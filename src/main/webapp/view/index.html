@@ -75,7 +75,7 @@
 								<img class="nav-user-photo us_photo" src="/assets/images/avatars/user.jpg" alt="个人头像" style="background-color:#fff" />
 
 								<span class="user-info">
-							       <span id="us_name"></span>
+							       <span id="us_name"></span>   <!--显示当前用户 -->
 								</span>
 
 								<i class="ace-icon fa fa-caret-down"></i>
@@ -83,7 +83,7 @@
 
 							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
-									<a id="setting" target="_blank">
+									<a id="setting" target="_blank" >
 										<i class="ace-icon fa fa-cog"></i> 设置
 									</a>
 								</li>
@@ -632,7 +632,9 @@
 		<!--[if !IE]> -->
 		<script src="/assets/js/jquery-2.1.4.min.js"></script>
 		<script src="/assets/js/jquery.cookie.js"></script>
-		<script src="/assets/js/sddb.util.js"></script>
+		<script src="/assets/js/ssm2.util.js"></script>
+		<!--相当于jsp页面中的header，将每个页面的右上角当做一个模块，相关链接功能以及获取cookie中用户名的功能放在ssm2.util.js中实现  -->
+		<!--  <script src="/assets/js/sddb.util.js"></script>  -->
 
 		<!-- <![endif]-->
 
@@ -836,6 +838,30 @@
 				});
 			} */
 		</script>
+		
+		
+		
+		<!--获取到login.html页面塞入cookie的us_name，并放在<span id="us_name"></span>  -->
+		<script type="text/javascript">
+		jQuery(function($) {
+			//显示用户名
+			$("#us_name").html($.cookie("us_name"));
+		});
+		</script>
+		
+		
+		<script type="text/javascript">
+		jQuery(function($) {
+			//显示用户名
+			$("#us_name").html($.cookie("us_name"));
+				$("#profile").attr("href", "/view/userInformation/teacherProfile.html?id=" + $.cookie("us_id"));
+				$("#setting").attr("href", "/view/userInformation/teacherSetting.html");
+		});
+		</script>
+		
+		
+		
+		
 
 		<script type="text/javascript">
 			jQuery(function($) {

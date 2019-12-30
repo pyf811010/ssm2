@@ -10,31 +10,14 @@ function timestampToTime(timestamp) {
 	return Y + M + D + h + m + s;
 };
 
-
-//从cookie中获取登陆id
 jQuery(function($) {
 	//显示用户名
 	$("#us_name").html($.cookie("us_name"));
 });
-
-
-//用户注销
-function logout() {
-	$.ajax({
-		type: "post",
-		url: "/logout",
-		dataType: "json",
-		data: {
-
-		},
-		success: function(data) {
-
-		},
-		error: function(err) {
-
-		}
-	});
-};
-
-
+jQuery(function($) {
+	//显示用户名
+	$("#us_name").html($.cookie("us_name"));
+		$("#profile").attr("href", "/view/userInformation/teacherProfile.html?id=" + $.cookie("us_id"));
+		$("#setting").attr("href", "/view/userInformation/teacherSetting.html");
+});
 

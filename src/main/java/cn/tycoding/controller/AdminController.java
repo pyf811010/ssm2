@@ -7,12 +7,16 @@ import cn.tycoding.pojo.State;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -59,12 +63,16 @@ public class AdminController {
     /**
      * 注册功能
      */
-    @RequestMapping(value = "/register")
-    public String register(Admin admin, HttpSession session) {
-        adminService.insert(admin);
-        session.setAttribute("name", admin.getA_name());
-        return "view/page";
+    @RequestMapping("/register")
+    @ResponseBody
+    public State dealRegister(@RequestParam(value="us_id") String a_name, @RequestParam(value="us_password") String a_password) {
+    	Admin admin = new Admin();
+    	admin.setA_name(a_name);
+    	admin.setA_password(a_password);
+    	State state = adminService.dealRegister(admin);
+        return state;
     }
+    
 
     /**
      * 退出登录的功能
@@ -93,4 +101,22 @@ public class AdminController {
         System.out.println(JSONObject.toJSONString(info));
         return JSONObject.toJSONString(info);
     }
+    
+    /*@ResponseBody
+    @RequestMapping(value = "/getAdminById")
+    public Map<String, String> getAdminById(@RequestParam(value="us_id") String a_name) {
+    	Map<String, String> map = new HashMap<>();
+        map.put("name", a_name);
+        return map;
+    }*/
+    
+    @RequestMapping("/resetPassword")
+    @ResponseBody
+    public State resetPassword(Admin admin) {
+        return adminService.resetPassword(admin);
+    }
+    
+    
+    
+    
 }

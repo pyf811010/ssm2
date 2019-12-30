@@ -339,7 +339,7 @@
 					}
 					$.ajax({
 						type: "post",
-						url: "/user/register.do",
+						url: "/admin/register.do",
 						dataType: "json",
 						data: {
 							"us_id": $("#register_id").val(),
@@ -348,11 +348,11 @@
 						success: function(data) {
 							if(data.success) {
 								alert(data.info + ",需要重新登录！");
-								window.open("/views/login.html", "_self");
+								window.open("/login.html", "_self");
 								$.cookie("us_id", $("#login_id").val(), {
 									path: "/"
 								});
-								$.cookie("us_name", data.info, {
+								$.cookie("us_password", data.info, {
 									path: "/"
 								});
 							} else {

@@ -12,4 +12,8 @@ public interface AdminService {
     Admin findByName(String a_name);
     
     public State dealLogin(Admin admin);
+
+	State dealRegister(Admin admin);
+
+	State resetPassword(Admin admin);
 }

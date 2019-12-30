@@ -6,7 +6,10 @@ public interface AdminMapper {
     
     Admin login(String a_name);
 
-    void insert(Admin admin);
+    int insert(Admin admin);
 
     Admin findByName(String a_name);
+
+	int resetPassword(Admin admin);
+
 }

@@ -32,4 +32,12 @@
     <select id="findByName" parameterType="String" resultType="cn.tycoding.pojo.Admin">
         select * from admin where a_name = #{a_name}
     </select>
+    
+    <!-- 重置密码 -->
+     <insert id="resetPassword" parameterType="cn.tycoding.pojo.Admin">
+       update admin
+		set a_password=#{a_password}
+		where a_name=#{a_name}
+    </insert>
+    
 </mapper>

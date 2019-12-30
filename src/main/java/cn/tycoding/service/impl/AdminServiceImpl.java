@@ -86,4 +86,44 @@ public class AdminServiceImpl implements AdminService {
             return state;
         }
 	}
+
+	@Override
+	public State dealRegister(Admin admin) {
+		State state = null;
+        Admin a = adminMapper.findByName(admin.getA_name());
+
+        //已存在此用户
+        if (null != a) {
+            state = new State(false, "此用户名已经存在！");
+            return state;
+        }else{
+        	state = new State(true, "管理员注册成功");
+        	int i = adminMapper.insert(admin);
+            if (i > 0) {
+                return state;
+            }
+        }
+        state = new State(false, "添加失败");
+        return state;
+	}
+
+	@Override
+	public State resetPassword(Admin admin) {
+		String a_password = admin.getA_password();
+		admin.setA_password(a_password);
+        State state = null;
+        int i = 0;
+        try {
+            i = adminMapper.resetPassword(admin);
+        } catch (Exception e) {
+            state = new State(false, "重置失败");
+        }
+        if (i > 0) {
+            state = new State(true, "重置成功");
+        } else {
+            state = new State(false, "重置失败");
+        }
+
+        return state;
+	}
 }
