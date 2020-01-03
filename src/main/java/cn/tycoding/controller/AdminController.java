@@ -1,6 +1,7 @@
 package cn.tycoding.controller;
 
 import cn.tycoding.pojo.Admin;
+import cn.tycoding.pojo.ObjectQuery;
 import cn.tycoding.service.AdminService;
 import cn.tycoding.pojo.State;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -110,13 +112,12 @@ public class AdminController {
         return map;
     }*/
     
+    //对管理员密码进行重置
     @RequestMapping("/resetPassword")
     @ResponseBody
     public State resetPassword(Admin admin) {
         return adminService.resetPassword(admin);
     }
     
-    
-    
-    
+   
 }
