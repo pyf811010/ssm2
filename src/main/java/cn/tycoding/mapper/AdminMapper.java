@@ -1,5 +1,7 @@
 package cn.tycoding.mapper;
 
+import java.util.List;
+
 import cn.tycoding.pojo.Admin;
 
 public interface AdminMapper {
@@ -11,5 +13,7 @@ public interface AdminMapper {
     Admin findByName(String a_name);
 
 	int resetPassword(Admin admin);
+
+
 
 }

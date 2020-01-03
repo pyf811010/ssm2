@@ -2,11 +2,14 @@ package cn.tycoding.service.impl;
 
 import cn.tycoding.mapper.AdminMapper;
 import cn.tycoding.pojo.Admin;
+import cn.tycoding.pojo.ObjectQuery;
 import cn.tycoding.pojo.State;
 import cn.tycoding.service.AdminService;
+import cn.tycoding.util.QueryUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -126,4 +129,5 @@ public class AdminServiceImpl implements AdminService {
 
         return state;
 	}
+	
 }

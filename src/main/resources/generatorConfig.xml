@@ -50,7 +50,20 @@
  
         <!-- 指定数据库表，要生成哪些表，就写哪些表，要和数据库中对应，不能写错！ -->
 
-        <table tableName="usertest"></table>
+       <table schema="general" tableName="usertest" 
+    	enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    	enableSelectByExample="false" selectByExampleQueryId="false" >
+    	<!--使得逆向工程不生成example类，（只生成纯sql，更适合多表关联，复杂查询）  -->
+    	<property name="useActualColumnNames" value="true"/>
+		</table>
+       <!--  <table tableName="electromyography"></table>
+        <table tableName="experiments"></table>
+        <table tableName="inverse_dynamics"></table>
+        <table tableName="inverse_kinematics"></table>
+        <table tableName="kand"></table>
+        <table tableName="oxygen"></table>
+        <table tableName="preec"></table>
+        <table tableName="subjects"></table> -->
     </context>
     <!-- 最后一步执行maven build中的mybatis-generator:generate即可生成对应的上述文件 -->
     <!-- 最后一步执行maven build中的mybatis-generator:generate即可生成对应的上述文件 -->
