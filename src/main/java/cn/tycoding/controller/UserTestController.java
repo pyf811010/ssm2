@@ -50,7 +50,8 @@ public class UserTestController {
             throws UnsupportedEncodingException {
         if (filters != null) {
             // 转码
-            //filters = new String(filters.getBytes("ISO-8859-1"), "UTF-8");
+           filters = new String(filters.getBytes("ISO-8859-1"), "UTF-8");
+           //此步为了解决页面编码和后台编码不一致的问题，如果不加此步骤，前端传入后台进行查询的sql条件会是乱码
             System.out.println(filters);
         }
         return userTestService.findByPage(_search, filters, page, rows);
@@ -74,6 +75,17 @@ public class UserTestController {
         return URLEncoder.encode(temp, "UTF-8");
     }
     
+    @RequestMapping("/score")
+    @ResponseBody
+    public List<UserTest> usertestInfo(int id) {
+        return userTestService.findAllById(id);
+    }
     
+    @RequestMapping("/relate")
+    @ResponseBody
+    public List<UserTest> usertestByRelate(int type) {
+    	return userTestService.findAllByRelateType(type);
+    }
+
     
 }

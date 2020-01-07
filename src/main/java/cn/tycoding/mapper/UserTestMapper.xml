@@ -98,8 +98,9 @@
 	
 	 <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.UserTest">
-		replace into usertest(id,name,type)
-		values(#{id},#{name},#{type});
+		insert into usertest(name,type)
+		values(#{name},#{type});
+		
 	</insert>
 
     <!-- 按学号删除学生 -->
@@ -119,8 +120,31 @@
             resultType="int">
 		${_parameter}
 	</select>
+
+	<!-- 按学号查找 -->
+	<select id="findAllById" parameterType="int" resultType="cn.tycoding.pojo.UserTest">
+        SELECT * FROM usertest WHERE id = #{id}
+    </select>
+    
   
-  
+  <select id="findAllByRelateType" parameterType="int" resultType="cn.tycoding.pojo.UserTest">
+        SELECT * FROM usertest WHERE type = #{id}
+    </select>
+    
+    <resultMap type="cn.tycoding.pojo.Relate" id="relateMapper">
+		<id column="type" property="type"/>
+		<result column="name1" property="name1"/>
+		<result column="name2" property="name2"/>
+		<collection property="usertests"  ofType="cn.tycoding.pojo.UserTest" select="findAllByRelateType" column="type"/>
+	</resultMap>
+	
+	<select id="selectRelateByType" resultMap="relateMapper">
+		select type
+		from country
+		where type=#{type}
+	</select>
+
+
   
   
 </mapper>

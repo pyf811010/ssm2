@@ -1,14 +1,11 @@
 package cn.tycoding.pojo;
 
-import java.util.List;
-
-public class UserTest {
+public class Json {
     private Integer id;
 
     private String name;
 
-    private String type;
-    
+    private Object text;
 
     public Integer getId() {
         return id;
@@ -26,11 +23,11 @@ public class UserTest {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getType() {
-        return type;
+    public Object getText() {
+        return text;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setText(Object text) {
+        this.text = text;
     }
 }
