@@ -127,6 +127,8 @@ public class UserTestServiceImpl implements UserTestService {
         }
         return "success";
     }
+<<<<<<< HEAD
+=======
 	@Override
 	public List<UserTest> findAllById(int id) {
 		List<UserTest> findAllById = userTestMapper.findAllById(id);
@@ -141,4 +143,5 @@ public class UserTestServiceImpl implements UserTestService {
 		int size = findAllByRelateType.size();
 		return findAllByRelateType;
 	}
+>>>>>>> dev
 }
