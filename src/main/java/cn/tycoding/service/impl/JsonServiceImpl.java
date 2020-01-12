@@ -1,11 +1,14 @@
 package cn.tycoding.service.impl;
 
+import cn.tycoding.mapper.JsonMapper;
 import cn.tycoding.mapper.UserTestMapper;
 import cn.tycoding.pojo.Admin;
+import cn.tycoding.pojo.Json;
 import cn.tycoding.pojo.ObjectQuery;
 import cn.tycoding.pojo.State;
 import cn.tycoding.pojo.UserTest;
 import cn.tycoding.service.AdminService;
+import cn.tycoding.service.JsonService;
 import cn.tycoding.service.UserTestService;
 import cn.tycoding.util.DataFormatUtil;
 import cn.tycoding.util.ExceptionUtil;
@@ -27,13 +30,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @date 18-4-27上午7:09
  */
 @Service
-public class UserTestServiceImpl implements UserTestService {
+public class JsonServiceImpl implements JsonService {
 
     /**
      * 注入service层
      */
     @Autowired
-    private UserTestMapper userTestMapper;
+    private JsonMapper jsonMapper;
 
 
 	@Override
@@ -49,11 +52,11 @@ public class UserTestServiceImpl implements UserTestService {
 	                e.printStackTrace();
 	            }
 
-	            String sql = SqlJointUtil.getSqlByFilters(queryCondition, (page - 1) * rows, rows, false, "usertest");
+	            String sql = SqlJointUtil.getSqlByFilters(queryCondition, (page - 1) * rows, rows, false, "json");
 
-	            List list = userTestMapper.findByFilters(sql);
-	            String getSumSql = SqlJointUtil.getSqlByFilters(queryCondition, (page - 1) * rows, rows, true, "usertest");
-	            int records = userTestMapper.findByFiltersSum(getSumSql);
+	            List list = jsonMapper.findByFilters(sql);
+	            String getSumSql = SqlJointUtil.getSqlByFilters(queryCondition, (page - 1) * rows, rows, true, "json");
+	            int records = jsonMapper.findByFiltersSum(getSumSql);
 	            int total = QueryUtil.getTotalPage(records, rows);
 	            ObjectQuery sq = new ObjectQuery(page, total, records, list);
 	            return sq;
@@ -64,9 +67,9 @@ public class UserTestServiceImpl implements UserTestService {
 		// 本次操作不是搜索，而是按条件进行查询
         // 查询全部
         // page 当前所处页数 rows 每页显示的条数
-        List list = userTestMapper.findByPage((page - 1) * rows, rows);
+        List list = jsonMapper.findByPage((page - 1) * rows, rows);
         // 获得总记录数
-        int records = userTestMapper.getSum();
+        int records = jsonMapper.getSum();
         // 获得总页数
         int total = QueryUtil.getTotalPage(records, rows);
         // 第一个参数为当前页数，第二个为总页数，第三个参数为总记录数，第四个参数为模型对象
@@ -77,24 +80,24 @@ public class UserTestServiceImpl implements UserTestService {
 	@Override
 	public List find() {
 		
-		List list = userTestMapper.find();
+		List list = jsonMapper.find();
 		
 		return list;
 	}
 
 	@Override
-    public String handle(String oper, UserTest usertest, String id[]) {
-		usertest = DataFormatUtil.checkNull(usertest);
+    public String handle(String oper, Json json, String id[]) {
+		json = DataFormatUtil.checkNull(json);
         // oper有三种操作 add,del,edit,
         switch (oper) {
             case "edit":
                 // 按st_id进行更改学生数据
                 if (id != null) {
 //                    student.setSt_id(id[0]);
-                    usertest.setId(Integer.valueOf(id[0]));
+                	json.setId(Integer.valueOf(id[0]));
                 }
                 try {
-                    int editAffectedRow = userTestMapper.edit(usertest);
+                    int editAffectedRow = jsonMapper.edit(json);
                     if (editAffectedRow == 1) {
                         return "success";
                     }
@@ -107,7 +110,7 @@ public class UserTestServiceImpl implements UserTestService {
                 // 会按st_id来删除，考虑到存在多选，此时主键id是数组
                 int count = 0;
                 for (int i = 0; i < id.length; i++) {
-                	userTestMapper.del(id[i]);
+                	jsonMapper.del(id[i]);
                     count++;
                 }
                 String str = count + "条成功删除" + (id.length - count) + "条删除失败";
@@ -115,9 +118,9 @@ public class UserTestServiceImpl implements UserTestService {
                 return str;
             case "add":
                 // 新增对象
-                System.out.println(usertest.toString());
+                System.out.println(json.toString());
                 try {
-                    int addAffectedRow = userTestMapper.add(usertest);
+                    int addAffectedRow = jsonMapper.add(json);
                     if (addAffectedRow == 1) {
                         return "success";
                     }
@@ -127,21 +130,4 @@ public class UserTestServiceImpl implements UserTestService {
         }
         return "success";
     }
-<<<<<<< HEAD
-=======
-	@Override
-	public List<UserTest> findAllById(int id) {
-		List<UserTest> findAllById = userTestMapper.findAllById(id);
-		int size = findAllById.size();
-		return findAllById;
-		
-	}
-
-	@Override
-	public List<UserTest> findAllByRelateType(int type) {
-		List<UserTest> findAllByRelateType = userTestMapper.findAllByRelateType(type);
-		int size = findAllByRelateType.size();
-		return findAllByRelateType;
-	}
->>>>>>> dev
 }

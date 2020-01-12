@@ -31,6 +31,24 @@
         <defaultGoal>compile</defaultGoal>
         <pluginManagement>
         <plugins>
+        
+        <plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-compiler-plugin</artifactId>
+  <version>3.3</version>
+  <configuration>
+    <source>1.7</source>
+    <target>1.7</target>
+    <!--maven编译的时候默认使用的GBK编码， 通过project.build.sourceEncoding属性设置字符编码，通知maven使用UTF-8编译项目 -->  
+    <encoding>UTF-8</encoding>
+  </configuration>
+</plugin>
+
+        
+        
+        
+        
+        
         <plugin>
 <groupId>org.apache.maven.plugins</groupId>
 <artifactId>maven-compiler-plugin</artifactId>
@@ -87,6 +105,10 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            
+            
+            
+            
             
 </plugins>
 </pluginManagement>
@@ -252,5 +274,9 @@
             <version>1.2.47</version>
         </dependency>
     </dependencies>
+<properties>   
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
+    </properties>
+
 
 </project>

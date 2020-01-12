@@ -32,4 +32,10 @@ public interface UserTestMapper {
 	List findByFilters(String sql);
 
 	int findByFiltersSum(String getSumSql);
+<<<<<<< HEAD
+=======
+	List<UserTest> findAllById(int id);
+
+	List<UserTest> findAllByRelateType(int type);
+>>>>>>> dev
 }
