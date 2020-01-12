@@ -74,14 +74,13 @@ public class UserTestController {
         return URLEncoder.encode(temp, "UTF-8");
     }
     
-<<<<<<< HEAD
-=======
+
     @RequestMapping("/score")
     @ResponseBody
     public List<UserTest> usertestInfo(int id) {
         return userTestService.findAllById(id);
     }
->>>>>>> dev
+
     
     
 }

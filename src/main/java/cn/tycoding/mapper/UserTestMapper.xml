@@ -120,14 +120,12 @@
 		${_parameter}
 	</select>
   
-<<<<<<< HEAD
-  
-=======
+
   <!-- 按学号查找 -->
 	<select id="findAllById" parameterType="int" resultType="cn.tycoding.pojo.UserTest">
         SELECT * FROM usertest WHERE id = #{id}
     </select>
->>>>>>> dev
+
   
   
 </mapper>

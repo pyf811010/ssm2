@@ -10,10 +10,6 @@
     <packaging>war</packaging>
 
  
-<properties>
-         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-</properties>
-
     <build>
         <finalName>ssm2</finalName>
         <resources>
