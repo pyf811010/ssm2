@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tycoding.mapper.TestMapper">
+
+  
+  
+    <!-- 第一个参数为页数，第二个参数为每页多少行 -->
+    <select id="findByPage" resultType="cn.tycoding.pojo.Test">
+		select * from
+		test
+		order by expid desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		test
+	</select>
+	
+	<select id="find" resultType="cn.tycoding.pojo.Test">
+		select * from
+		test
+		order by expid desc
+		
+	</select>
+  
+  <update id="edit" parameterType="cn.tycoding.pojo.Test">
+		update test
+    set name = #{name}
+    where expid = #{expid}
+	</update>
+	
+	 <!-- 增加一条学生数据 -->
+    <insert id="add" parameterType="cn.tycoding.pojo.Test">
+		insert into test
+		values(#{expid},#{name});
+	</insert>
+
+    <!-- 按学号删除学生 -->
+    <delete id="del" parameterType="string">
+		delete from test
+		where expid=#{expid}
+	</delete>
+  
+   <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFilters" parameterType="string"
+            resultType="cn.tycoding.pojo.Test">
+		${_parameter}
+	</select>
+
+    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFiltersSum" parameterType="string"
+            resultType="int">
+		${_parameter}
+	</select>
+  
+</mapper>

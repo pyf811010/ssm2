@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tycoding.mapper.EgContrastMapper">
+   <!-- 第一个参数为页数，第二个参数为每页多少行 -->
+    <select id="findByPage" resultType="cn.tycoding.pojo.EgContrast">
+		select * from
+		eg_contrast
+		order by expid desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		eg_contrast
+	</select>
+	
+	<select id="find" resultType="cn.tycoding.pojo.EgContrast">
+		select * from
+		eg_contrast
+		order by expid desc
+		
+	</select>
+  
+  <update id="edit" parameterType="cn.tycoding.pojo.EgContrast">
+		update eg_contrast
+    set sensor01 = #{sensor01},
+      sensor02 = #{sensor02},
+      sensor03 = #{sensor03},
+      sensor04 = #{sensor04},
+      sensor05 = #{sensor05},
+      sensor06 = #{sensor06},
+      sensor07 = #{sensor07},
+      sensor08 = #{sensor08},
+      sensor09 = #{sensor09},
+      sensor10 = #{sensor10},
+      sensor11 = #{sensor11},
+      sensor12 = #{sensor12},
+      sensor13 = #{sensor13},
+      sensor14 = #{sensor14},
+      sensor15 = #{sensor15},
+      sensor16 = #{sensor16},
+      sensor17 = #{sensor17},
+      sensor18 = #{sensor18},
+      sensor19 = #{sensor19},
+      sensor20 = #{sensor20},
+      sensor21 = #{sensor21},
+      sensor22 = #{sensor22},
+      sensor23 = #{sensor23},
+      sensor24 = #{sensor24},
+      sensor25 = #{sensor25},
+      sensor26 = #{sensor26},
+      sensor27 = #{sensor27},
+      sensor28 = #{sensor28},
+      sensor29 = #{sensor29},
+      sensor30 = #{sensor30},
+      sensor31 = #{sensor31},
+      sensor32 = #{sensor32},
+      id_query = #{id_query}
+    where expid = #{expid}
+	</update>
+	
+	 <!-- 增加一条学生数据 -->
+    <insert id="add" parameterType="cn.tycoding.pojo.EgContrast">
+		insert into eg_contrast
+		values(#{expid},#{sensor01},#{sensor02},#{sensor03},#{sensor04},#{sensor05},#{sensor06},#{sensor07},#{sensor08},#{sensor09},#{sensor10},#{sensor11},#{sensor12},#{sensor13},#{sensor14},#{sensor15},#{sensor16},#{sensor17},#{sensor18},#{sensor19},#{sensor20},#{sensor21},#{sensor22},#{sensor23},#{sensor24},#{sensor25},#{sensor26},#{sensor27},#{sensor28},#{sensor29},#{sensor30},#{sensor31},#{sensor32},#{id_query});
+	</insert>
+
+    <!-- 按学号删除学生 -->
+    <delete id="del" parameterType="string">
+		delete from eg_contrast
+		where expid=#{expid}
+	</delete>
+  
+   <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFilters" parameterType="string"
+            resultType="cn.tycoding.pojo.EgContrast">
+		${_parameter}
+	</select>
+
+    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFiltersSum" parameterType="string"
+            resultType="int">
+		${_parameter}
+	</select>
+  
+  
+  
+</mapper>
