@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>学生信息管理</title>
+		<title>管理</title>
 
 		<meta name="description" content="Dynamic tables and grids using jqGrid plugin" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -61,10 +61,10 @@
 				</button>
 
 				<div class="navbar-header pull-left">
-					<a href="/views/index.html" class="navbar-brand">
+					<a href="/view/index.html" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
-							学生发展数据综合评价与分析系统
+							人体运动测试数据分析与管理系统
 						</small>
 					</a>
 				</div>
@@ -471,7 +471,7 @@
 								<a href="/views/index.html">首页</a>
 							</li>
 
-							<li class="active">学生信息管理</li>
+							<li class="active">实验者信息管理</li>
 						</ul>
 						<!-- /.breadcrumb -->
 
@@ -482,13 +482,13 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<div class="alert alert-info">
+								<!-- <div class="alert alert-info">
 									<button class="close" data-dismiss="alert">
 										<i class="ace-icon fa fa-times"></i>
 									</button>
 
 									<i class="ace-icon fa fa-hand-o-right"></i> 学生的学号不可重复.
-								</div>
+								</div> -->
 								<div class="row" style="margin-bottom: 5px;">
 									<div class="row" style="float:right;margin-right: 12px;">
 										<div class="btn-group">
@@ -556,7 +556,7 @@
 				<div class="footer-inner">
 					<div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder" style="margin-right: 10px;">学生发展数据综合评价与分析系统</span> 苏州科技大学 &copy; 2018-2019
+							<span class="blue bolder" style="margin-right: 10px;">人体运动测试数据分析与管理系统</span> 中国航天二院
 						</span>
 
 					</div>
@@ -567,7 +567,6 @@
 				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 			</a>
 		</div>
-		<!-- /.main-container -->
 
 		<!-- basic scripts -->
 
@@ -641,6 +640,17 @@
 				font-size: 14px
 			}
 		</style>
+		
+				<style> 
+ 	.ui-jqgrid .ui-jqgrid-bdiv { 
+ 	    border-top: 1px solid #E1E1E1; 
+ 	    overflow-x: auto; 
+ 	} 
+ 	.frozen-div, .frozen-bdiv {
+ 	    background-color: #E4E6E9;/*与网页背景色一致*/ */
+ 	} 
+ </style> 
+ <!--上面代码用来设置水平滚动条  -->
 
 		<script type="text/javascript">
 			jQuery(function($) {
@@ -745,12 +755,12 @@
 				jQuery(grid_selector).jqGrid({
 					//direction: "rtl",
 
-					url: "/json/findsome",
+					url: "/egcontrast/findsome",
 
 					//data: grid_data,
 					datatype: "json",
 					height: 400,
-					colNames: ['操作', '', 'id号', 'name', 'text'],
+					colNames: ['操作', '', 'ID', '关联查询ID', '传感器01', '传感器02', '传感器03', '传感器04', '传感器05', '传感器06', '传感器07', '传感器08', '传感器09', '传感器10', '传感器11', '传感器12', '传感器13', '传感器14', '传感器15', '传感器16', '传感器17', '传感器18', '传感器19', '传感器20', '传感器21', '传感器22', '传感器23', '传感器24', '传感器25', '传感器26', '传感器27', '传感器28', '传感器29', '传感器30', '传感器31', '传感器32'],
 					colModel: [{
 							name: 'op',
 							index: 'op',
@@ -786,11 +796,11 @@
 						},
 
 						{
-							name: 'id',
-							index: 'id',
+							name: 'expid',
+							index: 'expid',
 							width: 100,
 							key: true,
-							editable: true,
+							editable: true,//即不可编辑，新增时此属性也不能添加
 							edittype: "textarea",
 							editoptions: {
 								rows: "2",
@@ -799,8 +809,8 @@
 
 						},
 						{
-							name: 'name',
-							index: 'name',
+							name: 'id_query',
+							index: 'id_query',
 							width: 100,
 							sortable: false,
 							editable: true,
@@ -811,9 +821,9 @@
 							}
 						},
 						{
-							name: 'text',
-							index: 'text',
-							width: 150,
+							name: 'sensor01',
+							index: 'sensor01',
+							width: 100,
 							sortable: false,
 							editable: true,
 							edittype: "textarea",
@@ -822,7 +832,348 @@
 								cols: "15"
 							}
 						},
-					
+						{
+							name: 'sensor02',
+							index: 'sensor02',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor03',
+							index: 'sensor03',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor04',
+							index: 'sensor04',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor05',
+							index: 'sensor05',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor06',
+							index: 'sensor06',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor07',
+							index: 'sensor07',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor08',
+							index: 'sensor08',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor09',
+							index: 'sensor09',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor10',
+							index: 'sensor10',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor11',
+							index: 'sensor11',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor12',
+							index: 'sensor12',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor13',
+							index: 'sensor13',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor14',
+							index: 'sensor14',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor15',
+							index: 'sensor15',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor16',
+							index: 'sensor16',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor17',
+							index: 'sensor17',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor18',
+							index: 'sensor18',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor19',
+							index: 'sensor19',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor20',
+							index: 'sensor20',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor21',
+							index: 'sensor21',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor22',
+							index: 'sensor22',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor23',
+							index: 'sensor23',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor24',
+							index: 'sensor24',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor25',
+							index: 'sensor25',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor26',
+							index: 'sensor26',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor27',
+							index: 'sensor27',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor28',
+							index: 'sensor28',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor29',
+							index: 'sensor29',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor30',
+							index: 'sensor30',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor31',
+							index: 'sensor31',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'sensor32',
+							index: 'sensor32',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},
 
 					],
 
@@ -831,7 +1182,9 @@
 					rowList: [10, 20, 30], //可选的每页显示条数
 					pager: pager_selector, //指定工具栏
 					altRows: true,
-
+					shrinkToFit:false,
+					autoScroll: true,
+					/*上面两个属性用于开启滚动条  */
 					multiselect: true, //是否支持多选
 					//multikey: "ctrlKey",
 					multiboxonly: true, //选中行，即可选中行前面的多选框，点击另外一行，此行效果取消，选中当前行，只能实现选中一条
@@ -847,8 +1200,8 @@
 						}, 0);
 					},
 
-					editurl: "/json/handle", //nothing is saved
-					caption: "用户基本信息管理" //表名
+					editurl: "/egcontrast/handle", //nothing is saved
+					caption: "实验者信息管理" //表名
 
 					//,autowidth: true,
 

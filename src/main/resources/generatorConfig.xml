@@ -50,9 +50,14 @@
  
         <!-- 指定数据库表，要生成哪些表，就写哪些表，要和数据库中对应，不能写错！ -->
 
+<<<<<<< HEAD
 
        <table schema="exp_data" tableName="test_oxygen" 
 
+=======
+      
+		<table schema="general" tableName="test" 
+>>>>>>> master
     	enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
     	enableSelectByExample="false" selectByExampleQueryId="false" >
     	<!--使得逆向工程不生成example类，（只生成纯sql，更适合多表关联，复杂查询）  -->
