@@ -39,23 +39,21 @@ public class OxygenController {
 		FilesOxygen fileResult = oxygenservice.findByExpid(id);
 		String filePath = fileResult.getUrl();
 		System.out.println(filePath);
-		List<List<Object>> excelDataList = excelUtil.getListByExcel(filePath,4);
+		List<List<List<Object>>> excelDataList = excelUtil.getListByExcel(filePath,4);
 		System.out.println("excel readed");
 		
 		Integer maxexpid = oxygenservice.getMaxExpid();
 		
 		System.out.println(maxexpid);
 		List<TestOxygen> oxygenParams = new ArrayList<TestOxygen>();
-		System.out.println(excelDataList.size());
-		System.out.println(excelDataList.get(0).size());
-		System.out.println(excelDataList.get(1).size());
-		for(int i=0;i<excelDataList.size();i++){
+
+		for(int i=0;i<excelDataList.get(0).size();i++){
 			TestOxygen tmp = new TestOxygen();
 			tmp.setExpid(maxexpid);
 			tmp.setId(0);
-			tmp.setTimestamp(Double.valueOf(excelDataList.get(i).get(0).toString()));
-			tmp.setVo2(Double.valueOf(excelDataList.get(i).get(1).toString()));
-			tmp.setVco2(Double.valueOf(excelDataList.get(i).get(2).toString()));
+			tmp.setTimestamp(Double.valueOf(excelDataList.get(0).get(i).get(0).toString()));
+			tmp.setVo2(Double.valueOf(excelDataList.get(0).get(i).get(1).toString()));
+			tmp.setVco2(Double.valueOf(excelDataList.get(0).get(i).get(2).toString()));
 			System.out.println(i+" "+tmp.getTimestamp()+" "+ tmp.getVo2()+" "+tmp.getVco2());
 			oxygenParams.add(tmp);
 	    }
