@@ -62,7 +62,8 @@ public class PreecServiceImpl implements PreecService {
 	            return sq;
 	        }
 	}
-
+	
+	
 	private ObjectQuery findByPage(int page, int rows) {
 		// 本次操作不是搜索，而是按条件进行查询
         // 查询全部

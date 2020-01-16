@@ -26,6 +26,8 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import ch.qos.logback.core.pattern.color.ANSIConstants;
+
 import java.io.FileInputStream;
 public class SmallExcelReaderUtil {
 
@@ -35,8 +37,9 @@ public class SmallExcelReaderUtil {
     /**
      * Excel导入
      */
-    public static List<List<Object>> getListByExcel(String filePath,int startrow) throws Exception {
-        List<List<Object>> list = null;
+    public static List<List<List<Object>>> getListByExcel(String filePath,int startrow) throws Exception {
+    	List<List<List<Object>>> ansList = new ArrayList<List<List<Object>>>();
+    	List<List<Object>> list = null;
         // 创建Excel工作薄
         FileInputStream instr = new FileInputStream(filePath); 
     	Workbook work = null;
@@ -55,7 +58,7 @@ public class SmallExcelReaderUtil {
         Sheet sheet = null;
         Row row = null;
         Cell cell = null;
-        list = new ArrayList<List<Object>>();
+       
         // 遍历Excel中所有的sheet
         for (int i = 0; i < work.getNumberOfSheets(); i++) {
             sheet = work.getSheetAt(i);
@@ -64,6 +67,7 @@ public class SmallExcelReaderUtil {
             }
             // 遍历当前sheet中的所有行
             // 包含头部，所以要小于等于最后一列数,这里也可以在初始值加上头部行数，以便跳过头部
+            list = new ArrayList<List<Object>>();
             for (int j = sheet.getFirstRowNum()+startrow-1; j <= sheet.getLastRowNum(); j++) {
                 // 读取一行
                 row = sheet.getRow(j);
@@ -79,6 +83,8 @@ public class SmallExcelReaderUtil {
                 }
                 list.add(li);
             }
+            ansList.add(list);
+            
         }
         
         //关闭文件流
@@ -87,7 +93,7 @@ public class SmallExcelReaderUtil {
         if(instr != null)
         	instr.close();
         
-        return list;
+        return ansList;
     }
 
     /**
