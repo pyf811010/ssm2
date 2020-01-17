@@ -54,7 +54,7 @@ public class KandController {
 		FilesKand fileResult = kandService.findByExpid(id);
 		String filePath = fileResult.getUrl();
 		System.out.println(filePath);
-		List<List<List<Object>>> excelDataList = excelUtil.getListByExcel(filePath, 3);
+		List<List<List<Object>>> excelDataList = excelUtil.getListByExcel(filePath, 2);
 		System.out.println("excel readed");
 
 		List<TmpKand> kandParams = new ArrayList<TmpKand>();
