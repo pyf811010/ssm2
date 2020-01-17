@@ -28,6 +28,12 @@
         <property name="prefix" value="/WEB-INF/jsp"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+    
+    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+	<property value="utf-8" name="defaultEncoding"/>
+	<property value="10485760000" name="maxUploadSize"/>
+	<property value="40960" name="maxInMemorySize"/>
+	</bean>
 
 
 </beans>

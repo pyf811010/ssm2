@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.tycoding.mapper.PreecMapper">
-  
-  <!-- 第一个参数为页数，第二个参数为每页多少行 -->
+
+    <!-- 第一个参数为页数，第二个参数为每页多少行 -->
     <select id="findByPage" resultType="cn.tycoding.pojo.Preec">
 		select * from
 		preec
@@ -14,22 +14,22 @@
 		select count(*) from
 		preec
 	</select>
-	
-	<select id="find" resultType="cn.tycoding.pojo.Preec">
+
+    <select id="find" resultType="cn.tycoding.pojo.Preec">
 		select * from
 		preec
 		order by expid desc
 		
 	</select>
-  
-  <update id="edit" parameterType="cn.tycoding.pojo.Preec">
+
+    <update id="edit" parameterType="cn.tycoding.pojo.Preec">
 		update preec set
 		id_subjects=#{id_subjects},advance=#{advance},remark=#{remark}
 		where
 		expid=#{expid}
 	</update>
-	
-	 <!-- 增加一条学生数据 -->
+
+    <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.Preec">
 		insert into preec
 		values(#{expid},#{id_query},#{id_subjects},#{advance},#{remark});
@@ -40,8 +40,8 @@
 		delete from preec
 		where expid=#{expid}
 	</delete>
-  
-   <!-- 按照filter的复杂条件查找 -->
+
+    <!-- 按照filter的复杂条件查找 -->
     <select id="findByFilters" parameterType="string"
             resultType="cn.tycoding.pojo.Preec">
 		${_parameter}
@@ -52,6 +52,10 @@
             resultType="int">
 		${_parameter}
 	</select>
-  
-  
+
+	<insert id="insertSelective" parameterType="cn.tycoding.pojo.Preec">
+		insert into preec (id_Subjects, remark, advance) values (#{id_subjects,jdbcType=INTEGER},
+		 #{remark,jdbcType=VARCHAR}, #{advance,jdbcType=LONGVARCHAR})
+	</insert>
+
 </mapper>

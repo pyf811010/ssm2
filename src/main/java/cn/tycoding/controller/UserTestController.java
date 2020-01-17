@@ -50,7 +50,7 @@ public class UserTestController {
             throws UnsupportedEncodingException {
         if (filters != null) {
             // 转码
-            //filters = new String(filters.getBytes("ISO-8859-1"), "UTF-8");
+            filters = new String(filters.getBytes("ISO-8859-1"), "UTF-8");
             System.out.println(filters);
         }
         return userTestService.findByPage(_search, filters, page, rows);

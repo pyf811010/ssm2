@@ -1,7 +1,434 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.tycoding.mapper.EgContrastMapper">
-   <!-- 第一个参数为页数，第二个参数为每页多少行 -->
+
+    <resultMap id="BaseResultMap" type="cn.tycoding.pojo.EgContrast">
+        <id column="expid" jdbcType="INTEGER" property="expid"/>
+        <result column="sensor01" jdbcType="DOUBLE" property="sensor01"/>
+        <result column="sensor02" jdbcType="DOUBLE" property="sensor02"/>
+        <result column="sensor03" jdbcType="DOUBLE" property="sensor03"/>
+        <result column="sensor04" jdbcType="DOUBLE" property="sensor04"/>
+        <result column="sensor05" jdbcType="DOUBLE" property="sensor05"/>
+        <result column="sensor06" jdbcType="DOUBLE" property="sensor06"/>
+        <result column="sensor07" jdbcType="DOUBLE" property="sensor07"/>
+        <result column="sensor08" jdbcType="DOUBLE" property="sensor08"/>
+        <result column="sensor09" jdbcType="DOUBLE" property="sensor09"/>
+        <result column="sensor10" jdbcType="DOUBLE" property="sensor10"/>
+        <result column="sensor11" jdbcType="DOUBLE" property="sensor11"/>
+        <result column="sensor12" jdbcType="DOUBLE" property="sensor12"/>
+        <result column="sensor13" jdbcType="DOUBLE" property="sensor13"/>
+        <result column="sensor14" jdbcType="DOUBLE" property="sensor14"/>
+        <result column="sensor15" jdbcType="DOUBLE" property="sensor15"/>
+        <result column="sensor16" jdbcType="DOUBLE" property="sensor16"/>
+        <result column="sensor17" jdbcType="DOUBLE" property="sensor17"/>
+        <result column="sensor18" jdbcType="DOUBLE" property="sensor18"/>
+        <result column="sensor19" jdbcType="DOUBLE" property="sensor19"/>
+        <result column="sensor20" jdbcType="DOUBLE" property="sensor20"/>
+        <result column="sensor21" jdbcType="DOUBLE" property="sensor21"/>
+        <result column="sensor22" jdbcType="DOUBLE" property="sensor22"/>
+        <result column="sensor23" jdbcType="DOUBLE" property="sensor23"/>
+        <result column="sensor24" jdbcType="DOUBLE" property="sensor24"/>
+        <result column="sensor25" jdbcType="DOUBLE" property="sensor25"/>
+        <result column="sensor26" jdbcType="DOUBLE" property="sensor26"/>
+        <result column="sensor27" jdbcType="DOUBLE" property="sensor27"/>
+        <result column="sensor28" jdbcType="DOUBLE" property="sensor28"/>
+        <result column="sensor29" jdbcType="DOUBLE" property="sensor29"/>
+        <result column="sensor30" jdbcType="DOUBLE" property="sensor30"/>
+        <result column="sensor31" jdbcType="DOUBLE" property="sensor31"/>
+        <result column="sensor32" jdbcType="DOUBLE" property="sensor32"/>
+        <result column="id_query" jdbcType="INTEGER" property="id_query"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    expid, sensor01, sensor02, sensor03, sensor04, sensor05, sensor06, sensor07, sensor08,
+    sensor09, sensor10, sensor11, sensor12, sensor13, sensor14, sensor15, sensor16, sensor17,
+    sensor18, sensor19, sensor20, sensor21, sensor22, sensor23, sensor24, sensor25, sensor26,
+    sensor27, sensor28, sensor29, sensor30, sensor31, sensor32, id_query
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from eg_contrast
+        where expid = #{expid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from eg_contrast
+    where expid = #{expid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="cn.tycoding.pojo.EgContrast">
+    insert into eg_contrast (sensor01, sensor02,
+      sensor03, sensor04, sensor05,
+      sensor06, sensor07, sensor08,
+      sensor09, sensor10, sensor11,
+      sensor12, sensor13, sensor14,
+      sensor15, sensor16, sensor17,
+      sensor18, sensor19, sensor20,
+      sensor21, sensor22, sensor23,
+      sensor24, sensor25, sensor26,
+      sensor27, sensor28, sensor29,
+      sensor30, sensor31, sensor32)
+    values ( #{sensor01,jdbcType=DOUBLE}, #{sensor02,jdbcType=DOUBLE},
+      #{sensor03,jdbcType=DOUBLE}, #{sensor04,jdbcType=DOUBLE}, #{sensor05,jdbcType=DOUBLE},
+      #{sensor06,jdbcType=DOUBLE}, #{sensor07,jdbcType=DOUBLE}, #{sensor08,jdbcType=DOUBLE},
+      #{sensor09,jdbcType=DOUBLE}, #{sensor10,jdbcType=DOUBLE}, #{sensor11,jdbcType=DOUBLE},
+      #{sensor12,jdbcType=DOUBLE}, #{sensor13,jdbcType=DOUBLE}, #{sensor14,jdbcType=DOUBLE},
+      #{sensor15,jdbcType=DOUBLE}, #{sensor16,jdbcType=DOUBLE}, #{sensor17,jdbcType=DOUBLE},
+      #{sensor18,jdbcType=DOUBLE}, #{sensor19,jdbcType=DOUBLE}, #{sensor20,jdbcType=DOUBLE},
+      #{sensor21,jdbcType=DOUBLE}, #{sensor22,jdbcType=DOUBLE}, #{sensor23,jdbcType=DOUBLE},
+      #{sensor24,jdbcType=DOUBLE}, #{sensor25,jdbcType=DOUBLE}, #{sensor26,jdbcType=DOUBLE},
+      #{sensor27,jdbcType=DOUBLE}, #{sensor28,jdbcType=DOUBLE}, #{sensor29,jdbcType=DOUBLE},
+      #{sensor30,jdbcType=DOUBLE}, #{sensor31,jdbcType=DOUBLE}, #{sensor32,jdbcType=DOUBLE})
+  </insert>
+    <insert id="insertSelective" parameterType="cn.tycoding.pojo.EgContrast">
+        insert into eg_contrast
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sensor01 != null">
+                sensor01,
+            </if>
+            <if test="sensor02 != null">
+                sensor02,
+            </if>
+            <if test="sensor03 != null">
+                sensor03,
+            </if>
+            <if test="sensor04 != null">
+                sensor04,
+            </if>
+            <if test="sensor05 != null">
+                sensor05,
+            </if>
+            <if test="sensor06 != null">
+                sensor06,
+            </if>
+            <if test="sensor07 != null">
+                sensor07,
+            </if>
+            <if test="sensor08 != null">
+                sensor08,
+            </if>
+            <if test="sensor09 != null">
+                sensor09,
+            </if>
+            <if test="sensor10 != null">
+                sensor10,
+            </if>
+            <if test="sensor11 != null">
+                sensor11,
+            </if>
+            <if test="sensor12 != null">
+                sensor12,
+            </if>
+            <if test="sensor13 != null">
+                sensor13,
+            </if>
+            <if test="sensor14 != null">
+                sensor14,
+            </if>
+            <if test="sensor15 != null">
+                sensor15,
+            </if>
+            <if test="sensor16 != null">
+                sensor16,
+            </if>
+            <if test="sensor17 != null">
+                sensor17,
+            </if>
+            <if test="sensor18 != null">
+                sensor18,
+            </if>
+            <if test="sensor19 != null">
+                sensor19,
+            </if>
+            <if test="sensor20 != null">
+                sensor20,
+            </if>
+            <if test="sensor21 != null">
+                sensor21,
+            </if>
+            <if test="sensor22 != null">
+                sensor22,
+            </if>
+            <if test="sensor23 != null">
+                sensor23,
+            </if>
+            <if test="sensor24 != null">
+                sensor24,
+            </if>
+            <if test="sensor25 != null">
+                sensor25,
+            </if>
+            <if test="sensor26 != null">
+                sensor26,
+            </if>
+            <if test="sensor27 != null">
+                sensor27,
+            </if>
+            <if test="sensor28 != null">
+                sensor28,
+            </if>
+            <if test="sensor29 != null">
+                sensor29,
+            </if>
+            <if test="sensor30 != null">
+                sensor30,
+            </if>
+            <if test="sensor31 != null">
+                sensor31,
+            </if>
+            <if test="sensor32 != null">
+                sensor32,
+            </if>
+            <if test="id_query != null">
+                id_query,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+            <if test="sensor01 != null">
+                #{sensor01,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor02 != null">
+                #{sensor02,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor03 != null">
+                #{sensor03,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor04 != null">
+                #{sensor04,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor05 != null">
+                #{sensor05,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor06 != null">
+                #{sensor06,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor07 != null">
+                #{sensor07,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor08 != null">
+                #{sensor08,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor09 != null">
+                #{sensor09,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor10 != null">
+                #{sensor10,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor11 != null">
+                #{sensor11,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor12 != null">
+                #{sensor12,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor13 != null">
+                #{sensor13,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor14 != null">
+                #{sensor14,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor15 != null">
+                #{sensor15,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor16 != null">
+                #{sensor16,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor17 != null">
+                #{sensor17,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor18 != null">
+                #{sensor18,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor19 != null">
+                #{sensor19,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor20 != null">
+                #{sensor20,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor21 != null">
+                #{sensor21,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor22 != null">
+                #{sensor22,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor23 != null">
+                #{sensor23,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor24 != null">
+                #{sensor24,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor25 != null">
+                #{sensor25,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor26 != null">
+                #{sensor26,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor27 != null">
+                #{sensor27,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor28 != null">
+                #{sensor28,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor29 != null">
+                #{sensor29,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor30 != null">
+                #{sensor30,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor31 != null">
+                #{sensor31,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor32 != null">
+                #{sensor32,jdbcType=DOUBLE},
+            </if>
+            <if test="id_query != null">
+                #{id_query,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.tycoding.pojo.EgContrast">
+        update eg_contrast
+        <set>
+            <if test="sensor01 != null">
+                sensor01 = #{sensor01,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor02 != null">
+                sensor02 = #{sensor02,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor03 != null">
+                sensor03 = #{sensor03,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor04 != null">
+                sensor04 = #{sensor04,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor05 != null">
+                sensor05 = #{sensor05,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor06 != null">
+                sensor06 = #{sensor06,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor07 != null">
+                sensor07 = #{sensor07,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor08 != null">
+                sensor08 = #{sensor08,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor09 != null">
+                sensor09 = #{sensor09,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor10 != null">
+                sensor10 = #{sensor10,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor11 != null">
+                sensor11 = #{sensor11,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor12 != null">
+                sensor12 = #{sensor12,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor13 != null">
+                sensor13 = #{sensor13,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor14 != null">
+                sensor14 = #{sensor14,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor15 != null">
+                sensor15 = #{sensor15,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor16 != null">
+                sensor16 = #{sensor16,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor17 != null">
+                sensor17 = #{sensor17,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor18 != null">
+                sensor18 = #{sensor18,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor19 != null">
+                sensor19 = #{sensor19,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor20 != null">
+                sensor20 = #{sensor20,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor21 != null">
+                sensor21 = #{sensor21,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor22 != null">
+                sensor22 = #{sensor22,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor23 != null">
+                sensor23 = #{sensor23,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor24 != null">
+                sensor24 = #{sensor24,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor25 != null">
+                sensor25 = #{sensor25,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor26 != null">
+                sensor26 = #{sensor26,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor27 != null">
+                sensor27 = #{sensor27,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor28 != null">
+                sensor28 = #{sensor28,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor29 != null">
+                sensor29 = #{sensor29,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor30 != null">
+                sensor30 = #{sensor30,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor31 != null">
+                sensor31 = #{sensor31,jdbcType=DOUBLE},
+            </if>
+            <if test="sensor32 != null">
+                sensor32 = #{sensor32,jdbcType=DOUBLE},
+            </if>
+            <if test="id_query != null">
+                id_query = #{id_query,jdbcType=INTEGER},
+            </if>
+        </set>
+        where expid = #{expid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.tycoding.pojo.EgContrast">
+    update eg_contrast
+    set sensor01 = #{sensor01,jdbcType=DOUBLE},
+      sensor02 = #{sensor02,jdbcType=DOUBLE},
+      sensor03 = #{sensor03,jdbcType=DOUBLE},
+      sensor04 = #{sensor04,jdbcType=DOUBLE},
+      sensor05 = #{sensor05,jdbcType=DOUBLE},
+      sensor06 = #{sensor06,jdbcType=DOUBLE},
+      sensor07 = #{sensor07,jdbcType=DOUBLE},
+      sensor08 = #{sensor08,jdbcType=DOUBLE},
+      sensor09 = #{sensor09,jdbcType=DOUBLE},
+      sensor10 = #{sensor10,jdbcType=DOUBLE},
+      sensor11 = #{sensor11,jdbcType=DOUBLE},
+      sensor12 = #{sensor12,jdbcType=DOUBLE},
+      sensor13 = #{sensor13,jdbcType=DOUBLE},
+      sensor14 = #{sensor14,jdbcType=DOUBLE},
+      sensor15 = #{sensor15,jdbcType=DOUBLE},
+      sensor16 = #{sensor16,jdbcType=DOUBLE},
+      sensor17 = #{sensor17,jdbcType=DOUBLE},
+      sensor18 = #{sensor18,jdbcType=DOUBLE},
+      sensor19 = #{sensor19,jdbcType=DOUBLE},
+      sensor20 = #{sensor20,jdbcType=DOUBLE},
+      sensor21 = #{sensor21,jdbcType=DOUBLE},
+      sensor22 = #{sensor22,jdbcType=DOUBLE},
+      sensor23 = #{sensor23,jdbcType=DOUBLE},
+      sensor24 = #{sensor24,jdbcType=DOUBLE},
+      sensor25 = #{sensor25,jdbcType=DOUBLE},
+      sensor26 = #{sensor26,jdbcType=DOUBLE},
+      sensor27 = #{sensor27,jdbcType=DOUBLE},
+      sensor28 = #{sensor28,jdbcType=DOUBLE},
+      sensor29 = #{sensor29,jdbcType=DOUBLE},
+      sensor30 = #{sensor30,jdbcType=DOUBLE},
+      sensor31 = #{sensor31,jdbcType=DOUBLE},
+      sensor32 = #{sensor32,jdbcType=DOUBLE},
+      id_query = #{id_query,jdbcType=INTEGER}
+    where expid = #{expid,jdbcType=INTEGER}
+  </update>
+
+
+    <!-- 第一个参数为页数，第二个参数为每页多少行 -->
     <select id="findByPage" resultType="cn.tycoding.pojo.EgContrast">
 		select * from
 		eg_contrast
@@ -13,15 +440,15 @@
 		select count(*) from
 		eg_contrast
 	</select>
-	
-	<select id="find" resultType="cn.tycoding.pojo.EgContrast">
+
+    <select id="find" resultType="cn.tycoding.pojo.EgContrast">
 		select * from
 		eg_contrast
 		order by expid desc
 		
 	</select>
-  
-  <update id="edit" parameterType="cn.tycoding.pojo.EgContrast">
+
+    <update id="edit" parameterType="cn.tycoding.pojo.EgContrast">
 		update eg_contrast
     set sensor01 = #{sensor01},
       sensor02 = #{sensor02},
@@ -58,8 +485,8 @@
       id_query = #{id_query}
     where expid = #{expid}
 	</update>
-	
-	 <!-- 增加一条学生数据 -->
+
+    <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.EgContrast">
 		insert into eg_contrast
 		values(#{expid},#{sensor01},#{sensor02},#{sensor03},#{sensor04},#{sensor05},#{sensor06},#{sensor07},#{sensor08},#{sensor09},#{sensor10},#{sensor11},#{sensor12},#{sensor13},#{sensor14},#{sensor15},#{sensor16},#{sensor17},#{sensor18},#{sensor19},#{sensor20},#{sensor21},#{sensor22},#{sensor23},#{sensor24},#{sensor25},#{sensor26},#{sensor27},#{sensor28},#{sensor29},#{sensor30},#{sensor31},#{sensor32},#{id_query});
@@ -70,8 +497,8 @@
 		delete from eg_contrast
 		where expid=#{expid}
 	</delete>
-  
-   <!-- 按照filter的复杂条件查找 -->
+
+    <!-- 按照filter的复杂条件查找 -->
     <select id="findByFilters" parameterType="string"
             resultType="cn.tycoding.pojo.EgContrast">
 		${_parameter}
@@ -82,7 +509,5 @@
             resultType="int">
 		${_parameter}
 	</select>
-  
-  
-  
+
 </mapper>
