@@ -13,7 +13,7 @@ public interface TmpKandMapper {
     int insertSelective(TmpKand record);
 
     TmpKand selectByPrimaryKey(TmpKandKey key);
-
+    
     int updateByPrimaryKeySelective(TmpKand record);
 
     int updateByPrimaryKey(TmpKand record);
@@ -28,5 +28,6 @@ public interface TmpKandMapper {
     List findByFilters(String sql);
 
 	int findByFiltersSum(String getSumSql);
+	
 
 }

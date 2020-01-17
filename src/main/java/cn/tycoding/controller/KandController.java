@@ -47,11 +47,11 @@ public class KandController {
 	private SmallExcelReaderUtil excelUtil;
 //	private SqlSessionTemplate SqlSessionTemplate;
 
-	@RequestMapping(value = "/findByExpid")
+	@RequestMapping(value = "/findByIdQuery")
 	@ResponseBody
-	public FilesKand findByExpid(String expid) throws Exception {
-		Integer id = Integer.valueOf(expid);
-		FilesKand fileResult = kandService.findByExpid(id);
+	public FilesKand findByIdQuery(String idQuery) throws Exception {
+		Integer id = Integer.valueOf(idQuery);
+		FilesKand fileResult = kandService.findByIdQuery(id);
 		String filePath = fileResult.getUrl();
 		System.out.println(filePath);
 		List<List<List<Object>>> excelDataList = excelUtil.getListByExcel(filePath, 2);

@@ -9,8 +9,8 @@
 </head>
 
 <body>
-	<input type="text" width="10" id="text_expid" />
-	<input type="button" value="获取数据" id="bt_bgetdata" />
+	<input type="text" width="10" id="text_idQuery" />
+	<input type="button" value="获取数据" id="bt_getdata" />
 	<input type="button" value="获取tmp" id="bt_gettmp" /><br>
 	<input type="button" style="visibility: hidden;" value="上一页" id="bt_prepage"/>
 	<label style="visibility: hidden;" id="lb_currentpage"/></label>
@@ -61,11 +61,11 @@
 <script type="text/javascript">
 	//页面加载事件，读入expid，并查询返回相应的url
 	$("#bt_getdata").click(function() {
-		var expid = $("#text_expid").val();
+		var idQuery = $("#text_idQuery").val();
 		$.ajax({
-			url : '/kand/findByExpid', // 请求地址, 就是你的控制器, 如 test.com/home/index/index
+			url : '/kand/findByIdQuery', // 请求地址, 就是你的控制器, 如 test.com/home/index/index
 			data : {
-				"expid" : expid
+				"idQuery" : idQuery
 			}, // 需要传送的参数
 			type : 'POST', // 请求方式
 			dataType : 'json', // 返回数据的格式, 通常为JSON

@@ -41,6 +41,12 @@ public class KandServicelmpl implements KandService {
 		// TODO Auto-generated method stub
 		return filesKandMapper.selectByPrimaryKey(expid);
 	}
+	
+	@Override
+	public FilesKand findByIdQuery(Integer idQuery) {
+		// TODO Auto-generated method stub
+		return filesKandMapper.selectByIdQuery(idQuery);
+	}
 
 	@Override
 	public Integer getMaxExpid() {

@@ -10,6 +10,8 @@ import java.util.List;
 public interface KandService {
 	public FilesKand findByExpid(Integer expid);
 	
+	public FilesKand findByIdQuery(Integer idQuery);
+	
 	public Integer getMaxExpid();
 	
 	public void insertList(List<TmpKand> list);
