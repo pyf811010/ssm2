@@ -21,14 +21,12 @@ public interface TmpKandMapper {
     int insertList(List<TmpKand> record);
     
     int selectMaxExpid();
-<<<<<<< HEAD
-    
+
     List findByPage(int i, int rows);
     
     int getSum();
     List findByFilters(String sql);
 
 	int findByFiltersSum(String getSumSql);
-=======
->>>>>>> dev
+
 }

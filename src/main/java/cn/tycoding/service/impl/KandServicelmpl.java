@@ -70,7 +70,7 @@ public class KandServicelmpl implements KandService {
 			sqlSession.close();
 		}
 	}
-<<<<<<< HEAD
+
 	@Override
 	public ObjectQuery findByPage(Boolean _search, String filters, int page, int rows) {
 		 if (!_search) {
@@ -109,6 +109,5 @@ public class KandServicelmpl implements KandService {
         ObjectQuery sq = new ObjectQuery(page, total, records, list);
         return sq;
 	}
-=======
->>>>>>> dev
+
 }
