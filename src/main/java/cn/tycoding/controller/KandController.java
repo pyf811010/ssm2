@@ -114,10 +114,20 @@ public class KandController {
 //		System.out.println("The exceldata is"+excelDataList.get(0).get(0).get(1).toString());
 //		ReflectUtil.setKandValues(tmp, "feature090", excelDataList.get(0).get(0).get(1).toString());
 //		System.out.println(tmp.getFeature090());
-
 		return null;
 	}
 
+	@RequestMapping(value = "/findAllByPage")
+	@ResponseBody
+	public ObjectQuery findByPage(int page, int rows)
+            throws UnsupportedEncodingException {
+//        if (filters != null) {
+//            // 转码
+//            //filters = new String(filters.getBytes("ISO-8859-1"), "UTF-8");
+//            System.out.println(filters);
+//        }
+        return kandService.findByPage(false,null, page, rows);
+    }
 //	public static void exec(List<TmpKand> list) throws InterruptedException {
 //		int count = 500; // 一个线程处理300条数据
 //		int listSize = list.size(); // 数据集合大小

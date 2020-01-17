@@ -238,9 +238,28 @@
 		and id =
 		#{id,jdbcType=INTEGER}
 	</select>
+	<select id="findByPage" resultMap="BaseResultMap">
+		select * from
+		tmp_kand
+		order by expid,id
+		limit #{0},#{1}
+	</select>
+	<select id="getSum" resultType="int">
+		select count(*) from
+		tmp_kand
+	</select>
 	<select id="selectMaxExpid" resultType="integer">
 		select
 		IFNULL(max(expid),0) from tmp_kand
+	</select>
+	<select id="findByFilters" parameterType="string"
+            resultMap="BaseResultMap">
+		${_parameter}
+	</select>
+	 <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFiltersSum" parameterType="string"
+            resultType="int">
+		${_parameter}
 	</select>
 	<delete id="deleteByPrimaryKey"
 		parameterType="cn.tycoding.pojo.TmpKandKey">
