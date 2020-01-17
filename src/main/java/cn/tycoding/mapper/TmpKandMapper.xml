@@ -238,6 +238,7 @@
 		and id =
 		#{id,jdbcType=INTEGER}
 	</select>
+<<<<<<< HEAD
 	<select id="findByPage" resultMap="BaseResultMap">
 		select * from
 		tmp_kand
@@ -248,10 +249,13 @@
 		select count(*) from
 		tmp_kand
 	</select>
+=======
+>>>>>>> dev
 	<select id="selectMaxExpid" resultType="integer">
 		select
 		IFNULL(max(expid),0) from tmp_kand
 	</select>
+<<<<<<< HEAD
 	<select id="findByFilters" parameterType="string"
             resultMap="BaseResultMap">
 		${_parameter}
@@ -261,6 +265,8 @@
             resultType="int">
 		${_parameter}
 	</select>
+=======
+>>>>>>> dev
 	<delete id="deleteByPrimaryKey"
 		parameterType="cn.tycoding.pojo.TmpKandKey">
 		delete from tmp_kand

@@ -114,6 +114,7 @@ public class KandController {
 //		System.out.println("The exceldata is"+excelDataList.get(0).get(0).get(1).toString());
 //		ReflectUtil.setKandValues(tmp, "feature090", excelDataList.get(0).get(0).get(1).toString());
 //		System.out.println(tmp.getFeature090());
+<<<<<<< HEAD
 		return null;
 	}
 
@@ -128,6 +129,12 @@ public class KandController {
 //        }
         return kandService.findByPage(false,null, page, rows);
     }
+=======
+
+		return null;
+	}
+
+>>>>>>> dev
 //	public static void exec(List<TmpKand> list) throws InterruptedException {
 //		int count = 500; // 一个线程处理300条数据
 //		int listSize = list.size(); // 数据集合大小

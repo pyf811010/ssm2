@@ -21,6 +21,7 @@ public interface TmpKandMapper {
     int insertList(List<TmpKand> record);
     
     int selectMaxExpid();
+<<<<<<< HEAD
     
     List findByPage(int i, int rows);
     
@@ -28,4 +29,6 @@ public interface TmpKandMapper {
     List findByFilters(String sql);
 
 	int findByFiltersSum(String getSumSql);
+=======
+>>>>>>> dev
 }
