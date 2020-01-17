@@ -1,10 +1,14 @@
 package cn.tycoding.controller;
 
 import cn.tycoding.pojo.Admin;
+import cn.tycoding.pojo.EgContrast;
 import cn.tycoding.pojo.ObjectQuery;
 import cn.tycoding.service.AdminService;
+import cn.tycoding.service.EgContrastService;
+import cn.tycoding.service.SubjectsService;
 import cn.tycoding.service.UserTestService;
 import cn.tycoding.pojo.State;
+import cn.tycoding.pojo.Subjects;
 import cn.tycoding.pojo.UserTest;
 
 import com.alibaba.fastjson.JSONObject;
@@ -33,14 +37,14 @@ import javax.servlet.http.HttpSession;
  * @date 18-4-27上午7:05
  */
 @Controller
-@RequestMapping(value = "/usertest")
-public class UserTestController {
+@RequestMapping(value = "/egcontrast")
+public class EgContrastController {
 
     /**
      * 注入service
      */
     @Autowired
-    private UserTestService userTestService;
+    private EgContrastService egContrastService;
 
 
 
@@ -50,10 +54,10 @@ public class UserTestController {
             throws UnsupportedEncodingException {
         if (filters != null) {
             // 转码
-            //filters = new String(filters.getBytes("ISO-8859-1"), "UTF-8");
+            filters = new String(filters.getBytes("ISO-8859-1"), "UTF-8");
             System.out.println(filters);
         }
-        return userTestService.findByPage(_search, filters, page, rows);
+        return egContrastService.findByPage(_search, filters, page, rows);
 
     }
     
@@ -61,26 +65,25 @@ public class UserTestController {
     @ResponseBody
     public List find(){
         
-        return userTestService.find();
+        return egContrastService.find();
 
     }
     
     @RequestMapping("/handle")
     @ResponseBody
-    public String handle(String oper, UserTest usertest, String id[])
+    public String handle(String oper, EgContrast egContrast, String id[])
             throws UnsupportedEncodingException {
-        String temp = userTestService.handle(oper, usertest, id);
+    	System.out.println(id);
+        String temp = egContrastService.handle(oper, egContrast, id);
         // 对传回的中文进行编码
         return URLEncoder.encode(temp, "UTF-8");
     }
     
-
-    @RequestMapping("/score")
+    /*@RequestMapping("/score")
     @ResponseBody
-    public List<UserTest> usertestInfo(int id) {
-        return userTestService.findAllById(id);
-    }
-
+    public List<Subjects> usertestInfo(int id) {
+        return subjectsService.findAllById(id);
+    }*/
     
     
 }

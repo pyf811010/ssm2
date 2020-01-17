@@ -5,9 +5,10 @@ import java.util.List;
 import cn.tycoding.pojo.Admin;
 import cn.tycoding.pojo.ObjectQuery;
 import cn.tycoding.pojo.State;
+import cn.tycoding.pojo.Subjects;
 import cn.tycoding.pojo.UserTest;
 
-public interface UserTestService {
+public interface SubjectsService {
 
 
 
@@ -15,10 +16,10 @@ public interface UserTestService {
 
 	List find();
 
-	String handle(String oper, UserTest usertest, String[] id);
+	String handle(String oper, Subjects subjects, String[] id);
+//	List<Subjects> findAllById(int id);
 
-	List<UserTest> findAllById(int id);
+	List<Subjects> findAllById(int id);
 
-	List<UserTest> findAllByRelateType(int type);
-
+//	List<UserTest> findAllByRelateType(int type);
 }

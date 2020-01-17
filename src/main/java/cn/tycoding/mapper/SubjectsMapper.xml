@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tycoding.mapper.SubjectsMapper">
+  <resultMap id="BaseResultMap" type="cn.tycoding.pojo.Subjects">
+    <id column="ID" jdbcType="INTEGER" property="ID" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="TestDate" jdbcType="VARCHAR" property="testDate" />
+    <result column="weight" jdbcType="VARCHAR" property="weight" />
+    <result column="height" jdbcType="VARCHAR" property="height" />
+  </resultMap>
+ 
+  
+  <!-- 第一个参数为页数，第二个参数为每页多少行 -->
+    <select id="findByPage" resultType="cn.tycoding.pojo.Subjects">
+		select * from
+		subjects
+		order by sub_id desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		subjects
+	</select>
+	
+	<select id="find" resultType="cn.tycoding.pojo.Subjects">
+		select * from
+		subjects
+		order by sub_id desc
+		
+	</select>
+  
+  <update id="edit" parameterType="cn.tycoding.pojo.Subjects">
+		update subjects set
+		name=#{name},testdate=#{testdate},weight=#{weight},height=#{height}
+		where
+		sub_id=#{sub_id}
+	</update>
+	
+	 <!-- 增加一条学生数据 -->
+    <insert id="add" parameterType="cn.tycoding.pojo.Subjects">
+		insert into subjects
+		values(#{sub_id},#{name},#{testdate},#{weight},#{height});
+	</insert>
+
+    <!-- 按学号删除学生 -->
+    <delete id="del" parameterType="string">
+		delete from subjects
+		where sub_id=#{sub_id}
+	</delete>
+  
+   <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFilters" parameterType="string"
+            resultType="cn.tycoding.pojo.Subjects">
+		${_parameter}
+	</select>
+
+    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFiltersSum" parameterType="string"
+            resultType="int">
+		${_parameter}
+	</select>
+  
+</mapper>

@@ -61,10 +61,10 @@
 				</button>
 
 				<div class="navbar-header pull-left">
-					<a href="/views/index.html" class="navbar-brand">
+					<a href="/view/index.html" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
-							学生发展数据综合评价与分析系统
+							人体运动测试数据分析与管理系统
 						</small>
 					</a>
 				</div>
@@ -471,7 +471,7 @@
 								<a href="/views/index.html">首页</a>
 							</li>
 
-							<li class="active">学生信息管理</li>
+							<li class="active">前提实验条件管理</li>
 						</ul>
 						<!-- /.breadcrumb -->
 
@@ -482,13 +482,13 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<div class="alert alert-info">
+								<!-- <div class="alert alert-info">
 									<button class="close" data-dismiss="alert">
 										<i class="ace-icon fa fa-times"></i>
 									</button>
 
 									<i class="ace-icon fa fa-hand-o-right"></i> 学生的学号不可重复.
-								</div>
+								</div> -->
 								<div class="row" style="margin-bottom: 5px;">
 									<div class="row" style="float:right;margin-right: 12px;">
 										<div class="btn-group">
@@ -556,7 +556,7 @@
 				<div class="footer-inner">
 					<div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder" style="margin-right: 10px;">学生发展数据综合评价与分析系统</span> 苏州科技大学 &copy; 2018-2019
+							<span class="blue bolder" style="margin-right: 10px;">人体运动测试数据分析与管理系统</span> 中国航天二院
 						</span>
 
 					</div>
@@ -641,6 +641,17 @@
 				font-size: 14px
 			}
 		</style>
+		
+		<style> 
+ 	.ui-jqgrid .ui-jqgrid-bdiv { 
+ 	    border-top: 1px solid #E1E1E1; 
+ 	    overflow-x: auto; 
+ 	} 
+ 	.frozen-div, .frozen-bdiv {
+ 	    background-color: #E4E6E9;/*与网页背景色一致*/ */
+ 	} 
+ </style> 
+ <!--上面代码用来设置水平滚动条  -->
 
 		<script type="text/javascript">
 			jQuery(function($) {
@@ -745,12 +756,12 @@
 				jQuery(grid_selector).jqGrid({
 					//direction: "rtl",
 
-					url: "/json/findsome",
+					url: "/preec/findsome",
 
 					//data: grid_data,
 					datatype: "json",
 					height: 400,
-					colNames: ['操作', '', 'id号', 'name', 'text'],
+					colNames: ['操作', '', 'ID', '关联查询ID', '实验者信息ID','实验条件','追加实验条件'],
 					colModel: [{
 							name: 'op',
 							index: 'op',
@@ -786,11 +797,11 @@
 						},
 
 						{
-							name: 'id',
-							index: 'id',
+							name: 'expid',
+							index: 'expid',
 							width: 100,
 							key: true,
-							editable: true,
+							editable: false,
 							edittype: "textarea",
 							editoptions: {
 								rows: "2",
@@ -799,9 +810,21 @@
 
 						},
 						{
-							name: 'name',
-							index: 'name',
+							name: 'id_query',
+							index: 'id_query',
 							width: 100,
+							sortable: false,
+							editable: false,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},
+						{
+							name: 'id_subjects',
+							index: 'id_subjects',
+							width: 150,
 							sortable: false,
 							editable: true,
 							edittype: "textarea",
@@ -811,9 +834,21 @@
 							}
 						},
 						{
-							name: 'text',
-							index: 'text',
+							name: 'advance',
+							index: 'advance',
 							width: 150,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},
+						{
+							name: 'remark',
+							index: 'remark',
+							width: 1000,
 							sortable: false,
 							editable: true,
 							edittype: "textarea",
@@ -831,7 +866,9 @@
 					rowList: [10, 20, 30], //可选的每页显示条数
 					pager: pager_selector, //指定工具栏
 					altRows: true,
-
+					shrinkToFit:false,
+					autoScroll: true,
+					/*上面两个属性用于开启滚动条  */
 					multiselect: true, //是否支持多选
 					//multikey: "ctrlKey",
 					multiboxonly: true, //选中行，即可选中行前面的多选框，点击另外一行，此行效果取消，选中当前行，只能实现选中一条
@@ -847,8 +884,8 @@
 						}, 0);
 					},
 
-					editurl: "/json/handle", //nothing is saved
-					caption: "用户基本信息管理" //表名
+					editurl: "/preec/handle", //nothing is saved
+					caption: "前提实验条件管理" //表名
 
 					//,autowidth: true,
 

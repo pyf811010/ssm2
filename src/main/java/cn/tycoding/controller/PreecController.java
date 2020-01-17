@@ -2,7 +2,9 @@ package cn.tycoding.controller;
 
 import cn.tycoding.pojo.Admin;
 import cn.tycoding.pojo.ObjectQuery;
+import cn.tycoding.pojo.Preec;
 import cn.tycoding.service.AdminService;
+import cn.tycoding.service.PreecService;
 import cn.tycoding.service.UserTestService;
 import cn.tycoding.pojo.State;
 import cn.tycoding.pojo.UserTest;
@@ -27,20 +29,20 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 /**
- * 管理人员的Controller层
+ * 前置实验条件的Controller层
  *
  * @author TyCoding
  * @date 18-4-27上午7:05
  */
 @Controller
-@RequestMapping(value = "/usertest")
-public class UserTestController {
+@RequestMapping(value = "/preec")
+public class PreecController {
 
     /**
      * 注入service
      */
     @Autowired
-    private UserTestService userTestService;
+    private PreecService preecService;
 
 
 
@@ -50,10 +52,10 @@ public class UserTestController {
             throws UnsupportedEncodingException {
         if (filters != null) {
             // 转码
-            //filters = new String(filters.getBytes("ISO-8859-1"), "UTF-8");
+            filters = new String(filters.getBytes("ISO-8859-1"), "UTF-8");
             System.out.println(filters);
         }
-        return userTestService.findByPage(_search, filters, page, rows);
+        return preecService.findByPage(_search, filters, page, rows);
 
     }
     
@@ -61,26 +63,24 @@ public class UserTestController {
     @ResponseBody
     public List find(){
         
-        return userTestService.find();
+        return preecService.find();
 
     }
     
     @RequestMapping("/handle")
     @ResponseBody
-    public String handle(String oper, UserTest usertest, String id[])
+    public String handle(String oper, Preec preec, String id[])
             throws UnsupportedEncodingException {
-        String temp = userTestService.handle(oper, usertest, id);
+        String temp = preecService.handle(oper, preec, id);
         // 对传回的中文进行编码
         return URLEncoder.encode(temp, "UTF-8");
     }
     
-
     @RequestMapping("/score")
     @ResponseBody
-    public List<UserTest> usertestInfo(int id) {
-        return userTestService.findAllById(id);
+    public List<Preec> usertestInfo(int id) {
+        return preecService.findAllById(id);
     }
-
     
     
 }

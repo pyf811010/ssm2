@@ -4,10 +4,11 @@ import java.util.List;
 
 import cn.tycoding.pojo.Admin;
 import cn.tycoding.pojo.ObjectQuery;
+import cn.tycoding.pojo.Preec;
 import cn.tycoding.pojo.State;
 import cn.tycoding.pojo.UserTest;
 
-public interface UserTestService {
+public interface PreecService {
 
 
 
@@ -15,10 +16,8 @@ public interface UserTestService {
 
 	List find();
 
-	String handle(String oper, UserTest usertest, String[] id);
+	String handle(String oper, Preec preec, String[] id);
+	List<Preec> findAllById(int id);
 
-	List<UserTest> findAllById(int id);
-
-	List<UserTest> findAllByRelateType(int type);
-
+//	List<Preec> findAllByRelateType(int type);
 }
