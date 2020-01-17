@@ -2,6 +2,7 @@ package cn.tycoding.controller;
 
 import cn.tycoding.pojo.Admin;
 import cn.tycoding.pojo.ObjectQuery;
+import cn.tycoding.pojo.Preec;
 import cn.tycoding.service.AdminService;
 import cn.tycoding.pojo.State;
 
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -118,6 +121,32 @@ public class AdminController {
     public State resetPassword(Admin admin) {
         return adminService.resetPassword(admin);
     }
+    
+    @RequestMapping("/findsome")
+    @ResponseBody
+    public ObjectQuery findByPage(Boolean _search, String filters, int page, int rows)
+            throws UnsupportedEncodingException {
+        if (filters != null) {
+            // 转码
+            filters = new String(filters.getBytes("ISO-8859-1"), "UTF-8");
+            System.out.println(filters);
+        }
+        return adminService.findByPage(_search, filters, page, rows);
+
+    }
+    
+    @RequestMapping("/handle")
+    @ResponseBody
+    public String handle(String oper, Admin admin, String id[])
+            throws UnsupportedEncodingException {
+        String temp = adminService.handle(oper, admin, id);
+        // 对传回的中文进行编码
+        return URLEncoder.encode(temp, "UTF-8");
+    }
+    
+    
+    
+    
     
    
 }

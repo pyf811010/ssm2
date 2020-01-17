@@ -3,6 +3,7 @@ package cn.tycoding.util;
 import cn.tycoding.pojo.EgContrast;
 import cn.tycoding.pojo.Preec;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -187,7 +188,7 @@ public class ReadExcel {
                 if (o instanceof Preec) {
                     Preec preec = new Preec();
                     int j = 0;
-                    row.getCell(j).setCellType(1);
+                    row.getCell(j).setCellType(CellType.STRING);
                     preec.setId_subjects(Integer.parseInt(row.getCell(j++).getStringCellValue()));
                     preec.setAdvance(row.getCell(j++).getStringCellValue());
                     preec.setRemark(row.getCell(j++).getStringCellValue());

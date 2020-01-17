@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+<!-- basic scripts -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta charset="utf-8" />
+</head>
+
+<body>
+	<input type="text" width="10" id="text_expid" />
+	<input type="button" value="获取数据" id="bt_bgetdata" />
+	<input type="button" value="获取tmp" id="bt_gettmp" /><br>
+	<input type="button" style="visibility: hidden;" value="上一页" id="bt_prepage"/>
+	<label style="visibility: hidden;" id="lb_currentpage"/></label>
+	<label style="visibility: hidden;" id="lb_connect"/>/</label>
+	<label style="visibility: hidden;" id="lb_totalpage"/></label>
+	<input type="button" style="visibility: hidden;" value="下一页" id="bt_nextpage"/><br>
+	<input type="button" style="visibility: hidden;" value="跳转" id="bt_jumpto"/>
+	<input type="text" style="visibility: hidden;" id="text_jumpto"/>
+ 	
+	<div class="widget-body">
+		<div class="widget-main no-padding">
+			<table class="table table-bordered table-striped table-hover"
+				style="margin-left: 20px; margin-top: 25px;" id="tmp_kand_datas">
+				<thead class="thin-border-bottom" style="visibility: hidden;" id="t_head"></thead>
+				<tbody id="t_body" ></tbody>
+			</table>
+		</div>
+		<!-- /.widget-main -->
+	</div>
+
+</body>
+<!--[if !IE]> -->
+<script src="/assets/js/jquery-2.1.4.min.js"></script>
+<script src="/assets/js/jquery.form.js"></script>
+<script src="/assets/js/jquery.cookie.js"></script>
+<script src="/assets/js/ssm2.util.js"></script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+		<script src="/assets/js/jquery-1.11.3.min.js"></script>
+		<![endif]-->
+<script type="text/javascript">
+	if ('ontouchstart' in document.documentElement)
+		document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>"
+				+ "<" + "/script>");
+</script>
+<script src="/assets/js/bootstrap.min.js"></script>
+
+<!-- page specific plugin scripts -->
+<script src="/assets/js/bootstrap-datepicker.min.js"></script>
+<script src="/assets/js/jquery.jqGrid.min.js"></script>
+<script src="/assets/js/grid.locale-cn.js"></script>
+
+<!-- ace scripts -->
+<script src="/assets/js/ace-elements.min.js"></script>
+<script src="/assets/js/ace.min.js"></script>
+<script type="text/javascript">
+	//页面加载事件，读入expid，并查询返回相应的url
+	$("#bt_bgetdata").click(function() {
+		var expid = $("#text_expid").val();
+		$.ajax({
+			url : '/kand/findByExpid', // 请求地址, 就是你的控制器, 如 test.com/home/index/index
+			data : {
+				"expid" : expid
+			}, // 需要传送的参数
+			type : 'POST', // 请求方式
+			dataType : 'json', // 返回数据的格式, 通常为JSON
+			//contentType: 'application/json',             
+			success : function(data) {
+				/* alert(data.page); */
+				alert("导入成功");
+			},
+			error : function() {
+				alert('Send Request Fail.....'); // 请求失败时的回调函数
+			}
+		});
+	});
+	
+	$("#bt_gettmp").click(function(){
+		if (document.getElementById("t_head").style.visibility != "visible"){
+			var t_head = document.getElementById("t_head");
+			var t_head_tr = document.createElement("tr");
+			var t_head_list = [];
+			t_head_list.push("<td><font size='3' color='#000000'>expid</font></td>");
+			t_head_list.push("<td><font size='3' color='#000000'>id</font></td>");
+			t_head_list.push("<td><font size='3' color='#000000'>time_stamp</font></td>");
+			for (var i = 1; i < 91; i++){
+				t_head_list.push("<td><font size='3' color='#000000'>feature"+PrefixInteger(i, 3)+"</font></td>");
+			}
+			t_head_tr.innerHTML = t_head_list.join("");
+			t_head.appendChild(t_head_tr);
+			document.getElementById("t_head").style.visibility = "visible";
+			
+			document.getElementById("bt_prepage").style.visibility = "visible";
+			document.getElementById("bt_nextpage").style.visibility = "visible";
+			document.getElementById("lb_currentpage").style.visibility = "visible";
+			document.getElementById("lb_totalpage").style.visibility = "visible";
+			document.getElementById("lb_connect").style.visibility = "visible";
+			document.getElementById("bt_jumpto").style.visibility = "visible";
+			document.getElementById("text_jumpto").style.visibility = "visible";
+		}
+		findAllByPage(1, 300);
+	});
+	$("#bt_prepage").click(function(){
+		var currentpage = parseInt($("#lb_currentpage").html());
+		if (currentpage == 1){
+			alert("已经是第一页");
+		} else {
+			findAllByPage(currentpage-1, 300);
+		}
+	});
+	$("#bt_nextpage").click(function(){
+		var currentpage = parseInt($("#lb_currentpage").html());
+		var totalpage = parseInt($("#lb_totalpage").html());
+		console.log(currentpage);
+		console.log(totalpage);
+		if (currentpage == totalpage){
+			alert("已经最后一页");
+		} else {
+			findAllByPage(currentpage+1, 300);
+		}
+	});
+	$("#bt_jumpto").click(function(){
+		var currentpage = parseInt($("#lb_currentpage").html());
+		var totalpage = parseInt($("#lb_totalpage").html());
+		var jumpto = parseInt($("#text_jumpto").val());
+		console.log(currentpage);
+		console.log(totalpage);
+		if (jumpto < 1 || jumpto > totalpage){
+			alert("超出范围已经最后一页");
+		} else {
+			findAllByPage(jumpto, 300);
+		}
+	});
+	function findAllByPage(page, rows){
+		var t_body = document.getElementById("t_body");
+		t_body.innerHTML="";
+		$.ajax({
+			url : '/kand/findAllByPage', // 请求地址, 就是你的控制器, 如 test.com/home/index/index
+			data : {
+				"page" : page,
+				"rows" : rows
+			}, // 需要传送的参数
+			type : 'POST', // 请求方式
+			dataType : 'json', // 返回数据的格式, 通常为JSON
+			//contentType: 'application/json',             
+			success : function(data) {
+				var lb_currentpage = document.getElementById("lb_currentpage");
+				var lb_totalpage = document.getElementById("lb_totalpage");
+				lb_currentpage.innerHTML = data.page;
+				lb_totalpage.innerHTML = data.total;
+				
+				var rowsize = data.rows.length;
+				for (var i = 0; i < rowsize; i++){
+					var t_body_tr = document.createElement("tr");
+					var t_body_list = [];
+					for (j in data.rows[i]){
+						t_body_list.push("<td><font size='1' color='#000000'>" + data.rows[i][j] + "</font></td>");
+					}	
+					t_body_tr.innerHTML = t_body_list.join("");
+					t_body.appendChild(t_body_tr);
+				}
+			},
+			error : function() {
+				alert('Send Request Fail..'); // 请求失败时的回调函数
+			}
+			
+		});	
+	}
+	
+	function PrefixInteger(num, n) {
+	    return (Array(n).join(0) + num).slice(-n);
+	}
+</script>

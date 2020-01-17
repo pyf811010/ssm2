@@ -71,10 +71,14 @@ public class ExcelServiceImpl implements ExcelService {
                 if (f instanceof CommonsMultipartFile) {
                     CommonsMultipartFile f2 = (CommonsMultipartFile) f;
                     name = f2.getFileItem().getName();
+                    int index = name.indexOf("/");
+                    String intNumber = name.substring(0,index);
                     System.out.println("相对路径:" + name);
                     String url = path + "/" + name;
+                    String dir = path + "/" + intNumber;
                     System.out.println("服务器绝对路径:" + url);
-                    file1 = new File(path);
+                    System.out.println("文件夹路径:" + dir);
+                    file1 = new File(dir);
                     if (!file1.exists()) {
                         file1.mkdirs();
                     }
