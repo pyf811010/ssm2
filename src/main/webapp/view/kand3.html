@@ -481,60 +481,37 @@
 
 						<div class="row">
 							<div class="col-xs-12">
-								<!-- PAGE CONTENT BEGINS -->
-								<div class="alert alert-info">
-									<button class="close" data-dismiss="alert">
-										<i class="ace-icon fa fa-times"></i>
-									</button>
-
-									<i class="ace-icon fa fa-hand-o-right"></i> 学生的学号不可重复.
+								<div class="row">
+									<div class="col-sm-10">
+										<h3 class="header blue lighter smaller">
+											<i class="ace-icon fa fa-spinner"></i>
+											运动学与动力学数据
+										</h3>
+									</div>
 								</div>
-								<div class="row" style="margin-bottom: 5px;">
-									<div class="row" style="float:right;margin-right: 12px;">
-										<div class="btn-group">
-											<button data-toggle="dropdown" class="btn btn-success bigger-120 dropdown-toggle">
-												   导入现有数据
-													<i class="ace-icon fa fa-angle-down icon-on-right"></i>
-												</button>
+								<div class="row">
+									<div class="col-sm-2">
+										<center>
+                                        <span style="float: left; height: 34px; width: 60px; line-height: 34px;">中间表ID</span>
+									<input type="text" name="text_idQuery" id="text_idQuery" placeholder="请输入中间表ID(Id-Query)" style="width:calc(100% - 60px);resize:none; height: 34px; float: left" placeholder="id" maxlength="15">
+                                  <!--将span内的文字和输入框设置在同一行  -->
+										</center>
 
-											<ul class="dropdown-menu dropdown-info dropdown-menu-right">
-												<li>
-													<a href="/student/downloadTemplate">下载导入摸板</a>
-												</li>
+									</div>
+									<div class="col-sm-2">
+										<center>
+											<button id="bt_gettmp" class="btn btn-info btn-sm">
+										<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+									&nbsp;查&nbsp;找&nbsp;
+									  </button>
+										</center>
+									</div>
+								</div>
 
-												<li class="divider"></li>
-
-												<li>
-
-													<form method="POST" enctype="multipart/form-data" id="form1" action="uploadExcel/upload.do">
-
-														<div style="margin-left: 10px;"><input id="upfile" type="file" name="upfile"></div>
-														<div style="margin-top: 15px;margin-left: 10px;">
-															<a href="#" onclick="importData()">由模版导入数据</a>
-														</div>
-													</form>
-
-												</li>
-											</ul>
-										</div>
-										<div class="btn-group">
-											<button data-toggle="dropdown" class="btn btn-warning bigger-120 dropdown-toggle">
-													导出查询数据
-													<i class="ace-icon fa fa-angle-down icon-on-right"></i>
-												</button>
-
-											<ul class="dropdown-menu dropdown-info dropdown-menu-right">
-												<li>
-													<a href="#" onclick="exportSinglePage()">导出本页数据</a>
-												</li>
-
-												<li class="divider"></li>
-
-												<li>
-													<a href="#" onclick="exportAllData()">导出全部数据</a>
-												</li>
-											</ul>
-										</div>
+								<div class="row">
+									<div class="col-sm-10">
+										<h3 class="header blue lighter smaller">
+										</h3>
 									</div>
 								</div>
 								<table id="grid-table"></table>
@@ -641,72 +618,55 @@
 				font-size: 14px
 			}
 		</style>
+		<style> 
+ 		.ui-jqgrid .ui-jqgrid-bdiv { 
+    		border-top: 1px solid #E1E1E1; 
+   			overflow-x: auto; 
+   		} 
+   		.frozen-div, .frozen-bdiv {
+   			background-color: #E4E6E9;/*与网页背景色一致*/ */
+   		} 
+   		</style> 
+		 <!--上面代码用来设置水平滚动条  -->
 
 		<script type="text/javascript">
-			jQuery(function($) {
-				$("#data_export").click(function() {
+			$("#data_export").click(function() {
 					var v = JSON.stringify($("#grid-table").jqGrid("getGridParam", "postData").filters);
 
 					alert(v);
 
 				});
-
+			
+			$("#bt_gettmp").click(function(){
+				var idQuery = $("#text_idQuery").val();
+				$.ajax({
+					url : '/kand/findByIdQuery', // 请求地址, 就是你的控制器, 如 test.com/home/index/index
+					data : {
+						"idQuery" : idQuery
+					}, // 需要传送的参数
+					type : 'POST', // 请求方式
+					dataType : 'json', // 返回数据的格式, 通常为JSON
+					//contentType: 'application/json',             
+					success : function(data) {
+						if (data.success) {
+							alert(data.info);
+							$("#grid-table").jqGrid('setGridParam',{datatype:'json'}).trigger('reloadGrid');
+						} else {
+							alert(data.info);
+						}
+					},
+					error : function() {
+						alert('Send Request Fail..'); // 请求失败时的回调函数
+					}
+				});
 			});
 
-			function checkData() {
-				var fileDir = $("#upfile").val();
-				var suffix = fileDir.substr(fileDir.lastIndexOf("."));
-				if("" == fileDir) {
-					alert("请选择文件后再上传！");
-					return false;
-				} else if(".xls" != suffix) {
-					alert("请选择后缀名为xls的excel文件！");
-					return false;
-				}
-				return true;
+			
 
-			}
-			//导入数据
-			function importData() {
-				if(checkData()) {
-					$('#form1').ajaxSubmit({
-						url: '/student/importExcel',
-						dataType: 'text',
-						success: resutlMsg,
-						error: errorMsg
-					});
-
-					function resutlMsg(res) {
-						alert(decodeURIComponent(res));
-						$("#upfile").val("");
-					}
-
-					function errorMsg() {
-						alert("导入excel出错！");
-					}
-
-				}
-
-			}
-
-			//导出当前页数的数据
-			function exportSinglePage() {
-				//得到查询的参数
-				var v = $("#grid-table").jqGrid("getGridParam", "postData");
-				//将json格式的数据转化为连接参数以附在请求后方
-				location.href = "/student/exportExcel?" + $.param(v);
-			}
-
-			//导出所有页数数据
-			function exportAllData() {
-				var v = $("#grid-table").jqGrid("getGridParam", "postData");
-				v.page = -1;
-				location.href = "/student/exportExcel?" + $.param(v);
-
-			}
 		</script>
 
 		<script type="text/javascript">
+			
 			jQuery(function($) {
 				var grid_selector = "#grid-table";
 				var pager_selector = "#grid-pager";
@@ -745,15 +705,13 @@
 				jQuery(grid_selector).jqGrid({
 					//direction: "rtl",
 
-					url: "/kand/findAllByPage",
+					url: "/kand/findByPage",
 
 					//data: grid_data,
-					datatype: "json",
+					datatype: "localjson",
 					height: 800,
-					width:window.screen.availWidth-20,
-			        autowidth: false,
-			        shrinkToFit: true,
-					colNames: ['操作', '', '实验编号', '序号', '时间戳','右髋前摆角度','右髋侧摆角度','右髋旋转角度','右膝角度','右踝角度','腰角度','右肩前摆角度','右肩侧摆角度','右肩旋转角度','右肘弯曲角度','右肘旋转角度','左髋前摆角度','左髋侧摆角度','左髋旋转角度','左膝角度','左踝角度','左肩前摆角度','左肩侧摆角度','左肩旋转角度','左肘弯曲角度','左肘旋转角度','右髋前摆角速度','右髋侧摆角速度','右髋旋转角速度','右膝角速度','右踝角速度','腰角速度','右肩前摆角速度','右肩侧摆角速度','右肩旋转角速度','右肘弯曲角速度','右肘旋转角速度','左髋前摆角速度','左髋侧摆角速度','左髋旋转角速度','左膝角速度','左踝角速度','左肩前摆角速度','左肩侧摆角速度','左肩旋转角速度','左肘弯曲角速度','左肘旋转角速度','右髋前摆力矩','右髋侧摆力矩','右髋旋转力矩','右膝力矩','右踝力矩','腰力矩','右肩前摆力矩','右肩侧摆力矩','右肩旋转力矩','右肘弯曲力矩','右肘旋转力矩','左髋前摆力矩','左髋侧摆力矩','左髋旋转力矩','左膝力矩','左踝力矩','左肩前摆力矩','左肩侧摆力矩','左肩旋转力矩','左肘弯曲力矩','左肘旋转力矩','右髋前摆功率','右髋侧摆功率','右髋旋转功率','右膝功率','右踝功率','腰功率','右肩前摆功率','右肩侧摆功率','右肩旋转功率','右肘弯曲功率','右肘旋转功率','左髋前摆功率','左髋侧摆功率','左髋旋转功率','左膝功率','左踝功率','左肩前摆功率','左肩侧摆功率','左肩旋转功率','左肘弯曲功率','左肘旋转功率','右脚X方向力','右脚Y方向力（竖直方向）','右脚Z方向力','左脚X方向力','左脚Y方向力（竖直方向）','左脚Z方向力'],
+					shrinkToFit: false,
+					colNames:['操作', '', '实验编号', '序号', '时间戳','右髋前摆角度','右髋侧摆角度','右髋旋转角度','右膝角度','右踝角度','腰角度','右肩前摆角度','右肩侧摆角度','右肩旋转角度','右肘弯曲角度','右肘旋转角度','左髋前摆角度','左髋侧摆角度','左髋旋转角度','左膝角度','左踝角度','左肩前摆角度','左肩侧摆角度','左肩旋转角度','左肘弯曲角度','左肘旋转角度','右髋前摆角速度','右髋侧摆角速度','右髋旋转角速度','右膝角速度','右踝角速度','腰角速度','右肩前摆角速度','右肩侧摆角速度','右肩旋转角速度','右肘弯曲角速度','右肘旋转角速度','左髋前摆角速度','左髋侧摆角速度','左髋旋转角速度','左膝角速度','左踝角速度','左肩前摆角速度','左肩侧摆角速度','左肩旋转角速度','左肘弯曲角速度','左肘旋转角速度','右髋前摆力矩','右髋侧摆力矩','右髋旋转力矩','右膝力矩','右踝力矩','腰力矩','右肩前摆力矩','右肩侧摆力矩','右肩旋转力矩','右肘弯曲力矩','右肘旋转力矩','左髋前摆力矩','左髋侧摆力矩','左髋旋转力矩','左膝力矩','左踝力矩','左肩前摆力矩','左肩侧摆力矩','左肩旋转力矩','左肘弯曲力矩','左肘旋转力矩','右髋前摆功率','右髋侧摆功率','右髋旋转功率','右膝功率','右踝功率','腰功率','右肩前摆功率','右肩侧摆功率','右肩旋转功率','右肘弯曲功率','右肘旋转功率','左髋前摆功率','左髋侧摆功率','左髋旋转功率','左膝功率','左踝功率','左肩前摆功率','左肩侧摆功率','左肩旋转功率','左肘弯曲功率','左肘旋转功率','右脚X方向力','右脚Y方向力（竖直方向）','右脚Z方向力','左脚X方向力','左脚Y方向力（竖直方向）','左脚Z方向力'],
 					colModel: [{
 							name: 'op',
 							index: 'op',
@@ -788,104 +746,104 @@
 
 						},
 
-						{name: 'expid',index: 'expid',width: 5,key: true,editable: false,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'id',index: 'id',width: 5,key:true;sortable: false,editable: false,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'timestamp',index: 'timestamp',width: 15,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature001',index: 'feature001',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature002',index: 'feature002',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature003',index: 'feature003',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature004',index: 'feature004',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature005',index: 'feature005',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature006',index: 'feature006',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature007',index: 'feature007',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature008',index: 'feature008',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature009',index: 'feature009',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature010',index: 'feature010',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature011',index: 'feature011',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature012',index: 'feature012',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature013',index: 'feature013',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature014',index: 'feature014',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature015',index: 'feature015',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature016',index: 'feature016',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature017',index: 'feature017',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature018',index: 'feature018',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature019',index: 'feature019',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature020',index: 'feature020',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature021',index: 'feature021',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature022',index: 'feature022',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature023',index: 'feature023',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature024',index: 'feature024',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature025',index: 'feature025',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature026',index: 'feature026',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature027',index: 'feature027',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature028',index: 'feature028',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature029',index: 'feature029',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature030',index: 'feature030',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature031',index: 'feature031',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature032',index: 'feature032',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature033',index: 'feature033',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature034',index: 'feature034',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature035',index: 'feature035',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature036',index: 'feature036',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature037',index: 'feature037',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature038',index: 'feature038',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature039',index: 'feature039',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature040',index: 'feature040',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature041',index: 'feature041',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature042',index: 'feature042',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature043',index: 'feature043',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature044',index: 'feature044',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature045',index: 'feature045',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature046',index: 'feature046',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature047',index: 'feature047',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature048',index: 'feature048',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature049',index: 'feature049',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature050',index: 'feature050',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature051',index: 'feature051',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature052',index: 'feature052',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature053',index: 'feature053',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature054',index: 'feature054',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature055',index: 'feature055',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature056',index: 'feature056',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature057',index: 'feature057',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature058',index: 'feature058',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature059',index: 'feature059',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature060',index: 'feature060',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature061',index: 'feature061',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature062',index: 'feature062',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature063',index: 'feature063',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature064',index: 'feature064',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature065',index: 'feature065',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature066',index: 'feature066',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature067',index: 'feature067',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature068',index: 'feature068',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature069',index: 'feature069',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature070',index: 'feature070',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature071',index: 'feature071',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature072',index: 'feature072',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature073',index: 'feature073',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature074',index: 'feature074',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature075',index: 'feature075',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature076',index: 'feature076',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature077',index: 'feature077',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature078',index: 'feature078',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature079',index: 'feature079',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature080',index: 'feature080',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature081',index: 'feature081',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature082',index: 'feature082',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature083',index: 'feature083',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature084',index: 'feature084',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature085',index: 'feature085',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature086',index: 'feature086',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature087',index: 'feature087',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature088',index: 'feature088',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature089',index: 'feature089',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature090',index: 'feature090',sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'expid',index: 'expid',align: 'center',key: true,fixed: true,width:70,resize: false, editable: false,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'id',index: 'id',key:true,fixed: true,resize: false,width:40, sortable: false,editable: false,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'timestamp',index: 'timestamp',width:160,resize: false, sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature001',index: 'feature001', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature002',index: 'feature002', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature003',index: 'feature003', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature004',index: 'feature004', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature005',index: 'feature005', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature006',index: 'feature006', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature007',index: 'feature007', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature008',index: 'feature008', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature009',index: 'feature009', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature010',index: 'feature010', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature011',index: 'feature011', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature012',index: 'feature012', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature013',index: 'feature013', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature014',index: 'feature014', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature015',index: 'feature015', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature016',index: 'feature016', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature017',index: 'feature017', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature018',index: 'feature018', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature019',index: 'feature019', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature020',index: 'feature020', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature021',index: 'feature021', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature022',index: 'feature022', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature023',index: 'feature023', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature024',index: 'feature024', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature025',index: 'feature025', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature026',index: 'feature026', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature027',index: 'feature027', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature028',index: 'feature028', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature029',index: 'feature029', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature030',index: 'feature030', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature031',index: 'feature031', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature032',index: 'feature032', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature033',index: 'feature033', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature034',index: 'feature034', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature035',index: 'feature035', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature036',index: 'feature036', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature037',index: 'feature037', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature038',index: 'feature038', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature039',index: 'feature039', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature040',index: 'feature040', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature041',index: 'feature041', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature042',index: 'feature042', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature043',index: 'feature043', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature044',index: 'feature044', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature045',index: 'feature045', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature046',index: 'feature046', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature047',index: 'feature047', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature048',index: 'feature048', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature049',index: 'feature049', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature050',index: 'feature050', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature051',index: 'feature051', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature052',index: 'feature052', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature053',index: 'feature053', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature054',index: 'feature054', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature055',index: 'feature055', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature056',index: 'feature056', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature057',index: 'feature057', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature058',index: 'feature058', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature059',index: 'feature059', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature060',index: 'feature060', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature061',index: 'feature061', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature062',index: 'feature062', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature063',index: 'feature063', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature064',index: 'feature064', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature065',index: 'feature065', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature066',index: 'feature066', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature067',index: 'feature067', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature068',index: 'feature068', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature069',index: 'feature069', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature070',index: 'feature070', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature071',index: 'feature071', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature072',index: 'feature072', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature073',index: 'feature073', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature074',index: 'feature074', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature075',index: 'feature075', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature076',index: 'feature076', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature077',index: 'feature077', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature078',index: 'feature078', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature079',index: 'feature079', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature080',index: 'feature080', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature081',index: 'feature081', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature082',index: 'feature082', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature083',index: 'feature083', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature084',index: 'feature084', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature085',index: 'feature085', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature086',index: 'feature086', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature087',index: 'feature087', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature088',index: 'feature088', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature089',index: 'feature089', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
+						{name: 'feature090',index: 'feature090', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}}
 					],
 
 					viewrecords: true, //是否显示总数  如View 1 - 10 of 23
-					rowNum: 200, //每页显示10条
-					rowList: [1000, 200, 300], //可选的每页显示条数
+					rowNum: 100, //每页显示10条
+					rowList: [100, 200, 300], //可选的每页显示条数
 					pager: pager_selector, //指定工具栏
 					altRows: true,
 
@@ -902,10 +860,12 @@
 							updatePagerIcons(table);
 							enableTooltips(table);
 						}, 0);
+						//jqgridColResize();
+						
 					},
 
-					editurl: "/usertest/handle", //nothing is saved
-					caption: "用户基本信息管理" //表名
+					editurl: "/kand/handle", //nothing is saved
+					caption: "数据表" //表名
 
 					//,autowidth: true,
 
@@ -928,6 +888,7 @@
 				//jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
 				//jQuery(grid_selector).filterToolbar({});
 
+				
 				//switch element when editing inline
 				//编辑表格时,yes与no的切换
 				function aceSwitch(cellvalue, options, cell) {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.tycoding.pojo.TmpKand;
 import cn.tycoding.pojo.TmpKandKey;
+import cn.tycoding.pojo.UserTest;
 
 public interface TmpKandMapper {
     int deleteByPrimaryKey(TmpKandKey key);
@@ -25,9 +26,13 @@ public interface TmpKandMapper {
     List findByPage(int i, int rows);
     
     int getSum();
+    
     List findByFilters(String sql);
 
 	int findByFiltersSum(String getSumSql);
-	
+
+	void del(String expid, String id);
+
+	int add(TmpKand tmpKand);
 
 }
