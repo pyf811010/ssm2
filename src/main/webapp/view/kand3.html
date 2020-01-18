@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>运动学与动力学数据</title>
+		<title>学生信息管理</title>
 
 		<meta name="description" content="Dynamic tables and grids using jqGrid plugin" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -17,7 +17,7 @@
 		<link rel="stylesheet" href="/assets/css/jquery-ui.min.css" />
 		<link rel="stylesheet" href="/assets/css/bootstrap-datepicker3.min.css" />
 		<link rel="stylesheet" href="/assets/css/ui.jqgrid.min.css" />
-		<link rel="stylesheet" href="/assets/css/loading.css" />
+
 		<!-- text fonts -->
 		<link rel="stylesheet" href="/assets/css/fonts.googleapis.com.css" />
 
@@ -48,10 +48,69 @@
 	</head>
 
 	<body class="no-skin">
-	<div id="loading">
-    	<img src="/assets/css/images/loading.gif">
-	</div>
-		<div id="navbar" class="navbar navbar-default          ace-save-state"></div>
+		<div id="navbar" class="navbar navbar-default          ace-save-state">
+			<div class="navbar-container ace-save-state" id="navbar-container">
+				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+					<span class="sr-only">Toggle sidebar</span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+				</button>
+
+				<div class="navbar-header pull-left">
+					<a href="/views/index.html" class="navbar-brand">
+						<small>
+							<i class="fa fa-leaf"></i>
+							学生发展数据综合评价与分析系统
+						</small>
+					</a>
+				</div>
+
+				<div class="navbar-buttons navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">
+
+						<li class="light-blue dropdown-modal">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+
+								<img class="nav-user-photo us_photo" src="/assets/images/avatars/blank.jpg" alt="个人头像" style="background-color:#fff" />
+
+								<span class="user-info">
+							       <span id="us_name"></span>
+								</span>
+
+								<i class="ace-icon fa fa-caret-down"></i>
+							</a>
+
+							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+								<li>
+									<a id="setting" target="_blank">
+										<i class="ace-icon fa fa-cog"></i> 设置
+									</a>
+								</li>
+
+								<li>
+									<a id="profile" target="_blank">
+										<i class="ace-icon fa fa-user"></i> 个人信息
+									</a>
+								</li>
+
+								<li class="divider"></li>
+
+								<li>
+									<a href="/login.html" onclick="logout()">
+										<i class="ace-icon fa fa-power-off"></i> 注销
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- /.navbar-container -->
+		</div>
 
 		<div class="main-container ace-save-state" id="main-container">
 			<script type="text/javascript">
@@ -60,7 +119,348 @@
 				} catch(e) {}
 			</script>
 
-			<div id="sidebar" class="sidebar                  responsive                    ace-save-state"></div>
+			<div id="sidebar" class="sidebar                  responsive                    ace-save-state">
+				<script type="text/javascript">
+					try {
+						ace.settings.loadState('sidebar')
+					} catch(e) {}
+				</script>
+
+				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+						<button class="btn btn-success">
+							<i class="ace-icon fa fa-signal"></i>
+						</button>
+
+						<button class="btn btn-info">
+							<i class="ace-icon fa fa-pencil"></i>
+						</button>
+
+						<button class="btn btn-warning">
+							<i class="ace-icon fa fa-users"></i>
+						</button>
+
+						<button class="btn btn-danger">
+							<i class="ace-icon fa fa-cogs"></i>
+						</button>
+					</div>
+
+					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+						<span class="btn btn-success"></span>
+
+						<span class="btn btn-info"></span>
+
+						<span class="btn btn-warning"></span>
+
+						<span class="btn btn-danger"></span>
+					</div>
+				</div>
+				<!-- /.sidebar-shortcuts -->
+
+				<ul class="nav nav-list">
+					<li class="">
+						<a href="/views/index.html">
+							<i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text"> 我的首页 </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
+					<li class="active open">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-tasks"></i>
+							<span class="menu-text"> 数据管理 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+
+							<li class="active">
+								<a href="/views/dataManage/studentManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 学生
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/teacherManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 教师
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/majorManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 专业
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/classroomManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 班级
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/scoreManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 成绩
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/certificateManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 证书
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/competitionManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 竞赛
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/innovationTrainManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 创新训练
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/scholarshipManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 奖学金
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/excellentStudentManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 优秀学生
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/pushExcellentManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 推优
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/partyMemberManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 入党
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/postGraduateManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 考研录取
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/volunteerManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 志愿服务
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/dutyManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 学生干部
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/adviceManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 发展建议
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+						</ul>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-bar-chart-o"></i>
+							<span class="menu-text"> 数据分析 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-caret-right"></i> 个人情况分析
+									<b class="arrow fa fa-angle-down"></b>
+								</a>
+
+								<b class="arrow"></b>
+
+								<ul class="submenu">
+									<li class="">
+										<a href="/views/dataAnalysis/student/personalGrade.html">
+											<i class="menu-icon fa fa-leaf green"></i>个人成绩查询
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+									<li class="">
+										<a href="/views/dataAnalysis/student/personalAllInfo.html">
+											<i class="menu-icon fa fa-leaf green"></i>发展综合分析
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+
+								</ul>
+							</li>
+
+							<li class="">
+								<a href="/views/dataAnalysis/dorm/dormAtmosphere.html">
+									<i class="menu-icon fa fa-caret-right"></i> 宿舍情况分析
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="/views/dataAnalysis/classroom/classAtmosphere.html">
+									<i class="menu-icon fa fa-caret-right"></i> 班级情况分析
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-caret-right"></i> 整体学业分析
+									<b class="arrow fa fa-angle-down"></b>
+								</a>
+
+								<b class="arrow"></b>
+
+								<ul class="submenu">
+									<li class="">
+										<a href="/views/dataAnalysis/all/allGrade.html">
+											<i class="menu-icon fa fa-leaf green"></i>学分积欠情况分析
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+									<li class="">
+										<a href="/views/dataAnalysis/all/make_up_rebuild.html">
+											<i class="menu-icon fa fa-leaf green"></i>补考重修情况分析
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+
+								</ul>
+							</li>
+
+						</ul>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-book"></i>
+							<span class="menu-text"> 数据预测 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="/views/bigDataAnalysis/courseDependence.html">
+									<i class="menu-icon fa fa-caret-right"></i> 课程通过预警
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="/views/bigDataAnalysis/scorePosition.html">
+									<i class="menu-icon fa fa-caret-right"></i> 成绩位置预测
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="/views/bigDataAnalysis/postGraduate.html">
+									<i class="menu-icon fa fa-caret-right"></i> 考研录取预测
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="/views/bigDataAnalysis/partyMember.html">
+									<i class="menu-icon fa fa-caret-right"></i> 入党情况预测
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+						</ul>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-folder-open-o"></i>
+							<span class="menu-text"> 文件操作 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="/views/file/fileUpload.html">
+									<i class="menu-icon fa fa-caret-right"></i> 文件上传
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/file/fileDownload.html">
+									<i class="menu-icon fa fa-caret-right"></i> 文件下载
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+						</ul>
+					</li>
+
+				</ul>
+				<!-- /.nav-list -->
+
+				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+					<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+				</div>
+			</div>
 
 			<div class="main-content">
 				<div class="main-content-inner">
@@ -71,7 +471,7 @@
 								<a href="/views/index.html">首页</a>
 							</li>
 
-							<li class="active">运动学与动力学数据</li>
+							<li class="active">学生信息管理</li>
 						</ul>
 						<!-- /.breadcrumb -->
 
@@ -98,10 +498,6 @@
 										</center>
 
 									</div>
-									<div clas="class="col-sm-2">
-										<div class="load"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-									</div>
-									
 									<div class="col-sm-2">
 										<center>
 											<button id="bt_gettmp" class="btn btn-info btn-sm">
@@ -133,7 +529,16 @@
 			</div>
 			<!-- /.main-content -->
 
-			<div id="footer" class="footer"></div>
+			<div class="footer">
+				<div class="footer-inner">
+					<div class="footer-content">
+						<span class="bigger-120">
+							<span class="blue bolder" style="margin-right: 10px;">学生发展数据综合评价与分析系统</span> 苏州科技大学 &copy; 2018-2019
+						</span>
+
+					</div>
+				</div>
+			</div>
 
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
@@ -152,8 +557,8 @@
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-		<script src="/assets/js/jquery-1.11.3.min.js"></script>
-		<![endif]-->
+<script src="/assets/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
 		</script>
@@ -233,7 +638,6 @@
 				});
 			
 			$("#bt_gettmp").click(function(){
-				showloading();
 				var idQuery = $("#text_idQuery").val();
 				$.ajax({
 					url : '/kand/findByIdQuery', // 请求地址, 就是你的控制器, 如 test.com/home/index/index
@@ -245,39 +649,25 @@
 					//contentType: 'application/json',             
 					success : function(data) {
 						if (data.success) {
-							hideloading();
+							alert(data.info);
 							$("#grid-table").jqGrid('setGridParam',{datatype:'json'}).trigger('reloadGrid');
 						} else {
-							hideloading();
 							alert(data.info);
 						}
 					},
 					error : function() {
-						hideloading();
 						alert('Send Request Fail..'); // 请求失败时的回调函数
 					}
 				});
 			});
-			
-			function hideloading(){
-				$("#loading").attr("style","display:none;");
-				console.log("hide");
-			}
-			function showloading(){
-				$("#loading").attr("style","display:block;");
-				console.log("show");
-			}
+
 			
 
 		</script>
 
 		<script type="text/javascript">
 			
-		 	
 			jQuery(function($) {
-				$("#navbar").load("/view/tools/navbar.html");
-				$("#sidebar").load("/view/tools/sidebar.html");
-				$("#footer").load("/view/tools/footer.html");
 				var grid_selector = "#grid-table";
 				var pager_selector = "#grid-pager";
 
