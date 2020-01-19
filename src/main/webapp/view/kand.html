@@ -103,7 +103,7 @@
 											<form class="form-inline" id="multiIdQuery">
 												<div class="input-group" style="width:60px">
 													<input type="text" style="width:50px" class="form-control search-query">
-													<span class="input-group-btn"><button type="button" class="close" onClick="addIdQuery()"><i class="ace-icon glyphicon glyphicon-plus"></i></button></span>
+													<span class="input-group-btn"><button type="button" class="close" onClick="addIdQuery()"><i class="ace-icon glyphicon glyphicon-plus green"></i></button></span>
 												</div>
 											</form>
 										</div>
@@ -303,7 +303,7 @@
 				var tmpdiv = document.createElement('div');
 				tmpdiv.className='input-group';
 				tmpdiv.style.width='60px';
-				code = '<input type="text" style="width:50px" class="form-control search-query"><span class="input-group-btn"><button type="button" onClick="bt_removeIdQuery(this)" class="close"><i class="ace-icon glyphicon glyphicon-trash"></i></button></span>'
+				code = '<input type="text" style="width:50px" class="form-control search-query"><span class="input-group-btn"><button type="button" onClick="bt_removeIdQuery(this)" class="close"><i class="ace-icon glyphicon glyphicon-trash red"></i></button></span>'
 				tmpdiv.innerHTML=code;
 				
 				document.getElementById('multiIdQuery').appendChild(tmpdiv);
@@ -315,7 +315,7 @@
 			
 			$("#bt_removeAllIdQuery").click(function(){
 				var form = document.getElementById('multiIdQuery');
-				form.innerHTML='<div class="input-group" style="width:60px"><input type="text" style="width:50px" class="form-control search-query"><span class="input-group-btn"><button type="button" class="close" onClick="addIdQuery()"><i class="ace-icon glyphicon glyphicon-plus"></i></button></span></div>';		
+				form.innerHTML='<div class="input-group" style="width:60px"><input type="text" style="width:50px" class="form-control search-query"><span class="input-group-btn"><button type="button" class="close" onClick="addIdQuery()"><i class="ace-icon glyphicon glyphicon-plus green"></i></button></span></div>';		
 			});
 			
 
