@@ -25,4 +25,5 @@ public interface KandService {
 	
 	String handle(String oper, TmpKand tmpKand,String Expid[], String[] id);
 
+	public void truncateTable();
 }

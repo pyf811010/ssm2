@@ -1075,6 +1075,9 @@
 		</trim>
 	</insert>
 	
+	<update id="truncate">
+    truncate table tmp_kand
+	</update>
 	<update id="updateByPrimaryKeySelective"
 		parameterType="cn.tycoding.pojo.TmpKand">
 		update tmp_kand

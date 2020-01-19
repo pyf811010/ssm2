@@ -166,5 +166,10 @@ public class KandServicelmpl implements KandService {
         }
         return "success";
     }
+	
+	@Override
+	public void truncateTable() {
+		tmpKandMapper.truncate();
+	}
 
 }
