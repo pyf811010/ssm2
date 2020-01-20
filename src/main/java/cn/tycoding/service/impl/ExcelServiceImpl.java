@@ -134,7 +134,7 @@ public class ExcelServiceImpl implements ExcelService {
             }
         }
         System.out.println("=================");
-        state.setSuccess(true);
+        state.setSuccess(1);
         state.setInfo("文件上传成功");
         System.out.println("文件上传成功");
         return state;

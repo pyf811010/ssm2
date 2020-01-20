@@ -23,5 +23,7 @@ public interface KandService {
 	public ObjectQuery findByPage(Boolean _search, String filters, int page, int rows);
 	
 	String handle(String oper, TmpKand tmpKand,String Expid[], String[] id);
+	
+	public void truncateTable();
 
 }

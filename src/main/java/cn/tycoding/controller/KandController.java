@@ -33,6 +33,7 @@ import java.lang.reflect.Field;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
@@ -51,44 +52,67 @@ public class KandController {
 
 	@RequestMapping(value = "/findByIdQuery")
 	@ResponseBody
-	public State findByIdQuery(String idQuery) throws Exception {
+	public State findByIdQuery(String jsonIdQuery) throws Exception {
 		State message = new State();
-		try {
-			Integer id = Integer.valueOf(idQuery);
-			FilesKand fileResult = kandService.findByIdQuery(id);
-			String filePath = fileResult.getUrl();
-			System.out.println(filePath);
-			List<List<List<Object>>> excelDataList = excelUtil.getListByExcel(filePath, 2);
-			System.out.println("excel readed");
+		message.setSuccess(1);//初始置为成功状态（0：失败，1：成功，2：部分失败）
+		List<Integer> queryList = JSONObject.parseArray(jsonIdQuery,Integer.class);
+		HashSet<Integer> h = new HashSet<Integer>(queryList);//去重
+		queryList.clear();
+		queryList.addAll(h);
+		String INFO = "";
+		kandService.truncateTable();
+		int count = 0;
+		for (int j = 0; j < queryList.size(); j++) {
+			Integer id = queryList.get(j);
+			try {
+				FilesKand fileResult = kandService.findByIdQuery(id);
+				String filePath = fileResult.getUrl();
+				System.out.println(filePath);
+				List<List<List<Object>>> excelDataList = excelUtil.getListByExcel(filePath, 2);
+				System.out.println("excel readed");
 
-			List<TmpKand> kandParams = new ArrayList<TmpKand>();
-
-			DecimalFormat df = new DecimalFormat("000");
-//	      simple insert
-			long start=System.currentTimeMillis();
-			for (int sheet = 0; sheet < excelDataList.size(); sheet++) {
-				Integer maxexpid = kandService.getMaxExpid();
-				kandParams.clear();
-				for (int i = 0; i < excelDataList.get(sheet).size(); i++) {
-					TmpKand tmp = new TmpKand();
-					tmp.setExpid(maxexpid);
-					tmp.setId(0);
-					ReflectUtil.setKandValues(tmp, excelDataList.get(sheet).get(i));
-					kandParams.add(tmp);
-					if (i % 1000 == 0 || i == excelDataList.get(sheet).size() - 1) {
-						kandService.insertBybatch(kandParams);
-						kandParams.clear();
+				List<TmpKand> kandParams = new ArrayList<TmpKand>();
+				DecimalFormat df = new DecimalFormat("000");
+//		      simple insert
+				long start=System.currentTimeMillis();
+				for (int sheet = 0; sheet < excelDataList.size(); sheet++) {
+					//Integer maxexpid = kandService.getMaxExpid();
+					kandParams.clear();
+					for (int i = 0; i < excelDataList.get(sheet).size(); i++) {
+						TmpKand tmp = new TmpKand();
+						tmp.setExpid(id);
+						tmp.setId(0);
+						ReflectUtil.setKandValues(tmp, excelDataList.get(sheet).get(i));
+						kandParams.add(tmp);
+						if (i % 1000 == 0 || i == excelDataList.get(sheet).size() - 1) {
+							kandService.insertBybatch(kandParams);
+							kandParams.clear();
+						}
 					}
 				}
+				long end=System.currentTimeMillis();
+				System.out.println("执行时长"+(end-start));
+			}catch(NullPointerException e) {
+				INFO = INFO+"id-Query:"+id+"的实验出错：\n"+"   不存在，请核对后再试!\n";
+				message.setSuccess(2);
+				count++;
+				System.out.println("--------------------------------");
+				continue;
+			}catch(Exception e) {
+				INFO = INFO+"id-Query:"+id+"的实验出错：\n"+e.toString()+"\n";
+				message.setSuccess(2);
+				count++;
+				System.out.println("*********");
+				continue;
 			}
-			long end=System.currentTimeMillis();
-			System.out.println("执行时长"+(end-start));
-			message.setSuccess(true);
-			message.setInfo(filePath);
-		}catch(Exception e) {
-			message.setSuccess(false);
-			message.setInfo(e.toString());
 		}
+		System.out.println("count:"+count+"size:"+queryList.size());
+		if(count == queryList.size()) {
+			INFO = "所有查询全部存在错误\n"+INFO;
+			message.setSuccess(0);
+		}
+		message.setInfo(INFO);
+		System.out.print(message.getSuccess());
 		return message;
 	}
 

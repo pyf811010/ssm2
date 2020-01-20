@@ -70,7 +70,7 @@ public class AdminServiceImpl implements AdminService {
 
         //不存在此用户
         if (null == a) {
-            state = new State(false, "此用户名不存在！");
+            state = new State(0, "此用户名不存在！");
             return state;
         }
 
@@ -82,13 +82,13 @@ public class AdminServiceImpl implements AdminService {
 
         String password = a.getA_password();
         if(!(password.equals(admin.getA_password()))){
-        	state = new State(false, "用户名或密码错误!");
+        	state = new State(0, "用户名或密码错误!");
             return state;
         }else{
         	String us_name = a.getA_name();
 
             //没有异常，将用户名设置进消息中
-            state = new State(true, us_name);
+            state = new State(1, us_name);
 
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             System.out.println(state);
@@ -104,16 +104,16 @@ public class AdminServiceImpl implements AdminService {
 
         //已存在此用户
         if (null != a) {
-            state = new State(false, "此用户名已经存在！");
+            state = new State(0, "此用户名已经存在！");
             return state;
         }else{
-        	state = new State(true, "管理员注册成功");
+        	state = new State(1, "管理员注册成功");
         	int i = adminMapper.insert(admin);
             if (i > 0) {
                 return state;
             }
         }
-        state = new State(false, "添加失败");
+        state = new State(0, "添加失败");
         return state;
 	}
 
@@ -126,12 +126,12 @@ public class AdminServiceImpl implements AdminService {
         try {
             i = adminMapper.resetPassword(admin);
         } catch (Exception e) {
-            state = new State(false, "重置失败");
+            state = new State(0, "重置失败");
         }
         if (i > 0) {
-            state = new State(true, "重置成功");
+            state = new State(1, "重置成功");
         } else {
-            state = new State(false, "重置失败");
+            state = new State(0, "重置失败");
         }
 
         return state;

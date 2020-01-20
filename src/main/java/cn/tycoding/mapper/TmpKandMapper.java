@@ -34,5 +34,7 @@ public interface TmpKandMapper {
 	void del(String expid, String id);
 
 	int add(TmpKand tmpKand);
+	
+	void truncate();
 
 }

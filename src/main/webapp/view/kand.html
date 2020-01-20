@@ -18,6 +18,11 @@
 		<link rel="stylesheet" href="/assets/css/bootstrap-datepicker3.min.css" />
 		<link rel="stylesheet" href="/assets/css/ui.jqgrid.min.css" />
 		<link rel="stylesheet" href="/assets/css/loading.css" />
+		<link rel="stylesheet" href="/assets/css/chosen.min.css" />
+		<link rel="stylesheet" href="/assets/css/bootstrap-timepicker.min.css" />
+		<link rel="stylesheet" href="/assets/css/daterangepicker.min.css" />
+		<link rel="stylesheet" href="/assets/css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" href="/assets/css/bootstrap-colorpicker.min.css" />
 		<!-- text fonts -->
 		<link rel="stylesheet" href="/assets/css/fonts.googleapis.com.css" />
 
@@ -90,27 +95,35 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-sm-2">
-										<center>
-                                        <span style="float: left; height: 34px; width: 60px; line-height: 34px;">关联查询ID</span>
-									<input type="text" name="text_idQuery" id="text_idQuery" placeholder="请输入关联查询ID(Id-Query)" style="width:calc(100% - 60px);resize:none; height: 34px; float: left" placeholder="id" maxlength="15">
-                                  <!--将span内的文字和输入框设置在同一行  -->
-										</center>
-
-									</div>
-									<div clas="class="col-sm-2">
-										<div class="load"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-									</div>
 									
-									<div class="col-sm-2">
-										<center>
-											<button id="bt_gettmp" class="btn btn-info btn-sm">
-										<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
-									&nbsp;查&nbsp;找&nbsp;
-									  </button>
-										</center>
+									<div class="col-sm-10">
+									  <span style="float: left; height: 34px; width: auto; line-height: 34px;">请输入中间表ID:</span>
+										<div class="col-sm-10">
+											<form class="form-inline" id="multiIdQuery">
+												<div class="input-group" style="width:60px">
+													<input type="text" style="width:50px" class="form-control search-query">
+													<span class="input-group-btn"><button type="button" class="close" onClick="addIdQuery()"><i class="ace-icon glyphicon glyphicon-plus green"></i></button></span>
+												</div>
+											</form>
+										</div>
 									</div>
 								</div>
+								
+								<div class="space-4"></div>
+
+								<div class="row">
+									<button type="button" id="bt_gettmp" class="btn btn-xs btn-info">
+										<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>&nbsp;查&nbsp;找&nbsp;
+									</button>
+									<button type="button" id="bt_addIdQuery" class="btn btn-xs btn-info" onClick="addIdQuery()">
+										<span class="ace-icon glyphicon glyphicon-plus"></span>&nbsp;添&nbsp;加&nbsp;
+									</button>
+									<button type="button" id="bt_removeAllIdQuery" class="btn btn-xs btn-info">
+										<span class="ace-icon glyphicon glyphicon-remove"></span>&nbsp;清&nbsp;空&nbsp;
+									</button>
+								</div>
+								
+								
 
 								<div class="row">
 									<div class="col-sm-10">
@@ -163,6 +176,21 @@
 		<script src="/assets/js/bootstrap-datepicker.min.js"></script>
 		<script src="/assets/js/jquery.jqGrid.min.js"></script>
 		<script src="/assets/js/grid.locale-cn.js"></script>
+		
+		<script src="/assets/js/jquery-ui.custom.min.js"></script>
+		<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="/assets/js/chosen.jquery.min.js"></script>
+		<script src="/assets/js/spinbox.min.js"></script>
+		<script src="/assets/js/bootstrap-timepicker.min.js"></script>
+		<script src="/assets/js/moment.min.js"></script>
+		<script src="/assets/js/daterangepicker.min.js"></script>
+		<script src="/assets/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="/assets/js/bootstrap-colorpicker.min.js"></script>
+		<script src="/assets/js/jquery.knob.min.js"></script>
+		<script src="/assets/js/autosize.min.js"></script>
+		<script src="/assets/js/jquery.inputlimiter.min.js"></script>
+		<script src="/assets/js/jquery.maskedinput.min.js"></script>
+		<script src="/assets/js/bootstrap-tag.min.js"></script>
 
 		<!-- ace scripts -->
 		<script src="/assets/js/ace-elements.min.js"></script>
@@ -224,45 +252,71 @@
    		</style> 
 		 <!--上面代码用来设置水平滚动条  -->
 
-		<script type="text/javascript">
-			$("#data_export").click(function() {
-					var v = JSON.stringify($("#grid-table").jqGrid("getGridParam", "postData").filters);
-
-					alert(v);
-
-				});
+		<script type="text/javascript">	
 			
 			$("#bt_gettmp").click(function(){
-				showloading();
-				var idQuery = $("#text_idQuery").val();
-				$.ajax({
-					url : '/kand/findByIdQuery', // 请求地址, 就是你的控制器, 如 test.com/home/index/index
-					data : {
-						"idQuery" : idQuery
-					}, // 需要传送的参数
-					type : 'POST', // 请求方式
-					dataType : 'json', // 返回数据的格式, 通常为JSON
-					//contentType: 'application/json',             
-					success : function(data) {
-						if (data.success) {
-							hideloading();
-							$("#grid-table").jqGrid('setGridParam',{datatype:'json'}).trigger('reloadGrid');
-						} else {
-							hideloading();
-							alert(data.info);
-						}
-					},
-					error : function() {
-						hideloading();
-						alert('Send Request Fail..'); // 请求失败时的回调函数
-					}
+				var formlist = new Array();
+				$("#multiIdQuery input[type='text']").each(function(){
+					var value = $(this).val();
+					if (value != "" && value != null)
+						formlist.push(value);
 				});
+				console.log("formlist"+formlist);
+				if (formlist.length != 0){
+					showloading();
+					$.ajax({
+						url : '/kand/findByIdQuery', // 请求地址, 就是你的控制器, 如 test.com/home/index/index
+						data : {
+							"jsonIdQuery" : JSON.stringify(formlist)
+						}, // 需要传送的参数
+						type : 'POST', // 请求方式
+						dataType : 'json', // 返回数据的格式, 通常为JSON
+						//contentType: 'application/json',             
+						success : function(data) {
+							console.log(data.success);
+							if (data.success!='0') {
+								hideloading();
+								if (data.success == 2) alert(data.info);
+								$("#grid-table").jqGrid('setGridParam',{datatype:'json'}).trigger('reloadGrid');
+							} else {
+								hideloading();
+								alert(data.info);
+							}
+						},
+						error : function() {
+							hideloading();
+							alert('Send Request Fail..'); // 请求失败时的回调函数
+						}
+					});
+				}else {
+					alert("请输入id-query");
+				}
 			});
 			
 			function hideloading(){
 				$("#loading").attr("style","display:none;");
 				console.log("hide");
 			}
+			
+			function addIdQuery(){
+				var tmpdiv = document.createElement('div');
+				tmpdiv.className='input-group';
+				tmpdiv.style.width='60px';
+				code = '<input type="text" style="width:50px" class="form-control search-query"><span class="input-group-btn"><button type="button" onClick="bt_removeIdQuery(this)" class="close"><i class="ace-icon glyphicon glyphicon-trash red"></i></button></span>'
+				tmpdiv.innerHTML=code;
+
+				document.getElementById('multiIdQuery').appendChild(tmpdiv);
+			}
+
+			function bt_removeIdQuery(Obj){
+				Obj.parentNode.parentNode.parentNode.removeChild(Obj.parentNode.parentNode);
+			}
+
+			$("#bt_removeAllIdQuery").click(function(){
+				var form = document.getElementById('multiIdQuery');
+				form.innerHTML='<div class="input-group" style="width:60px"><input type="text" style="width:50px" class="form-control search-query"><span class="input-group-btn"><button type="button" class="close" onClick="addIdQuery()"><i class="ace-icon glyphicon glyphicon-plus green"></i></button></span></div>';		
+			});
+			
 			function showloading(){
 				$("#loading").attr("style","display:block;");
 				console.log("show");
@@ -283,6 +337,41 @@
 
 				var parent_column = $(grid_selector).closest('[class*="col-"]');
 				//resize to fit page size
+				var tag_input = $('#form-field-tags');
+				try{
+					tag_input.tag(
+					  {
+						placeholder:tag_input.attr('placeholder'),
+						//enable typeahead by specifying the source array
+						source: ace.vars['US_STATES'],//defined in ace.js >> ace.enable_search_ahead
+						/**
+						//or fetch data from database, fetch those that match "query"
+						source: function(query, process) {
+						  $.ajax({url: 'remote_source.php?q='+encodeURIComponent(query)})
+						  .done(function(result_items){
+							process(result_items);
+						  });
+						}
+						*/
+					  }
+					)
+
+					//programmatically add/remove a tag
+					/* var $tag_obj = $('#form-field-tags').data('tag');
+					$tag_obj.add('Programmatically Added');
+					
+					var index = $tag_obj.inValues('some tag');
+					$tag_obj.remove(index); */
+				}
+				catch(e) {
+					console.log(e);
+					//display a textarea for old IE, because it doesn't support this plugin or another one I tried!
+					tag_input.after('<textarea id="'+tag_input.attr('id')+'" name="'+tag_input.attr('name')+'" rows="3">'+tag_input.val()+'</textarea>').remove();
+					//autosize($('#form-field-tags'));
+				}
+				
+				
+				
 				$(window).on('resize.jqGrid', function() {
 					$(grid_selector).jqGrid('setGridWidth', parent_column.width());
 				})

@@ -1356,6 +1356,12 @@
 		where expid = #{expid,jdbcType=INTEGER}
 		and id = #{id,jdbcType=INTEGER}
 	</update>
+	
+	<update id="truncate">
+    truncate table tmp_kand
+	</update>
+	
+	
 	<update id="updateByPrimaryKey"
 		parameterType="cn.tycoding.pojo.TmpKand">
 		update tmp_kand
