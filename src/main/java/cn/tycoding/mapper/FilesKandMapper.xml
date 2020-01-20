@@ -62,4 +62,14 @@
       id_query = #{id_query,jdbcType=INTEGER}
     where expid = #{expid,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectByIdQuery" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from files_kand
+    where id_query = #{idQuery,jdbcType=INTEGER}
+  </select>
+  
+  
+  
 </mapper>

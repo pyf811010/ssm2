@@ -20,4 +20,6 @@ public interface FilesKandMapper {
     int updateByPrimaryKeySelective(FilesKand record);
 
     int updateByPrimaryKey(FilesKand record);
+    
+    FilesKand selectByIdQuery(Integer idQuery);
 }

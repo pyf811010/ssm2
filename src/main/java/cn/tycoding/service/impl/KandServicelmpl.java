@@ -5,6 +5,7 @@ import cn.tycoding.pojo.FilesOxygen;
 import cn.tycoding.pojo.ObjectQuery;
 import cn.tycoding.pojo.State;
 import cn.tycoding.pojo.TmpKand;
+import cn.tycoding.pojo.UserTest;
 import cn.tycoding.mapper.FilesKandMapper;
 import cn.tycoding.mapper.TmpKandMapper;
 import cn.tycoding.service.KandService;
@@ -18,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.io.filefilter.AndFileFilter;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -40,6 +42,12 @@ public class KandServicelmpl implements KandService {
 	public FilesKand findByExpid(Integer expid) {
 		// TODO Auto-generated method stub
 		return filesKandMapper.selectByPrimaryKey(expid);
+	}
+	
+	@Override
+	public FilesKand findByIdQuery(Integer idQuery) {
+		// TODO Auto-generated method stub
+		return filesKandMapper.selectByIdQuery(idQuery);
 	}
 
 	@Override
@@ -109,5 +117,54 @@ public class KandServicelmpl implements KandService {
         ObjectQuery sq = new ObjectQuery(page, total, records, list);
         return sq;
 	}
+	
+	@Override
+    public String handle(String oper, TmpKand tmpKand,String expid[], String id[]) {
+		tmpKand = DataFormatUtil.checkNull(tmpKand);
+        // oper有三种操作 add,del,edit,
+        switch (oper) {
+            case "edit":
+                // 按st_id进行更改学生数据
+                if (id != null && expid != null) {
+//                    student.setSt_id(id[0]);
+                	tmpKand.setExpid(Integer.valueOf(expid[0]));
+                    tmpKand.setId(Integer.valueOf(id[0]));
+                }
+                try {
+                    int editAffectedRow = tmpKandMapper.updateByPrimaryKeySelective(tmpKand);
+                    if (editAffectedRow == 1) {
+                        return "success";
+                    }
+                } catch (Exception e) {
+                    return ExceptionUtil.HandleDataException(e);
+                }
+                break;
+            case "del":
+
+                // 会按st_id来删除，考虑到存在多选，此时主键id是数组
+                int count = 0;
+                for (int i = 0; i <expid.length; i++) {
+                	for (int j = 0; j < id.length; j++) {
+                    	tmpKandMapper.del(expid[i],id[j]);
+                        count++;
+                    }
+                }
+                String str = count + "条成功删除" + (id.length - count) + "条删除失败";
+                System.out.println(str);
+                return str;
+            case "add":
+                // 新增对象
+                System.out.println(tmpKand.toString());
+                try {
+                    int addAffectedRow = tmpKandMapper.insert(tmpKand);
+                    if (addAffectedRow == 1) {
+                        return "success";
+                    }
+                } catch (Exception e) {
+                    return ExceptionUtil.HandleDataException(e);
+                }
+        }
+        return "success";
+    }
 
 }

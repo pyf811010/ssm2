@@ -272,6 +272,10 @@
 		#{expid,jdbcType=INTEGER}
 		and id = #{id,jdbcType=INTEGER}
 	</delete>
+	<delete id="del">
+		delete from tmp_kand
+		where expid=#{0} and id=#{1}
+	</delete>
 	<insert id="insert" parameterType="cn.tycoding.pojo.TmpKand">
 		insert into tmp_kand (expid,
 		id, timestamp,
@@ -1070,6 +1074,7 @@
 			</if>
 		</trim>
 	</insert>
+	
 	<update id="updateByPrimaryKeySelective"
 		parameterType="cn.tycoding.pojo.TmpKand">
 		update tmp_kand
