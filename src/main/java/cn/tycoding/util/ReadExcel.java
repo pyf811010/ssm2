@@ -3,6 +3,7 @@ package cn.tycoding.util;
 import cn.tycoding.pojo.EgContrast;
 import cn.tycoding.pojo.Preec;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -110,8 +111,8 @@ public class ReadExcel {
         System.out.println("文件名：" + fileName);
         //获取后缀
         Iterator<Sheet> sheetIterator;
-        String endFile = fileName.lastIndexOf(".") == -1 ? "" :
-                fileName.substring(fileName.lastIndexOf(".") + 1);
+        String endFile = (fileName.lastIndexOf(".") == -1 ? "" :
+                fileName.substring(fileName.lastIndexOf(".") + 1)).trim();
         if ("xls".equals(endFile)) {
             sheetIterator = new HSSFWorkbook(file.getInputStream()).iterator();
             /*list = readXls(file);*/
@@ -132,18 +133,14 @@ public class ReadExcel {
      */
     private static List<Object> listExcel(Iterator<Sheet> sheetIterator, Object o) {
         ArrayList<Object> list = new ArrayList<>();
-        while (sheetIterator.hasNext()) {
-            Sheet sheet = sheetIterator.next();
-            if (sheet == null) {
-                continue;
-            }
-            //行数
+        Sheet sheet;
+        while (sheetIterator.hasNext() && (sheet = sheetIterator.next()) != null) {
             int lastRowNum = sheet.getLastRowNum();
             //从第一行开始读取
             for (int i = 1; i <= lastRowNum; i++) {
                 //获取行
                 Row row = sheet.getRow(i);
-                if (row == null || row.getCell(0).getNumericCellValue() == 0.0) {
+                if (row == null) {
                     continue;
                 }
                 //int numberOfCells = row.getPhysicalNumberOfCells();
@@ -151,9 +148,136 @@ public class ReadExcel {
                     int j = 0;
                     EgContrast egContrast = new EgContrast();
                     //封装egContrast
-                    egContrast.setSensor01(row.getCell(j++).getNumericCellValue());
-                    egContrast.setSensor02(row.getCell(j++).getNumericCellValue());
-                    egContrast.setSensor03(row.getCell(j++).getNumericCellValue());
+                    Cell cell;
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor01(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor02(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor03(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor04(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor05(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor06(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor07(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor08(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor09(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor10(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor11(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor12(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor13(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor14(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor15(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor16(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor17(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor18(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor19(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor20(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor21(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor22(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor23(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor24(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor25(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor26(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor27(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor28(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor29(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor30(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor31(cell.getStringCellValue());
+                    }
+                    if ((cell = row.getCell(j++)) != null){
+                        cell.setCellType(CellType.STRING);
+                        egContrast.setSensor32(cell.getStringCellValue());
+                    }
+                    /*egContrast.setSensor03(row.getCell(j++).getNumericCellValue());
                     egContrast.setSensor04(row.getCell(j++).getNumericCellValue());
                     egContrast.setSensor05(row.getCell(j++).getNumericCellValue());
                     egContrast.setSensor06(row.getCell(j++).getNumericCellValue());
@@ -182,7 +306,7 @@ public class ReadExcel {
                     egContrast.setSensor29(row.getCell(j++).getNumericCellValue());
                     egContrast.setSensor30(row.getCell(j++).getNumericCellValue());
                     egContrast.setSensor31(row.getCell(j++).getNumericCellValue());
-                    egContrast.setSensor32(row.getCell(j++).getNumericCellValue());
+                    egContrast.setSensor32(row.getCell(j++).getNumericCellValue());*/
                     list.add(egContrast);
                 }
                 if (o instanceof Preec) {
