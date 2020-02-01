@@ -2,6 +2,7 @@ package cn.tycoding.service;
 
 import cn.tycoding.pojo.Admin;
 import cn.tycoding.pojo.ObjectQuery;
+import cn.tycoding.pojo.Preec;
 import cn.tycoding.pojo.State;
 
 public interface AdminService {
@@ -17,5 +18,10 @@ public interface AdminService {
 	State dealRegister(Admin admin);
 
 	State resetPassword(Admin admin);
+
+	ObjectQuery findByPage(Boolean _search, String filters, int page, int rows);
+
+	String handle(String oper, Admin admin, String[] id);
+
 
 }

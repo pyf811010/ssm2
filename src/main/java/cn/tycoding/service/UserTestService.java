@@ -16,4 +16,7 @@ public interface UserTestService {
 	List find();
 
 	String handle(String oper, UserTest usertest, String[] id);
+	List<UserTest> findAllById(int id);
+
+	List<UserTest> findAllByRelateType(int type);
 }

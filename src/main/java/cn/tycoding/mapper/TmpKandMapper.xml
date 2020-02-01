@@ -1,0 +1,1553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tycoding.mapper.TmpKandMapper">
+	<resultMap id="BaseResultMap" type="cn.tycoding.pojo.TmpKand">
+		<id column="expid" jdbcType="INTEGER" property="expid" />
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="timestamp" jdbcType="DOUBLE"
+			property="timestamp" />
+		<result column="feature001" jdbcType="DOUBLE"
+			property="feature001" />
+		<result column="feature002" jdbcType="DOUBLE"
+			property="feature002" />
+		<result column="feature003" jdbcType="DOUBLE"
+			property="feature003" />
+		<result column="feature004" jdbcType="DOUBLE"
+			property="feature004" />
+		<result column="feature005" jdbcType="DOUBLE"
+			property="feature005" />
+		<result column="feature006" jdbcType="DOUBLE"
+			property="feature006" />
+		<result column="feature007" jdbcType="DOUBLE"
+			property="feature007" />
+		<result column="feature008" jdbcType="DOUBLE"
+			property="feature008" />
+		<result column="feature009" jdbcType="DOUBLE"
+			property="feature009" />
+		<result column="feature010" jdbcType="DOUBLE"
+			property="feature010" />
+		<result column="feature011" jdbcType="DOUBLE"
+			property="feature011" />
+		<result column="feature012" jdbcType="DOUBLE"
+			property="feature012" />
+		<result column="feature013" jdbcType="DOUBLE"
+			property="feature013" />
+		<result column="feature014" jdbcType="DOUBLE"
+			property="feature014" />
+		<result column="feature015" jdbcType="DOUBLE"
+			property="feature015" />
+		<result column="feature016" jdbcType="DOUBLE"
+			property="feature016" />
+		<result column="feature017" jdbcType="DOUBLE"
+			property="feature017" />
+		<result column="feature018" jdbcType="DOUBLE"
+			property="feature018" />
+		<result column="feature019" jdbcType="DOUBLE"
+			property="feature019" />
+		<result column="feature020" jdbcType="DOUBLE"
+			property="feature020" />
+		<result column="feature021" jdbcType="DOUBLE"
+			property="feature021" />
+		<result column="feature022" jdbcType="DOUBLE"
+			property="feature022" />
+		<result column="feature023" jdbcType="DOUBLE"
+			property="feature023" />
+		<result column="feature024" jdbcType="DOUBLE"
+			property="feature024" />
+		<result column="feature025" jdbcType="DOUBLE"
+			property="feature025" />
+		<result column="feature026" jdbcType="DOUBLE"
+			property="feature026" />
+		<result column="feature027" jdbcType="DOUBLE"
+			property="feature027" />
+		<result column="feature028" jdbcType="DOUBLE"
+			property="feature028" />
+		<result column="feature029" jdbcType="DOUBLE"
+			property="feature029" />
+		<result column="feature030" jdbcType="DOUBLE"
+			property="feature030" />
+		<result column="feature031" jdbcType="DOUBLE"
+			property="feature031" />
+		<result column="feature032" jdbcType="DOUBLE"
+			property="feature032" />
+		<result column="feature033" jdbcType="DOUBLE"
+			property="feature033" />
+		<result column="feature034" jdbcType="DOUBLE"
+			property="feature034" />
+		<result column="feature035" jdbcType="DOUBLE"
+			property="feature035" />
+		<result column="feature036" jdbcType="DOUBLE"
+			property="feature036" />
+		<result column="feature037" jdbcType="DOUBLE"
+			property="feature037" />
+		<result column="feature038" jdbcType="DOUBLE"
+			property="feature038" />
+		<result column="feature039" jdbcType="DOUBLE"
+			property="feature039" />
+		<result column="feature040" jdbcType="DOUBLE"
+			property="feature040" />
+		<result column="feature041" jdbcType="DOUBLE"
+			property="feature041" />
+		<result column="feature042" jdbcType="DOUBLE"
+			property="feature042" />
+		<result column="feature043" jdbcType="DOUBLE"
+			property="feature043" />
+		<result column="feature044" jdbcType="DOUBLE"
+			property="feature044" />
+		<result column="feature045" jdbcType="DOUBLE"
+			property="feature045" />
+		<result column="feature046" jdbcType="DOUBLE"
+			property="feature046" />
+		<result column="feature047" jdbcType="DOUBLE"
+			property="feature047" />
+		<result column="feature048" jdbcType="DOUBLE"
+			property="feature048" />
+		<result column="feature049" jdbcType="DOUBLE"
+			property="feature049" />
+		<result column="feature050" jdbcType="DOUBLE"
+			property="feature050" />
+		<result column="feature051" jdbcType="DOUBLE"
+			property="feature051" />
+		<result column="feature052" jdbcType="DOUBLE"
+			property="feature052" />
+		<result column="feature053" jdbcType="DOUBLE"
+			property="feature053" />
+		<result column="feature054" jdbcType="DOUBLE"
+			property="feature054" />
+		<result column="feature055" jdbcType="DOUBLE"
+			property="feature055" />
+		<result column="feature056" jdbcType="DOUBLE"
+			property="feature056" />
+		<result column="feature057" jdbcType="DOUBLE"
+			property="feature057" />
+		<result column="feature058" jdbcType="DOUBLE"
+			property="feature058" />
+		<result column="feature059" jdbcType="DOUBLE"
+			property="feature059" />
+		<result column="feature060" jdbcType="DOUBLE"
+			property="feature060" />
+		<result column="feature061" jdbcType="DOUBLE"
+			property="feature061" />
+		<result column="feature062" jdbcType="DOUBLE"
+			property="feature062" />
+		<result column="feature063" jdbcType="DOUBLE"
+			property="feature063" />
+		<result column="feature064" jdbcType="DOUBLE"
+			property="feature064" />
+		<result column="feature065" jdbcType="DOUBLE"
+			property="feature065" />
+		<result column="feature066" jdbcType="DOUBLE"
+			property="feature066" />
+		<result column="feature067" jdbcType="DOUBLE"
+			property="feature067" />
+		<result column="feature068" jdbcType="DOUBLE"
+			property="feature068" />
+		<result column="feature069" jdbcType="DOUBLE"
+			property="feature069" />
+		<result column="feature070" jdbcType="DOUBLE"
+			property="feature070" />
+		<result column="feature071" jdbcType="DOUBLE"
+			property="feature071" />
+		<result column="feature072" jdbcType="DOUBLE"
+			property="feature072" />
+		<result column="feature073" jdbcType="DOUBLE"
+			property="feature073" />
+		<result column="feature074" jdbcType="DOUBLE"
+			property="feature074" />
+		<result column="feature075" jdbcType="DOUBLE"
+			property="feature075" />
+		<result column="feature076" jdbcType="DOUBLE"
+			property="feature076" />
+		<result column="feature077" jdbcType="DOUBLE"
+			property="feature077" />
+		<result column="feature078" jdbcType="DOUBLE"
+			property="feature078" />
+		<result column="feature079" jdbcType="DOUBLE"
+			property="feature079" />
+		<result column="feature080" jdbcType="DOUBLE"
+			property="feature080" />
+		<result column="feature081" jdbcType="DOUBLE"
+			property="feature081" />
+		<result column="feature082" jdbcType="DOUBLE"
+			property="feature082" />
+		<result column="feature083" jdbcType="DOUBLE"
+			property="feature083" />
+		<result column="feature084" jdbcType="DOUBLE"
+			property="feature084" />
+		<result column="feature085" jdbcType="DOUBLE"
+			property="feature085" />
+		<result column="feature086" jdbcType="DOUBLE"
+			property="feature086" />
+		<result column="feature087" jdbcType="DOUBLE"
+			property="feature087" />
+		<result column="feature088" jdbcType="DOUBLE"
+			property="feature088" />
+		<result column="feature089" jdbcType="DOUBLE"
+			property="feature089" />
+		<result column="feature090" jdbcType="DOUBLE"
+			property="feature090" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		expid, id, timestamp, feature001, feature002, feature003,
+		feature004,
+		feature005,
+		feature006, feature007, feature008, feature009,
+		feature010, feature011,
+		feature012,
+		feature013, feature014, feature015,
+		feature016, feature017, feature018,
+		feature019,
+		feature020, feature021,
+		feature022, feature023, feature024, feature025,
+		feature026,
+		feature027,
+		feature028, feature029, feature030, feature031, feature032,
+		feature033,
+		feature034, feature035, feature036, feature037, feature038,
+		feature039,
+		feature040,
+		feature041, feature042, feature043, feature044,
+		feature045, feature046,
+		feature047,
+		feature048, feature049, feature050,
+		feature051, feature052, feature053,
+		feature054,
+		feature055, feature056,
+		feature057, feature058, feature059, feature060,
+		feature061,
+		feature062,
+		feature063, feature064, feature065, feature066, feature067,
+		feature068,
+		feature069, feature070, feature071, feature072, feature073,
+		feature074,
+		feature075,
+		feature076, feature077, feature078, feature079,
+		feature080, feature081,
+		feature082,
+		feature083, feature084, feature085,
+		feature086, feature087, feature088,
+		feature089,
+		feature090
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="cn.tycoding.pojo.TmpKandKey" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tmp_kand
+		where expid = #{expid,jdbcType=INTEGER}
+		and id =
+		#{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="findByPage" resultMap="BaseResultMap">
+		select * from
+		tmp_kand
+		order by expid,id
+		limit #{0},#{1}
+	</select>
+	<select id="getSum" resultType="int">
+		select count(*) from
+		tmp_kand
+	</select>
+
+	<select id="selectMaxExpid" resultType="integer">
+		select
+		IFNULL(max(expid),0) from tmp_kand
+	</select>
+
+	<select id="findByFilters" parameterType="string"
+            resultMap="BaseResultMap">
+		${_parameter}
+	</select>
+	 <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFiltersSum" parameterType="string"
+            resultType="int">
+		${_parameter}
+	</select>
+
+	<delete id="deleteByPrimaryKey"
+		parameterType="cn.tycoding.pojo.TmpKandKey">
+		delete from tmp_kand
+		where expid =
+		#{expid,jdbcType=INTEGER}
+		and id = #{id,jdbcType=INTEGER}
+	</delete>
+	<delete id="del">
+		delete from tmp_kand
+		where expid=#{0} and id=#{1}
+	</delete>
+	<insert id="insert" parameterType="cn.tycoding.pojo.TmpKand">
+		insert into tmp_kand (expid,
+		id, timestamp,
+		feature001, feature002, feature003,
+		feature004,
+		feature005, feature006,
+		feature007, feature008, feature009,
+		feature010,
+		feature011, feature012,
+		feature013, feature014, feature015,
+		feature016,
+		feature017, feature018,
+		feature019, feature020, feature021,
+		feature022,
+		feature023, feature024,
+		feature025, feature026, feature027,
+		feature028,
+		feature029, feature030,
+		feature031, feature032, feature033,
+		feature034,
+		feature035, feature036,
+		feature037, feature038, feature039,
+		feature040,
+		feature041, feature042,
+		feature043, feature044, feature045,
+		feature046,
+		feature047, feature048,
+		feature049, feature050, feature051,
+		feature052,
+		feature053, feature054,
+		feature055, feature056, feature057,
+		feature058,
+		feature059, feature060,
+		feature061, feature062, feature063,
+		feature064,
+		feature065, feature066,
+		feature067, feature068, feature069,
+		feature070,
+		feature071, feature072,
+		feature073, feature074, feature075,
+		feature076,
+		feature077, feature078,
+		feature079, feature080, feature081,
+		feature082,
+		feature083, feature084,
+		feature085, feature086, feature087,
+		feature088,
+		feature089, feature090
+		)
+		values (#{expid,jdbcType=INTEGER},
+		#{id,jdbcType=INTEGER},
+		#{timestamp,jdbcType=DOUBLE},
+		#{feature001,jdbcType=DOUBLE}, #{feature002,jdbcType=DOUBLE},
+		#{feature003,jdbcType=DOUBLE},
+		#{feature004,jdbcType=DOUBLE},
+		#{feature005,jdbcType=DOUBLE},
+		#{feature006,jdbcType=DOUBLE},
+		#{feature007,jdbcType=DOUBLE}, #{feature008,jdbcType=DOUBLE},
+		#{feature009,jdbcType=DOUBLE},
+		#{feature010,jdbcType=DOUBLE},
+		#{feature011,jdbcType=DOUBLE},
+		#{feature012,jdbcType=DOUBLE},
+		#{feature013,jdbcType=DOUBLE}, #{feature014,jdbcType=DOUBLE},
+		#{feature015,jdbcType=DOUBLE},
+		#{feature016,jdbcType=DOUBLE},
+		#{feature017,jdbcType=DOUBLE},
+		#{feature018,jdbcType=DOUBLE},
+		#{feature019,jdbcType=DOUBLE}, #{feature020,jdbcType=DOUBLE},
+		#{feature021,jdbcType=DOUBLE},
+		#{feature022,jdbcType=DOUBLE},
+		#{feature023,jdbcType=DOUBLE},
+		#{feature024,jdbcType=DOUBLE},
+		#{feature025,jdbcType=DOUBLE}, #{feature026,jdbcType=DOUBLE},
+		#{feature027,jdbcType=DOUBLE},
+		#{feature028,jdbcType=DOUBLE},
+		#{feature029,jdbcType=DOUBLE},
+		#{feature030,jdbcType=DOUBLE},
+		#{feature031,jdbcType=DOUBLE}, #{feature032,jdbcType=DOUBLE},
+		#{feature033,jdbcType=DOUBLE},
+		#{feature034,jdbcType=DOUBLE},
+		#{feature035,jdbcType=DOUBLE},
+		#{feature036,jdbcType=DOUBLE},
+		#{feature037,jdbcType=DOUBLE}, #{feature038,jdbcType=DOUBLE},
+		#{feature039,jdbcType=DOUBLE},
+		#{feature040,jdbcType=DOUBLE},
+		#{feature041,jdbcType=DOUBLE},
+		#{feature042,jdbcType=DOUBLE},
+		#{feature043,jdbcType=DOUBLE}, #{feature044,jdbcType=DOUBLE},
+		#{feature045,jdbcType=DOUBLE},
+		#{feature046,jdbcType=DOUBLE},
+		#{feature047,jdbcType=DOUBLE},
+		#{feature048,jdbcType=DOUBLE},
+		#{feature049,jdbcType=DOUBLE}, #{feature050,jdbcType=DOUBLE},
+		#{feature051,jdbcType=DOUBLE},
+		#{feature052,jdbcType=DOUBLE},
+		#{feature053,jdbcType=DOUBLE},
+		#{feature054,jdbcType=DOUBLE},
+		#{feature055,jdbcType=DOUBLE}, #{feature056,jdbcType=DOUBLE},
+		#{feature057,jdbcType=DOUBLE},
+		#{feature058,jdbcType=DOUBLE},
+		#{feature059,jdbcType=DOUBLE},
+		#{feature060,jdbcType=DOUBLE},
+		#{feature061,jdbcType=DOUBLE}, #{feature062,jdbcType=DOUBLE},
+		#{feature063,jdbcType=DOUBLE},
+		#{feature064,jdbcType=DOUBLE},
+		#{feature065,jdbcType=DOUBLE},
+		#{feature066,jdbcType=DOUBLE},
+		#{feature067,jdbcType=DOUBLE}, #{feature068,jdbcType=DOUBLE},
+		#{feature069,jdbcType=DOUBLE},
+		#{feature070,jdbcType=DOUBLE},
+		#{feature071,jdbcType=DOUBLE},
+		#{feature072,jdbcType=DOUBLE},
+		#{feature073,jdbcType=DOUBLE}, #{feature074,jdbcType=DOUBLE},
+		#{feature075,jdbcType=DOUBLE},
+		#{feature076,jdbcType=DOUBLE},
+		#{feature077,jdbcType=DOUBLE},
+		#{feature078,jdbcType=DOUBLE},
+		#{feature079,jdbcType=DOUBLE}, #{feature080,jdbcType=DOUBLE},
+		#{feature081,jdbcType=DOUBLE},
+		#{feature082,jdbcType=DOUBLE},
+		#{feature083,jdbcType=DOUBLE},
+		#{feature084,jdbcType=DOUBLE},
+		#{feature085,jdbcType=DOUBLE}, #{feature086,jdbcType=DOUBLE},
+		#{feature087,jdbcType=DOUBLE},
+		#{feature088,jdbcType=DOUBLE},
+		#{feature089,jdbcType=DOUBLE},
+		#{feature090,jdbcType=DOUBLE}
+		)
+	</insert>
+	<insert id="insertList" parameterType="java.util.List"
+		useGeneratedKeys="false">
+		insert into tmp_kand
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.expid,jdbcType=INTEGER},
+			#{item.id,jdbcType=INTEGER},
+			#{item.timestamp,jdbcType=DOUBLE},
+			#{item.feature001,jdbcType=DOUBLE},
+			#{item.feature002,jdbcType=DOUBLE},
+			#{item.feature003,jdbcType=DOUBLE},
+			#{item.feature004,jdbcType=DOUBLE},
+			#{item.feature005,jdbcType=DOUBLE},
+			#{item.feature006,jdbcType=DOUBLE},
+			#{item.feature007,jdbcType=DOUBLE},
+			#{item.feature008,jdbcType=DOUBLE},
+			#{item.feature009,jdbcType=DOUBLE},
+			#{item.feature010,jdbcType=DOUBLE},
+			#{item.feature011,jdbcType=DOUBLE},
+			#{item.feature012,jdbcType=DOUBLE},
+			#{item.feature013,jdbcType=DOUBLE},
+			#{item.feature014,jdbcType=DOUBLE},
+			#{item.feature015,jdbcType=DOUBLE},
+			#{item.feature016,jdbcType=DOUBLE},
+			#{item.feature017,jdbcType=DOUBLE},
+			#{item.feature018,jdbcType=DOUBLE},
+			#{item.feature019,jdbcType=DOUBLE},
+			#{item.feature020,jdbcType=DOUBLE},
+			#{item.feature021,jdbcType=DOUBLE},
+			#{item.feature022,jdbcType=DOUBLE},
+			#{item.feature023,jdbcType=DOUBLE},
+			#{item.feature024,jdbcType=DOUBLE},
+			#{item.feature025,jdbcType=DOUBLE},
+			#{item.feature026,jdbcType=DOUBLE},
+			#{item.feature027,jdbcType=DOUBLE},
+			#{item.feature028,jdbcType=DOUBLE},
+			#{item.feature029,jdbcType=DOUBLE},
+			#{item.feature030,jdbcType=DOUBLE},
+			#{item.feature031,jdbcType=DOUBLE},
+			#{item.feature032,jdbcType=DOUBLE},
+			#{item.feature033,jdbcType=DOUBLE},
+			#{item.feature034,jdbcType=DOUBLE},
+			#{item.feature035,jdbcType=DOUBLE},
+			#{item.feature036,jdbcType=DOUBLE},
+			#{item.feature037,jdbcType=DOUBLE},
+			#{item.feature038,jdbcType=DOUBLE},
+			#{item.feature039,jdbcType=DOUBLE},
+			#{item.feature040,jdbcType=DOUBLE},
+			#{item.feature041,jdbcType=DOUBLE},
+			#{item.feature042,jdbcType=DOUBLE},
+			#{item.feature043,jdbcType=DOUBLE},
+			#{item.feature044,jdbcType=DOUBLE},
+			#{item.feature045,jdbcType=DOUBLE},
+			#{item.feature046,jdbcType=DOUBLE},
+			#{item.feature047,jdbcType=DOUBLE},
+			#{item.feature048,jdbcType=DOUBLE},
+			#{item.feature049,jdbcType=DOUBLE},
+			#{item.feature050,jdbcType=DOUBLE},
+			#{item.feature051,jdbcType=DOUBLE},
+			#{item.feature052,jdbcType=DOUBLE},
+			#{item.feature053,jdbcType=DOUBLE},
+			#{item.feature054,jdbcType=DOUBLE},
+			#{item.feature055,jdbcType=DOUBLE},
+			#{item.feature056,jdbcType=DOUBLE},
+			#{item.feature057,jdbcType=DOUBLE},
+			#{item.feature058,jdbcType=DOUBLE},
+			#{item.feature059,jdbcType=DOUBLE},
+			#{item.feature060,jdbcType=DOUBLE},
+			#{item.feature061,jdbcType=DOUBLE},
+			#{item.feature062,jdbcType=DOUBLE},
+			#{item.feature063,jdbcType=DOUBLE},
+			#{item.feature064,jdbcType=DOUBLE},
+			#{item.feature065,jdbcType=DOUBLE},
+			#{item.feature066,jdbcType=DOUBLE},
+			#{item.feature067,jdbcType=DOUBLE},
+			#{item.feature068,jdbcType=DOUBLE},
+			#{item.feature069,jdbcType=DOUBLE},
+			#{item.feature070,jdbcType=DOUBLE},
+			#{item.feature071,jdbcType=DOUBLE},
+			#{item.feature072,jdbcType=DOUBLE},
+			#{item.feature073,jdbcType=DOUBLE},
+			#{item.feature074,jdbcType=DOUBLE},
+			#{item.feature075,jdbcType=DOUBLE},
+			#{item.feature076,jdbcType=DOUBLE},
+			#{item.feature077,jdbcType=DOUBLE},
+			#{item.feature078,jdbcType=DOUBLE},
+			#{item.feature079,jdbcType=DOUBLE},
+			#{item.feature080,jdbcType=DOUBLE},
+			#{item.feature081,jdbcType=DOUBLE},
+			#{item.feature082,jdbcType=DOUBLE},
+			#{item.feature083,jdbcType=DOUBLE},
+			#{item.feature084,jdbcType=DOUBLE},
+			#{item.feature085,jdbcType=DOUBLE},
+			#{item.feature086,jdbcType=DOUBLE},
+			#{item.feature087,jdbcType=DOUBLE},
+			#{item.feature088,jdbcType=DOUBLE},
+			#{item.feature089,jdbcType=DOUBLE},
+			#{item.feature090,jdbcType=DOUBLE}
+			)
+		</foreach>
+	</insert>
+	<insert id="insertSelective"
+		parameterType="cn.tycoding.pojo.TmpKand">
+		insert into tmp_kand
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="expid != null">
+				expid,
+			</if>
+			<if test="id != null">
+				id,
+			</if>
+			<if test="timestamp != null">
+				timestamp,
+			</if>
+			<if test="feature001 != null">
+				feature001,
+			</if>
+			<if test="feature002 != null">
+				feature002,
+			</if>
+			<if test="feature003 != null">
+				feature003,
+			</if>
+			<if test="feature004 != null">
+				feature004,
+			</if>
+			<if test="feature005 != null">
+				feature005,
+			</if>
+			<if test="feature006 != null">
+				feature006,
+			</if>
+			<if test="feature007 != null">
+				feature007,
+			</if>
+			<if test="feature008 != null">
+				feature008,
+			</if>
+			<if test="feature009 != null">
+				feature009,
+			</if>
+			<if test="feature010 != null">
+				feature010,
+			</if>
+			<if test="feature011 != null">
+				feature011,
+			</if>
+			<if test="feature012 != null">
+				feature012,
+			</if>
+			<if test="feature013 != null">
+				feature013,
+			</if>
+			<if test="feature014 != null">
+				feature014,
+			</if>
+			<if test="feature015 != null">
+				feature015,
+			</if>
+			<if test="feature016 != null">
+				feature016,
+			</if>
+			<if test="feature017 != null">
+				feature017,
+			</if>
+			<if test="feature018 != null">
+				feature018,
+			</if>
+			<if test="feature019 != null">
+				feature019,
+			</if>
+			<if test="feature020 != null">
+				feature020,
+			</if>
+			<if test="feature021 != null">
+				feature021,
+			</if>
+			<if test="feature022 != null">
+				feature022,
+			</if>
+			<if test="feature023 != null">
+				feature023,
+			</if>
+			<if test="feature024 != null">
+				feature024,
+			</if>
+			<if test="feature025 != null">
+				feature025,
+			</if>
+			<if test="feature026 != null">
+				feature026,
+			</if>
+			<if test="feature027 != null">
+				feature027,
+			</if>
+			<if test="feature028 != null">
+				feature028,
+			</if>
+			<if test="feature029 != null">
+				feature029,
+			</if>
+			<if test="feature030 != null">
+				feature030,
+			</if>
+			<if test="feature031 != null">
+				feature031,
+			</if>
+			<if test="feature032 != null">
+				feature032,
+			</if>
+			<if test="feature033 != null">
+				feature033,
+			</if>
+			<if test="feature034 != null">
+				feature034,
+			</if>
+			<if test="feature035 != null">
+				feature035,
+			</if>
+			<if test="feature036 != null">
+				feature036,
+			</if>
+			<if test="feature037 != null">
+				feature037,
+			</if>
+			<if test="feature038 != null">
+				feature038,
+			</if>
+			<if test="feature039 != null">
+				feature039,
+			</if>
+			<if test="feature040 != null">
+				feature040,
+			</if>
+			<if test="feature041 != null">
+				feature041,
+			</if>
+			<if test="feature042 != null">
+				feature042,
+			</if>
+			<if test="feature043 != null">
+				feature043,
+			</if>
+			<if test="feature044 != null">
+				feature044,
+			</if>
+			<if test="feature045 != null">
+				feature045,
+			</if>
+			<if test="feature046 != null">
+				feature046,
+			</if>
+			<if test="feature047 != null">
+				feature047,
+			</if>
+			<if test="feature048 != null">
+				feature048,
+			</if>
+			<if test="feature049 != null">
+				feature049,
+			</if>
+			<if test="feature050 != null">
+				feature050,
+			</if>
+			<if test="feature051 != null">
+				feature051,
+			</if>
+			<if test="feature052 != null">
+				feature052,
+			</if>
+			<if test="feature053 != null">
+				feature053,
+			</if>
+			<if test="feature054 != null">
+				feature054,
+			</if>
+			<if test="feature055 != null">
+				feature055,
+			</if>
+			<if test="feature056 != null">
+				feature056,
+			</if>
+			<if test="feature057 != null">
+				feature057,
+			</if>
+			<if test="feature058 != null">
+				feature058,
+			</if>
+			<if test="feature059 != null">
+				feature059,
+			</if>
+			<if test="feature060 != null">
+				feature060,
+			</if>
+			<if test="feature061 != null">
+				feature061,
+			</if>
+			<if test="feature062 != null">
+				feature062,
+			</if>
+			<if test="feature063 != null">
+				feature063,
+			</if>
+			<if test="feature064 != null">
+				feature064,
+			</if>
+			<if test="feature065 != null">
+				feature065,
+			</if>
+			<if test="feature066 != null">
+				feature066,
+			</if>
+			<if test="feature067 != null">
+				feature067,
+			</if>
+			<if test="feature068 != null">
+				feature068,
+			</if>
+			<if test="feature069 != null">
+				feature069,
+			</if>
+			<if test="feature070 != null">
+				feature070,
+			</if>
+			<if test="feature071 != null">
+				feature071,
+			</if>
+			<if test="feature072 != null">
+				feature072,
+			</if>
+			<if test="feature073 != null">
+				feature073,
+			</if>
+			<if test="feature074 != null">
+				feature074,
+			</if>
+			<if test="feature075 != null">
+				feature075,
+			</if>
+			<if test="feature076 != null">
+				feature076,
+			</if>
+			<if test="feature077 != null">
+				feature077,
+			</if>
+			<if test="feature078 != null">
+				feature078,
+			</if>
+			<if test="feature079 != null">
+				feature079,
+			</if>
+			<if test="feature080 != null">
+				feature080,
+			</if>
+			<if test="feature081 != null">
+				feature081,
+			</if>
+			<if test="feature082 != null">
+				feature082,
+			</if>
+			<if test="feature083 != null">
+				feature083,
+			</if>
+			<if test="feature084 != null">
+				feature084,
+			</if>
+			<if test="feature085 != null">
+				feature085,
+			</if>
+			<if test="feature086 != null">
+				feature086,
+			</if>
+			<if test="feature087 != null">
+				feature087,
+			</if>
+			<if test="feature088 != null">
+				feature088,
+			</if>
+			<if test="feature089 != null">
+				feature089,
+			</if>
+			<if test="feature090 != null">
+				feature090,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="expid != null">
+				#{expid,jdbcType=INTEGER},
+			</if>
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="timestamp != null">
+				#{timestamp,jdbcType=DOUBLE},
+			</if>
+			<if test="feature001 != null">
+				#{feature001,jdbcType=DOUBLE},
+			</if>
+			<if test="feature002 != null">
+				#{feature002,jdbcType=DOUBLE},
+			</if>
+			<if test="feature003 != null">
+				#{feature003,jdbcType=DOUBLE},
+			</if>
+			<if test="feature004 != null">
+				#{feature004,jdbcType=DOUBLE},
+			</if>
+			<if test="feature005 != null">
+				#{feature005,jdbcType=DOUBLE},
+			</if>
+			<if test="feature006 != null">
+				#{feature006,jdbcType=DOUBLE},
+			</if>
+			<if test="feature007 != null">
+				#{feature007,jdbcType=DOUBLE},
+			</if>
+			<if test="feature008 != null">
+				#{feature008,jdbcType=DOUBLE},
+			</if>
+			<if test="feature009 != null">
+				#{feature009,jdbcType=DOUBLE},
+			</if>
+			<if test="feature010 != null">
+				#{feature010,jdbcType=DOUBLE},
+			</if>
+			<if test="feature011 != null">
+				#{feature011,jdbcType=DOUBLE},
+			</if>
+			<if test="feature012 != null">
+				#{feature012,jdbcType=DOUBLE},
+			</if>
+			<if test="feature013 != null">
+				#{feature013,jdbcType=DOUBLE},
+			</if>
+			<if test="feature014 != null">
+				#{feature014,jdbcType=DOUBLE},
+			</if>
+			<if test="feature015 != null">
+				#{feature015,jdbcType=DOUBLE},
+			</if>
+			<if test="feature016 != null">
+				#{feature016,jdbcType=DOUBLE},
+			</if>
+			<if test="feature017 != null">
+				#{feature017,jdbcType=DOUBLE},
+			</if>
+			<if test="feature018 != null">
+				#{feature018,jdbcType=DOUBLE},
+			</if>
+			<if test="feature019 != null">
+				#{feature019,jdbcType=DOUBLE},
+			</if>
+			<if test="feature020 != null">
+				#{feature020,jdbcType=DOUBLE},
+			</if>
+			<if test="feature021 != null">
+				#{feature021,jdbcType=DOUBLE},
+			</if>
+			<if test="feature022 != null">
+				#{feature022,jdbcType=DOUBLE},
+			</if>
+			<if test="feature023 != null">
+				#{feature023,jdbcType=DOUBLE},
+			</if>
+			<if test="feature024 != null">
+				#{feature024,jdbcType=DOUBLE},
+			</if>
+			<if test="feature025 != null">
+				#{feature025,jdbcType=DOUBLE},
+			</if>
+			<if test="feature026 != null">
+				#{feature026,jdbcType=DOUBLE},
+			</if>
+			<if test="feature027 != null">
+				#{feature027,jdbcType=DOUBLE},
+			</if>
+			<if test="feature028 != null">
+				#{feature028,jdbcType=DOUBLE},
+			</if>
+			<if test="feature029 != null">
+				#{feature029,jdbcType=DOUBLE},
+			</if>
+			<if test="feature030 != null">
+				#{feature030,jdbcType=DOUBLE},
+			</if>
+			<if test="feature031 != null">
+				#{feature031,jdbcType=DOUBLE},
+			</if>
+			<if test="feature032 != null">
+				#{feature032,jdbcType=DOUBLE},
+			</if>
+			<if test="feature033 != null">
+				#{feature033,jdbcType=DOUBLE},
+			</if>
+			<if test="feature034 != null">
+				#{feature034,jdbcType=DOUBLE},
+			</if>
+			<if test="feature035 != null">
+				#{feature035,jdbcType=DOUBLE},
+			</if>
+			<if test="feature036 != null">
+				#{feature036,jdbcType=DOUBLE},
+			</if>
+			<if test="feature037 != null">
+				#{feature037,jdbcType=DOUBLE},
+			</if>
+			<if test="feature038 != null">
+				#{feature038,jdbcType=DOUBLE},
+			</if>
+			<if test="feature039 != null">
+				#{feature039,jdbcType=DOUBLE},
+			</if>
+			<if test="feature040 != null">
+				#{feature040,jdbcType=DOUBLE},
+			</if>
+			<if test="feature041 != null">
+				#{feature041,jdbcType=DOUBLE},
+			</if>
+			<if test="feature042 != null">
+				#{feature042,jdbcType=DOUBLE},
+			</if>
+			<if test="feature043 != null">
+				#{feature043,jdbcType=DOUBLE},
+			</if>
+			<if test="feature044 != null">
+				#{feature044,jdbcType=DOUBLE},
+			</if>
+			<if test="feature045 != null">
+				#{feature045,jdbcType=DOUBLE},
+			</if>
+			<if test="feature046 != null">
+				#{feature046,jdbcType=DOUBLE},
+			</if>
+			<if test="feature047 != null">
+				#{feature047,jdbcType=DOUBLE},
+			</if>
+			<if test="feature048 != null">
+				#{feature048,jdbcType=DOUBLE},
+			</if>
+			<if test="feature049 != null">
+				#{feature049,jdbcType=DOUBLE},
+			</if>
+			<if test="feature050 != null">
+				#{feature050,jdbcType=DOUBLE},
+			</if>
+			<if test="feature051 != null">
+				#{feature051,jdbcType=DOUBLE},
+			</if>
+			<if test="feature052 != null">
+				#{feature052,jdbcType=DOUBLE},
+			</if>
+			<if test="feature053 != null">
+				#{feature053,jdbcType=DOUBLE},
+			</if>
+			<if test="feature054 != null">
+				#{feature054,jdbcType=DOUBLE},
+			</if>
+			<if test="feature055 != null">
+				#{feature055,jdbcType=DOUBLE},
+			</if>
+			<if test="feature056 != null">
+				#{feature056,jdbcType=DOUBLE},
+			</if>
+			<if test="feature057 != null">
+				#{feature057,jdbcType=DOUBLE},
+			</if>
+			<if test="feature058 != null">
+				#{feature058,jdbcType=DOUBLE},
+			</if>
+			<if test="feature059 != null">
+				#{feature059,jdbcType=DOUBLE},
+			</if>
+			<if test="feature060 != null">
+				#{feature060,jdbcType=DOUBLE},
+			</if>
+			<if test="feature061 != null">
+				#{feature061,jdbcType=DOUBLE},
+			</if>
+			<if test="feature062 != null">
+				#{feature062,jdbcType=DOUBLE},
+			</if>
+			<if test="feature063 != null">
+				#{feature063,jdbcType=DOUBLE},
+			</if>
+			<if test="feature064 != null">
+				#{feature064,jdbcType=DOUBLE},
+			</if>
+			<if test="feature065 != null">
+				#{feature065,jdbcType=DOUBLE},
+			</if>
+			<if test="feature066 != null">
+				#{feature066,jdbcType=DOUBLE},
+			</if>
+			<if test="feature067 != null">
+				#{feature067,jdbcType=DOUBLE},
+			</if>
+			<if test="feature068 != null">
+				#{feature068,jdbcType=DOUBLE},
+			</if>
+			<if test="feature069 != null">
+				#{feature069,jdbcType=DOUBLE},
+			</if>
+			<if test="feature070 != null">
+				#{feature070,jdbcType=DOUBLE},
+			</if>
+			<if test="feature071 != null">
+				#{feature071,jdbcType=DOUBLE},
+			</if>
+			<if test="feature072 != null">
+				#{feature072,jdbcType=DOUBLE},
+			</if>
+			<if test="feature073 != null">
+				#{feature073,jdbcType=DOUBLE},
+			</if>
+			<if test="feature074 != null">
+				#{feature074,jdbcType=DOUBLE},
+			</if>
+			<if test="feature075 != null">
+				#{feature075,jdbcType=DOUBLE},
+			</if>
+			<if test="feature076 != null">
+				#{feature076,jdbcType=DOUBLE},
+			</if>
+			<if test="feature077 != null">
+				#{feature077,jdbcType=DOUBLE},
+			</if>
+			<if test="feature078 != null">
+				#{feature078,jdbcType=DOUBLE},
+			</if>
+			<if test="feature079 != null">
+				#{feature079,jdbcType=DOUBLE},
+			</if>
+			<if test="feature080 != null">
+				#{feature080,jdbcType=DOUBLE},
+			</if>
+			<if test="feature081 != null">
+				#{feature081,jdbcType=DOUBLE},
+			</if>
+			<if test="feature082 != null">
+				#{feature082,jdbcType=DOUBLE},
+			</if>
+			<if test="feature083 != null">
+				#{feature083,jdbcType=DOUBLE},
+			</if>
+			<if test="feature084 != null">
+				#{feature084,jdbcType=DOUBLE},
+			</if>
+			<if test="feature085 != null">
+				#{feature085,jdbcType=DOUBLE},
+			</if>
+			<if test="feature086 != null">
+				#{feature086,jdbcType=DOUBLE},
+			</if>
+			<if test="feature087 != null">
+				#{feature087,jdbcType=DOUBLE},
+			</if>
+			<if test="feature088 != null">
+				#{feature088,jdbcType=DOUBLE},
+			</if>
+			<if test="feature089 != null">
+				#{feature089,jdbcType=DOUBLE},
+			</if>
+			<if test="feature090 != null">
+				#{feature090,jdbcType=DOUBLE},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="updateByPrimaryKeySelective"
+		parameterType="cn.tycoding.pojo.TmpKand">
+		update tmp_kand
+		<set>
+			<if test="timestamp != null">
+				timestamp = #{timestamp,jdbcType=DOUBLE},
+			</if>
+			<if test="feature001 != null">
+				feature001 = #{feature001,jdbcType=DOUBLE},
+			</if>
+			<if test="feature002 != null">
+				feature002 = #{feature002,jdbcType=DOUBLE},
+			</if>
+			<if test="feature003 != null">
+				feature003 = #{feature003,jdbcType=DOUBLE},
+			</if>
+			<if test="feature004 != null">
+				feature004 = #{feature004,jdbcType=DOUBLE},
+			</if>
+			<if test="feature005 != null">
+				feature005 = #{feature005,jdbcType=DOUBLE},
+			</if>
+			<if test="feature006 != null">
+				feature006 = #{feature006,jdbcType=DOUBLE},
+			</if>
+			<if test="feature007 != null">
+				feature007 = #{feature007,jdbcType=DOUBLE},
+			</if>
+			<if test="feature008 != null">
+				feature008 = #{feature008,jdbcType=DOUBLE},
+			</if>
+			<if test="feature009 != null">
+				feature009 = #{feature009,jdbcType=DOUBLE},
+			</if>
+			<if test="feature010 != null">
+				feature010 = #{feature010,jdbcType=DOUBLE},
+			</if>
+			<if test="feature011 != null">
+				feature011 = #{feature011,jdbcType=DOUBLE},
+			</if>
+			<if test="feature012 != null">
+				feature012 = #{feature012,jdbcType=DOUBLE},
+			</if>
+			<if test="feature013 != null">
+				feature013 = #{feature013,jdbcType=DOUBLE},
+			</if>
+			<if test="feature014 != null">
+				feature014 = #{feature014,jdbcType=DOUBLE},
+			</if>
+			<if test="feature015 != null">
+				feature015 = #{feature015,jdbcType=DOUBLE},
+			</if>
+			<if test="feature016 != null">
+				feature016 = #{feature016,jdbcType=DOUBLE},
+			</if>
+			<if test="feature017 != null">
+				feature017 = #{feature017,jdbcType=DOUBLE},
+			</if>
+			<if test="feature018 != null">
+				feature018 = #{feature018,jdbcType=DOUBLE},
+			</if>
+			<if test="feature019 != null">
+				feature019 = #{feature019,jdbcType=DOUBLE},
+			</if>
+			<if test="feature020 != null">
+				feature020 = #{feature020,jdbcType=DOUBLE},
+			</if>
+			<if test="feature021 != null">
+				feature021 = #{feature021,jdbcType=DOUBLE},
+			</if>
+			<if test="feature022 != null">
+				feature022 = #{feature022,jdbcType=DOUBLE},
+			</if>
+			<if test="feature023 != null">
+				feature023 = #{feature023,jdbcType=DOUBLE},
+			</if>
+			<if test="feature024 != null">
+				feature024 = #{feature024,jdbcType=DOUBLE},
+			</if>
+			<if test="feature025 != null">
+				feature025 = #{feature025,jdbcType=DOUBLE},
+			</if>
+			<if test="feature026 != null">
+				feature026 = #{feature026,jdbcType=DOUBLE},
+			</if>
+			<if test="feature027 != null">
+				feature027 = #{feature027,jdbcType=DOUBLE},
+			</if>
+			<if test="feature028 != null">
+				feature028 = #{feature028,jdbcType=DOUBLE},
+			</if>
+			<if test="feature029 != null">
+				feature029 = #{feature029,jdbcType=DOUBLE},
+			</if>
+			<if test="feature030 != null">
+				feature030 = #{feature030,jdbcType=DOUBLE},
+			</if>
+			<if test="feature031 != null">
+				feature031 = #{feature031,jdbcType=DOUBLE},
+			</if>
+			<if test="feature032 != null">
+				feature032 = #{feature032,jdbcType=DOUBLE},
+			</if>
+			<if test="feature033 != null">
+				feature033 = #{feature033,jdbcType=DOUBLE},
+			</if>
+			<if test="feature034 != null">
+				feature034 = #{feature034,jdbcType=DOUBLE},
+			</if>
+			<if test="feature035 != null">
+				feature035 = #{feature035,jdbcType=DOUBLE},
+			</if>
+			<if test="feature036 != null">
+				feature036 = #{feature036,jdbcType=DOUBLE},
+			</if>
+			<if test="feature037 != null">
+				feature037 = #{feature037,jdbcType=DOUBLE},
+			</if>
+			<if test="feature038 != null">
+				feature038 = #{feature038,jdbcType=DOUBLE},
+			</if>
+			<if test="feature039 != null">
+				feature039 = #{feature039,jdbcType=DOUBLE},
+			</if>
+			<if test="feature040 != null">
+				feature040 = #{feature040,jdbcType=DOUBLE},
+			</if>
+			<if test="feature041 != null">
+				feature041 = #{feature041,jdbcType=DOUBLE},
+			</if>
+			<if test="feature042 != null">
+				feature042 = #{feature042,jdbcType=DOUBLE},
+			</if>
+			<if test="feature043 != null">
+				feature043 = #{feature043,jdbcType=DOUBLE},
+			</if>
+			<if test="feature044 != null">
+				feature044 = #{feature044,jdbcType=DOUBLE},
+			</if>
+			<if test="feature045 != null">
+				feature045 = #{feature045,jdbcType=DOUBLE},
+			</if>
+			<if test="feature046 != null">
+				feature046 = #{feature046,jdbcType=DOUBLE},
+			</if>
+			<if test="feature047 != null">
+				feature047 = #{feature047,jdbcType=DOUBLE},
+			</if>
+			<if test="feature048 != null">
+				feature048 = #{feature048,jdbcType=DOUBLE},
+			</if>
+			<if test="feature049 != null">
+				feature049 = #{feature049,jdbcType=DOUBLE},
+			</if>
+			<if test="feature050 != null">
+				feature050 = #{feature050,jdbcType=DOUBLE},
+			</if>
+			<if test="feature051 != null">
+				feature051 = #{feature051,jdbcType=DOUBLE},
+			</if>
+			<if test="feature052 != null">
+				feature052 = #{feature052,jdbcType=DOUBLE},
+			</if>
+			<if test="feature053 != null">
+				feature053 = #{feature053,jdbcType=DOUBLE},
+			</if>
+			<if test="feature054 != null">
+				feature054 = #{feature054,jdbcType=DOUBLE},
+			</if>
+			<if test="feature055 != null">
+				feature055 = #{feature055,jdbcType=DOUBLE},
+			</if>
+			<if test="feature056 != null">
+				feature056 = #{feature056,jdbcType=DOUBLE},
+			</if>
+			<if test="feature057 != null">
+				feature057 = #{feature057,jdbcType=DOUBLE},
+			</if>
+			<if test="feature058 != null">
+				feature058 = #{feature058,jdbcType=DOUBLE},
+			</if>
+			<if test="feature059 != null">
+				feature059 = #{feature059,jdbcType=DOUBLE},
+			</if>
+			<if test="feature060 != null">
+				feature060 = #{feature060,jdbcType=DOUBLE},
+			</if>
+			<if test="feature061 != null">
+				feature061 = #{feature061,jdbcType=DOUBLE},
+			</if>
+			<if test="feature062 != null">
+				feature062 = #{feature062,jdbcType=DOUBLE},
+			</if>
+			<if test="feature063 != null">
+				feature063 = #{feature063,jdbcType=DOUBLE},
+			</if>
+			<if test="feature064 != null">
+				feature064 = #{feature064,jdbcType=DOUBLE},
+			</if>
+			<if test="feature065 != null">
+				feature065 = #{feature065,jdbcType=DOUBLE},
+			</if>
+			<if test="feature066 != null">
+				feature066 = #{feature066,jdbcType=DOUBLE},
+			</if>
+			<if test="feature067 != null">
+				feature067 = #{feature067,jdbcType=DOUBLE},
+			</if>
+			<if test="feature068 != null">
+				feature068 = #{feature068,jdbcType=DOUBLE},
+			</if>
+			<if test="feature069 != null">
+				feature069 = #{feature069,jdbcType=DOUBLE},
+			</if>
+			<if test="feature070 != null">
+				feature070 = #{feature070,jdbcType=DOUBLE},
+			</if>
+			<if test="feature071 != null">
+				feature071 = #{feature071,jdbcType=DOUBLE},
+			</if>
+			<if test="feature072 != null">
+				feature072 = #{feature072,jdbcType=DOUBLE},
+			</if>
+			<if test="feature073 != null">
+				feature073 = #{feature073,jdbcType=DOUBLE},
+			</if>
+			<if test="feature074 != null">
+				feature074 = #{feature074,jdbcType=DOUBLE},
+			</if>
+			<if test="feature075 != null">
+				feature075 = #{feature075,jdbcType=DOUBLE},
+			</if>
+			<if test="feature076 != null">
+				feature076 = #{feature076,jdbcType=DOUBLE},
+			</if>
+			<if test="feature077 != null">
+				feature077 = #{feature077,jdbcType=DOUBLE},
+			</if>
+			<if test="feature078 != null">
+				feature078 = #{feature078,jdbcType=DOUBLE},
+			</if>
+			<if test="feature079 != null">
+				feature079 = #{feature079,jdbcType=DOUBLE},
+			</if>
+			<if test="feature080 != null">
+				feature080 = #{feature080,jdbcType=DOUBLE},
+			</if>
+			<if test="feature081 != null">
+				feature081 = #{feature081,jdbcType=DOUBLE},
+			</if>
+			<if test="feature082 != null">
+				feature082 = #{feature082,jdbcType=DOUBLE},
+			</if>
+			<if test="feature083 != null">
+				feature083 = #{feature083,jdbcType=DOUBLE},
+			</if>
+			<if test="feature084 != null">
+				feature084 = #{feature084,jdbcType=DOUBLE},
+			</if>
+			<if test="feature085 != null">
+				feature085 = #{feature085,jdbcType=DOUBLE},
+			</if>
+			<if test="feature086 != null">
+				feature086 = #{feature086,jdbcType=DOUBLE},
+			</if>
+			<if test="feature087 != null">
+				feature087 = #{feature087,jdbcType=DOUBLE},
+			</if>
+			<if test="feature088 != null">
+				feature088 = #{feature088,jdbcType=DOUBLE},
+			</if>
+			<if test="feature089 != null">
+				feature089 = #{feature089,jdbcType=DOUBLE},
+			</if>
+			<if test="feature090 != null">
+				feature090 = #{feature090,jdbcType=DOUBLE},
+			</if>
+		</set>
+		where expid = #{expid,jdbcType=INTEGER}
+		and id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<update id="truncate">
+    truncate table tmp_kand
+	</update>
+	
+	
+	<update id="updateByPrimaryKey"
+		parameterType="cn.tycoding.pojo.TmpKand">
+		update tmp_kand
+		set timestamp =
+		#{timestamp,jdbcType=DOUBLE},
+		feature001 =
+		#{feature001,jdbcType=DOUBLE},
+		feature002 =
+		#{feature002,jdbcType=DOUBLE},
+		feature003 =
+		#{feature003,jdbcType=DOUBLE},
+		feature004 =
+		#{feature004,jdbcType=DOUBLE},
+		feature005 =
+		#{feature005,jdbcType=DOUBLE},
+		feature006 =
+		#{feature006,jdbcType=DOUBLE},
+		feature007 =
+		#{feature007,jdbcType=DOUBLE},
+		feature008 =
+		#{feature008,jdbcType=DOUBLE},
+		feature009 =
+		#{feature009,jdbcType=DOUBLE},
+		feature010 =
+		#{feature010,jdbcType=DOUBLE},
+		feature011 =
+		#{feature011,jdbcType=DOUBLE},
+		feature012 =
+		#{feature012,jdbcType=DOUBLE},
+		feature013 =
+		#{feature013,jdbcType=DOUBLE},
+		feature014 =
+		#{feature014,jdbcType=DOUBLE},
+		feature015 =
+		#{feature015,jdbcType=DOUBLE},
+		feature016 =
+		#{feature016,jdbcType=DOUBLE},
+		feature017 =
+		#{feature017,jdbcType=DOUBLE},
+		feature018 =
+		#{feature018,jdbcType=DOUBLE},
+		feature019 =
+		#{feature019,jdbcType=DOUBLE},
+		feature020 =
+		#{feature020,jdbcType=DOUBLE},
+		feature021 =
+		#{feature021,jdbcType=DOUBLE},
+		feature022 =
+		#{feature022,jdbcType=DOUBLE},
+		feature023 =
+		#{feature023,jdbcType=DOUBLE},
+		feature024 =
+		#{feature024,jdbcType=DOUBLE},
+		feature025 =
+		#{feature025,jdbcType=DOUBLE},
+		feature026 =
+		#{feature026,jdbcType=DOUBLE},
+		feature027 =
+		#{feature027,jdbcType=DOUBLE},
+		feature028 =
+		#{feature028,jdbcType=DOUBLE},
+		feature029 =
+		#{feature029,jdbcType=DOUBLE},
+		feature030 =
+		#{feature030,jdbcType=DOUBLE},
+		feature031 =
+		#{feature031,jdbcType=DOUBLE},
+		feature032 =
+		#{feature032,jdbcType=DOUBLE},
+		feature033 =
+		#{feature033,jdbcType=DOUBLE},
+		feature034 =
+		#{feature034,jdbcType=DOUBLE},
+		feature035 =
+		#{feature035,jdbcType=DOUBLE},
+		feature036 =
+		#{feature036,jdbcType=DOUBLE},
+		feature037 =
+		#{feature037,jdbcType=DOUBLE},
+		feature038 =
+		#{feature038,jdbcType=DOUBLE},
+		feature039 =
+		#{feature039,jdbcType=DOUBLE},
+		feature040 =
+		#{feature040,jdbcType=DOUBLE},
+		feature041 =
+		#{feature041,jdbcType=DOUBLE},
+		feature042 =
+		#{feature042,jdbcType=DOUBLE},
+		feature043 =
+		#{feature043,jdbcType=DOUBLE},
+		feature044 =
+		#{feature044,jdbcType=DOUBLE},
+		feature045 =
+		#{feature045,jdbcType=DOUBLE},
+		feature046 =
+		#{feature046,jdbcType=DOUBLE},
+		feature047 =
+		#{feature047,jdbcType=DOUBLE},
+		feature048 =
+		#{feature048,jdbcType=DOUBLE},
+		feature049 =
+		#{feature049,jdbcType=DOUBLE},
+		feature050 =
+		#{feature050,jdbcType=DOUBLE},
+		feature051 =
+		#{feature051,jdbcType=DOUBLE},
+		feature052 =
+		#{feature052,jdbcType=DOUBLE},
+		feature053 =
+		#{feature053,jdbcType=DOUBLE},
+		feature054 =
+		#{feature054,jdbcType=DOUBLE},
+		feature055 =
+		#{feature055,jdbcType=DOUBLE},
+		feature056 =
+		#{feature056,jdbcType=DOUBLE},
+		feature057 =
+		#{feature057,jdbcType=DOUBLE},
+		feature058 =
+		#{feature058,jdbcType=DOUBLE},
+		feature059 =
+		#{feature059,jdbcType=DOUBLE},
+		feature060 =
+		#{feature060,jdbcType=DOUBLE},
+		feature061 =
+		#{feature061,jdbcType=DOUBLE},
+		feature062 =
+		#{feature062,jdbcType=DOUBLE},
+		feature063 =
+		#{feature063,jdbcType=DOUBLE},
+		feature064 =
+		#{feature064,jdbcType=DOUBLE},
+		feature065 =
+		#{feature065,jdbcType=DOUBLE},
+		feature066 =
+		#{feature066,jdbcType=DOUBLE},
+		feature067 =
+		#{feature067,jdbcType=DOUBLE},
+		feature068 =
+		#{feature068,jdbcType=DOUBLE},
+		feature069 =
+		#{feature069,jdbcType=DOUBLE},
+		feature070 =
+		#{feature070,jdbcType=DOUBLE},
+		feature071 =
+		#{feature071,jdbcType=DOUBLE},
+		feature072 =
+		#{feature072,jdbcType=DOUBLE},
+		feature073 =
+		#{feature073,jdbcType=DOUBLE},
+		feature074 =
+		#{feature074,jdbcType=DOUBLE},
+		feature075 =
+		#{feature075,jdbcType=DOUBLE},
+		feature076 =
+		#{feature076,jdbcType=DOUBLE},
+		feature077 =
+		#{feature077,jdbcType=DOUBLE},
+		feature078 =
+		#{feature078,jdbcType=DOUBLE},
+		feature079 =
+		#{feature079,jdbcType=DOUBLE},
+		feature080 =
+		#{feature080,jdbcType=DOUBLE},
+		feature081 =
+		#{feature081,jdbcType=DOUBLE},
+		feature082 =
+		#{feature082,jdbcType=DOUBLE},
+		feature083 =
+		#{feature083,jdbcType=DOUBLE},
+		feature084 =
+		#{feature084,jdbcType=DOUBLE},
+		feature085 =
+		#{feature085,jdbcType=DOUBLE},
+		feature086 =
+		#{feature086,jdbcType=DOUBLE},
+		feature087 =
+		#{feature087,jdbcType=DOUBLE},
+		feature088 =
+		#{feature088,jdbcType=DOUBLE},
+		feature089 =
+		#{feature089,jdbcType=DOUBLE},
+		feature090 =
+		#{feature090,jdbcType=DOUBLE}
+		where expid = #{expid,jdbcType=INTEGER}
+		and id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

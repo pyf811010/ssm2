@@ -41,6 +41,12 @@
         <!-- 扫描Mapper层的配置文件 -->
         <property name="mapperLocations" value="classpath:cn/tycoding/mapper/*.xml"/>
     </bean>
+    
+    <!-- 配置一个可以批量执行的sqlSession -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+	<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	<constructor-arg value="BATCH" name="executorType"/>
+	</bean>
 
     <!-- 启用mybatis的接口代理开发模式（接口和Xml配置必须同名，并且在同一目录下） -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
