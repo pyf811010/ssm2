@@ -1,0 +1,1484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tycoding.mapper.TmpFootPressureAscMapper">
+  <resultMap id="BaseResultMap" type="cn.tycoding.pojo.TmpFootPressureAsc">
+    <id column="expid" jdbcType="INTEGER" property="expid" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="timestap" jdbcType="DOUBLE" property="timestap" />
+    <result column="sensor01" jdbcType="DOUBLE" property="sensor01" />
+    <result column="sensor02" jdbcType="DOUBLE" property="sensor02" />
+    <result column="sensor03" jdbcType="DOUBLE" property="sensor03" />
+    <result column="sensor04" jdbcType="DOUBLE" property="sensor04" />
+    <result column="sensor05" jdbcType="DOUBLE" property="sensor05" />
+    <result column="sensor06" jdbcType="DOUBLE" property="sensor06" />
+    <result column="sensor07" jdbcType="DOUBLE" property="sensor07" />
+    <result column="sensor08" jdbcType="DOUBLE" property="sensor08" />
+    <result column="sensor09" jdbcType="DOUBLE" property="sensor09" />
+    <result column="sensor10" jdbcType="DOUBLE" property="sensor10" />
+    <result column="sensor11" jdbcType="DOUBLE" property="sensor11" />
+    <result column="sensor12" jdbcType="DOUBLE" property="sensor12" />
+    <result column="sensor13" jdbcType="DOUBLE" property="sensor13" />
+    <result column="sensor14" jdbcType="DOUBLE" property="sensor14" />
+    <result column="sensor15" jdbcType="DOUBLE" property="sensor15" />
+    <result column="sensor16" jdbcType="DOUBLE" property="sensor16" />
+    <result column="sensor17" jdbcType="DOUBLE" property="sensor17" />
+    <result column="sensor18" jdbcType="DOUBLE" property="sensor18" />
+    <result column="sensor19" jdbcType="DOUBLE" property="sensor19" />
+    <result column="sensor20" jdbcType="DOUBLE" property="sensor20" />
+    <result column="sensor21" jdbcType="DOUBLE" property="sensor21" />
+    <result column="sensor22" jdbcType="DOUBLE" property="sensor22" />
+    <result column="sensor23" jdbcType="DOUBLE" property="sensor23" />
+    <result column="sensor24" jdbcType="DOUBLE" property="sensor24" />
+    <result column="sensor25" jdbcType="DOUBLE" property="sensor25" />
+    <result column="sensor26" jdbcType="DOUBLE" property="sensor26" />
+    <result column="sensor27" jdbcType="DOUBLE" property="sensor27" />
+    <result column="sensor28" jdbcType="DOUBLE" property="sensor28" />
+    <result column="sensor29" jdbcType="DOUBLE" property="sensor29" />
+    <result column="sensor30" jdbcType="DOUBLE" property="sensor30" />
+    <result column="sensor31" jdbcType="DOUBLE" property="sensor31" />
+    <result column="sensor32" jdbcType="DOUBLE" property="sensor32" />
+    <result column="sensor33" jdbcType="DOUBLE" property="sensor33" />
+    <result column="sensor34" jdbcType="DOUBLE" property="sensor34" />
+    <result column="sensor35" jdbcType="DOUBLE" property="sensor35" />
+    <result column="sensor36" jdbcType="DOUBLE" property="sensor36" />
+    <result column="sensor37" jdbcType="DOUBLE" property="sensor37" />
+    <result column="sensor38" jdbcType="DOUBLE" property="sensor38" />
+    <result column="sensor39" jdbcType="DOUBLE" property="sensor39" />
+    <result column="sensor40" jdbcType="DOUBLE" property="sensor40" />
+    <result column="sensor41" jdbcType="DOUBLE" property="sensor41" />
+    <result column="sensor42" jdbcType="DOUBLE" property="sensor42" />
+    <result column="sensor43" jdbcType="DOUBLE" property="sensor43" />
+    <result column="sensor44" jdbcType="DOUBLE" property="sensor44" />
+    <result column="sensor45" jdbcType="DOUBLE" property="sensor45" />
+    <result column="sensor46" jdbcType="DOUBLE" property="sensor46" />
+    <result column="sensor47" jdbcType="DOUBLE" property="sensor47" />
+    <result column="sensor48" jdbcType="DOUBLE" property="sensor48" />
+    <result column="sensor49" jdbcType="DOUBLE" property="sensor49" />
+    <result column="sensor50" jdbcType="DOUBLE" property="sensor50" />
+    <result column="sensor51" jdbcType="DOUBLE" property="sensor51" />
+    <result column="sensor52" jdbcType="DOUBLE" property="sensor52" />
+    <result column="sensor53" jdbcType="DOUBLE" property="sensor53" />
+    <result column="sensor54" jdbcType="DOUBLE" property="sensor54" />
+    <result column="sensor55" jdbcType="DOUBLE" property="sensor55" />
+    <result column="sensor56" jdbcType="DOUBLE" property="sensor56" />
+    <result column="sensor57" jdbcType="DOUBLE" property="sensor57" />
+    <result column="sensor58" jdbcType="DOUBLE" property="sensor58" />
+    <result column="sensor59" jdbcType="DOUBLE" property="sensor59" />
+    <result column="sensor60" jdbcType="DOUBLE" property="sensor60" />
+    <result column="sensor61" jdbcType="DOUBLE" property="sensor61" />
+    <result column="sensor62" jdbcType="DOUBLE" property="sensor62" />
+    <result column="sensor63" jdbcType="DOUBLE" property="sensor63" />
+    <result column="sensor64" jdbcType="DOUBLE" property="sensor64" />
+    <result column="sensor65" jdbcType="DOUBLE" property="sensor65" />
+    <result column="sensor66" jdbcType="DOUBLE" property="sensor66" />
+    <result column="sensor67" jdbcType="DOUBLE" property="sensor67" />
+    <result column="sensor68" jdbcType="DOUBLE" property="sensor68" />
+    <result column="sensor69" jdbcType="DOUBLE" property="sensor69" />
+    <result column="sensor70" jdbcType="DOUBLE" property="sensor70" />
+    <result column="sensor71" jdbcType="DOUBLE" property="sensor71" />
+    <result column="sensor72" jdbcType="DOUBLE" property="sensor72" />
+    <result column="sensor73" jdbcType="DOUBLE" property="sensor73" />
+    <result column="sensor74" jdbcType="DOUBLE" property="sensor74" />
+    <result column="sensor75" jdbcType="DOUBLE" property="sensor75" />
+    <result column="sensor76" jdbcType="DOUBLE" property="sensor76" />
+    <result column="sensor77" jdbcType="DOUBLE" property="sensor77" />
+    <result column="sensor78" jdbcType="DOUBLE" property="sensor78" />
+    <result column="sensor79" jdbcType="DOUBLE" property="sensor79" />
+    <result column="sensor80" jdbcType="DOUBLE" property="sensor80" />
+    <result column="sensor81" jdbcType="DOUBLE" property="sensor81" />
+    <result column="sensor82" jdbcType="DOUBLE" property="sensor82" />
+    <result column="sensor83" jdbcType="DOUBLE" property="sensor83" />
+    <result column="sensor84" jdbcType="DOUBLE" property="sensor84" />
+    <result column="sensor85" jdbcType="DOUBLE" property="sensor85" />
+    <result column="sensor86" jdbcType="DOUBLE" property="sensor86" />
+    <result column="sensor87" jdbcType="DOUBLE" property="sensor87" />
+    <result column="sensor88" jdbcType="DOUBLE" property="sensor88" />
+    <result column="sensor89" jdbcType="DOUBLE" property="sensor89" />
+    <result column="sensor90" jdbcType="DOUBLE" property="sensor90" />
+    <result column="sensor91" jdbcType="DOUBLE" property="sensor91" />
+    <result column="sensor92" jdbcType="DOUBLE" property="sensor92" />
+    <result column="sensor93" jdbcType="DOUBLE" property="sensor93" />
+    <result column="sensor94" jdbcType="DOUBLE" property="sensor94" />
+    <result column="sensor95" jdbcType="DOUBLE" property="sensor95" />
+    <result column="sensor96" jdbcType="DOUBLE" property="sensor96" />
+    <result column="sensor97" jdbcType="DOUBLE" property="sensor97" />
+    <result column="sensor98" jdbcType="DOUBLE" property="sensor98" />
+    <result column="sensor99" jdbcType="DOUBLE" property="sensor99" />
+    <result column="sensor100" jdbcType="DOUBLE" property="sensor100" />
+    <result column="sensor101" jdbcType="DOUBLE" property="sensor101" />
+    <result column="sensor102" jdbcType="DOUBLE" property="sensor102" />
+    <result column="sensor103" jdbcType="DOUBLE" property="sensor103" />
+    <result column="sensor104" jdbcType="DOUBLE" property="sensor104" />
+    <result column="sensor105" jdbcType="DOUBLE" property="sensor105" />
+    <result column="sensor106" jdbcType="DOUBLE" property="sensor106" />
+    <result column="sensor107" jdbcType="DOUBLE" property="sensor107" />
+    <result column="sensor108" jdbcType="DOUBLE" property="sensor108" />
+    <result column="sensor109" jdbcType="DOUBLE" property="sensor109" />
+    <result column="sensor110" jdbcType="DOUBLE" property="sensor110" />
+    <result column="sensor111" jdbcType="DOUBLE" property="sensor111" />
+    <result column="sensor112" jdbcType="DOUBLE" property="sensor112" />
+    <result column="sensor113" jdbcType="DOUBLE" property="sensor113" />
+    <result column="sensor114" jdbcType="DOUBLE" property="sensor114" />
+    <result column="sensor115" jdbcType="DOUBLE" property="sensor115" />
+    <result column="sensor116" jdbcType="DOUBLE" property="sensor116" />
+    <result column="sensor117" jdbcType="DOUBLE" property="sensor117" />
+    <result column="sensor118" jdbcType="DOUBLE" property="sensor118" />
+    <result column="sensor119" jdbcType="DOUBLE" property="sensor119" />
+    <result column="sensor120" jdbcType="DOUBLE" property="sensor120" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    expid, id, timestap, sensor01, sensor02, sensor03, sensor04, sensor05, sensor06, 
+    sensor07, sensor08, sensor09, sensor10, sensor11, sensor12, sensor13, sensor14, sensor15, 
+    sensor16, sensor17, sensor18, sensor19, sensor20, sensor21, sensor22, sensor23, sensor24, 
+    sensor25, sensor26, sensor27, sensor28, sensor29, sensor30, sensor31, sensor32, sensor33, 
+    sensor34, sensor35, sensor36, sensor37, sensor38, sensor39, sensor40, sensor41, sensor42, 
+    sensor43, sensor44, sensor45, sensor46, sensor47, sensor48, sensor49, sensor50, sensor51, 
+    sensor52, sensor53, sensor54, sensor55, sensor56, sensor57, sensor58, sensor59, sensor60, 
+    sensor61, sensor62, sensor63, sensor64, sensor65, sensor66, sensor67, sensor68, sensor69, 
+    sensor70, sensor71, sensor72, sensor73, sensor74, sensor75, sensor76, sensor77, sensor78, 
+    sensor79, sensor80, sensor81, sensor82, sensor83, sensor84, sensor85, sensor86, sensor87, 
+    sensor88, sensor89, sensor90, sensor91, sensor92, sensor93, sensor94, sensor95, sensor96, 
+    sensor97, sensor98, sensor99, sensor100, sensor101, sensor102, sensor103, sensor104, 
+    sensor105, sensor106, sensor107, sensor108, sensor109, sensor110, sensor111, sensor112, 
+    sensor113, sensor114, sensor115, sensor116, sensor117, sensor118, sensor119, sensor120
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="cn.tycoding.pojo.TmpFootPressureAscKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tmp_foot_pressure_asc
+    where expid = #{expid,jdbcType=INTEGER}
+      and id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.tycoding.pojo.TmpFootPressureAscKey">
+    delete from tmp_foot_pressure_asc
+    where expid = #{expid,jdbcType=INTEGER}
+      and id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.tycoding.pojo.TmpFootPressureAsc">
+    insert into tmp_foot_pressure_asc (expid, id, timestap, 
+      sensor01, sensor02, sensor03, 
+      sensor04, sensor05, sensor06, 
+      sensor07, sensor08, sensor09, 
+      sensor10, sensor11, sensor12, 
+      sensor13, sensor14, sensor15, 
+      sensor16, sensor17, sensor18, 
+      sensor19, sensor20, sensor21, 
+      sensor22, sensor23, sensor24, 
+      sensor25, sensor26, sensor27, 
+      sensor28, sensor29, sensor30, 
+      sensor31, sensor32, sensor33, 
+      sensor34, sensor35, sensor36, 
+      sensor37, sensor38, sensor39, 
+      sensor40, sensor41, sensor42, 
+      sensor43, sensor44, sensor45, 
+      sensor46, sensor47, sensor48, 
+      sensor49, sensor50, sensor51, 
+      sensor52, sensor53, sensor54, 
+      sensor55, sensor56, sensor57, 
+      sensor58, sensor59, sensor60, 
+      sensor61, sensor62, sensor63, 
+      sensor64, sensor65, sensor66, 
+      sensor67, sensor68, sensor69, 
+      sensor70, sensor71, sensor72, 
+      sensor73, sensor74, sensor75, 
+      sensor76, sensor77, sensor78, 
+      sensor79, sensor80, sensor81, 
+      sensor82, sensor83, sensor84, 
+      sensor85, sensor86, sensor87, 
+      sensor88, sensor89, sensor90, 
+      sensor91, sensor92, sensor93, 
+      sensor94, sensor95, sensor96, 
+      sensor97, sensor98, sensor99, 
+      sensor100, sensor101, sensor102, 
+      sensor103, sensor104, sensor105, 
+      sensor106, sensor107, sensor108, 
+      sensor109, sensor110, sensor111, 
+      sensor112, sensor113, sensor114, 
+      sensor115, sensor116, sensor117, 
+      sensor118, sensor119, sensor120
+      )
+    values (#{expid,jdbcType=INTEGER}, #{id,jdbcType=INTEGER}, #{timestap,jdbcType=DOUBLE}, 
+      #{sensor01,jdbcType=DOUBLE}, #{sensor02,jdbcType=DOUBLE}, #{sensor03,jdbcType=DOUBLE}, 
+      #{sensor04,jdbcType=DOUBLE}, #{sensor05,jdbcType=DOUBLE}, #{sensor06,jdbcType=DOUBLE}, 
+      #{sensor07,jdbcType=DOUBLE}, #{sensor08,jdbcType=DOUBLE}, #{sensor09,jdbcType=DOUBLE}, 
+      #{sensor10,jdbcType=DOUBLE}, #{sensor11,jdbcType=DOUBLE}, #{sensor12,jdbcType=DOUBLE}, 
+      #{sensor13,jdbcType=DOUBLE}, #{sensor14,jdbcType=DOUBLE}, #{sensor15,jdbcType=DOUBLE}, 
+      #{sensor16,jdbcType=DOUBLE}, #{sensor17,jdbcType=DOUBLE}, #{sensor18,jdbcType=DOUBLE}, 
+      #{sensor19,jdbcType=DOUBLE}, #{sensor20,jdbcType=DOUBLE}, #{sensor21,jdbcType=DOUBLE}, 
+      #{sensor22,jdbcType=DOUBLE}, #{sensor23,jdbcType=DOUBLE}, #{sensor24,jdbcType=DOUBLE}, 
+      #{sensor25,jdbcType=DOUBLE}, #{sensor26,jdbcType=DOUBLE}, #{sensor27,jdbcType=DOUBLE}, 
+      #{sensor28,jdbcType=DOUBLE}, #{sensor29,jdbcType=DOUBLE}, #{sensor30,jdbcType=DOUBLE}, 
+      #{sensor31,jdbcType=DOUBLE}, #{sensor32,jdbcType=DOUBLE}, #{sensor33,jdbcType=DOUBLE}, 
+      #{sensor34,jdbcType=DOUBLE}, #{sensor35,jdbcType=DOUBLE}, #{sensor36,jdbcType=DOUBLE}, 
+      #{sensor37,jdbcType=DOUBLE}, #{sensor38,jdbcType=DOUBLE}, #{sensor39,jdbcType=DOUBLE}, 
+      #{sensor40,jdbcType=DOUBLE}, #{sensor41,jdbcType=DOUBLE}, #{sensor42,jdbcType=DOUBLE}, 
+      #{sensor43,jdbcType=DOUBLE}, #{sensor44,jdbcType=DOUBLE}, #{sensor45,jdbcType=DOUBLE}, 
+      #{sensor46,jdbcType=DOUBLE}, #{sensor47,jdbcType=DOUBLE}, #{sensor48,jdbcType=DOUBLE}, 
+      #{sensor49,jdbcType=DOUBLE}, #{sensor50,jdbcType=DOUBLE}, #{sensor51,jdbcType=DOUBLE}, 
+      #{sensor52,jdbcType=DOUBLE}, #{sensor53,jdbcType=DOUBLE}, #{sensor54,jdbcType=DOUBLE}, 
+      #{sensor55,jdbcType=DOUBLE}, #{sensor56,jdbcType=DOUBLE}, #{sensor57,jdbcType=DOUBLE}, 
+      #{sensor58,jdbcType=DOUBLE}, #{sensor59,jdbcType=DOUBLE}, #{sensor60,jdbcType=DOUBLE}, 
+      #{sensor61,jdbcType=DOUBLE}, #{sensor62,jdbcType=DOUBLE}, #{sensor63,jdbcType=DOUBLE}, 
+      #{sensor64,jdbcType=DOUBLE}, #{sensor65,jdbcType=DOUBLE}, #{sensor66,jdbcType=DOUBLE}, 
+      #{sensor67,jdbcType=DOUBLE}, #{sensor68,jdbcType=DOUBLE}, #{sensor69,jdbcType=DOUBLE}, 
+      #{sensor70,jdbcType=DOUBLE}, #{sensor71,jdbcType=DOUBLE}, #{sensor72,jdbcType=DOUBLE}, 
+      #{sensor73,jdbcType=DOUBLE}, #{sensor74,jdbcType=DOUBLE}, #{sensor75,jdbcType=DOUBLE}, 
+      #{sensor76,jdbcType=DOUBLE}, #{sensor77,jdbcType=DOUBLE}, #{sensor78,jdbcType=DOUBLE}, 
+      #{sensor79,jdbcType=DOUBLE}, #{sensor80,jdbcType=DOUBLE}, #{sensor81,jdbcType=DOUBLE}, 
+      #{sensor82,jdbcType=DOUBLE}, #{sensor83,jdbcType=DOUBLE}, #{sensor84,jdbcType=DOUBLE}, 
+      #{sensor85,jdbcType=DOUBLE}, #{sensor86,jdbcType=DOUBLE}, #{sensor87,jdbcType=DOUBLE}, 
+      #{sensor88,jdbcType=DOUBLE}, #{sensor89,jdbcType=DOUBLE}, #{sensor90,jdbcType=DOUBLE}, 
+      #{sensor91,jdbcType=DOUBLE}, #{sensor92,jdbcType=DOUBLE}, #{sensor93,jdbcType=DOUBLE}, 
+      #{sensor94,jdbcType=DOUBLE}, #{sensor95,jdbcType=DOUBLE}, #{sensor96,jdbcType=DOUBLE}, 
+      #{sensor97,jdbcType=DOUBLE}, #{sensor98,jdbcType=DOUBLE}, #{sensor99,jdbcType=DOUBLE}, 
+      #{sensor100,jdbcType=DOUBLE}, #{sensor101,jdbcType=DOUBLE}, #{sensor102,jdbcType=DOUBLE}, 
+      #{sensor103,jdbcType=DOUBLE}, #{sensor104,jdbcType=DOUBLE}, #{sensor105,jdbcType=DOUBLE}, 
+      #{sensor106,jdbcType=DOUBLE}, #{sensor107,jdbcType=DOUBLE}, #{sensor108,jdbcType=DOUBLE}, 
+      #{sensor109,jdbcType=DOUBLE}, #{sensor110,jdbcType=DOUBLE}, #{sensor111,jdbcType=DOUBLE}, 
+      #{sensor112,jdbcType=DOUBLE}, #{sensor113,jdbcType=DOUBLE}, #{sensor114,jdbcType=DOUBLE}, 
+      #{sensor115,jdbcType=DOUBLE}, #{sensor116,jdbcType=DOUBLE}, #{sensor117,jdbcType=DOUBLE}, 
+      #{sensor118,jdbcType=DOUBLE}, #{sensor119,jdbcType=DOUBLE}, #{sensor120,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tycoding.pojo.TmpFootPressureAsc">
+    insert into tmp_foot_pressure_asc
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="expid != null">
+        expid,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+      <if test="timestap != null">
+        timestap,
+      </if>
+      <if test="sensor01 != null">
+        sensor01,
+      </if>
+      <if test="sensor02 != null">
+        sensor02,
+      </if>
+      <if test="sensor03 != null">
+        sensor03,
+      </if>
+      <if test="sensor04 != null">
+        sensor04,
+      </if>
+      <if test="sensor05 != null">
+        sensor05,
+      </if>
+      <if test="sensor06 != null">
+        sensor06,
+      </if>
+      <if test="sensor07 != null">
+        sensor07,
+      </if>
+      <if test="sensor08 != null">
+        sensor08,
+      </if>
+      <if test="sensor09 != null">
+        sensor09,
+      </if>
+      <if test="sensor10 != null">
+        sensor10,
+      </if>
+      <if test="sensor11 != null">
+        sensor11,
+      </if>
+      <if test="sensor12 != null">
+        sensor12,
+      </if>
+      <if test="sensor13 != null">
+        sensor13,
+      </if>
+      <if test="sensor14 != null">
+        sensor14,
+      </if>
+      <if test="sensor15 != null">
+        sensor15,
+      </if>
+      <if test="sensor16 != null">
+        sensor16,
+      </if>
+      <if test="sensor17 != null">
+        sensor17,
+      </if>
+      <if test="sensor18 != null">
+        sensor18,
+      </if>
+      <if test="sensor19 != null">
+        sensor19,
+      </if>
+      <if test="sensor20 != null">
+        sensor20,
+      </if>
+      <if test="sensor21 != null">
+        sensor21,
+      </if>
+      <if test="sensor22 != null">
+        sensor22,
+      </if>
+      <if test="sensor23 != null">
+        sensor23,
+      </if>
+      <if test="sensor24 != null">
+        sensor24,
+      </if>
+      <if test="sensor25 != null">
+        sensor25,
+      </if>
+      <if test="sensor26 != null">
+        sensor26,
+      </if>
+      <if test="sensor27 != null">
+        sensor27,
+      </if>
+      <if test="sensor28 != null">
+        sensor28,
+      </if>
+      <if test="sensor29 != null">
+        sensor29,
+      </if>
+      <if test="sensor30 != null">
+        sensor30,
+      </if>
+      <if test="sensor31 != null">
+        sensor31,
+      </if>
+      <if test="sensor32 != null">
+        sensor32,
+      </if>
+      <if test="sensor33 != null">
+        sensor33,
+      </if>
+      <if test="sensor34 != null">
+        sensor34,
+      </if>
+      <if test="sensor35 != null">
+        sensor35,
+      </if>
+      <if test="sensor36 != null">
+        sensor36,
+      </if>
+      <if test="sensor37 != null">
+        sensor37,
+      </if>
+      <if test="sensor38 != null">
+        sensor38,
+      </if>
+      <if test="sensor39 != null">
+        sensor39,
+      </if>
+      <if test="sensor40 != null">
+        sensor40,
+      </if>
+      <if test="sensor41 != null">
+        sensor41,
+      </if>
+      <if test="sensor42 != null">
+        sensor42,
+      </if>
+      <if test="sensor43 != null">
+        sensor43,
+      </if>
+      <if test="sensor44 != null">
+        sensor44,
+      </if>
+      <if test="sensor45 != null">
+        sensor45,
+      </if>
+      <if test="sensor46 != null">
+        sensor46,
+      </if>
+      <if test="sensor47 != null">
+        sensor47,
+      </if>
+      <if test="sensor48 != null">
+        sensor48,
+      </if>
+      <if test="sensor49 != null">
+        sensor49,
+      </if>
+      <if test="sensor50 != null">
+        sensor50,
+      </if>
+      <if test="sensor51 != null">
+        sensor51,
+      </if>
+      <if test="sensor52 != null">
+        sensor52,
+      </if>
+      <if test="sensor53 != null">
+        sensor53,
+      </if>
+      <if test="sensor54 != null">
+        sensor54,
+      </if>
+      <if test="sensor55 != null">
+        sensor55,
+      </if>
+      <if test="sensor56 != null">
+        sensor56,
+      </if>
+      <if test="sensor57 != null">
+        sensor57,
+      </if>
+      <if test="sensor58 != null">
+        sensor58,
+      </if>
+      <if test="sensor59 != null">
+        sensor59,
+      </if>
+      <if test="sensor60 != null">
+        sensor60,
+      </if>
+      <if test="sensor61 != null">
+        sensor61,
+      </if>
+      <if test="sensor62 != null">
+        sensor62,
+      </if>
+      <if test="sensor63 != null">
+        sensor63,
+      </if>
+      <if test="sensor64 != null">
+        sensor64,
+      </if>
+      <if test="sensor65 != null">
+        sensor65,
+      </if>
+      <if test="sensor66 != null">
+        sensor66,
+      </if>
+      <if test="sensor67 != null">
+        sensor67,
+      </if>
+      <if test="sensor68 != null">
+        sensor68,
+      </if>
+      <if test="sensor69 != null">
+        sensor69,
+      </if>
+      <if test="sensor70 != null">
+        sensor70,
+      </if>
+      <if test="sensor71 != null">
+        sensor71,
+      </if>
+      <if test="sensor72 != null">
+        sensor72,
+      </if>
+      <if test="sensor73 != null">
+        sensor73,
+      </if>
+      <if test="sensor74 != null">
+        sensor74,
+      </if>
+      <if test="sensor75 != null">
+        sensor75,
+      </if>
+      <if test="sensor76 != null">
+        sensor76,
+      </if>
+      <if test="sensor77 != null">
+        sensor77,
+      </if>
+      <if test="sensor78 != null">
+        sensor78,
+      </if>
+      <if test="sensor79 != null">
+        sensor79,
+      </if>
+      <if test="sensor80 != null">
+        sensor80,
+      </if>
+      <if test="sensor81 != null">
+        sensor81,
+      </if>
+      <if test="sensor82 != null">
+        sensor82,
+      </if>
+      <if test="sensor83 != null">
+        sensor83,
+      </if>
+      <if test="sensor84 != null">
+        sensor84,
+      </if>
+      <if test="sensor85 != null">
+        sensor85,
+      </if>
+      <if test="sensor86 != null">
+        sensor86,
+      </if>
+      <if test="sensor87 != null">
+        sensor87,
+      </if>
+      <if test="sensor88 != null">
+        sensor88,
+      </if>
+      <if test="sensor89 != null">
+        sensor89,
+      </if>
+      <if test="sensor90 != null">
+        sensor90,
+      </if>
+      <if test="sensor91 != null">
+        sensor91,
+      </if>
+      <if test="sensor92 != null">
+        sensor92,
+      </if>
+      <if test="sensor93 != null">
+        sensor93,
+      </if>
+      <if test="sensor94 != null">
+        sensor94,
+      </if>
+      <if test="sensor95 != null">
+        sensor95,
+      </if>
+      <if test="sensor96 != null">
+        sensor96,
+      </if>
+      <if test="sensor97 != null">
+        sensor97,
+      </if>
+      <if test="sensor98 != null">
+        sensor98,
+      </if>
+      <if test="sensor99 != null">
+        sensor99,
+      </if>
+      <if test="sensor100 != null">
+        sensor100,
+      </if>
+      <if test="sensor101 != null">
+        sensor101,
+      </if>
+      <if test="sensor102 != null">
+        sensor102,
+      </if>
+      <if test="sensor103 != null">
+        sensor103,
+      </if>
+      <if test="sensor104 != null">
+        sensor104,
+      </if>
+      <if test="sensor105 != null">
+        sensor105,
+      </if>
+      <if test="sensor106 != null">
+        sensor106,
+      </if>
+      <if test="sensor107 != null">
+        sensor107,
+      </if>
+      <if test="sensor108 != null">
+        sensor108,
+      </if>
+      <if test="sensor109 != null">
+        sensor109,
+      </if>
+      <if test="sensor110 != null">
+        sensor110,
+      </if>
+      <if test="sensor111 != null">
+        sensor111,
+      </if>
+      <if test="sensor112 != null">
+        sensor112,
+      </if>
+      <if test="sensor113 != null">
+        sensor113,
+      </if>
+      <if test="sensor114 != null">
+        sensor114,
+      </if>
+      <if test="sensor115 != null">
+        sensor115,
+      </if>
+      <if test="sensor116 != null">
+        sensor116,
+      </if>
+      <if test="sensor117 != null">
+        sensor117,
+      </if>
+      <if test="sensor118 != null">
+        sensor118,
+      </if>
+      <if test="sensor119 != null">
+        sensor119,
+      </if>
+      <if test="sensor120 != null">
+        sensor120,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="expid != null">
+        #{expid,jdbcType=INTEGER},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="timestap != null">
+        #{timestap,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor01 != null">
+        #{sensor01,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor02 != null">
+        #{sensor02,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor03 != null">
+        #{sensor03,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor04 != null">
+        #{sensor04,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor05 != null">
+        #{sensor05,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor06 != null">
+        #{sensor06,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor07 != null">
+        #{sensor07,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor08 != null">
+        #{sensor08,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor09 != null">
+        #{sensor09,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor10 != null">
+        #{sensor10,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor11 != null">
+        #{sensor11,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor12 != null">
+        #{sensor12,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor13 != null">
+        #{sensor13,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor14 != null">
+        #{sensor14,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor15 != null">
+        #{sensor15,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor16 != null">
+        #{sensor16,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor17 != null">
+        #{sensor17,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor18 != null">
+        #{sensor18,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor19 != null">
+        #{sensor19,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor20 != null">
+        #{sensor20,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor21 != null">
+        #{sensor21,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor22 != null">
+        #{sensor22,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor23 != null">
+        #{sensor23,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor24 != null">
+        #{sensor24,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor25 != null">
+        #{sensor25,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor26 != null">
+        #{sensor26,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor27 != null">
+        #{sensor27,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor28 != null">
+        #{sensor28,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor29 != null">
+        #{sensor29,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor30 != null">
+        #{sensor30,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor31 != null">
+        #{sensor31,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor32 != null">
+        #{sensor32,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor33 != null">
+        #{sensor33,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor34 != null">
+        #{sensor34,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor35 != null">
+        #{sensor35,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor36 != null">
+        #{sensor36,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor37 != null">
+        #{sensor37,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor38 != null">
+        #{sensor38,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor39 != null">
+        #{sensor39,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor40 != null">
+        #{sensor40,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor41 != null">
+        #{sensor41,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor42 != null">
+        #{sensor42,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor43 != null">
+        #{sensor43,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor44 != null">
+        #{sensor44,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor45 != null">
+        #{sensor45,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor46 != null">
+        #{sensor46,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor47 != null">
+        #{sensor47,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor48 != null">
+        #{sensor48,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor49 != null">
+        #{sensor49,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor50 != null">
+        #{sensor50,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor51 != null">
+        #{sensor51,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor52 != null">
+        #{sensor52,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor53 != null">
+        #{sensor53,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor54 != null">
+        #{sensor54,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor55 != null">
+        #{sensor55,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor56 != null">
+        #{sensor56,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor57 != null">
+        #{sensor57,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor58 != null">
+        #{sensor58,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor59 != null">
+        #{sensor59,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor60 != null">
+        #{sensor60,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor61 != null">
+        #{sensor61,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor62 != null">
+        #{sensor62,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor63 != null">
+        #{sensor63,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor64 != null">
+        #{sensor64,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor65 != null">
+        #{sensor65,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor66 != null">
+        #{sensor66,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor67 != null">
+        #{sensor67,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor68 != null">
+        #{sensor68,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor69 != null">
+        #{sensor69,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor70 != null">
+        #{sensor70,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor71 != null">
+        #{sensor71,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor72 != null">
+        #{sensor72,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor73 != null">
+        #{sensor73,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor74 != null">
+        #{sensor74,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor75 != null">
+        #{sensor75,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor76 != null">
+        #{sensor76,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor77 != null">
+        #{sensor77,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor78 != null">
+        #{sensor78,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor79 != null">
+        #{sensor79,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor80 != null">
+        #{sensor80,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor81 != null">
+        #{sensor81,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor82 != null">
+        #{sensor82,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor83 != null">
+        #{sensor83,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor84 != null">
+        #{sensor84,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor85 != null">
+        #{sensor85,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor86 != null">
+        #{sensor86,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor87 != null">
+        #{sensor87,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor88 != null">
+        #{sensor88,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor89 != null">
+        #{sensor89,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor90 != null">
+        #{sensor90,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor91 != null">
+        #{sensor91,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor92 != null">
+        #{sensor92,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor93 != null">
+        #{sensor93,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor94 != null">
+        #{sensor94,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor95 != null">
+        #{sensor95,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor96 != null">
+        #{sensor96,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor97 != null">
+        #{sensor97,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor98 != null">
+        #{sensor98,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor99 != null">
+        #{sensor99,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor100 != null">
+        #{sensor100,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor101 != null">
+        #{sensor101,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor102 != null">
+        #{sensor102,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor103 != null">
+        #{sensor103,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor104 != null">
+        #{sensor104,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor105 != null">
+        #{sensor105,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor106 != null">
+        #{sensor106,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor107 != null">
+        #{sensor107,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor108 != null">
+        #{sensor108,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor109 != null">
+        #{sensor109,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor110 != null">
+        #{sensor110,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor111 != null">
+        #{sensor111,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor112 != null">
+        #{sensor112,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor113 != null">
+        #{sensor113,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor114 != null">
+        #{sensor114,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor115 != null">
+        #{sensor115,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor116 != null">
+        #{sensor116,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor117 != null">
+        #{sensor117,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor118 != null">
+        #{sensor118,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor119 != null">
+        #{sensor119,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor120 != null">
+        #{sensor120,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.tycoding.pojo.TmpFootPressureAsc">
+    update tmp_foot_pressure_asc
+    <set>
+      <if test="timestap != null">
+        timestap = #{timestap,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor01 != null">
+        sensor01 = #{sensor01,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor02 != null">
+        sensor02 = #{sensor02,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor03 != null">
+        sensor03 = #{sensor03,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor04 != null">
+        sensor04 = #{sensor04,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor05 != null">
+        sensor05 = #{sensor05,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor06 != null">
+        sensor06 = #{sensor06,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor07 != null">
+        sensor07 = #{sensor07,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor08 != null">
+        sensor08 = #{sensor08,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor09 != null">
+        sensor09 = #{sensor09,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor10 != null">
+        sensor10 = #{sensor10,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor11 != null">
+        sensor11 = #{sensor11,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor12 != null">
+        sensor12 = #{sensor12,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor13 != null">
+        sensor13 = #{sensor13,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor14 != null">
+        sensor14 = #{sensor14,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor15 != null">
+        sensor15 = #{sensor15,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor16 != null">
+        sensor16 = #{sensor16,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor17 != null">
+        sensor17 = #{sensor17,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor18 != null">
+        sensor18 = #{sensor18,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor19 != null">
+        sensor19 = #{sensor19,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor20 != null">
+        sensor20 = #{sensor20,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor21 != null">
+        sensor21 = #{sensor21,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor22 != null">
+        sensor22 = #{sensor22,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor23 != null">
+        sensor23 = #{sensor23,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor24 != null">
+        sensor24 = #{sensor24,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor25 != null">
+        sensor25 = #{sensor25,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor26 != null">
+        sensor26 = #{sensor26,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor27 != null">
+        sensor27 = #{sensor27,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor28 != null">
+        sensor28 = #{sensor28,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor29 != null">
+        sensor29 = #{sensor29,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor30 != null">
+        sensor30 = #{sensor30,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor31 != null">
+        sensor31 = #{sensor31,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor32 != null">
+        sensor32 = #{sensor32,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor33 != null">
+        sensor33 = #{sensor33,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor34 != null">
+        sensor34 = #{sensor34,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor35 != null">
+        sensor35 = #{sensor35,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor36 != null">
+        sensor36 = #{sensor36,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor37 != null">
+        sensor37 = #{sensor37,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor38 != null">
+        sensor38 = #{sensor38,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor39 != null">
+        sensor39 = #{sensor39,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor40 != null">
+        sensor40 = #{sensor40,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor41 != null">
+        sensor41 = #{sensor41,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor42 != null">
+        sensor42 = #{sensor42,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor43 != null">
+        sensor43 = #{sensor43,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor44 != null">
+        sensor44 = #{sensor44,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor45 != null">
+        sensor45 = #{sensor45,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor46 != null">
+        sensor46 = #{sensor46,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor47 != null">
+        sensor47 = #{sensor47,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor48 != null">
+        sensor48 = #{sensor48,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor49 != null">
+        sensor49 = #{sensor49,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor50 != null">
+        sensor50 = #{sensor50,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor51 != null">
+        sensor51 = #{sensor51,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor52 != null">
+        sensor52 = #{sensor52,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor53 != null">
+        sensor53 = #{sensor53,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor54 != null">
+        sensor54 = #{sensor54,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor55 != null">
+        sensor55 = #{sensor55,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor56 != null">
+        sensor56 = #{sensor56,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor57 != null">
+        sensor57 = #{sensor57,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor58 != null">
+        sensor58 = #{sensor58,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor59 != null">
+        sensor59 = #{sensor59,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor60 != null">
+        sensor60 = #{sensor60,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor61 != null">
+        sensor61 = #{sensor61,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor62 != null">
+        sensor62 = #{sensor62,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor63 != null">
+        sensor63 = #{sensor63,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor64 != null">
+        sensor64 = #{sensor64,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor65 != null">
+        sensor65 = #{sensor65,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor66 != null">
+        sensor66 = #{sensor66,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor67 != null">
+        sensor67 = #{sensor67,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor68 != null">
+        sensor68 = #{sensor68,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor69 != null">
+        sensor69 = #{sensor69,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor70 != null">
+        sensor70 = #{sensor70,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor71 != null">
+        sensor71 = #{sensor71,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor72 != null">
+        sensor72 = #{sensor72,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor73 != null">
+        sensor73 = #{sensor73,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor74 != null">
+        sensor74 = #{sensor74,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor75 != null">
+        sensor75 = #{sensor75,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor76 != null">
+        sensor76 = #{sensor76,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor77 != null">
+        sensor77 = #{sensor77,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor78 != null">
+        sensor78 = #{sensor78,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor79 != null">
+        sensor79 = #{sensor79,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor80 != null">
+        sensor80 = #{sensor80,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor81 != null">
+        sensor81 = #{sensor81,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor82 != null">
+        sensor82 = #{sensor82,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor83 != null">
+        sensor83 = #{sensor83,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor84 != null">
+        sensor84 = #{sensor84,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor85 != null">
+        sensor85 = #{sensor85,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor86 != null">
+        sensor86 = #{sensor86,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor87 != null">
+        sensor87 = #{sensor87,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor88 != null">
+        sensor88 = #{sensor88,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor89 != null">
+        sensor89 = #{sensor89,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor90 != null">
+        sensor90 = #{sensor90,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor91 != null">
+        sensor91 = #{sensor91,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor92 != null">
+        sensor92 = #{sensor92,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor93 != null">
+        sensor93 = #{sensor93,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor94 != null">
+        sensor94 = #{sensor94,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor95 != null">
+        sensor95 = #{sensor95,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor96 != null">
+        sensor96 = #{sensor96,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor97 != null">
+        sensor97 = #{sensor97,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor98 != null">
+        sensor98 = #{sensor98,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor99 != null">
+        sensor99 = #{sensor99,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor100 != null">
+        sensor100 = #{sensor100,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor101 != null">
+        sensor101 = #{sensor101,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor102 != null">
+        sensor102 = #{sensor102,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor103 != null">
+        sensor103 = #{sensor103,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor104 != null">
+        sensor104 = #{sensor104,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor105 != null">
+        sensor105 = #{sensor105,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor106 != null">
+        sensor106 = #{sensor106,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor107 != null">
+        sensor107 = #{sensor107,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor108 != null">
+        sensor108 = #{sensor108,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor109 != null">
+        sensor109 = #{sensor109,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor110 != null">
+        sensor110 = #{sensor110,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor111 != null">
+        sensor111 = #{sensor111,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor112 != null">
+        sensor112 = #{sensor112,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor113 != null">
+        sensor113 = #{sensor113,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor114 != null">
+        sensor114 = #{sensor114,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor115 != null">
+        sensor115 = #{sensor115,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor116 != null">
+        sensor116 = #{sensor116,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor117 != null">
+        sensor117 = #{sensor117,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor118 != null">
+        sensor118 = #{sensor118,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor119 != null">
+        sensor119 = #{sensor119,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor120 != null">
+        sensor120 = #{sensor120,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where expid = #{expid,jdbcType=INTEGER}
+      and id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tycoding.pojo.TmpFootPressureAsc">
+    update tmp_foot_pressure_asc
+    set timestap = #{timestap,jdbcType=DOUBLE},
+      sensor01 = #{sensor01,jdbcType=DOUBLE},
+      sensor02 = #{sensor02,jdbcType=DOUBLE},
+      sensor03 = #{sensor03,jdbcType=DOUBLE},
+      sensor04 = #{sensor04,jdbcType=DOUBLE},
+      sensor05 = #{sensor05,jdbcType=DOUBLE},
+      sensor06 = #{sensor06,jdbcType=DOUBLE},
+      sensor07 = #{sensor07,jdbcType=DOUBLE},
+      sensor08 = #{sensor08,jdbcType=DOUBLE},
+      sensor09 = #{sensor09,jdbcType=DOUBLE},
+      sensor10 = #{sensor10,jdbcType=DOUBLE},
+      sensor11 = #{sensor11,jdbcType=DOUBLE},
+      sensor12 = #{sensor12,jdbcType=DOUBLE},
+      sensor13 = #{sensor13,jdbcType=DOUBLE},
+      sensor14 = #{sensor14,jdbcType=DOUBLE},
+      sensor15 = #{sensor15,jdbcType=DOUBLE},
+      sensor16 = #{sensor16,jdbcType=DOUBLE},
+      sensor17 = #{sensor17,jdbcType=DOUBLE},
+      sensor18 = #{sensor18,jdbcType=DOUBLE},
+      sensor19 = #{sensor19,jdbcType=DOUBLE},
+      sensor20 = #{sensor20,jdbcType=DOUBLE},
+      sensor21 = #{sensor21,jdbcType=DOUBLE},
+      sensor22 = #{sensor22,jdbcType=DOUBLE},
+      sensor23 = #{sensor23,jdbcType=DOUBLE},
+      sensor24 = #{sensor24,jdbcType=DOUBLE},
+      sensor25 = #{sensor25,jdbcType=DOUBLE},
+      sensor26 = #{sensor26,jdbcType=DOUBLE},
+      sensor27 = #{sensor27,jdbcType=DOUBLE},
+      sensor28 = #{sensor28,jdbcType=DOUBLE},
+      sensor29 = #{sensor29,jdbcType=DOUBLE},
+      sensor30 = #{sensor30,jdbcType=DOUBLE},
+      sensor31 = #{sensor31,jdbcType=DOUBLE},
+      sensor32 = #{sensor32,jdbcType=DOUBLE},
+      sensor33 = #{sensor33,jdbcType=DOUBLE},
+      sensor34 = #{sensor34,jdbcType=DOUBLE},
+      sensor35 = #{sensor35,jdbcType=DOUBLE},
+      sensor36 = #{sensor36,jdbcType=DOUBLE},
+      sensor37 = #{sensor37,jdbcType=DOUBLE},
+      sensor38 = #{sensor38,jdbcType=DOUBLE},
+      sensor39 = #{sensor39,jdbcType=DOUBLE},
+      sensor40 = #{sensor40,jdbcType=DOUBLE},
+      sensor41 = #{sensor41,jdbcType=DOUBLE},
+      sensor42 = #{sensor42,jdbcType=DOUBLE},
+      sensor43 = #{sensor43,jdbcType=DOUBLE},
+      sensor44 = #{sensor44,jdbcType=DOUBLE},
+      sensor45 = #{sensor45,jdbcType=DOUBLE},
+      sensor46 = #{sensor46,jdbcType=DOUBLE},
+      sensor47 = #{sensor47,jdbcType=DOUBLE},
+      sensor48 = #{sensor48,jdbcType=DOUBLE},
+      sensor49 = #{sensor49,jdbcType=DOUBLE},
+      sensor50 = #{sensor50,jdbcType=DOUBLE},
+      sensor51 = #{sensor51,jdbcType=DOUBLE},
+      sensor52 = #{sensor52,jdbcType=DOUBLE},
+      sensor53 = #{sensor53,jdbcType=DOUBLE},
+      sensor54 = #{sensor54,jdbcType=DOUBLE},
+      sensor55 = #{sensor55,jdbcType=DOUBLE},
+      sensor56 = #{sensor56,jdbcType=DOUBLE},
+      sensor57 = #{sensor57,jdbcType=DOUBLE},
+      sensor58 = #{sensor58,jdbcType=DOUBLE},
+      sensor59 = #{sensor59,jdbcType=DOUBLE},
+      sensor60 = #{sensor60,jdbcType=DOUBLE},
+      sensor61 = #{sensor61,jdbcType=DOUBLE},
+      sensor62 = #{sensor62,jdbcType=DOUBLE},
+      sensor63 = #{sensor63,jdbcType=DOUBLE},
+      sensor64 = #{sensor64,jdbcType=DOUBLE},
+      sensor65 = #{sensor65,jdbcType=DOUBLE},
+      sensor66 = #{sensor66,jdbcType=DOUBLE},
+      sensor67 = #{sensor67,jdbcType=DOUBLE},
+      sensor68 = #{sensor68,jdbcType=DOUBLE},
+      sensor69 = #{sensor69,jdbcType=DOUBLE},
+      sensor70 = #{sensor70,jdbcType=DOUBLE},
+      sensor71 = #{sensor71,jdbcType=DOUBLE},
+      sensor72 = #{sensor72,jdbcType=DOUBLE},
+      sensor73 = #{sensor73,jdbcType=DOUBLE},
+      sensor74 = #{sensor74,jdbcType=DOUBLE},
+      sensor75 = #{sensor75,jdbcType=DOUBLE},
+      sensor76 = #{sensor76,jdbcType=DOUBLE},
+      sensor77 = #{sensor77,jdbcType=DOUBLE},
+      sensor78 = #{sensor78,jdbcType=DOUBLE},
+      sensor79 = #{sensor79,jdbcType=DOUBLE},
+      sensor80 = #{sensor80,jdbcType=DOUBLE},
+      sensor81 = #{sensor81,jdbcType=DOUBLE},
+      sensor82 = #{sensor82,jdbcType=DOUBLE},
+      sensor83 = #{sensor83,jdbcType=DOUBLE},
+      sensor84 = #{sensor84,jdbcType=DOUBLE},
+      sensor85 = #{sensor85,jdbcType=DOUBLE},
+      sensor86 = #{sensor86,jdbcType=DOUBLE},
+      sensor87 = #{sensor87,jdbcType=DOUBLE},
+      sensor88 = #{sensor88,jdbcType=DOUBLE},
+      sensor89 = #{sensor89,jdbcType=DOUBLE},
+      sensor90 = #{sensor90,jdbcType=DOUBLE},
+      sensor91 = #{sensor91,jdbcType=DOUBLE},
+      sensor92 = #{sensor92,jdbcType=DOUBLE},
+      sensor93 = #{sensor93,jdbcType=DOUBLE},
+      sensor94 = #{sensor94,jdbcType=DOUBLE},
+      sensor95 = #{sensor95,jdbcType=DOUBLE},
+      sensor96 = #{sensor96,jdbcType=DOUBLE},
+      sensor97 = #{sensor97,jdbcType=DOUBLE},
+      sensor98 = #{sensor98,jdbcType=DOUBLE},
+      sensor99 = #{sensor99,jdbcType=DOUBLE},
+      sensor100 = #{sensor100,jdbcType=DOUBLE},
+      sensor101 = #{sensor101,jdbcType=DOUBLE},
+      sensor102 = #{sensor102,jdbcType=DOUBLE},
+      sensor103 = #{sensor103,jdbcType=DOUBLE},
+      sensor104 = #{sensor104,jdbcType=DOUBLE},
+      sensor105 = #{sensor105,jdbcType=DOUBLE},
+      sensor106 = #{sensor106,jdbcType=DOUBLE},
+      sensor107 = #{sensor107,jdbcType=DOUBLE},
+      sensor108 = #{sensor108,jdbcType=DOUBLE},
+      sensor109 = #{sensor109,jdbcType=DOUBLE},
+      sensor110 = #{sensor110,jdbcType=DOUBLE},
+      sensor111 = #{sensor111,jdbcType=DOUBLE},
+      sensor112 = #{sensor112,jdbcType=DOUBLE},
+      sensor113 = #{sensor113,jdbcType=DOUBLE},
+      sensor114 = #{sensor114,jdbcType=DOUBLE},
+      sensor115 = #{sensor115,jdbcType=DOUBLE},
+      sensor116 = #{sensor116,jdbcType=DOUBLE},
+      sensor117 = #{sensor117,jdbcType=DOUBLE},
+      sensor118 = #{sensor118,jdbcType=DOUBLE},
+      sensor119 = #{sensor119,jdbcType=DOUBLE},
+      sensor120 = #{sensor120,jdbcType=DOUBLE}
+    where expid = #{expid,jdbcType=INTEGER}
+      and id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

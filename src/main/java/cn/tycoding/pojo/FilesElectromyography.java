@@ -1,11 +1,13 @@
 package cn.tycoding.pojo;
 
-public class FilesOxygen {
+public class FilesElectromyography {
     private Integer expid;
 
     private String url;
 
     private Integer id_query;
+
+    private String file_name;
 
     public Integer getExpid() {
         return expid;
@@ -31,12 +33,11 @@ public class FilesOxygen {
         this.id_query = id_query;
     }
 
-    @Override
-    public String toString() {
-        return "FilesOxygen{" +
-                "expid=" + expid +
-                ", url='" + url + '\'' +
-                ", id_query=" + id_query +
-                '}';
+    public String getFile_name() {
+        return file_name;
+    }
+
+    public void setFile_name(String file_name) {
+        this.file_name = file_name == null ? null : file_name.trim();
     }
 }

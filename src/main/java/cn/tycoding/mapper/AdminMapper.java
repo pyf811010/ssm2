@@ -29,6 +29,8 @@ public interface AdminMapper {
 
 	int findByFiltersSum(String getSumSql);
 
+	List<Admin> findAll();
+
 
 
 }

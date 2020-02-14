@@ -121,6 +121,10 @@
 									<button type="button" id="bt_removeAllIdQuery" class="btn btn-xs btn-info">
 										<span class="ace-icon glyphicon glyphicon-remove"></span>&nbsp;清&nbsp;空&nbsp;
 									</button>
+									
+									<button type="button" id="bt_save" class="btn btn-xs btn-info">
+										<span class="ace-icon glyphicon glyphicon-save"></span>&nbsp;保&nbsp;存&nbsp;
+									</button>
 								</div>
 								
 								
@@ -291,6 +295,26 @@
 				}else {
 					alert("请输入id-query");
 				}
+			});
+			
+			
+			$("#bt_save").click(function(){
+					showloading();
+					$.ajax({
+						url : '/admin/save', // 请求地址, 就是你的控制器, 如 test.com/home/index/index
+						type : 'POST', // 请求方式
+						dataType : 'json', // 返回数据的格式, 通常为JSON
+						success : function(data) {
+							console.log(data.success);
+							alert(data.info)
+							hideloading();
+							/* alert(data.info); */
+						},
+						error : function() {
+							hideloading();
+							alert(data.info); // 请求失败时的回调函数
+						}
+					});
 			});
 			
 			function hideloading(){
