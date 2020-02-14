@@ -1,11 +1,13 @@
 package cn.tycoding.controller;
 
+import cn.tycoding.pojo.Admin;
 import cn.tycoding.pojo.FilesKand;
 import cn.tycoding.pojo.TmpKand;
 import cn.tycoding.pojo.UserTest;
 import cn.tycoding.pojo.ObjectQuery;
 import cn.tycoding.pojo.State;
 import cn.tycoding.pojo.TmpKand;
+import cn.tycoding.service.AdminService;
 import cn.tycoding.service.KandService;
 import cn.tycoding.util.SmallExcelReaderUtil;
 import cn.tycoding.util.ReflectUtil;
@@ -17,6 +19,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.apache.commons.math3.analysis.function.Exp;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,6 +34,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.net.URLEncoder;
@@ -47,6 +55,7 @@ import java.util.concurrent.Executors;
 public class KandController {
 	@Autowired
 	private KandService kandService;
+	private AdminService adminService;
 	private SmallExcelReaderUtil excelUtil;
 //	private SqlSessionTemplate SqlSessionTemplate;
 
@@ -116,6 +125,10 @@ public class KandController {
 		return message;
 	}
 
+	
+
+	
+	
 	@RequestMapping(value = "/findByPage")
 	@ResponseBody
 	public ObjectQuery findByPage(Boolean _search, String filters,int page, int rows)

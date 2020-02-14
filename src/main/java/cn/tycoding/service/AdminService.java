@@ -1,5 +1,7 @@
 package cn.tycoding.service;
 
+import java.util.List;
+
 import cn.tycoding.pojo.Admin;
 import cn.tycoding.pojo.ObjectQuery;
 import cn.tycoding.pojo.Preec;
@@ -22,6 +24,8 @@ public interface AdminService {
 	ObjectQuery findByPage(Boolean _search, String filters, int page, int rows);
 
 	String handle(String oper, Admin admin, String[] id);
+
+	List<Admin> findAll();
 
 
 }

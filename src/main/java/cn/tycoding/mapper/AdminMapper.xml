@@ -54,10 +54,10 @@
 		admin
 	</select>
 
-    <select id="find" resultType="cn.tycoding.pojo.Admin">
+    <select id="findAll" resultType="cn.tycoding.pojo.Admin">
 		select * from
 		admin
-		order by a_id desc
+		order by a_id asc
 		
 	</select>
 

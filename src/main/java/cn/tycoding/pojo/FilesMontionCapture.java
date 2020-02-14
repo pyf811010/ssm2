@@ -1,6 +1,6 @@
 package cn.tycoding.pojo;
 
-public class FilesOxygen {
+public class FilesMontionCapture {
     private Integer expid;
 
     private String url;
@@ -29,14 +29,5 @@ public class FilesOxygen {
 
     public void setId_query(Integer id_query) {
         this.id_query = id_query;
-    }
-
-    @Override
-    public String toString() {
-        return "FilesOxygen{" +
-                "expid=" + expid +
-                ", url='" + url + '\'' +
-                ", id_query=" + id_query +
-                '}';
     }
 }

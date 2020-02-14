@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tycoding.mapper.FilesElectromyographyMapper">
+  <resultMap id="BaseResultMap" type="cn.tycoding.pojo.FilesElectromyography">
+    <id column="expid" jdbcType="INTEGER" property="expid" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="id_query" jdbcType="INTEGER" property="id_query" />
+    <result column="file_name" jdbcType="VARCHAR" property="file_name" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    expid, url, id_query, file_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from files_electromyography
+    where expid = #{expid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from files_electromyography
+    where expid = #{expid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.tycoding.pojo.FilesElectromyography">
+    insert into files_electromyography (expid, url, id_query, 
+      file_name)
+    values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, 
+      #{file_name,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tycoding.pojo.FilesElectromyography">
+    insert into files_electromyography
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="expid != null">
+        expid,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="id_query != null">
+        id_query,
+      </if>
+      <if test="file_name != null">
+        file_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="expid != null">
+        #{expid,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="id_query != null">
+        #{id_query,jdbcType=INTEGER},
+      </if>
+      <if test="file_name != null">
+        #{file_name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.tycoding.pojo.FilesElectromyography">
+    update files_electromyography
+    <set>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="id_query != null">
+        id_query = #{id_query,jdbcType=INTEGER},
+      </if>
+      <if test="file_name != null">
+        file_name = #{file_name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where expid = #{expid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tycoding.pojo.FilesElectromyography">
+    update files_electromyography
+    set url = #{url,jdbcType=VARCHAR},
+      id_query = #{id_query,jdbcType=INTEGER},
+      file_name = #{file_name,jdbcType=VARCHAR}
+    where expid = #{expid,jdbcType=INTEGER}
+  </update>
+</mapper>
