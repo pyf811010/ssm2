@@ -51,25 +51,8 @@
         <!-- 指定数据库表，要生成哪些表，就写哪些表，要和数据库中对应，不能写错！ -->
 
       
-		<table schema="general" tableName="files_montion_capture" 
-    	enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
-    	enableSelectByExample="false" selectByExampleQueryId="false" >
-    	<!--使得逆向工程不生成example类，（只生成纯sql，更适合多表关联，复杂查询）  -->
-    	<property name="useActualColumnNames" value="true"/>
-		</table>
-		<table schema="general" tableName="files_slot_machine" 
-    	enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
-    	enableSelectByExample="false" selectByExampleQueryId="false" >
-    	<!--使得逆向工程不生成example类，（只生成纯sql，更适合多表关联，复杂查询）  -->
-    	<property name="useActualColumnNames" value="true"/>
-		</table>
-		<table schema="general" tableName="files_foot_pressure_asc" 
-    	enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
-    	enableSelectByExample="false" selectByExampleQueryId="false" >
-    	<!--使得逆向工程不生成example类，（只生成纯sql，更适合多表关联，复杂查询）  -->
-    	<property name="useActualColumnNames" value="true"/>
-		</table>
-		<table schema="general" tableName="files_foot_pressure_fgt" 
+		
+		<table schema="general" tableName="query" 
     	enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
     	enableSelectByExample="false" selectByExampleQueryId="false" >
     	<!--使得逆向工程不生成example类，（只生成纯sql，更适合多表关联，复杂查询）  -->
