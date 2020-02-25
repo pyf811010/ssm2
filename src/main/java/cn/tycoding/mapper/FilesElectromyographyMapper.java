@@ -1,5 +1,7 @@
 package cn.tycoding.mapper;
 
+import java.util.List;
+
 import cn.tycoding.pojo.FilesElectromyography;
 
 public interface FilesElectromyographyMapper {
@@ -14,4 +16,20 @@ public interface FilesElectromyographyMapper {
     int updateByPrimaryKeySelective(FilesElectromyography record);
 
     int updateByPrimaryKey(FilesElectromyography record);
+
+	List findByFilters(String sql);
+
+	int findByFiltersSum(String getSumSql);
+
+	List findByPage(int i, int rows);
+
+	int getSum();
+
+	List find();
+
+	int edit(FilesElectromyography filesElectromyography);
+
+	void del(String string);
+
+	int add(FilesElectromyography filesElectromyography);
 }

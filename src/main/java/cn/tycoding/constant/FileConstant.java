@@ -9,6 +9,9 @@ public class FileConstant {
 
     //默认头像地址
     public String DEFAULT_PHOTO_URL;
+    
+    
+    
 
 //    public static String getDefault_photo_url(Class<?> c) {
 //        return c.getClassLoader().getResource("/").getPath().replaceFirst("/", "")

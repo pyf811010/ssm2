@@ -79,4 +79,57 @@
       file_name = #{file_name,jdbcType=VARCHAR}
     where expid = #{expid,jdbcType=INTEGER}
   </update>
+  
+   <!-- 第一个参数为页数，第二个参数为每页多少行 -->
+    <select id="findByPage" resultType="cn.tycoding.pojo.FilesElectromyography">
+		select * from
+		files_electromyography
+		order by expid desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		files_electromyography
+	</select>
+
+    <select id="find" resultType="cn.tycoding.pojo.FilesElectromyography">
+		select * from
+		files_electromyography
+		order by expid desc
+		
+	</select>
+
+    <update id="edit" parameterType="cn.tycoding.pojo.FilesElectromyography">
+	  update files_electromyography
+      set url = #{url},
+      id_query = #{id_query},
+      file_name = #{file_name}
+      where expid = #{expid}
+	</update>
+
+    <!-- 增加一条学生数据 -->
+    <insert id="add" parameterType="cn.tycoding.pojo.FilesElectromyography">
+		insert into files_electromyography
+		values(#{expid},#{url},#{id_query},#{file_name});
+	</insert>
+
+    <!-- 按学号删除学生 -->
+    <delete id="del" parameterType="string">
+		delete from files_electromyography
+		where expid=#{expid}
+	</delete>
+
+    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFilters" parameterType="string"
+            resultType="cn.tycoding.pojo.FilesElectromyography">
+		${_parameter}
+	</select>
+
+    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFiltersSum" parameterType="string"
+            resultType="int">
+		${_parameter}
+	</select>
+  
 </mapper>

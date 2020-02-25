@@ -5,9 +5,10 @@
     <id column="expid" jdbcType="INTEGER" property="expid" />
     <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="id_query" jdbcType="INTEGER" property="id_query" />
+    <result column="files_name" jdbcType="VARCHAR" property="files_name" />
   </resultMap>
   <sql id="Base_Column_List">
-    expid, url, id_query
+    expid, url, id_query, files_name
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -26,10 +27,10 @@
     where expid = #{expid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.tycoding.pojo.FilesMontionCapture">
-    insert into files_montion_capture (expid, url, id_query
-      )
-    values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}
-      )
+    insert into files_montion_capture (expid, url, id_query, 
+      files_name)
+    values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, 
+      #{files_name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.tycoding.pojo.FilesMontionCapture">
     insert into files_montion_capture
@@ -43,6 +44,9 @@
       <if test="id_query != null">
         id_query,
       </if>
+      <if test="files_name != null">
+        files_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="expid != null">
@@ -53,6 +57,9 @@
       </if>
       <if test="id_query != null">
         #{id_query,jdbcType=INTEGER},
+      </if>
+      <if test="files_name != null">
+        #{files_name,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -65,13 +72,17 @@
       <if test="id_query != null">
         id_query = #{id_query,jdbcType=INTEGER},
       </if>
+      <if test="files_name != null">
+        files_name = #{files_name,jdbcType=VARCHAR},
+      </if>
     </set>
     where expid = #{expid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.tycoding.pojo.FilesMontionCapture">
     update files_montion_capture
     set url = #{url,jdbcType=VARCHAR},
-      id_query = #{id_query,jdbcType=INTEGER}
+      id_query = #{id_query,jdbcType=INTEGER},
+      files_name = #{files_name,jdbcType=VARCHAR}
     where expid = #{expid,jdbcType=INTEGER}
   </update>
 </mapper>
