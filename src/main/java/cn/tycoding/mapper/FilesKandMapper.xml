@@ -73,6 +73,10 @@
     from files_kand
     where id_query = #{idQuery,jdbcType=INTEGER}
   </select>
+  <select id="selectMaxExpid" resultType="integer">
+		select
+		IFNULL(max(expid),0) from files_kand
+  </select>
   
   
   

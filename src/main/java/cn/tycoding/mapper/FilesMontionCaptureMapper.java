@@ -18,4 +18,6 @@ public interface FilesMontionCaptureMapper {
     int updateByPrimaryKey(FilesMontionCapture record);
     
     FilesMontionCapture selectByIdQuery(Integer idQuery);
+    
+    int selectMaxExpid();
 }

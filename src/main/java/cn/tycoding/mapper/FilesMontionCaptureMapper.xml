@@ -16,6 +16,10 @@
     from files_montion_capture
     where expid = #{expid,jdbcType=INTEGER}
   </select>
+  <select id="selectMaxExpid" resultType="integer">
+		select
+		IFNULL(max(expid),0) from files_montion_capture
+  </select>
    <select id="selectByIdQuery" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

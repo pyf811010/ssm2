@@ -22,4 +22,6 @@ public interface FilesKandMapper {
     int updateByPrimaryKey(FilesKand record);
     
     FilesKand selectByIdQuery(Integer idQuery);
+    
+    int selectMaxExpid();
 }

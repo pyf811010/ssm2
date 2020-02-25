@@ -16,4 +16,6 @@ public interface FilesOxygenMapper {
     int updateByPrimaryKeySelective(FilesOxygen record);
 
     int updateByPrimaryKey(FilesOxygen record);
+    
+    int selectMaxExpid();
 }
