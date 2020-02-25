@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.tree.ExpandVetoException;
 
 import cn.tycoding.pojo.ExcelBean;
 import org.apache.http.client.utils.DateUtils;
@@ -37,7 +38,7 @@ public class SmallExcelReaderUtil {
     /**
      * Excel导入
      */
-    public static List<List<List<Object>>> getListByExcel(String filePath,int startrow) throws Exception {
+    public static List<List<List<Object>>> getListByExcel(String filePath,int startrow,int startcol) throws Exception {
     	List<List<List<Object>>> ansList = new ArrayList<List<List<Object>>>();
     	List<List<Object>> list = null;
         // 创建Excel工作薄
@@ -49,7 +50,11 @@ public class SmallExcelReaderUtil {
         } else if (excel2007U.equals(fileType)) {
             work = new XSSFWorkbook(instr); // 2007+
         } else {
-            throw new Exception("解析的文件格式有误！");
+        	try {
+           	 work = new XSSFWorkbook(instr); // 2007+
+           	} catch (Exception e) {
+           		throw e;
+           	}
         }
 
         if (null == work) {
@@ -77,7 +82,7 @@ public class SmallExcelReaderUtil {
                 }
                 // 遍历所有的列
                 List<Object> li = new ArrayList<Object>();
-                for (int y = row.getFirstCellNum(); y < row.getLastCellNum(); y++) {
+                for (int y = row.getFirstCellNum()+startcol-1; y < row.getLastCellNum(); y++) {
                     cell = row.getCell(y);
                     li.add(getCellValue(cell));
                 }

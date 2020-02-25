@@ -23,6 +23,7 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.hamcrest.SelfDescribing;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -57,6 +58,8 @@ public class KandController {
 	private KandService kandService;
 	private AdminService adminService;
 	private SmallExcelReaderUtil excelUtil;
+	private int startrow = 2;//excel文件从第startrow行开始扫描（从1开始计数）
+	private int startcol = 1;//excel文件从第startcol列开始扫描（从1开始计数）
 //	private SqlSessionTemplate SqlSessionTemplate;
 
 	@RequestMapping(value = "/findByIdQuery")
@@ -77,7 +80,7 @@ public class KandController {
 				FilesKand fileResult = kandService.findByIdQuery(id);
 				String filePath = fileResult.getUrl();
 				System.out.println(filePath);
-				List<List<List<Object>>> excelDataList = excelUtil.getListByExcel(filePath, 2);
+				List<List<List<Object>>> excelDataList = excelUtil.getListByExcel(filePath, this.startrow, this.startcol);
 				System.out.println("excel readed");
 
 				List<TmpKand> kandParams = new ArrayList<TmpKand>();
@@ -91,7 +94,7 @@ public class KandController {
 						TmpKand tmp = new TmpKand();
 						tmp.setExpid(id);
 						tmp.setId(0);
-						ReflectUtil.setKandValues(tmp, excelDataList.get(sheet).get(i));
+						ReflectUtil.setValues(tmp, excelDataList.get(sheet).get(i));
 						kandParams.add(tmp);
 						if (i % 1000 == 0 || i == excelDataList.get(sheet).size() - 1) {
 							kandService.insertBybatch(kandParams);

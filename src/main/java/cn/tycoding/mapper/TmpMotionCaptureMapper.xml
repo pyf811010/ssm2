@@ -263,11 +263,38 @@
     where expid = #{expid,jdbcType=INTEGER}
       and id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectMaxExpid" resultType="integer">
+		select
+		IFNULL(max(expid),0) from tmp_motion_capture
+  </select>
+  <select id="getSum" resultType="int">
+		select count(*) from
+		tmp_motion_capture
+  </select>
+  <select id="findByPage" resultMap="BaseResultMap">
+		select * from
+		tmp_motion_capture
+		order by expid,id
+		limit #{0},#{1}
+	</select>
+	<select id="findByFilters" parameterType="string"
+            resultMap="BaseResultMap">
+		${_parameter}
+	</select>
+	 <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFiltersSum" parameterType="string"
+            resultType="int">
+		${_parameter}
+	</select>
   <delete id="deleteByPrimaryKey" parameterType="cn.tycoding.pojo.TmpMotionCaptureKey">
     delete from tmp_motion_capture
     where expid = #{expid,jdbcType=INTEGER}
       and id = #{id,jdbcType=INTEGER}
   </delete>
+  <delete id="del">
+		delete from tmp_motion_capture
+		where expid=#{0} and id=#{1}
+	</delete>
   <insert id="insert" parameterType="cn.tycoding.pojo.TmpMotionCapture">
     insert into tmp_motion_capture (expid, id, timestamp, 
       sensor001_x, sensor001_y, sensor001_z, 
@@ -418,6 +445,233 @@
       #{sensor072_x,jdbcType=DOUBLE}, #{sensor072_y,jdbcType=DOUBLE}, #{sensor072_z,jdbcType=DOUBLE}
       )
   </insert>
+
+	<insert id="insertList" parameterType="java.util.List"
+		useGeneratedKeys="false">
+		insert into tmp_motion_capture
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.sensor001_x,jdbcType=DOUBLE},
+			#{item.sensor001_y,jdbcType=DOUBLE},
+			#{item.sensor001_z,jdbcType=DOUBLE},
+			#{item.sensor002_x,jdbcType=DOUBLE},
+			#{item.sensor002_y,jdbcType=DOUBLE},
+			#{item.sensor002_z,jdbcType=DOUBLE},
+			#{item.sensor003_x,jdbcType=DOUBLE},
+			#{item.sensor003_y,jdbcType=DOUBLE},
+			#{item.sensor003_z,jdbcType=DOUBLE},
+			#{item.sensor004_x,jdbcType=DOUBLE},
+			#{item.sensor004_y,jdbcType=DOUBLE},
+			#{item.sensor004_z,jdbcType=DOUBLE},
+			#{item.sensor005_x,jdbcType=DOUBLE},
+			#{item.sensor005_y,jdbcType=DOUBLE},
+			#{item.sensor005_z,jdbcType=DOUBLE},
+			#{item.sensor006_x,jdbcType=DOUBLE},
+			#{item.sensor006_y,jdbcType=DOUBLE},
+			#{item.sensor006_z,jdbcType=DOUBLE},
+			#{item.sensor007_x,jdbcType=DOUBLE},
+			#{item.sensor007_y,jdbcType=DOUBLE},
+			#{item.sensor007_z,jdbcType=DOUBLE},
+			#{item.sensor008_x,jdbcType=DOUBLE},
+			#{item.sensor008_y,jdbcType=DOUBLE},
+			#{item.sensor008_z,jdbcType=DOUBLE},
+			#{item.sensor009_x,jdbcType=DOUBLE},
+			#{item.sensor009_y,jdbcType=DOUBLE},
+			#{item.sensor009_z,jdbcType=DOUBLE},
+			#{item.sensor010_x,jdbcType=DOUBLE},
+			#{item.sensor010_y,jdbcType=DOUBLE},
+			#{item.sensor010_z,jdbcType=DOUBLE},
+			#{item.sensor011_x,jdbcType=DOUBLE},
+			#{item.sensor011_y,jdbcType=DOUBLE},
+			#{item.sensor011_z,jdbcType=DOUBLE},
+			#{item.sensor012_x,jdbcType=DOUBLE},
+			#{item.sensor012_y,jdbcType=DOUBLE},
+			#{item.sensor012_z,jdbcType=DOUBLE},
+			#{item.sensor013_x,jdbcType=DOUBLE},
+			#{item.sensor013_y,jdbcType=DOUBLE},
+			#{item.sensor013_z,jdbcType=DOUBLE},
+			#{item.sensor014_x,jdbcType=DOUBLE},
+			#{item.sensor014_y,jdbcType=DOUBLE},
+			#{item.sensor014_z,jdbcType=DOUBLE},
+			#{item.sensor015_x,jdbcType=DOUBLE},
+			#{item.sensor015_y,jdbcType=DOUBLE},
+			#{item.sensor015_z,jdbcType=DOUBLE},
+			#{item.sensor016_x,jdbcType=DOUBLE},
+			#{item.sensor016_y,jdbcType=DOUBLE},
+			#{item.sensor016_z,jdbcType=DOUBLE},
+			#{item.sensor017_x,jdbcType=DOUBLE},
+			#{item.sensor017_y,jdbcType=DOUBLE},
+			#{item.sensor017_z,jdbcType=DOUBLE},
+			#{item.sensor018_x,jdbcType=DOUBLE},
+			#{item.sensor018_y,jdbcType=DOUBLE},
+			#{item.sensor018_z,jdbcType=DOUBLE},
+			#{item.sensor019_x,jdbcType=DOUBLE},
+			#{item.sensor019_y,jdbcType=DOUBLE},
+			#{item.sensor019_z,jdbcType=DOUBLE},
+			#{item.sensor020_x,jdbcType=DOUBLE},
+			#{item.sensor020_y,jdbcType=DOUBLE},
+			#{item.sensor020_z,jdbcType=DOUBLE},
+			#{item.sensor021_x,jdbcType=DOUBLE},
+			#{item.sensor021_y,jdbcType=DOUBLE},
+			#{item.sensor021_z,jdbcType=DOUBLE},
+			#{item.sensor022_x,jdbcType=DOUBLE},
+			#{item.sensor022_y,jdbcType=DOUBLE},
+			#{item.sensor022_z,jdbcType=DOUBLE},
+			#{item.sensor023_x,jdbcType=DOUBLE},
+			#{item.sensor023_y,jdbcType=DOUBLE},
+			#{item.sensor023_z,jdbcType=DOUBLE},
+			#{item.sensor024_x,jdbcType=DOUBLE},
+			#{item.sensor024_y,jdbcType=DOUBLE},
+			#{item.sensor024_z,jdbcType=DOUBLE},
+			#{item.sensor025_x,jdbcType=DOUBLE},
+			#{item.sensor025_y,jdbcType=DOUBLE},
+			#{item.sensor025_z,jdbcType=DOUBLE},
+			#{item.sensor026_x,jdbcType=DOUBLE},
+			#{item.sensor026_y,jdbcType=DOUBLE},
+			#{item.sensor026_z,jdbcType=DOUBLE},
+			#{item.sensor027_x,jdbcType=DOUBLE},
+			#{item.sensor027_y,jdbcType=DOUBLE},
+			#{item.sensor027_z,jdbcType=DOUBLE},
+			#{item.sensor028_x,jdbcType=DOUBLE},
+			#{item.sensor028_y,jdbcType=DOUBLE},
+			#{item.sensor028_z,jdbcType=DOUBLE},
+			#{item.sensor029_x,jdbcType=DOUBLE},
+			#{item.sensor029_y,jdbcType=DOUBLE},
+			#{item.sensor029_z,jdbcType=DOUBLE},
+			#{item.sensor030_x,jdbcType=DOUBLE},
+			#{item.sensor030_y,jdbcType=DOUBLE},
+			#{item.sensor030_z,jdbcType=DOUBLE},
+			#{item.sensor031_x,jdbcType=DOUBLE},
+			#{item.sensor031_y,jdbcType=DOUBLE},
+			#{item.sensor031_z,jdbcType=DOUBLE},
+			#{item.sensor032_x,jdbcType=DOUBLE},
+			#{item.sensor032_y,jdbcType=DOUBLE},
+			#{item.sensor032_z,jdbcType=DOUBLE},
+			#{item.sensor033_x,jdbcType=DOUBLE},
+			#{item.sensor033_y,jdbcType=DOUBLE},
+			#{item.sensor033_z,jdbcType=DOUBLE},
+			#{item.sensor034_x,jdbcType=DOUBLE},
+			#{item.sensor034_y,jdbcType=DOUBLE},
+			#{item.sensor034_z,jdbcType=DOUBLE},
+			#{item.sensor035_x,jdbcType=DOUBLE},
+			#{item.sensor035_y,jdbcType=DOUBLE},
+			#{item.sensor035_z,jdbcType=DOUBLE},
+			#{item.sensor036_x,jdbcType=DOUBLE},
+			#{item.sensor036_y,jdbcType=DOUBLE},
+			#{item.sensor036_z,jdbcType=DOUBLE},
+			#{item.sensor037_x,jdbcType=DOUBLE},
+			#{item.sensor037_y,jdbcType=DOUBLE},
+			#{item.sensor037_z,jdbcType=DOUBLE},
+			#{item.sensor038_x,jdbcType=DOUBLE},
+			#{item.sensor038_y,jdbcType=DOUBLE},
+			#{item.sensor038_z,jdbcType=DOUBLE},
+			#{item.sensor039_x,jdbcType=DOUBLE},
+			#{item.sensor039_y,jdbcType=DOUBLE},
+			#{item.sensor039_z,jdbcType=DOUBLE},
+			#{item.sensor040_x,jdbcType=DOUBLE},
+			#{item.sensor040_y,jdbcType=DOUBLE},
+			#{item.sensor040_z,jdbcType=DOUBLE},
+			#{item.sensor041_x,jdbcType=DOUBLE},
+			#{item.sensor041_y,jdbcType=DOUBLE},
+			#{item.sensor041_z,jdbcType=DOUBLE},
+			#{item.sensor042_x,jdbcType=DOUBLE},
+			#{item.sensor042_y,jdbcType=DOUBLE},
+			#{item.sensor042_z,jdbcType=DOUBLE},
+			#{item.sensor043_x,jdbcType=DOUBLE},
+			#{item.sensor043_y,jdbcType=DOUBLE},
+			#{item.sensor043_z,jdbcType=DOUBLE},
+			#{item.sensor044_x,jdbcType=DOUBLE},
+			#{item.sensor044_y,jdbcType=DOUBLE},
+			#{item.sensor044_z,jdbcType=DOUBLE},
+			#{item.sensor045_x,jdbcType=DOUBLE},
+			#{item.sensor045_y,jdbcType=DOUBLE},
+			#{item.sensor045_z,jdbcType=DOUBLE},
+			#{item.sensor046_x,jdbcType=DOUBLE},
+			#{item.sensor046_y,jdbcType=DOUBLE},
+			#{item.sensor046_z,jdbcType=DOUBLE},
+			#{item.sensor047_x,jdbcType=DOUBLE},
+			#{item.sensor047_y,jdbcType=DOUBLE},
+			#{item.sensor047_z,jdbcType=DOUBLE},
+			#{item.sensor048_x,jdbcType=DOUBLE},
+			#{item.sensor048_y,jdbcType=DOUBLE},
+			#{item.sensor048_z,jdbcType=DOUBLE},
+			#{item.sensor049_x,jdbcType=DOUBLE},
+			#{item.sensor049_y,jdbcType=DOUBLE},
+			#{item.sensor049_z,jdbcType=DOUBLE},
+			#{item.sensor050_x,jdbcType=DOUBLE},
+			#{item.sensor050_y,jdbcType=DOUBLE},
+			#{item.sensor050_z,jdbcType=DOUBLE},
+			#{item.sensor051_x,jdbcType=DOUBLE},
+			#{item.sensor051_y,jdbcType=DOUBLE},
+			#{item.sensor051_z,jdbcType=DOUBLE},
+			#{item.sensor052_x,jdbcType=DOUBLE},
+			#{item.sensor052_y,jdbcType=DOUBLE},
+			#{item.sensor052_z,jdbcType=DOUBLE},
+			#{item.sensor053_x,jdbcType=DOUBLE},
+			#{item.sensor053_y,jdbcType=DOUBLE},
+			#{item.sensor053_z,jdbcType=DOUBLE},
+			#{item.sensor054_x,jdbcType=DOUBLE},
+			#{item.sensor054_y,jdbcType=DOUBLE},
+			#{item.sensor054_z,jdbcType=DOUBLE},
+			#{item.sensor055_x,jdbcType=DOUBLE},
+			#{item.sensor055_y,jdbcType=DOUBLE},
+			#{item.sensor055_z,jdbcType=DOUBLE},
+			#{item.sensor056_x,jdbcType=DOUBLE},
+			#{item.sensor056_y,jdbcType=DOUBLE},
+			#{item.sensor056_z,jdbcType=DOUBLE},
+			#{item.sensor057_x,jdbcType=DOUBLE},
+			#{item.sensor057_y,jdbcType=DOUBLE},
+			#{item.sensor057_z,jdbcType=DOUBLE},
+			#{item.sensor058_x,jdbcType=DOUBLE},
+			#{item.sensor058_y,jdbcType=DOUBLE},
+			#{item.sensor058_z,jdbcType=DOUBLE},
+			#{item.sensor059_x,jdbcType=DOUBLE},
+			#{item.sensor059_y,jdbcType=DOUBLE},
+			#{item.sensor059_z,jdbcType=DOUBLE},
+			#{item.sensor060_x,jdbcType=DOUBLE},
+			#{item.sensor060_y,jdbcType=DOUBLE},
+			#{item.sensor060_z,jdbcType=DOUBLE},
+			#{item.sensor061_x,jdbcType=DOUBLE},
+			#{item.sensor061_y,jdbcType=DOUBLE},
+			#{item.sensor061_z,jdbcType=DOUBLE},
+			#{item.sensor062_x,jdbcType=DOUBLE},
+			#{item.sensor062_y,jdbcType=DOUBLE},
+			#{item.sensor062_z,jdbcType=DOUBLE},
+			#{item.sensor063_x,jdbcType=DOUBLE},
+			#{item.sensor063_y,jdbcType=DOUBLE},
+			#{item.sensor063_z,jdbcType=DOUBLE},
+			#{item.sensor064_x,jdbcType=DOUBLE},
+			#{item.sensor064_y,jdbcType=DOUBLE},
+			#{item.sensor064_z,jdbcType=DOUBLE},
+			#{item.sensor065_x,jdbcType=DOUBLE},
+			#{item.sensor065_y,jdbcType=DOUBLE},
+			#{item.sensor065_z,jdbcType=DOUBLE},
+			#{item.sensor066_x,jdbcType=DOUBLE},
+			#{item.sensor066_y,jdbcType=DOUBLE},
+			#{item.sensor066_z,jdbcType=DOUBLE},
+			#{item.sensor067_x,jdbcType=DOUBLE},
+			#{item.sensor067_y,jdbcType=DOUBLE},
+			#{item.sensor067_z,jdbcType=DOUBLE},
+			#{item.sensor068_x,jdbcType=DOUBLE},
+			#{item.sensor068_y,jdbcType=DOUBLE},
+			#{item.sensor068_z,jdbcType=DOUBLE},
+			#{item.sensor069_x,jdbcType=DOUBLE},
+			#{item.sensor069_y,jdbcType=DOUBLE},
+			#{item.sensor069_z,jdbcType=DOUBLE},
+			#{item.sensor070_x,jdbcType=DOUBLE},
+			#{item.sensor070_y,jdbcType=DOUBLE},
+			#{item.sensor070_z,jdbcType=DOUBLE},
+			#{item.sensor071_x,jdbcType=DOUBLE},
+			#{item.sensor071_y,jdbcType=DOUBLE},
+			#{item.sensor071_z,jdbcType=DOUBLE},
+			#{item.sensor072_x,jdbcType=DOUBLE},
+			#{item.sensor072_y,jdbcType=DOUBLE},
+			#{item.sensor072_z,jdbcType=DOUBLE}
+			)
+		</foreach>
+	</insert>
   <insert id="insertSelective" parameterType="cn.tycoding.pojo.TmpMotionCapture">
     insert into tmp_motion_capture
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -1739,6 +1993,9 @@
       </if>
     </trim>
   </insert>
+  <update id="truncate">
+    truncate table tmp_motion_capture
+	</update>
   <update id="updateByPrimaryKeySelective" parameterType="cn.tycoding.pojo.TmpMotionCapture">
     update tmp_motion_capture
     <set>

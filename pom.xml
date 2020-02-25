@@ -8,7 +8,7 @@
     <artifactId>ssm2</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-
+	
     <build>
         <finalName>ssm2</finalName>
         <resources>
@@ -272,7 +272,9 @@
         
         
     </dependencies>
-<properties>   
+<properties>  
+<failOnMissingWebXml>false</failOnMissingWebXml>
+ 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
     </properties>
 
