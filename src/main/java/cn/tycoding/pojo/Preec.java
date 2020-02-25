@@ -7,9 +7,59 @@ public class Preec {
 
     private Integer id_subjects;
 
-    private String advance;
+    private String motion_capture_info; //动补数据信息
+    
+    private String slot_machine_info; //跑台数据信息
+    
+    private String asc_info; //足底压力数据信息
+    
+    private String fgt_info; //足底压力合力大小、位置
+    
+    private String elec_info; //肌电数据信息
+    
+    public String getMotion_capture_info() {
+		return motion_capture_info;
+	}
 
-    private String remark;
+	public void setMotion_capture_info(String motion_capture_info) {
+		this.motion_capture_info = motion_capture_info;
+	}
+
+	public String getSlot_machine_info() {
+		return slot_machine_info;
+	}
+
+	public void setSlot_machine_info(String slot_machine_info) {
+		this.slot_machine_info = slot_machine_info;
+	}
+
+	public String getAsc_info() {
+		return asc_info;
+	}
+
+	public void setAsc_info(String asc_info) {
+		this.asc_info = asc_info;
+	}
+
+	public String getFgt_info() {
+		return fgt_info;
+	}
+
+	public void setFgt_info(String fgt_info) {
+		this.fgt_info = fgt_info;
+	}
+
+	public String getElec_info() {
+		return elec_info;
+	}
+
+	public void setElec_info(String elec_info) {
+		this.elec_info = elec_info;
+	}
+
+	private String advance;  //实验条件
+
+    private String remark;  //追加实验条件
 
     public Integer getExpid() {
         return expid;

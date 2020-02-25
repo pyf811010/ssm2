@@ -63,6 +63,18 @@
     	<!--使得逆向工程不生成example类，（只生成纯sql，更适合多表关联，复杂查询）  -->
     	<property name="useActualColumnNames" value="true"/>
 		</table>
+		<table schema="general" tableName="files_foot_pressure_asc" 
+    	enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    	enableSelectByExample="false" selectByExampleQueryId="false" >
+    	<!--使得逆向工程不生成example类，（只生成纯sql，更适合多表关联，复杂查询）  -->
+    	<property name="useActualColumnNames" value="true"/>
+		</table>
+		<table schema="general" tableName="files_foot_pressure_fgt" 
+    	enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    	enableSelectByExample="false" selectByExampleQueryId="false" >
+    	<!--使得逆向工程不生成example类，（只生成纯sql，更适合多表关联，复杂查询）  -->
+    	<property name="useActualColumnNames" value="true"/>
+		</table>
 
 		
 
