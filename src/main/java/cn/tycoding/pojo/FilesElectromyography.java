@@ -8,7 +8,15 @@ public class FilesElectromyography {
     private Integer id_query;
 
     private String file_name;
-
+    
+    public FilesElectromyography() {
+    }
+    public FilesElectromyography(Integer expid, String url, Integer id_query, String file_name) {
+    	this.expid = expid;
+    	this.url = url;
+    	this.id_query = id_query;
+    	this.file_name = file_name;
+    }
     public Integer getExpid() {
         return expid;
     }

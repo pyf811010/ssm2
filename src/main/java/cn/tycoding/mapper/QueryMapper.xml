@@ -25,6 +25,10 @@
     from query
     where expid = #{expid,jdbcType=INTEGER}
   </select>
+  <select id="selectMaxExpid" resultType="integer">
+		select
+		IFNULL(max(expid),0) from files_montion_capture
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from query
     where expid = #{expid,jdbcType=INTEGER}

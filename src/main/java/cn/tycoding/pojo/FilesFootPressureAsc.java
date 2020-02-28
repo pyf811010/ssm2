@@ -9,6 +9,14 @@ public class FilesFootPressureAsc {
 
     private String files_name;
 
+    public FilesFootPressureAsc () {
+    }
+    public FilesFootPressureAsc (Integer expid, String url, Integer id_query, String files_name) {
+    	this.expid = expid;
+    	this.url = url;
+    	this.id_query = id_query;
+    	this.files_name = files_name;
+    }
     public Integer getExpid() {
         return expid;
     }

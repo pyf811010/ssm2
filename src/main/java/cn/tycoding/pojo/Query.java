@@ -24,7 +24,40 @@ public class Query {
     private Integer expid_fpa;
 
     private Integer expid_fpf;
-
+    
+    public Query() {
+    	this.expid = null;
+    	this.datetime = null;
+    	this.id_preec = null;
+    	this.expid_mc = null;
+    	this.expid_sm = null;
+    	this.expid_kd = null;
+    	this.name_kand = null;
+    	this.expid_ox = null;
+    	this.expid_eg = null;
+    	this.expid_eg_contrast = null;
+    	this.expid_fpa = null;
+    	this.expid_fpf = null;
+    }
+    public Query(
+    	Integer expid, String datetime, Integer id_preec,
+    	Integer expid_mc, Integer expid_sm, Integer expid_kd,
+    	String name_kand, Integer expid_ox, Integer expid_eg,
+    	Integer expid_eg_contrast, Integer expid_fpa, Integer expid_fpf
+    	) {
+    	this.expid = expid;
+    	this.datetime = datetime;
+    	this.id_preec = id_preec;
+    	this.expid_mc = expid_mc;
+    	this.expid_sm = expid_sm;
+    	this.expid_kd = expid_kd;
+    	this.name_kand = name_kand;
+    	this.expid_ox = expid_ox;
+    	this.expid_eg = expid_eg;
+    	this.expid_eg_contrast = expid_eg_contrast;
+    	this.expid_fpa = expid_fpa;
+    	this.expid_fpf = expid_fpf;	
+    }
     public Integer getExpid() {
         return expid;
     }

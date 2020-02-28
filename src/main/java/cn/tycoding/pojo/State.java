@@ -5,6 +5,8 @@ public class State {
     private String info;
 
     public State() {
+    	this.success = 0;
+    	this.info = null;
     }
 
     public State(Integer success, String info) {
@@ -25,7 +27,7 @@ public class State {
     }
 
     public void setInfo(String info) {
-        this.info = info;
+        this.info = this.info + info;
     }
 
 
