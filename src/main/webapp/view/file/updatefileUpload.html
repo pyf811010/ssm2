@@ -161,11 +161,11 @@
 
                 <div class="page-header">
                     <h1>
-                        文件上传
-                        <small>
+                       修改数据文件上传
+                        <!-- <small>
                             <i class="ace-icon fa fa-angle-double-right"></i>
                             <span style="font-size: 16px;">可支持同时上传多份文件</span>
-                        </small>
+                        </small> -->
                     </h1>
                 </div>
                 <!-- /.page-header -->
@@ -188,49 +188,27 @@
 
                                         <div class="widget-body">
                                             <div class="widget-main">
-
-                                                <!--<div style="margin-bottom: 12px;">
-                                                    <label for="fi_grade" style="margin-bottom: 8px;">文件所属年级</label>
-                                                    <select class="form-control" id="fi_grade">
-                                                    </select>
-                                                </div>
-                                                <div style="margin-bottom: 12px;">
-                                                    <label for="fi_major" style="margin-bottom: 8px;">文件所属专业</label>
-                                                    <select class="form-control" id="fi_major">
-                                                    </select>
-                                                </div>
-                                                <div style="margin-bottom: 12px;">
-                                                    <label for="fi_class" style="margin-bottom: 8px;">文件所属班级</label>
-                                                    <select class="form-control" id="fi_class">
-                                                    </select>
-                                                </div>
-                                                <div style="margin-bottom: 12px;">
-                                                    <label for="fi_course" style="margin-bottom: 8px;">文件所属课程</label>
-                                                    <select class="form-control" id="fi_course" class="select2">
-                                                    </select>
-                                                </div>-->
                                                 <div class="form-group" style="margin-top: 20px;">
                                                     <div class="col-xs-12">
-                                                        <input multiple="" type="file" id="files" webkitdirectory
-                                                               mozdirectory/>
+                                                        <input type="file" id="files" />
                                                     </div>
                                                 </div>
 
-                                                <!-- <div style="margin-bottom: 12px;">
-                                                    <label for="fi_info" style="margin-bottom: 8px;">文件简介</label>
+                                                <div style="margin-bottom: 12px;">
+                                                    <label for="fi_info" style="margin-bottom: 8px;">修改内容记录</label>
                                                     <textarea id="fi_info"
                                                               class="autosize-transition form-control"></textarea>
                                                 </div>
- -->
+
                                                 <div class="clearfix form-actions">
                                                     <div class="col-md-offset-3 col-md-9">
                                                         <button class="btn btn-info" type="button" id="fileCommit">
                                                             <i class="ace-icon fa fa-check bigger-110"></i>
-                                                            确定上传
+                                                           		 确定上传
                                                         </button> &nbsp; &nbsp; &nbsp;
                                                         <button class="btn" type="reset">
                                                             <i class="ace-icon fa fa-undo bigger-110"></i>
-                                                            重置
+                                                           		 重置
                                                         </button>
                                                     </div>
                                                 </div>
@@ -324,122 +302,7 @@
 <script src="/assets/js/ace-elements.min.js"></script>
 <script src="/assets/js/ace.min.js"></script>
 
-<!--选择年份、班级、专业-->
-<!--<script type="text/javascript">
-    //总体数据
-    var arrayGrade = [];
-    //判断数组中是否存在此数
-    function isExist(array, n) {
-        for (var i = 0; i < array.length; i++) {
-            if (array[i] == n) {
-                return true;
-            }
-        }
-        return false;
-    }
-    //先得到年级
-    function getGrade(arrayGrade) {
-        var grade = [""];
-        for (var i = 0; i < arrayGrade.length; i++) {
-            //先判断grade中是否存在该数字
-            var grade_item = arrayGrade[i].cl_grade;
-            if (!isExist(grade, grade_item)) {
-                grade.push(grade_item);
-            }
-        }
-        //遍历grade数组，将值填入进年级下拉框中
-        var sel_grade = document.getElementById("fi_grade");
-        for (var j = 0; j < grade.length; j++) {
-            var temp = grade[j];
-            sel_grade.options[j] = new Option(temp, temp);
-        }
-    }
-    //st_grade的改变事件
-    $("#fi_grade").change(function () {
-        var major = [""];
-        var grade = $("#fi_grade option:selected").val();
-        //取出指定年级的不重复的专业
-        for (var i = 0; i < arrayGrade.length; i++) {
-            var temp_grade = arrayGrade[i].cl_grade;
-            var temp_major = arrayGrade[i].cl_major;
-            if ((temp_grade == grade) && (!isExist(major, temp_major))) {
-                major.push(temp_major);
-            }
-        }
-        var sel_major = document.getElementById("fi_major");
-        //清空之前的专业、班级、课程下拉框
-        $("#fi_major").empty();
-        $("#fi_class").empty();
-        $("#fi_course").empty();
-        for (var j = 0; j < major.length; j++) {
-            sel_major.options[j] = new Option(major[j], major[j]);
-        }
-    });
-    //fi_major的改变事件
-    $("#fi_major").change(function () {
-        var sclass = [""];
-        var grade = $("#fi_grade option:selected").val();
-        var major = $("#fi_major option:selected").val();
-        //取出指定年级、专业的班级
-        for (var i = 0; i < arrayGrade.length; i++) {
-            var temp_grade = arrayGrade[i].cl_grade;
-            var temp_major = arrayGrade[i].cl_major;
-            if ((temp_grade == grade) && (temp_major == major)) {
-                sclass.push(arrayGrade[i].cl_name);
-            }
-        }
-        ///清空之前的班级、课程下拉框
-        $("#fi_class").empty();
-        $("#fi_course").empty();
-        var sel_class = document.getElementById("fi_class");
-        for (var j = 0; j < sclass.length; j++) {
-            sel_class.options[j] = new Option(sclass[j], sclass[j]);
-        }
-    });
-    //fi_class的改变事件
-    /*$("#fi_class").change(function () {
-        $.ajax({
-            type: "post",
-            url: "/file/findClass.do",
-            dataType: "json",
-            data: {
-                "sc_class_name": $("#fi_class").val()
-            },
-            success: function (data) {
-                //document.getElementById("fi_course").innerHTML = "";
-                //$("#fi_course_chosen > div > ul").html("");
-                $("#fi_course").empty();
-                //将数据填充到下拉框中
-                var sel_course = document.getElementById("fi_course");
-                var i = 0;
-                for (var str in data) {
-                    sel_course.options[i] = new Option(data[str], data[str]);
-                    i++;
-                }
-                //初始化select2
-                $("#fi_course").select2();
-            },
-            error: function (err) {
-            }
-        });
-    });*/
-    /*$(function () {
-        //ajax请求获取班级
-        $.ajax({
-            type: "post",
-            url: "/score/getClassroom.do",
-            dataType: "json",
-            data: {},
-            success: function (data) {
-                arrayGrade = data;
-                getGrade(data);
-            },
-            error: function () {
-                alert("获取信息失败!");
-            }
-        });
-    })*/
-</script>-->
+
 
 <!--文件上传-->
 <script type="text/javascript">
@@ -450,15 +313,15 @@
             for (var i = 0; i < files.length; i++) {
                 formData.append("files", files[i]);
             }
+            formData.append("fi_info", $("#fi_info").val());
             /*formData.append("fi_user_id", $.cookie("us_id"));
             formData.append("fi_grade", $("#fi_grade").val());
             formData.append("fi_major", $("#fi_major").val());
             //文件简介
-            formData.append("fi_info", $("#fi_info").val());
             formData.append("fi_course", $("#fi_course").val())*/
             $.ajax({
                 type: "post",
-                url: "/excel/upload",
+                url: "/updateExcel/upload",
                 data: formData,
                 cache: false,
                 processData: false,
@@ -716,42 +579,8 @@
             file_input
                 .off('file.error.ace')
                 .on('file.error.ace', function (e, info) {
-                    //console.log(info.file_count);//number of selected files
-                    //console.log(info.invalid_count);//number of invalid files
-                    //console.log(info.error_list);//a list of errors in the following format
-
-                    //info.error_count['ext']
-                    //info.error_count['mime']
-                    //info.error_count['size']
-
-                    //info.error_list['ext']  = [list of file names with invalid extension]
-                    //info.error_list['mime'] = [list of file names with invalid mimetype]
-                    //info.error_list['size'] = [list of file names with invalid size]
-
-                    /**
-                     if( !info.dropped ) {
-								//perhapse reset file field if files have been selected, and there are invalid files among them
-								//when files are dropped, only valid files will be added to our file array
-								e.preventDefault();//it will rest input
-							}
-                     */
-
-                    //if files have been selected (not dropped), you can choose to reset input
-                    //because browser keeps all selected files anyway and this cannot be changed
-                    //we can only reset file field to become empty again
-                    //on any case you still should check files with your server side script
-                    //because any arbitrary file can be uploaded by user and it's not safe to rely on browser-side measures
+                    
                 });
-
-            /**
-             file_input
-             .off('file.preview.ace')
-             .on('file.preview.ace', function(e, info) {
-						console.log(info.file.width);
-						console.log(info.file.height);
-						e.preventDefault();//to prevent preview
-					});
-             */
 
         });
 
@@ -798,14 +627,6 @@
             btn_up_class: 'btn-purple',
             btn_down_class: 'btn-purple'
         });
-
-        //$('#spinner1').ace_spinner('disable').ace_spinner('value', 11);
-        //or
-        //$('#spinner1').closest('.ace-spinner').spinner('disable').spinner('enable').spinner('value', 11);//disable, enable or change value
-        //$('#spinner1').closest('.ace-spinner').spinner('value', 0);//reset to 0
-
-        //datepicker plugin
-        //link
         $('.date-picker').datepicker({
             autoclose: true,
             todayHighlight: true

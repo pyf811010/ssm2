@@ -59,7 +59,7 @@
 								<a href="/views/index.html">首页</a>
 							</li>
 
-							<li class="active">肌电数据文件信息管理</li>
+							<li class="active">耗氧量数据文件信息管理</li>
 						</ul>
 						<!-- /.breadcrumb -->
 
@@ -188,7 +188,7 @@
 
 		<script type="text/javascript">
 		function Modify(expid) { 
-			window.open("/ele/download/" + expid, "_blank");
+			window.open("/FilesOxygen/download/" + expid, "_blank");
 	       }  
 		
 		
@@ -216,7 +216,7 @@
 				jQuery(grid_selector).jqGrid({
 					//direction: "rtl",
 
-					url: "/ele/findsome",
+					url: "/FilesOxygen/findsome",
 
 					//data: grid_data,
 					datatype: "json",
@@ -270,7 +270,7 @@
 							index: 'expid',
 							width: 100,
 							key: true,
-							editable: true,
+							editable: false,
 							edittype: "textarea",
 							editoptions: {
 								rows: "2",
@@ -292,8 +292,8 @@
 						},
 						
 						{
-							name: 'file_name',
-							index: 'file_name',
+							name: 'files_name',
+							index: 'files_name',
 							width: 450,
 							sortable: false,
 							editable: true,
@@ -342,8 +342,8 @@
 						}, 0);
 					},
 
-					editurl: "/ele/handle", //nothing is saved
-					caption: "肌电数据文件信息管理" //表名
+					editurl: "/FilesOxygen/handle", //nothing is saved
+					caption: "耗氧量数据文件信息管理" //表名
 
 
 				});

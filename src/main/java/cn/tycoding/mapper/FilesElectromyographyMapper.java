@@ -32,4 +32,8 @@ public interface FilesElectromyographyMapper {
 	void del(String string);
 
 	int add(FilesElectromyography filesElectromyography);
+
+	String getPathByExpid(int expid);
+
+	String getFile_name(int expid);
 }

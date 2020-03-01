@@ -131,5 +131,17 @@
             resultType="int">
 		${_parameter}
 	</select>
+	
+	<!--根据expid返回url  -->
+	<select id="getPathByExpid"  resultType="String">
+    SELECT url from files_electromyography where expid = #{expid}
+  </select>
+  
+	<!--根据expid返回url  -->
+	<select id="getFile_name"  resultType="String">
+    SELECT file_name from files_electromyography where expid = #{expid}
+  </select>
+
+	
   
 </mapper>

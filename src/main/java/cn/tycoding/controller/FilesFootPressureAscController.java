@@ -14,8 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.tycoding.pojo.FilesElectromyography;
+import cn.tycoding.pojo.FilesFootPressureAsc;
+import cn.tycoding.pojo.FilesKand;
+import cn.tycoding.pojo.FilesOxygen;
 import cn.tycoding.pojo.ObjectQuery;
 import cn.tycoding.service.FilesEleService;
+import cn.tycoding.service.FilesFootPressureAscService;
+import cn.tycoding.service.FilesKandService;
+import cn.tycoding.service.FilesOxygenService;
 
 /**
  * 肌电数据
@@ -23,13 +29,13 @@ import cn.tycoding.service.FilesEleService;
  *
  */
 @Controller
-@RequestMapping(value = "/ele")
-public class FilesEleController {
+@RequestMapping(value = "/FilesFootPressureAsc")
+public class FilesFootPressureAscController {
     /**
      * 注入service
      */
     @Autowired
-    private FilesEleService filesEleService;
+    private FilesFootPressureAscService filesFootPressureAscService;
     
     @RequestMapping("/findsome")
     @ResponseBody
@@ -40,7 +46,7 @@ public class FilesEleController {
             filters = new String(filters.getBytes("ISO-8859-1"), "UTF-8");
             System.out.println(filters);
         }
-        return filesEleService.findByPage(_search, filters, page, rows);
+        return filesFootPressureAscService.findByPage(_search, filters, page, rows);
 
     }
     
@@ -48,16 +54,16 @@ public class FilesEleController {
     @ResponseBody
     public List find(){
         
-        return filesEleService.find();
+        return filesFootPressureAscService.find();
 
     }
     
     @RequestMapping("/handle")
     @ResponseBody
-    public String handle(String oper, FilesElectromyography filesElectromyography, String id[])
+    public String handle(String oper, FilesFootPressureAsc filesFootPressureAsc, String id[])
             throws UnsupportedEncodingException {
     	System.out.println(id);
-        String temp = filesEleService.handle(oper, filesElectromyography, id);
+        String temp = filesFootPressureAscService.handle(oper, filesFootPressureAsc, id);
         // 对传回的中文进行编码
         return URLEncoder.encode(temp, "UTF-8");
     }
@@ -66,7 +72,7 @@ public class FilesEleController {
     @ResponseBody
     public void download(@PathVariable int expid, HttpServletResponse response) {
     	try {
-    		filesEleService.download(expid, response);
+    		filesFootPressureAscService.download(expid, response);
         } catch (IOException e) {
             e.printStackTrace();
         }

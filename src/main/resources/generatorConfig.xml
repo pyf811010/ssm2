@@ -52,7 +52,7 @@
 
       
 		
-		<table schema="general" tableName="query" 
+		<table schema="general" tableName="files_kand_updateInfo" 
     	enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
     	enableSelectByExample="false" selectByExampleQueryId="false" >
     	<!--使得逆向工程不生成example类，（只生成纯sql，更适合多表关联，复杂查询）  -->
