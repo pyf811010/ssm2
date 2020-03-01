@@ -14,4 +14,6 @@ public interface QueryMapper {
     int updateByPrimaryKeySelective(Query record);
 
     int updateByPrimaryKey(Query record);
+    
+    int selectMaxExpid();
 }

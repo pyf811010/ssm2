@@ -8,7 +8,14 @@ public class FilesKand {
     private Integer id_query;
     
     private String files_name;
-
+    public FilesKand () {
+    }
+    public FilesKand (Integer expid, String url, Integer id_query, String file_name) {
+    	this.expid = expid;
+    	this.url = url;
+    	this.id_query = id_query;
+    	this.files_name = file_name;
+    }
 	public Integer getExpid() {
 		return expid;
 	}
