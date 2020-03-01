@@ -73,9 +73,6 @@ public class FilesOrganizeController {
 		String fpa = object.getString("fpa");
 		String fpf = object.getString("fpf");
 		String sm = object.getString("sm");
-		if (filesOrganizeService.insertFilesSet(kand, mc, ele, ox, fpa, fpf, sm) == null) {
-			message.setSuccess(0);
-		}
 		
 		return message;
 	}
