@@ -17,6 +17,7 @@ public class FilesElectromyography {
     	this.id_query = id_query;
     	this.file_name = file_name;
     }
+
     public Integer getExpid() {
         return expid;
     }

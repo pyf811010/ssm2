@@ -78,6 +78,67 @@
 		IFNULL(max(expid),0) from files_kand
   </select>
   
+  <!-- 第一个参数为页数，第二个参数为每页多少行 -->
+    <select id="findByPage" resultType="cn.tycoding.pojo.FilesKand">
+		select * from
+		files_kand
+		order by expid desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		files_kand
+	</select>
+
+    <select id="find" resultType="cn.tycoding.pojo.FilesKand">
+		select * from
+		files_kand
+		order by expid desc
+		
+	</select>
+
+    <update id="edit" parameterType="cn.tycoding.pojo.FilesKand">
+	  update files_kand
+      set url = #{url},
+      id_query = #{id_query},
+      files_name = #{files_name}
+      where expid = #{expid}
+	</update>
+
+    <!-- 增加一条学生数据 -->
+    <insert id="add" parameterType="cn.tycoding.pojo.FilesKand">
+		insert into files_kand
+		values(#{expid},#{url},#{id_query},#{files_name});
+	</insert>
+
+    <!-- 按学号删除学生 -->
+    <delete id="del" parameterType="string">
+		delete from files_kand
+		where expid=#{expid}
+	</delete>
+
+    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFilters" parameterType="string"
+            resultType="cn.tycoding.pojo.FilesKand">
+		${_parameter}
+	</select>
+
+    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFiltersSum" parameterType="string"
+            resultType="int">
+		${_parameter}
+	</select>
+	
+	<!--根据expid返回url  -->
+	<select id="getPathByExpid"  resultType="String">
+    SELECT url from files_kand where expid = #{expid}
+  </select>
+  
+	<!--根据expid返回url  -->
+	<select id="getFile_name"  resultType="String">
+    SELECT files_name from files_kand where expid = #{expid}
+  </select>
   
   
 </mapper>

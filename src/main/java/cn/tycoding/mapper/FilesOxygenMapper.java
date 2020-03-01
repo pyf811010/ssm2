@@ -1,6 +1,8 @@
     
 package cn.tycoding.mapper;
 
+import java.util.List;
+
 import cn.tycoding.pojo.FilesOxygen;
 
 public interface FilesOxygenMapper {
@@ -16,6 +18,24 @@ public interface FilesOxygenMapper {
     int updateByPrimaryKeySelective(FilesOxygen record);
 
     int updateByPrimaryKey(FilesOxygen record);
-    
-    int selectMaxExpid();
+
+	List findByFilters(String sql);
+
+	List find();
+
+	List findByPage(int i, int rows);
+
+	int findByFiltersSum(String getSumSql);
+
+	int getSum();
+
+	int edit(FilesOxygen filesOxygen);
+
+	void del(String string);
+
+	int add(FilesOxygen filesOxygen);
+
+	String getPathByExpid(int expid);
+
+	String getFile_name(int expid);
 }

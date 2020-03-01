@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.tycoding.pojo.FilesElectromyography;
+import cn.tycoding.pojo.FilesKandUpdateinfo;
 import cn.tycoding.pojo.ObjectQuery;
 import cn.tycoding.service.FilesEleService;
+import cn.tycoding.service.FilesKandUpdateService;
 
 /**
  * 肌电数据
@@ -23,13 +25,13 @@ import cn.tycoding.service.FilesEleService;
  *
  */
 @Controller
-@RequestMapping(value = "/ele")
-public class FilesEleController {
+@RequestMapping(value = "/KandUpdate")
+public class FilesKandUpdateController {
     /**
      * 注入service
      */
     @Autowired
-    private FilesEleService filesEleService;
+    private FilesKandUpdateService filesKandUpdateService;
     
     @RequestMapping("/findsome")
     @ResponseBody
@@ -40,7 +42,7 @@ public class FilesEleController {
             filters = new String(filters.getBytes("ISO-8859-1"), "UTF-8");
             System.out.println(filters);
         }
-        return filesEleService.findByPage(_search, filters, page, rows);
+        return filesKandUpdateService.findByPage(_search, filters, page, rows);
 
     }
     
@@ -48,25 +50,25 @@ public class FilesEleController {
     @ResponseBody
     public List find(){
         
-        return filesEleService.find();
+        return filesKandUpdateService.find();
 
     }
     
     @RequestMapping("/handle")
     @ResponseBody
-    public String handle(String oper, FilesElectromyography filesElectromyography, String id[])
+    public String handle(String oper, FilesKandUpdateinfo filesKandUpdateinfo, String id[])
             throws UnsupportedEncodingException {
     	System.out.println(id);
-        String temp = filesEleService.handle(oper, filesElectromyography, id);
+        String temp = filesKandUpdateService.handle(oper, filesKandUpdateinfo, id);
         // 对传回的中文进行编码
         return URLEncoder.encode(temp, "UTF-8");
     }
     
-    @RequestMapping("/download/{expid}")
+    @RequestMapping("/download/{u_id}")
     @ResponseBody
-    public void download(@PathVariable int expid, HttpServletResponse response) {
+    public void download(@PathVariable int u_id, HttpServletResponse response) {
     	try {
-    		filesEleService.download(expid, response);
+    		filesKandUpdateService.download(u_id, response);
         } catch (IOException e) {
             e.printStackTrace();
         }

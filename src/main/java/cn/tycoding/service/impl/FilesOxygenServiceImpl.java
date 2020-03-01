@@ -18,11 +18,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cn.tycoding.mapper.EgContrastMapper;
 import cn.tycoding.mapper.FilesElectromyographyMapper;
+import cn.tycoding.mapper.FilesKandMapper;
+import cn.tycoding.mapper.FilesOxygenMapper;
 import cn.tycoding.pojo.EgContrast;
 import cn.tycoding.pojo.FilesElectromyography;
+import cn.tycoding.pojo.FilesKand;
+import cn.tycoding.pojo.FilesOxygen;
 import cn.tycoding.pojo.ObjectQuery;
 import cn.tycoding.pojo.State;
 import cn.tycoding.service.FilesEleService;
+import cn.tycoding.service.FilesKandService;
+import cn.tycoding.service.FilesOxygenService;
 import cn.tycoding.util.DataFormatUtil;
 import cn.tycoding.util.ExceptionUtil;
 import cn.tycoding.util.QueryCondition;
@@ -31,12 +37,12 @@ import cn.tycoding.util.SqlJointUtil;
 
 
 @Service
-public class FilesEleServiceImpl implements FilesEleService {
+public class FilesOxygenServiceImpl implements FilesOxygenService {
     /**
      * 注入service层
      */
     @Autowired
-    private FilesElectromyographyMapper filesElectromyographyMapper;
+    private FilesOxygenMapper filesOxygenMapper;
 
 
 	@Override
@@ -52,11 +58,11 @@ public class FilesEleServiceImpl implements FilesEleService {
 	                e.printStackTrace();
 	            }
 
-	            String sql = SqlJointUtil.getSqlByFilters(queryCondition, (page - 1) * rows, rows, false, "files_electromyography");
+	            String sql = SqlJointUtil.getSqlByFilters(queryCondition, (page - 1) * rows, rows, false, "files_oxygen");
 
-	            List list = filesElectromyographyMapper.findByFilters(sql);
-	            String getSumSql = SqlJointUtil.getSqlByFilters(queryCondition, (page - 1) * rows, rows, true, "files_electromyography");
-	            int records = filesElectromyographyMapper.findByFiltersSum(getSumSql);
+	            List list = filesOxygenMapper.findByFilters(sql);
+	            String getSumSql = SqlJointUtil.getSqlByFilters(queryCondition, (page - 1) * rows, rows, true, "files_oxygen");
+	            int records = filesOxygenMapper.findByFiltersSum(getSumSql);
 	            int total = QueryUtil.getTotalPage(records, rows);
 	            ObjectQuery sq = new ObjectQuery(page, total, records, list);
 	            return sq;
@@ -67,9 +73,9 @@ public class FilesEleServiceImpl implements FilesEleService {
 		// 本次操作不是搜索，而是按条件进行查询
         // 查询全部
         // page 当前所处页数 rows 每页显示的条数
-        List list = filesElectromyographyMapper.findByPage((page - 1) * rows, rows);
+        List list = filesOxygenMapper.findByPage((page - 1) * rows, rows);
         // 获得总记录数
-        int records = filesElectromyographyMapper.getSum();
+        int records = filesOxygenMapper.getSum();
         // 获得总页数
         int total = QueryUtil.getTotalPage(records, rows);
         // 第一个参数为当前页数，第二个为总页数，第三个参数为总记录数，第四个参数为模型对象
@@ -80,24 +86,24 @@ public class FilesEleServiceImpl implements FilesEleService {
 	@Override
 	public List find() {
 		
-		List list = filesElectromyographyMapper.find();
+		List list = filesOxygenMapper.find();
 		
 		return list;
 	}
 
 	@Override
-    public String handle(String oper, FilesElectromyography filesElectromyography, String id[]) {
-		filesElectromyography = DataFormatUtil.checkNull(filesElectromyography);
+    public String handle(String oper, FilesOxygen filesOxygen, String id[]) {
+		filesOxygen = DataFormatUtil.checkNull(filesOxygen);
         // oper有三种操作 add,del,edit,
         switch (oper) {
             case "edit":
                 // 按st_id进行更改学生数据
                 if (id != null) {
 //                    student.setSt_id(id[0]);
-                	filesElectromyography.setExpid(Integer.valueOf(id[0]));
+                	filesOxygen.setExpid(Integer.valueOf(id[0]));
                 }
                 try {
-                    int editAffectedRow = filesElectromyographyMapper.edit(filesElectromyography);
+                    int editAffectedRow = filesOxygenMapper.edit(filesOxygen);
                     if (editAffectedRow == 1) {
                         return "success";
                     }
@@ -110,7 +116,13 @@ public class FilesEleServiceImpl implements FilesEleService {
                 // 会按st_id来删除，考虑到存在多选，此时主键id是数组
                 int count = 0;
                 for (int i = 0; i < id.length; i++) {
-                	filesElectromyographyMapper.del(id[i]);
+                	int expid = Integer.parseInt(id[i]);
+                	String url = filesOxygenMapper.getPathByExpid(expid);
+                	System.out.println(url);
+//                	url = url.substring(0, url.lastIndexOf("/"));
+                	filesOxygenMapper.del(id[i]);
+                	File file = new File(url);
+                	file.delete();
                     count++;
                 }
                 String str = count + "条成功删除" + (id.length - count) + "条删除失败";
@@ -118,9 +130,9 @@ public class FilesEleServiceImpl implements FilesEleService {
                 return str;
             case "add":
                 // 新增对象
-                System.out.println(filesElectromyography.toString());
+                System.out.println(filesOxygen.toString());
                 try {
-                    int addAffectedRow = filesElectromyographyMapper.add(filesElectromyography);
+                    int addAffectedRow = filesOxygenMapper.add(filesOxygen);
                     if (addAffectedRow == 1) {
                         return "success";
                     }
@@ -135,8 +147,8 @@ public class FilesEleServiceImpl implements FilesEleService {
 	public void download(int expid, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
         State state = new State();
-        String path = filesElectromyographyMapper.getPathByExpid(expid);
-        String filename = filesElectromyographyMapper.getFile_name(expid);
+        String path = filesOxygenMapper.getPathByExpid(expid);
+        String filename = filesOxygenMapper.getFile_name(expid);
         //获取输入流
         InputStream bis = new BufferedInputStream(new FileInputStream(new File(path)));
         String fileName = URLEncoder.encode(filename, "utf-8");
@@ -152,5 +164,7 @@ public class FilesEleServiceImpl implements FilesEleService {
         out.close();
 		
 	}
+
+	
 
 }

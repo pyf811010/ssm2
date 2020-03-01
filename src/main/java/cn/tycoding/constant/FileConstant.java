@@ -1,8 +1,11 @@
 package cn.tycoding.constant;
 
 public class FileConstant {
-    //文件上传基地址
+    //原始数据文件上传基地址
     public static final String FILE_UPLOAD_URL = "D:/其他/谷歌浏览器/SDDB";
+    
+    //修改数据文件上传基地址
+    public static final String UPDATE_FILE_UPLOAD_URL = "D:/其他/谷歌浏览器/ssm2";
 
     //头像的保存地址
     public static final String PHOTO_UPLOAD_URL = FILE_UPLOAD_URL + "/photo";

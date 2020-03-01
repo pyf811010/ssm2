@@ -59,7 +59,7 @@
 								<a href="/views/index.html">首页</a>
 							</li>
 
-							<li class="active">肌电数据文件信息管理</li>
+							<li class="active">运动学与动力学数据文件修改信息管理</li>
 						</ul>
 						<!-- /.breadcrumb -->
 
@@ -187,8 +187,8 @@
 		</script>
 
 		<script type="text/javascript">
-		function Modify(expid) { 
-			window.open("/ele/download/" + expid, "_blank");
+		function Modify(u_id) { 
+			window.open("/KandUpdate/download/" + u_id);
 	       }  
 		
 		
@@ -216,12 +216,12 @@
 				jQuery(grid_selector).jqGrid({
 					//direction: "rtl",
 
-					url: "/ele/findsome",
+					url: "/KandUpdate/findsome",
 
 					//data: grid_data,
 					datatype: "json",
 					height: 400,
-					colNames: ['操作','下载', '', 'ID', '关联查询ID', '文件名','文件地址'],
+					colNames: ['操作','下载', '', 'ID', '文件名', '修改内容', '修改时间', '文件地址'],
 					colModel: [{
 							name: 'op',
 							index: 'op',
@@ -250,9 +250,10 @@
 						{
 							name: 'operate', 
 							index: 'operate',
+							search: false,
 							width: 55,
 							formatter: function (value, grid, rows, state) {
-								       return "<a href=\"#\" style=\"color:#f60\" onclick=\"Modify(" + rows.expid + ")\"><img src='image/b.png'></a>" }  
+								       return "<span=\"#\" style=\"color:#f60\" onclick=\"Modify(" + rows.u_id + ")\"><img src='image/b.png'></span>" }  
 			            },
 	                    
 						{
@@ -266,11 +267,11 @@
 						},
 
 						{
-							name: 'expid',
-							index: 'expid',
+							name: 'u_id',
+							index: 'u_id',
 							width: 100,
 							key: true,
-							editable: true,
+							editable: false,
 							edittype: "textarea",
 							editoptions: {
 								rows: "2",
@@ -279,9 +280,9 @@
 
 						},
 						{
-							name: 'id_query',
-							index: 'id_query',
-							width: 100,
+							name: 'file_name',
+							index: 'file_name',
+							width: 200,
 							sortable: false,
 							editable: true,
 							edittype: "textarea",
@@ -292,9 +293,9 @@
 						},
 						
 						{
-							name: 'file_name',
-							index: 'file_name',
-							width: 450,
+							name: 'comment',
+							index: 'comment',
+							width: 500,
 							sortable: false,
 							editable: true,
 							edittype: "textarea",
@@ -304,9 +305,22 @@
 							}
 						},
 						{
+							name: 'updatetime',
+							index: 'updatetime',
+							width: 200,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},
+						
+						{
 							name: 'url',
 							index: 'url',
-							width: 500,
+							width: 250,
 							sortable: false,
 							editable: true,
 							edittype: "textarea",
@@ -342,8 +356,8 @@
 						}, 0);
 					},
 
-					editurl: "/ele/handle", //nothing is saved
-					caption: "肌电数据文件信息管理" //表名
+					editurl: "/KandUpdate/handle", //nothing is saved
+					caption: "运动学与动力学数据文件修改信息管理" //表名
 
 
 				});
