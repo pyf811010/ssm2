@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/assets/css/bootstrap-datepicker3.min.css"/>
     <link rel="stylesheet" href="/assets/css/bootstrap-timepicker.min.css"/>
     <link rel="stylesheet" href="/assets/css/daterangepicker.min.css"/>
+    <link rel="stylesheet" href="/assets/css/loading.css" />
     <link rel="stylesheet" href="/assets/css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" href="/assets/css/bootstrap-colorpicker.min.css"/>
 
@@ -53,6 +54,9 @@
 </head>
 
 <body class="no-skin">
+<div id="loading">
+    	<img src="/assets/css/images/loading.gif">
+	</div>
 <div id="navbar" class="navbar navbar-default          ace-save-state">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
@@ -443,39 +447,62 @@
 
 <!--文件上传-->
 <script type="text/javascript">
+	function hideloading(){
+		$("#loading").attr("style","display:none;");
+		console.log("hide");
+	}
+	function showloading(){
+		$("#loading").attr("style","display:block;");
+		console.log("show");
+	}
     jQuery(function ($) {
         $("#fileCommit").click(function (e) {
+        	
         	// e.preventDefault();
             var formData = new FormData();
             var files = $("#files")[0].files;
-            for (var i = 0; i < files.length; i++) {
-                formData.append("files", files[i]);
-            }
+            
+            
+            
             /*formData.append("fi_user_id", $.cookie("us_id"));
             formData.append("fi_grade", $("#fi_grade").val());
             formData.append("fi_major", $("#fi_major").val());
             //文件简介
             formData.append("fi_info", $("#fi_info").val());
             formData.append("fi_course", $("#fi_course").val())*/
-            $.ajax({
-                type: "post",
-                url: "/excel/upload",
-                data: formData,
-                cache: false,
-                processData: false,
-                contentType: false,
-
-                success: function (data) {
-                    if (data.success) {
-                        alert("上传成功!");
-                    }
-                },
-                error: function (err) {
-                    alert("文件上传遇到错误!" + JSON.stringify(err));
-                    alert("上传失败!");
+            if (files.length !=  0){
+            	for (var i = 0; i < files.length; i++) {
+                    formData.append("files", files[i]);
                 }
+            	showloading();
+                $.ajax({
+                    type: "post",
+                    url: "/excel/upload",
+                    data: formData,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
 
-            });
+                    success: function (data) {
+                    	console.log(data.success);
+    					if (data.success!='0') {
+    						hideloading();
+    						if (data.success == 2) alert(data.info);
+    					} else {
+    						hideloading();
+    						alert(data.info);
+    					}
+                    },
+                    error: function (err) {
+                    	hideloading();
+                        alert("文件上传遇到错误!" + JSON.stringify(err));
+                        alert("上传失败!");
+                    }
+
+                });
+            } else {
+            	alert("请选择上传的文件");
+            }
         })
     });
 </script>

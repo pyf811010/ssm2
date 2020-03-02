@@ -202,12 +202,17 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 				String preecUrl = fs.getPreec();
 				String egcontrastUrl = fs.getEgcontrast();
 				if (preecUrl!=null) {
+					System.out.println("探测到前置实验表");
 					if (!this.preecMap.containsKey(fs.getDatetime())) {
+						System.out.println("开始解析Datetime:" + fs.getDatetime() + "的前置实验表");
 						try {
 							getAnalyzedPreec(fs.getDatetime(), preecUrl);
 						}catch(Exception e) {
 							System.out.println("解析前置实验条件表出现问题");
 							e.printStackTrace();
+							state.setInfo("解析Datetime:"+fs.getDatetime()+"实验:"+originexpid+"的前置实验条件时出现问题，停止改所有"+originexpid+"的实验插\n");
+							state.setInfo(e.toString());
+							continue;
 						}	
 					}
 				}
@@ -221,6 +226,9 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 						}catch(Exception e) {
 							System.out.println("解析肌肉对照表出现问题");
 							e.printStackTrace();
+							state.setInfo("解析Datetime:"+fs.getDatetime()+"实验:"+originexpid+"的肌肉对照表时出现问题，停止改所有"+originexpid+"的实验插\n");
+							state.setInfo(e.toString());
+							continue;
 						}	
 					}
 				}
@@ -229,224 +237,104 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 					if (fs.getMc() != null) {
 						query.setExpid_mc(expid);
 						//realExpidByDate = fs.getMc().split("\\/")[4].split("_")[1];
-						try {
-							System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的mc表");
-							insertFilesMC(new FilesMontionCapture(expid, fs.getMc(), expid, null));
-						} catch (Exception e) {
-							state.setInfo("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的mc表时出现问题");
-							System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的mc表时出现问题");
-							e.printStackTrace();
-							System.out.println("开始删除");
-							filesMCMapper.deleteByPrimaryKey(expid);
-							System.out.println("删除结束");
-							continue;
-						}
+						System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的mc表");
+						insertFilesMC(new FilesMontionCapture(expid, fs.getMc(), expid, null));
 					}
 					if (fs.getSm() != null) {
 						query.setExpid_sm(expid);
 						//realExpidByDate = fs.getSm().split("\\/")[4].split("_")[1];
-						try {
-							System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的sm表");
-							insertFilesSM(new FilesSlotMachine(expid, fs.getSm(), expid, null));
-						} catch (Exception e) {
-							state.setInfo("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的sm表时出现问题");
-							System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的sm表时出现问题");
-							e.printStackTrace();
-							System.out.println("开始删除");
-							filesMCMapper.deleteByPrimaryKey(expid);
-							filesSMMapper.deleteByPrimaryKey(expid);
-							System.out.println("删除结束");
-							continue;
-						}
+						System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的sm表");
+						insertFilesSM(new FilesSlotMachine(expid, fs.getSm(), expid, null));
+
 						
 					}
 					if (fs.getKand() != null) {
 						query.setExpid_kd(expid);
 						//realExpidByDate = fs.getKand().split("\\/")[4].split("_")[1];
-						try {
-							System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的kand表");
-							insertFilesKand(new FilesKand(expid, fs.getKand(), expid, null));
-						} catch (Exception e) {
-							state.setInfo("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的kand表时出现问题");
-							System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的kand表时出现问题");
-							e.printStackTrace();
-							System.out.println("开始删除");
-							filesMCMapper.deleteByPrimaryKey(expid);
-							filesSMMapper.deleteByPrimaryKey(expid);
-							filesKandMapper.deleteByPrimaryKey(expid);
-							System.out.println("删除结束");
-							continue;
-						}
+						System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的kand表");
+						insertFilesKand(new FilesKand(expid, fs.getKand(), expid, null));
+
 					}
 					if (fs.getOx() != null) {
 						query.setExpid_ox(expid);
-						try {
-							System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的ox表");
-							insertFilesOxygen(new FilesOxygen(expid, fs.getOx(), expid, null));
-						} catch (Exception e) {
-							state.setInfo("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的ox表时出现问题");
-							System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的ox表时出现问题");
-							e.printStackTrace();
-							System.out.println("开始删除");
-							filesMCMapper.deleteByPrimaryKey(expid);
-							filesSMMapper.deleteByPrimaryKey(expid);
-							filesKandMapper.deleteByPrimaryKey(expid);
-							filesOxygenMapper.deleteByPrimaryKey(expid);
-							System.out.println("删除结束");
-							continue;
-						}
+						System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的ox表");
+						insertFilesOxygen(new FilesOxygen(expid, fs.getOx(), expid, null));
 					}
 					if (fs.getEle() != null) {
 						query.setExpid_eg(expid);
 						//realExpidByDate = fs.getEle().split("\\/")[4].split("_")[1];
-						try {
-							System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的Ele表");
-							insertFilesEle(new FilesElectromyography(expid, fs.getEle(), expid, null));
-						} catch (Exception e) {
-							state.setInfo("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的Ele表时出现问题");
-							System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的Ele表时出现问题");
-							e.printStackTrace();
-							System.out.println("开始删除");
-							filesMCMapper.deleteByPrimaryKey(expid);
-							filesSMMapper.deleteByPrimaryKey(expid);
-							filesKandMapper.deleteByPrimaryKey(expid);
-							filesOxygenMapper.deleteByPrimaryKey(expid);
-							filesMCMapper.deleteByPrimaryKey(expid);
-							System.out.println("删除结束");
-							continue;
-						}
+						System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的Ele表");
+						insertFilesEle(new FilesElectromyography(expid, fs.getEle(), expid, null));
 					}
 					if (fs.getFpa() != null) {
 						query.setExpid_fpa(expid);
 						//realExpidByDate = fs.getFpa().split("\\/")[4].split("_")[1];
-						try {
-							System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的fpa表");
-							insertFilesFPA(new FilesFootPressureAsc(expid, fs.getFpa(), expid, null));
-						} catch (Exception e) {
-							state.setInfo("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的fpa表时出现问题");
-							System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的fpa表时出现问题");
-							e.printStackTrace();
-							System.out.println("开始删除");
-							filesMCMapper.deleteByPrimaryKey(expid);
-							filesSMMapper.deleteByPrimaryKey(expid);
-							filesKandMapper.deleteByPrimaryKey(expid);
-							filesOxygenMapper.deleteByPrimaryKey(expid);
-							filesECMapper.deleteByPrimaryKey(expid);
-							filesFPAMapper.deleteByPrimaryKey(expid);
-							System.out.println("删除结束");
-							continue;
-						}
+						System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的fpa表");
+						insertFilesFPA(new FilesFootPressureAsc(expid, fs.getFpa(), expid, null));
 					}
 					if (fs.getFpf() != null) {
 						query.setExpid_fpf(expid);
 						//realExpidByDate = fs.getFpf().split("\\/")[4].split("_")[1];
-						try {
-							System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的fpf表");
-							insertFilesFPF(new FilesFootPressureFgt(expid, fs.getFpf(), expid, null));
-						} catch (Exception e) {
-							state.setInfo("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的fpf表时出现问题");
-							System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的fpf表时出现问题");
-							e.printStackTrace();
-							System.out.println("开始删除");
-							filesMCMapper.deleteByPrimaryKey(expid);
-							filesSMMapper.deleteByPrimaryKey(expid);
-							filesKandMapper.deleteByPrimaryKey(expid);
-							filesOxygenMapper.deleteByPrimaryKey(expid);
-							filesECMapper.deleteByPrimaryKey(expid);
-							filesFPAMapper.deleteByPrimaryKey(expid);
-							filesFPFMapper.deleteByPrimaryKey(expid);
-							System.out.println("删除结束");
-							continue;
-						}
+						System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的fpf表");
+						insertFilesFPF(new FilesFootPressureFgt(expid, fs.getFpf(), expid, null));
 					}
 					Preec tmpPreec = null;
 					if (this.preecMap.containsKey(fs.getDatetime())) {
 						if (this.preecMap.get(fs.getDatetime()).containsKey(originexpid)) {
 							System.out.println("Datetime:"+fs.getDatetime()+"存在preec");
-							tmpPreec = this.preecMap.get(fs.getDatetime()).get(originexpid);
-							
+							tmpPreec = this.preecMap.get(fs.getDatetime()).get(originexpid);			
 							tmpPreec.setExpid(expid);
 							tmpPreec.setId_query(expid);
-							try {
-								PreecMapper.insert(tmpPreec);
-							} catch (Exception e) {
-								state.setInfo("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的preec表时出现问题");
-								System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的preec表时出现问题");
-								e.printStackTrace();
-								System.out.println("开始删除");
-								filesMCMapper.deleteByPrimaryKey(expid);
-								filesSMMapper.deleteByPrimaryKey(expid);
-								filesKandMapper.deleteByPrimaryKey(expid);
-								filesOxygenMapper.deleteByPrimaryKey(expid);
-								filesECMapper.deleteByPrimaryKey(expid);
-								filesFPAMapper.deleteByPrimaryKey(expid);
-								filesFPFMapper.deleteByPrimaryKey(expid);
-								PreecMapper.deleteByPrimaryKey(expid);
-								System.out.println("删除结束");
-								continue;
-							} 
+							System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的preec表");
+							PreecMapper.insert(tmpPreec);
 							query.setId_preec(expid);
-						} else System.out.println("Datetime:"+fs.getDatetime()+"不存在preec");
-					} else System.out.println("Datetime:"+fs.getDatetime()+"不存在preec");
+						} else {
+							System.out.println("Datetime:"+fs.getDatetime()+"不存在preec");
+							state.setInfo("Datetime:"+fs.getDatetime()+"实验:"+originexpid+"的无前置实验表，请后期加入\n");
+						}
+					} else {
+						System.out.println("Datetime:"+fs.getDatetime()+"不存在preec");
+						state.setInfo("Datetime:"+fs.getDatetime()+"实验:"+originexpid+"的无前置实验表，请后期加入\n");
+					}
 					EgContrast tmpEgContrast = null;
 					System.out.println("OriginExpid:"+originexpid);
 					if (this.egcontrastMap.containsKey(fs.getDatetime())) {
 						if (egcontrastMap.get(fs.getDatetime()).containsKey(originexpid)) {
 							System.out.println("Datetime:"+fs.getDatetime()+"实验:"+originexpid+"存在Egcontrast");
 							tmpEgContrast = this.egcontrastMap.get(fs.getDatetime()).get(originexpid);
-							
 							tmpEgContrast.setExpid(expid);
 							tmpEgContrast.setId_query(expid);
-							try {
-								egContrastMapper.insert(tmpEgContrast);
-							} catch (Exception e) {
-								state.setInfo("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的egcontrast表时出现问题");
-								System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的egcontrast表时出现问题");
-								e.printStackTrace();
-								System.out.println("开始删除");
-								filesMCMapper.deleteByPrimaryKey(expid);
-								filesSMMapper.deleteByPrimaryKey(expid);
-								filesKandMapper.deleteByPrimaryKey(expid);
-								filesOxygenMapper.deleteByPrimaryKey(expid);
-								filesECMapper.deleteByPrimaryKey(expid);
-								filesFPAMapper.deleteByPrimaryKey(expid);
-								filesFPFMapper.deleteByPrimaryKey(expid);
-								PreecMapper.deleteByPrimaryKey(expid);
-								egContrastMapper.deleteByPrimaryKey(expid);
-								System.out.println("删除结束");
-								continue;
-							} 
+							state.setInfo("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的egcontrast表");
+							egContrastMapper.insert(tmpEgContrast);
 							query.setExpid_eg_contrast(expid);
-						} else System.out.println("Datetime:"+fs.getDatetime()+"实验:"+originexpid+"不存在Egcontrast");
-					} else System.out.println("Datetime:"+fs.getDatetime()+"实验:"+originexpid+"不存在Egcontrast");
-					try {
-						insertQuery(query);
-					} catch (Exception e) {
-						state.setInfo("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的query表时出现问题");
-						System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的query表时出现问题");
-						e.printStackTrace();
-						System.out.println("开始删除");
-						filesMCMapper.deleteByPrimaryKey(expid);
-						filesSMMapper.deleteByPrimaryKey(expid);
-						filesKandMapper.deleteByPrimaryKey(expid);
-						filesOxygenMapper.deleteByPrimaryKey(expid);
-						filesECMapper.deleteByPrimaryKey(expid);
-						filesFPAMapper.deleteByPrimaryKey(expid);
-						filesFPFMapper.deleteByPrimaryKey(expid);
-						PreecMapper.deleteByPrimaryKey(expid);
-						egContrastMapper.deleteByPrimaryKey(expid);
-						queryMapper.deleteByPrimaryKey(expid);
-						System.out.println("删除结束");
-						continue;
-					} 
-					
-					//System.out.println("realExpidByDate:"+realExpidByDate);
+						} else {
+							System.out.println("Datetime:"+fs.getDatetime()+"不存在egcontrast");
+							state.setInfo("Datetime:"+fs.getDatetime()+"实验:"+originexpid+"的无肌肉对照表，若该次有肌电数据，请后期加入\n");
+						}
+					} else {
+						System.out.println("Datetime:"+fs.getDatetime()+"不存肌肉对照表");
+						state.setInfo("Datetime:"+fs.getDatetime()+"实验:"+originexpid+"的无肌肉对照表，若该次有肌电数据，请后期加入\n");
+					}
+					System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的query表");
+					insertQuery(query);
 				} catch (Exception e) {
 					e.printStackTrace();
-					state.setInfo("导入"+fs.getDatetime()+"日,第"+originexpid+"次实验出现问题，问题如下\n");
+					System.out.println("开始删除");
+					filesMCMapper.deleteByPrimaryKey(expid);
+					filesSMMapper.deleteByPrimaryKey(expid);
+					filesKandMapper.deleteByPrimaryKey(expid);
+					filesOxygenMapper.deleteByPrimaryKey(expid);
+					filesECMapper.deleteByPrimaryKey(expid);
+					filesFPAMapper.deleteByPrimaryKey(expid);
+					filesFPFMapper.deleteByPrimaryKey(expid);
+					PreecMapper.deleteByPrimaryKey(expid);
+					egContrastMapper.deleteByPrimaryKey(expid);
+					queryMapper.deleteByPrimaryKey(expid);
+					System.out.println("删除结束");
+					state.setInfo("在插入Datetime:"+fs.getDatetime()+" expid:"+originexpid+"的实验室出现问题,已回滚该id的所有实验\n");
 					state.setInfo(e.toString());
 					continue;
-				} 
+				}
 				state.setSuccess(1);
 			}
 		}
