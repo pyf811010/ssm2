@@ -7,6 +7,7 @@
     <id column="expid" jdbcType="INTEGER" property="expid" />
     <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="id_query" jdbcType="INTEGER" property="id_query" />
+    <result column="files_name" jdbcType="VARCHAR" property="files_name" />
   </resultMap>
 
   <!-- 数据库中得字段 -->
@@ -72,10 +73,6 @@
     <include refid="Base_Column_List" />
     from files_kand
     where id_query = #{idQuery,jdbcType=INTEGER}
-  </select>
-  <select id="selectMaxExpid" resultType="integer">
-		select
-		IFNULL(max(expid),0) from files_kand
   </select>
   
   <!-- 第一个参数为页数，第二个参数为每页多少行 -->

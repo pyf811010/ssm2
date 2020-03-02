@@ -27,7 +27,7 @@
   </select>
   <select id="selectMaxExpid" resultType="integer">
 		select
-		IFNULL(max(expid),0) from files_montion_capture
+		IFNULL(max(expid),0) from query
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from query
@@ -45,6 +45,23 @@
       #{expid_eg_contrast,jdbcType=INTEGER}, #{expid_fpa,jdbcType=INTEGER}, #{expid_fpf,jdbcType=INTEGER}
       )
   </insert>
+  
+  <insert id="insertWithIdReturned" parameterType="cn.tycoding.pojo.Query" useGeneratedKeys="true">
+	insert into query (expid, datetime, id_preec, 
+      expid_mc, expid_sm, expid_kd, 
+      name_kand, expid_ox, expid_eg, 
+      expid_eg_contrast, expid_fpa, expid_fpf
+      )
+    values (#{expid,jdbcType=INTEGER}, #{datetime,jdbcType=VARCHAR}, #{id_preec,jdbcType=INTEGER}, 
+      #{expid_mc,jdbcType=INTEGER}, #{expid_sm,jdbcType=INTEGER}, #{expid_kd,jdbcType=INTEGER}, 
+      #{name_kand,jdbcType=VARCHAR}, #{expid_ox,jdbcType=INTEGER}, #{expid_eg,jdbcType=INTEGER}, 
+      #{expid_eg_contrast,jdbcType=INTEGER}, #{expid_fpa,jdbcType=INTEGER}, #{expid_fpf,jdbcType=INTEGER}
+      )
+	<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="expid">
+	SELECT LAST_INSERT_ID() AS id
+	   </selectKey>
+	</insert>
+
   <insert id="insertSelective" parameterType="cn.tycoding.pojo.Query">
     insert into query
     <trim prefix="(" suffix=")" suffixOverrides=",">

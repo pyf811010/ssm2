@@ -1,22 +1,35 @@
 package cn.tycoding.pojo;
 
 public class Preec {
-    private Integer expid;
+    private Integer expid=null;
 
-    private Integer id_query;
+    private Integer id_query=null;
 
-    private Integer id_subjects;
+    private Integer id_subjects=null;
 
-    private String motion_capture_info; //动补数据信息
+    private String motion_capture_info=null; //动补数据信息
     
-    private String slot_machine_info; //跑台数据信息
+    private String slot_machine_info=null; //跑台数据信息
     
-    private String asc_info; //足底压力数据信息
+    private String asc_info=null; //足底压力数据信息
     
-    private String fgt_info; //足底压力合力大小、位置
+    private String fgt_info=null; //足底压力合力大小、位置
     
-    private String elec_info; //肌电数据信息
+    private String elec_info=null; //肌电数据信息
     
+    public Preec() {
+    	
+    }
+    public Preec(Integer expid, Integer id_query, Integer id_subjects ,String motion_capture_info,String slot_machine_info,String asc_info,String fgt_info,String elec_info){
+    	this.expid = expid;
+    	this.id_query = id_query;
+    	this.id_subjects =  id_subjects;
+    	this.motion_capture_info = motion_capture_info;
+    	this.slot_machine_info = slot_machine_info;
+    	this.asc_info = asc_info;
+    	this.fgt_info = fgt_info;
+    	this.elec_info = elec_info;
+    }
     public String getMotion_capture_info() {
 		return motion_capture_info;
 	}

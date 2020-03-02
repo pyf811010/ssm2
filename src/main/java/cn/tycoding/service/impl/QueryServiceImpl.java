@@ -37,12 +37,20 @@ public class QueryServiceImpl implements QueryService {
 	
 	@Override 
 	public int SelectMaxExpid() {
-		return queryMapper.selectMaxExpid();
+		Integer maxid = queryMapper.selectMaxExpid();
+		if (maxid == null) {
+			maxid = -1;
+		}
+		return maxid;
 	}
 	
 	@Override
 	public void insert(Query record) {
 		queryMapper.insert(record);
+	}
+	@Override
+	public int insertAndReturnExpid(Query record) {
+		return queryMapper.insertWithIdReturned(record);
 	}
 
 }

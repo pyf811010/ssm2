@@ -3,9 +3,7 @@ package cn.tycoding.mapper;
 import java.util.List;
 
 import cn.tycoding.pojo.FilesMontionCapture;
-/*
- * 动补数据表
- */
+
 public interface FilesMontionCaptureMapper {
     int deleteByPrimaryKey(Integer expid);
 

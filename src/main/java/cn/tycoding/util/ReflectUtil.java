@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class ReflectUtil {
 
-	public static void setValues(Object model, List<Object> valueList) {
+	public static void setKandValues(Object model, List<Object> valueList) {
 
 		Field[] field = model.getClass().getDeclaredFields(); // 获取实体类的所有属性，返回Field数组
 		try {

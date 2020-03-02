@@ -1,5 +1,8 @@
 package cn.tycoding.util;
-
+/**
+ * @author lsy
+ * @Funtion 读取excel文件，入口getListByExcel(文件路径，开始行(excel中的行标)),返回<sheet-list <row-list <column-list>>>
+ */
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.io.InputStream;
@@ -12,8 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.tree.ExpandVetoException;
-
+import cn.tycoding.pojo.EgContrast;
 import cn.tycoding.pojo.ExcelBean;
 import org.apache.http.client.utils.DateUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -26,6 +28,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.config.YamlMapFactoryBean;
 
 import ch.qos.logback.core.pattern.color.ANSIConstants;
 
@@ -38,7 +41,7 @@ public class SmallExcelReaderUtil {
     /**
      * Excel导入
      */
-    public static List<List<List<Object>>> getListByExcel(String filePath,int startrow,int startcol) throws Exception {
+    public static List<List<List<Object>>> getListByExcel(String filePath,int startrow) throws Exception {
     	List<List<List<Object>>> ansList = new ArrayList<List<List<Object>>>();
     	List<List<Object>> list = null;
         // 创建Excel工作薄
@@ -50,11 +53,7 @@ public class SmallExcelReaderUtil {
         } else if (excel2007U.equals(fileType)) {
             work = new XSSFWorkbook(instr); // 2007+
         } else {
-        	try {
-           	 work = new XSSFWorkbook(instr); // 2007+
-           	} catch (Exception e) {
-           		throw e;
-           	}
+            throw new Exception("解析的文件格式有误！");
         }
 
         if (null == work) {
@@ -65,7 +64,9 @@ public class SmallExcelReaderUtil {
         Cell cell = null;
        
         // 遍历Excel中所有的sheet
+        //System.out.println("开始解析excel");
         for (int i = 0; i < work.getNumberOfSheets(); i++) {
+        	
             sheet = work.getSheetAt(i);
             if (sheet == null) {
                 continue;
@@ -73,25 +74,42 @@ public class SmallExcelReaderUtil {
             // 遍历当前sheet中的所有行
             // 包含头部，所以要小于等于最后一列数,这里也可以在初始值加上头部行数，以便跳过头部
             list = new ArrayList<List<Object>>();
+            System.out.println("共"+sheet.getLastRowNum()+"行");
+            int totalColumn = sheet.getRow(0).getLastCellNum();
             for (int j = sheet.getFirstRowNum()+startrow-1; j <= sheet.getLastRowNum(); j++) {
                 // 读取一行
+            	//System.out.println("	第"+j+"行");
                 row = sheet.getRow(j);
                 // 去掉空行和表头
                 if (row == null || row.getFirstCellNum() == j) {
                     continue;
                 }
                 // 遍历所有的列
+                //System.out.println("共"+row.getLastCellNum()+"行");
                 List<Object> li = new ArrayList<Object>();
-                for (int y = row.getFirstCellNum()+startcol-1; y < row.getLastCellNum(); y++) {
-                    cell = row.getCell(y);
-                    li.add(getCellValue(cell));
+                for (int y = row.getFirstCellNum(); y < row.getLastCellNum(); y++) {
+                	//System.out.println("		解析第"+y+"列：");
+                	try{	
+						cell = row.getCell(y);
+						//System.out.println("		第"+y+"列："+getCellValue(cell));
+	                    li.add(getCellValue(cell));
+					}catch(Exception e){
+						//System.out.println("		捕捉到空cell");	
+						li.add("");
+					}
+                    
+                }
+                if (totalColumn > row.getLastCellNum()) {
+                	for (int y = 0; y < totalColumn -row.getLastCellNum(); y++) {
+                		li.add("");
+                	}
                 }
                 list.add(li);
             }
             ansList.add(list);
             
         }
-        
+        //System.out.println("解析excel完成");
         //关闭文件流
         if(work != null)
         	work.close();
@@ -207,10 +225,149 @@ public class SmallExcelReaderUtil {
                 }
                 XSSFCell cell = row.createCell(i);
                 cell.setCellValue(value);
-                cell.setCellType(CellType.STRING);
+                
             }
             rowindex++;
         }
+    }
+    
+    public static List<EgContrast> readEGcontrasts(String filePath, int startrow) throws Exception {
+    	List<EgContrast> ansList = new ArrayList<EgContrast>();
+    	List<List<List<Object>>> excel = getListByExcel(filePath, startrow);
+		for (List<List<Object>> sheet : excel) {
+			for (List<Object> row : sheet) {
+				System.out.println("rowsize:"+row.size());
+				int j = 1;
+				String cell = null;
+				EgContrast egContrast = new EgContrast();
+				Float floattmppreexpid = Float.parseFloat((String) row.get(0));
+				Integer tmpexpid = floattmppreexpid.intValue() ;
+				System.out.println("tmpexpid"+ tmpexpid);
+				egContrast.setExpid(tmpexpid);
+		    	if (!(cell = row.get(j++).toString()).equals("")){
+		    		System.out.println("cell1"+cell);
+		            egContrast.setSensor01(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            egContrast.setSensor02(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){	
+		            egContrast.setSensor03(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            egContrast.setSensor04(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            egContrast.setSensor05(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            egContrast.setSensor06(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            egContrast.setSensor07(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            egContrast.setSensor08(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            egContrast.setSensor09(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            egContrast.setSensor10(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor11(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor12(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor13(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor14(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor15(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor16(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor17(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor18(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor19(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor20(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor21(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor22(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor23(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor24(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor25(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor26(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor27(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor28(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor29(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor30(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor31(cell);
+		        }
+		        if (!(cell = row.get(j++).toString()).equals("")){
+		            
+		            egContrast.setSensor32(cell);
+		        }
+		        
+		        ansList.add(egContrast);
+			}
+		}
+	    return ansList;
     }
 }
 

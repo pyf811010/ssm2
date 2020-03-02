@@ -444,7 +444,8 @@
 <!--文件上传-->
 <script type="text/javascript">
     jQuery(function ($) {
-        $("#fileCommit").click(function () {
+        $("#fileCommit").click(function (e) {
+        	// e.preventDefault();
             var formData = new FormData();
             var files = $("#files")[0].files;
             for (var i = 0; i < files.length; i++) {

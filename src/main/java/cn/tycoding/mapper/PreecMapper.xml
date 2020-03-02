@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.tycoding.mapper.PreecMapper">
-
+  <resultMap id="BaseResultMap" type="cn.tycoding.pojo.Preec">
+    <id column="expid" jdbcType="INTEGER" property="expid" />
+    <result column="id_query" jdbcType="INTEGER" property="id_query" />
+    <result column="id_subjects" jdbcType="INTEGER" property="id_subjects" />
+    <result column="motion_capture_info" jdbcType="VARCHAR" property="motion_capture_info" />
+    <result column="slot_machine_info" jdbcType="VARCHAR" property="slot_machine_info" />
+    <result column="asc_info" jdbcType="VARCHAR" property="asc_info" />
+    <result column="fgt_info" jdbcType="VARCHAR" property="fgt_info"/>
+    <result column="elec_info" jdbcType="VARCHAR" property="elec_info" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    expid,id_query,id_subjects,motion_capture_info,slot_machine_info,asc_info,fgt_info,elec_info
+  </sql>
     <!-- 第一个参数为页数，第二个参数为每页多少行 -->
     <select id="findByPage" resultType="cn.tycoding.pojo.Preec">
 		select * from
@@ -34,13 +46,20 @@
 		insert into preec
 		values(#{expid},#{id_query},#{id_subjects},#{advance},#{remark},#{motion_capture_info},#{slot_machine_info},#{asc_info},#{fgt_info},#{elec_info});
 	</insert>
-
+	
+	<insert id="insert" parameterType="cn.tycoding.pojo.Preec">
+		insert into preec
+		values(#{expid},#{id_query},#{id_subjects},#{advance},#{remark},#{motion_capture_info},#{slot_machine_info},#{asc_info},#{fgt_info},#{elec_info});
+	</insert>
     <!-- 按学号删除学生 -->
     <delete id="del" parameterType="string">
 		delete from preec
 		where expid=#{expid}
 	</delete>
-
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from preec
+    where expid = #{expid,jdbcType=INTEGER}
+  	</delete>
     <!-- 按照filter的复杂条件查找 -->
     <select id="findByFilters" parameterType="string"
             resultType="cn.tycoding.pojo.Preec">

@@ -4,12 +4,14 @@ import cn.tycoding.pojo.FilesKand;
 import cn.tycoding.pojo.FilesOxygen;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.tycoding.pojo.FilesElectromyography;
 import cn.tycoding.pojo.FilesFolder;
 import cn.tycoding.pojo.FilesFootPressureAsc;
 import cn.tycoding.pojo.FilesFootPressureFgt;
 import cn.tycoding.pojo.FilesSlotMachine;
+import cn.tycoding.pojo.Preec;
 import cn.tycoding.pojo.Query;
 import cn.tycoding.pojo.State;
 
@@ -32,6 +34,10 @@ public interface FilesOrganizeService {
 	public void insertFilesSM(FilesSlotMachine record);
 	
 	public State insertByString(List<FilesFolder> filesfoldersList);
+	
+	public void getAnalyzedPreec(String Datetime, String preecUrl) throws Exception;
+	
+	public void getAnalyzedEgContrast(String Datetime, String egcontrastUrl) throws Exception;
 			
 
 }
