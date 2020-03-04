@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -102,6 +103,20 @@ public class AdminController {
     @RequestMapping(value = "/page")
     public String page() {
         return "view/page";
+    }
+    
+    /**
+     * 打开matlab可执行文件
+     */
+    @RequestMapping(value = "/open")
+    public void open() {
+    	Runtime runtime = Runtime.getRuntime();  
+    	try {
+			Process exec = runtime.exec("C:\\Users\\pyf\\Desktop\\lab_mo_cap\\for_testing\\lab_mo_cap.exe");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
     }
 
     /**

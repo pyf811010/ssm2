@@ -59,7 +59,7 @@
 								<a href="/views/index.html">首页</a>
 							</li>
 
-							<li class="active">运动学与动力学数据文件信息管理</li>
+							<li class="active">步态周期图像信息管理</li>
 						</ul>
 						<!-- /.breadcrumb -->
 
@@ -187,8 +187,19 @@
 		</script>
 
 		<script type="text/javascript">
-		function Modify(expid) { 
-			window.open("/FilesKand/download/" + expid, "_blank");
+		function Open(p_id) { 
+			$.ajax({
+				type: "post",
+				url: "/GaitCyclePic/open/",
+				dataType: "json",
+				data: {
+					"p_id": p_id
+				},
+			});
+	       }  
+		
+		function Modify(p_id) { 
+			window.open("/GaitCyclePic/download/" + p_id, "_blank");
 	       }  
 		
 		
@@ -216,12 +227,12 @@
 				jQuery(grid_selector).jqGrid({
 					//direction: "rtl",
 
-					url: "/FilesKand/findsome",
+					url: "/GaitCyclePic/findsome",
 
 					//data: grid_data,
 					datatype: "json",
 					height: 400,
-					colNames: ['操作','下载', '', 'ID', '关联查询ID', '文件名','文件地址'],
+					colNames: ['操作','查看','下载', '', 'ID', '文件名', '备注','文件地址'],
 					colModel: [{
 							name: 'op',
 							index: 'op',
@@ -252,7 +263,14 @@
 							index: 'operate',
 							width: 55,
 							formatter: function (value, grid, rows, state) {
-								       return "<a href=\"#\" style=\"color:#f60\" onclick=\"Modify(" + rows.expid + ")\"><img src='image/b.png'></a>" }  
+								       return "<a href=\"#\" style=\"color:#f60\" onclick=\"Open(" + rows.p_id + ")\">查看</a>" }  
+			            },
+						{
+							name: 'operate2', 
+							index: 'operate2',
+							width: 55,
+							formatter: function (value, grid, rows, state) {
+								       return "<a href=\"#\" style=\"color:#f60\" onclick=\"Modify(" + rows.p_id + ")\"><img src='image/b.png'></a>" }  
 			            },
 	                    
 						{
@@ -266,8 +284,8 @@
 						},
 
 						{
-							name: 'expid',
-							index: 'expid',
+							name: 'p_id',
+							index: 'p_id',
 							width: 100,
 							key: true,
 							editable: false,
@@ -279,8 +297,8 @@
 
 						},
 						{
-							name: 'id_query',
-							index: 'id_query',
+							name: 'name',
+							index: 'name',
 							width: 100,
 							sortable: false,
 							editable: true,
@@ -292,8 +310,8 @@
 						},
 						
 						{
-							name: 'files_name',
-							index: 'files_name',
+							name: 'remark',
+							index: 'remark',
 							width: 450,
 							sortable: false,
 							editable: true,
@@ -342,8 +360,8 @@
 						}, 0);
 					},
 
-					editurl: "/FilesKand/handle", //nothing is saved
-					caption: "运动学与动力学数据文件信息管理" //表名
+					editurl: "/GaitCyclePic/handle", //nothing is saved
+					caption: "步态周期图像信息管理" //表名
 
 
 				});

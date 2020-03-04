@@ -59,7 +59,7 @@
 								<a href="/views/index.html">首页</a>
 							</li>
 
-							<li class="active">运动学与动力学数据文件信息管理</li>
+							<li class="active">实验机器信息管理</li>
 						</ul>
 						<!-- /.breadcrumb -->
 
@@ -187,10 +187,6 @@
 		</script>
 
 		<script type="text/javascript">
-		function Modify(expid) { 
-			window.open("/FilesKand/download/" + expid, "_blank");
-	       }  
-		
 		
 			jQuery(function($) {
 				var grid_selector = "#grid-table";
@@ -216,12 +212,12 @@
 				jQuery(grid_selector).jqGrid({
 					//direction: "rtl",
 
-					url: "/FilesKand/findsome",
+					url: "/Machine/findsome",
 
 					//data: grid_data,
 					datatype: "json",
 					height: 400,
-					colNames: ['操作','下载', '', 'ID', '关联查询ID', '文件名','文件地址'],
+					colNames: ['操作', '', 'ID', '机器名称', '类型','备注'],
 					colModel: [{
 							name: 'op',
 							index: 'op',
@@ -248,14 +244,6 @@
 						},
 						
 						{
-							name: 'operate', 
-							index: 'operate',
-							width: 55,
-							formatter: function (value, grid, rows, state) {
-								       return "<a href=\"#\" style=\"color:#f60\" onclick=\"Modify(" + rows.expid + ")\"><img src='image/b.png'></a>" }  
-			            },
-	                    
-						{
 							name: '',
 							index: '',
 							width: 0.1,
@@ -266,8 +254,8 @@
 						},
 
 						{
-							name: 'expid',
-							index: 'expid',
+							name: 'm_id',
+							index: 'm_id',
 							width: 100,
 							key: true,
 							editable: false,
@@ -279,9 +267,9 @@
 
 						},
 						{
-							name: 'id_query',
-							index: 'id_query',
-							width: 100,
+							name: 'name',
+							index: 'name',
+							width: 300,
 							sortable: false,
 							editable: true,
 							edittype: "textarea",
@@ -292,9 +280,9 @@
 						},
 						
 						{
-							name: 'files_name',
-							index: 'files_name',
-							width: 450,
+							name: 'type',
+							index: 'type',
+							width: 350,
 							sortable: false,
 							editable: true,
 							edittype: "textarea",
@@ -304,8 +292,8 @@
 							}
 						},
 						{
-							name: 'url',
-							index: 'url',
+							name: 'remark',
+							index: 'remark',
 							width: 500,
 							sortable: false,
 							editable: true,
@@ -342,8 +330,8 @@
 						}, 0);
 					},
 
-					editurl: "/FilesKand/handle", //nothing is saved
-					caption: "运动学与动力学数据文件信息管理" //表名
+					editurl: "/Machine/handle", //nothing is saved
+					caption: "实验机器信息管理" //表名
 
 
 				});

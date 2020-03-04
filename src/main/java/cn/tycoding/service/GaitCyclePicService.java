@@ -10,16 +10,17 @@ import cn.tycoding.pojo.FilesKand;
 import cn.tycoding.pojo.GaitCyclePic;
 import cn.tycoding.pojo.ObjectQuery;
 
-public interface FilesKandService {
+public interface GaitCyclePicService {
 
 	ObjectQuery findByPage(Boolean _search, String filters, int page, int rows);
 
 	List find();
 
+	String handle(String oper, GaitCyclePic gaitCyclePic, String[] id);
 
-	void download(int expid, HttpServletResponse response) throws IOException;
+	void open(int expid) throws IOException;
 
-	String handle(String oper, FilesKand filesKand, String[] id);
+	void download(int p_id, HttpServletResponse response) throws IOException;
 
 	
 

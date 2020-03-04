@@ -113,17 +113,18 @@
 
     <update id="edit" parameterType="cn.tycoding.pojo.FilesKandUpdateinfo">
 	  update files_kand_updateinfo
-      set url = #{url},
-      updatetime = #{updatetime},
+      set
       file_name = #{file_name},
-       comment = #{comment}
+       comment = #{comment},
+      updatetime = #{updatetime},
+       url = #{url}
       where u_id = #{u_id}
 	</update>
 
     <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.FilesKandUpdateinfo">
 		insert into files_kand_updateinfo
-		values(#{u_id},#{url},#{updatetime},#{file_name},#{comment});
+		values(#{u_id},#{file_name},#{comment},#{updatetime},#{url});
 	</insert>
 
     <!-- 按学号删除学生 -->
