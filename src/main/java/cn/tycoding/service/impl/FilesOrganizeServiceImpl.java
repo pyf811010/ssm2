@@ -145,22 +145,28 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 					Float id_SubjectFloat = Float.parseFloat(id_SubjectString);
 					id_Subjects = id_SubjectFloat.intValue() ;
 				}
+				String id_MachineString = columns.get(2).equals("") ? null : columns.get(2).toString();
+				Integer id_Machine = null;
+				if (id_MachineString != null) {
+					Float id_MachineFloat = Float.parseFloat(id_MachineString);
+					id_Machine = id_MachineFloat.intValue() ;
+				}
 				//System.out.println("id_Subjects"+id_Subjects);
-				String advance = columns.get(2).equals("") ? null : columns.get(2).toString();
+				String advance = columns.get(8).equals("") ? null : columns.get(8).toString();
 				//System.out.println("advance"+advance);
-				String remark = columns.get(3).equals("") ? null : columns.get(3).toString();
+				String remark = columns.get(9).equals("") ? null : columns.get(9).toString();
 				//System.out.println("remark"+remark);
-				String motion_capture_info = columns.get(4).equals("") ? null : columns.get(4).toString();
+				String motion_capture_info = columns.get(3).equals("") ? null : columns.get(3).toString();
 				//System.out.println("motion_capture_info"+motion_capture_info);
-				String slot_machine_info = columns.get(5).equals("") ? null : columns.get(5).toString();
+				String slot_machine_info = columns.get(4).equals("") ? null : columns.get(4).toString();
 				//System.out.println("slot_machine_info"+slot_machine_info);
-				String asc_info = columns.get(6).equals("") ? null : columns.get(6).toString();
+				String asc_info = columns.get(5).equals("") ? null : columns.get(5).toString();
 				//System.out.println("asc_info"+asc_info);
-				String fgt_info = columns.get(7).equals("") ? null : columns.get(7).toString();
+				String fgt_info = columns.get(6).equals("") ? null : columns.get(6).toString();
 				//System.out.println("fgt_info"+fgt_info);
-				String elec_info = columns.get(8).equals("") ? null : columns.get(8).toString();
+				String elec_info = columns.get(7).equals("") ? null : columns.get(7).toString();
 				//System.out.println("elec_info "+elec_info);
-				Preec tmpPreec = new Preec(null, null, id_Subjects, motion_capture_info, slot_machine_info, asc_info, fgt_info, elec_info);
+				Preec tmpPreec = new Preec(null, null, id_Subjects,id_Machine, motion_capture_info, slot_machine_info, asc_info, fgt_info, elec_info,advance,remark);
 				//Preec(Integer expid, Integer id_query, Integer id_subjects ,String motion_capture_info,String slot_machine_info,String asc_info,String fgt_info,String elec_info)
 				this.preecMap.get(Datetime).put(preexpid, tmpPreec);
 			}

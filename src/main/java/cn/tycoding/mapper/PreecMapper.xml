@@ -36,7 +36,7 @@
 
     <update id="edit" parameterType="cn.tycoding.pojo.Preec">
 		update preec set
-		id_subjects=#{id_subjects},advance=#{advance},remark=#{remark},motion_capture_info=#{motion_capture_info},slot_machine_info=#{slot_machine_info},asc_info=#{asc_info},fgt_info=#{fgt_info},elec_info=#{elec_info}                                                
+		id_subjects=#{id_subjects},advance=#{advance},remark=#{remark},motion_capture_info=#{motion_capture_info},slot_machine_info=#{slot_machine_info},asc_info=#{asc_info},fgt_info=#{fgt_info},elec_info=#{elec_info},id_machine=#{id_machine}                                                
 		where
 		expid=#{expid}
 	</update>
@@ -44,12 +44,12 @@
     <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.Preec">
 		insert into preec
-		values(#{expid},#{id_query},#{id_subjects},#{advance},#{remark},#{motion_capture_info},#{slot_machine_info},#{asc_info},#{fgt_info},#{elec_info});
+		values(#{expid},#{id_query},#{id_machine},#{id_subjects},#{advance},#{remark},#{motion_capture_info},#{slot_machine_info},#{asc_info},#{fgt_info},#{elec_info});
 	</insert>
 	
 	<insert id="insert" parameterType="cn.tycoding.pojo.Preec">
 		insert into preec
-		values(#{expid},#{id_query},#{id_subjects},#{advance},#{remark},#{motion_capture_info},#{slot_machine_info},#{asc_info},#{fgt_info},#{elec_info});
+		values(#{expid},#{id_query},#{id_machine},#{id_subjects},#{advance},#{remark},#{motion_capture_info},#{slot_machine_info},#{asc_info},#{fgt_info},#{elec_info});
 	</insert>
     <!-- 按学号删除学生 -->
     <delete id="del" parameterType="string">

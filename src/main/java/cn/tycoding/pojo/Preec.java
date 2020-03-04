@@ -6,8 +6,10 @@ public class Preec {
     private Integer id_query=null;
 
     private Integer id_subjects=null;
-
-    private String motion_capture_info=null; //动补数据信息
+    
+    private Integer id_machine=null;
+    
+	private String motion_capture_info=null; //动补数据信息
     
     private String slot_machine_info=null; //跑台数据信息
     
@@ -20,16 +22,35 @@ public class Preec {
     public Preec() {
     	
     }
-    public Preec(Integer expid, Integer id_query, Integer id_subjects ,String motion_capture_info,String slot_machine_info,String asc_info,String fgt_info,String elec_info){
-    	this.expid = expid;
-    	this.id_query = id_query;
-    	this.id_subjects =  id_subjects;
-    	this.motion_capture_info = motion_capture_info;
-    	this.slot_machine_info = slot_machine_info;
-    	this.asc_info = asc_info;
-    	this.fgt_info = fgt_info;
-    	this.elec_info = elec_info;
-    }
+    
+
+	public Preec(Integer expid, Integer id_query, Integer id_subjects, Integer id_machine, String motion_capture_info,
+			String slot_machine_info, String asc_info, String fgt_info, String elec_info, String advance,
+			String remark) {
+		super();
+		this.expid = expid;
+		this.id_query = id_query;
+		this.id_subjects = id_subjects;
+		this.id_machine = id_machine;
+		this.motion_capture_info = motion_capture_info;
+		this.slot_machine_info = slot_machine_info;
+		this.asc_info = asc_info;
+		this.fgt_info = fgt_info;
+		this.elec_info = elec_info;
+		this.advance = advance;
+		this.remark = remark;
+	}
+
+
+
+
+	public Integer getId_machine() {
+		return id_machine;
+	}
+	public void setId_machine(Integer id_machine) {
+		this.id_machine = id_machine;
+	}
+    
     public String getMotion_capture_info() {
 		return motion_capture_info;
 	}

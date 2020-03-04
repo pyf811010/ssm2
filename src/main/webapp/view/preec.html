@@ -230,7 +230,7 @@
 					//data: grid_data,
 					datatype: "json",
 					height: 400,
-					colNames: ['操作', '', 'ID', '实验者信息ID','实验条件','动补数据信息','跑台数据信息','足底压力数据信息','足底压力合力大小、位置数据信息','肌电数据信息','追加实验条件'],
+					colNames: ['操作', '', 'ID', '实验者信息ID','实验机器ID','动补数据信息','跑台数据信息','足底压力数据信息','足底压力合力大小、位置数据信息','肌电数据信息','实验条件','追加实验条件'],
 					colModel: [{
 							name: 'op',
 							index: 'op',
@@ -291,6 +291,20 @@
 								cols: "15"
 							}
 						},
+						
+						{
+							name: 'id_machine',
+							index: 'id_machine',
+							width: 150,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},
+						
 						{
 							name: 'motion_capture_info',
 							index: 'motion_capture_info',
