@@ -31,7 +31,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 /**
- * 管理人员的Controller层
+ * 肌电对照
  *
  * @author TyCoding
  * @date 18-4-27上午7:05

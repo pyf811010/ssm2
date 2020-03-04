@@ -230,7 +230,7 @@
 					//data: grid_data,
 					datatype: "json",
 					height: 400,
-					colNames: ['操作', '', 'ID', '关联查询ID', '实验者信息ID','实验条件','追加实验条件'],
+					colNames: ['操作', '', 'ID', '实验者信息ID','实验机器ID','动补数据信息','跑台数据信息','足底压力数据信息','足底压力合力大小、位置数据信息','肌电数据信息','实验条件','追加实验条件'],
 					colModel: [{
 							name: 'op',
 							index: 'op',
@@ -278,12 +278,39 @@
 							}
 
 						},
+						
 						{
-							name: 'id_query',
-							index: 'id_query',
-							width: 100,
+							name: 'id_subjects',
+							index: 'id_subjects',
+							width: 150,
 							sortable: false,
-							editable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},
+						
+						{
+							name: 'id_machine',
+							index: 'id_machine',
+							width: 150,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},
+						
+						{
+							name: 'motion_capture_info',
+							index: 'motion_capture_info',
+							width: 150,
+							sortable: false,
+							editable: true,
 							edittype: "textarea",
 							editoptions: {
 								rows: "2",
@@ -291,8 +318,41 @@
 							}
 						},
 						{
-							name: 'id_subjects',
-							index: 'id_subjects',
+							name: 'slot_machine_info',
+							index: 'slot_machine_info',
+							width: 150,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'asc_info',
+							index: 'asc_info',
+							width: 150,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'fgt_info',
+							index: 'fgt_info',
+							width: 150,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
+						},{
+							name: 'elec_info',
+							index: 'elec_info',
 							width: 150,
 							sortable: false,
 							editable: true,

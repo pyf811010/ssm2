@@ -1,5 +1,7 @@
 package cn.tycoding.mapper;
 
+import java.util.List;
+
 import cn.tycoding.pojo.FilesKand;
 
 /**
@@ -22,4 +24,25 @@ public interface FilesKandMapper {
     int updateByPrimaryKey(FilesKand record);
     
     FilesKand selectByIdQuery(Integer idQuery);
+
+	List findByFilters(String sql);
+
+	int findByFiltersSum(String getSumSql);
+
+	List findByPage(int i, int rows);
+
+	int getSum();
+
+	List find();
+
+	int edit(FilesKand filesKand);
+
+	void del(String string);
+
+	int add(FilesKand filesKand);
+
+	String getPathByExpid(int expid);
+
+	String getFile_name(int expid);
+
 }

@@ -13,6 +13,7 @@ import cn.tycoding.util.QueryUtil;
 import cn.tycoding.util.SqlJointUtil;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -221,5 +222,12 @@ public class AdminServiceImpl implements AdminService {
         }
         return "success";
     }
+
+	@Override
+	public List<Admin> findAll() {
+		List<Admin> admin = new ArrayList<>();
+		admin = adminMapper.findAll();
+		return admin;
+	}
 	
 }

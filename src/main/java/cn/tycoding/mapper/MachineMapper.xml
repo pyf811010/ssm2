@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tycoding.mapper.MachineMapper">
+  <resultMap id="BaseResultMap" type="cn.tycoding.pojo.Machine">
+    <id column="m_id" jdbcType="INTEGER" property="m_id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    m_id, name, type, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from machine
+    where m_id = #{m_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from machine
+    where m_id = #{m_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.tycoding.pojo.Machine">
+    insert into machine (m_id, name, type, 
+      remark)
+    values (#{m_id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tycoding.pojo.Machine">
+    insert into machine
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="m_id != null">
+        m_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="m_id != null">
+        #{m_id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.tycoding.pojo.Machine">
+    update machine
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where m_id = #{m_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tycoding.pojo.Machine">
+    update machine
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where m_id = #{m_id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 第一个参数为页数，第二个参数为每页多少行 -->
+    <select id="findByPage" resultType="cn.tycoding.pojo.Machine">
+		select * from
+		machine
+		order by m_id desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		machine
+	</select>
+
+    <select id="find" resultType="cn.tycoding.pojo.Machine">
+		select * from
+		machine
+		order by m_id desc
+		
+	</select>
+
+    <update id="edit" parameterType="cn.tycoding.pojo.Machine">
+	  update machine
+      set type = #{type},
+      name = #{name},
+      remark = #{remark}
+      where m_id = #{m_id}
+	</update>
+
+    <!-- 增加一条学生数据 -->
+    <insert id="add" parameterType="cn.tycoding.pojo.Machine">
+		insert into machine
+		values(#{m_id},#{name},#{type},#{remark});
+	</insert>
+
+    <!-- 按学号删除学生 -->
+    <delete id="del" parameterType="string">
+		delete from machine
+		where m_id=#{m_id}
+	</delete>
+
+    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFilters" parameterType="string"
+            resultType="cn.tycoding.pojo.Machine">
+		${_parameter}
+	</select>
+
+    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFiltersSum" parameterType="string"
+            resultType="int">
+		${_parameter}
+	</select>
+	
+  
+</mapper>

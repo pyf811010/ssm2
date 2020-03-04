@@ -6,7 +6,16 @@ public class FilesOxygen {
     private String url;
 
     private Integer id_query;
-
+    
+    private String files_name;
+    public FilesOxygen () {
+    }
+    public FilesOxygen (Integer expid, String url, Integer id_query, String file_name) {
+    	this.expid = expid;
+    	this.url = url;
+    	this.id_query = id_query;
+    	this.files_name = file_name;
+    }
     public Integer getExpid() {
         return expid;
     }
@@ -31,12 +40,19 @@ public class FilesOxygen {
         this.id_query = id_query;
     }
 
-    @Override
-    public String toString() {
-        return "FilesOxygen{" +
-                "expid=" + expid +
-                ", url='" + url + '\'' +
-                ", id_query=" + id_query +
-                '}';
-    }
+
+	public String getFiles_name() {
+		return files_name;
+	}
+
+	public void setFiles_name(String files_name) {
+		this.files_name = files_name;
+	}
+
+	@Override
+	public String toString() {
+		return "FilesOxygen [expid=" + expid + ", url=" + url + ", id_query=" + id_query + ", files_name=" + files_name
+				+ "]";
+	}
+	
 }

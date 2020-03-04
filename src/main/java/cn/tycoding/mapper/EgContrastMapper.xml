@@ -55,7 +55,8 @@
     where expid = #{expid,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="cn.tycoding.pojo.EgContrast">
-    insert into eg_contrast (sensor01, sensor02,
+    insert into eg_contrast (
+      expid, sensor01, sensor02,
       sensor03, sensor04, sensor05,
       sensor06, sensor07, sensor08,
       sensor09, sensor10, sensor11,
@@ -65,8 +66,8 @@
       sensor21, sensor22, sensor23,
       sensor24, sensor25, sensor26,
       sensor27, sensor28, sensor29,
-      sensor30, sensor31, sensor32)
-    values ( #{sensor01,jdbcType=DOUBLE}, #{sensor02,jdbcType=DOUBLE},
+      sensor30, sensor31, sensor32, id_query)
+    values ( #{expid,jdbcType=INTEGER},#{sensor01,jdbcType=DOUBLE}, #{sensor02,jdbcType=DOUBLE},
       #{sensor03,jdbcType=DOUBLE}, #{sensor04,jdbcType=DOUBLE}, #{sensor05,jdbcType=DOUBLE},
       #{sensor06,jdbcType=DOUBLE}, #{sensor07,jdbcType=DOUBLE}, #{sensor08,jdbcType=DOUBLE},
       #{sensor09,jdbcType=DOUBLE}, #{sensor10,jdbcType=DOUBLE}, #{sensor11,jdbcType=DOUBLE},
@@ -76,7 +77,7 @@
       #{sensor21,jdbcType=DOUBLE}, #{sensor22,jdbcType=DOUBLE}, #{sensor23,jdbcType=DOUBLE},
       #{sensor24,jdbcType=DOUBLE}, #{sensor25,jdbcType=DOUBLE}, #{sensor26,jdbcType=DOUBLE},
       #{sensor27,jdbcType=DOUBLE}, #{sensor28,jdbcType=DOUBLE}, #{sensor29,jdbcType=DOUBLE},
-      #{sensor30,jdbcType=DOUBLE}, #{sensor31,jdbcType=DOUBLE}, #{sensor32,jdbcType=DOUBLE})
+      #{sensor30,jdbcType=DOUBLE}, #{sensor31,jdbcType=DOUBLE}, #{sensor32,jdbcType=DOUBLE},#{id_query,jdbcType=INTEGER})
   </insert>
     <insert id="insertSelective" parameterType="cn.tycoding.pojo.EgContrast">
         insert into eg_contrast

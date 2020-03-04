@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tycoding.mapper.FilesFootPressureAscMapper">
+  <resultMap id="BaseResultMap" type="cn.tycoding.pojo.FilesFootPressureAsc">
+    <id column="expid" jdbcType="INTEGER" property="expid" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="id_query" jdbcType="INTEGER" property="id_query" />
+    <result column="files_name" jdbcType="VARCHAR" property="files_name" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    expid, url, id_query, files_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from files_foot_pressure_asc
+    where expid = #{expid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from files_foot_pressure_asc
+    where expid = #{expid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.tycoding.pojo.FilesFootPressureAsc">
+    insert into files_foot_pressure_asc (expid, url, id_query, 
+      files_name)
+    values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, 
+      #{files_name,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tycoding.pojo.FilesFootPressureAsc">
+    insert into files_foot_pressure_asc
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="expid != null">
+        expid,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="id_query != null">
+        id_query,
+      </if>
+      <if test="files_name != null">
+        files_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="expid != null">
+        #{expid,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="id_query != null">
+        #{id_query,jdbcType=INTEGER},
+      </if>
+      <if test="files_name != null">
+        #{files_name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.tycoding.pojo.FilesFootPressureAsc">
+    update files_foot_pressure_asc
+    <set>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="id_query != null">
+        id_query = #{id_query,jdbcType=INTEGER},
+      </if>
+      <if test="files_name != null">
+        files_name = #{files_name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where expid = #{expid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tycoding.pojo.FilesFootPressureAsc">
+    update files_foot_pressure_asc
+    set url = #{url,jdbcType=VARCHAR},
+      id_query = #{id_query,jdbcType=INTEGER},
+      files_name = #{files_name,jdbcType=VARCHAR}
+    where expid = #{expid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 第一个参数为页数，第二个参数为每页多少行 -->
+    <select id="findByPage" resultType="cn.tycoding.pojo.FilesFootPressureAsc">
+		select * from
+		files_foot_pressure_asc
+		order by expid desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		files_foot_pressure_asc
+	</select>
+
+    <select id="find" resultType="cn.tycoding.pojo.FilesFootPressureAsc">
+		select * from
+		files_foot_pressure_asc
+		order by expid desc
+		
+	</select>
+
+    <update id="edit" parameterType="cn.tycoding.pojo.FilesFootPressureAsc">
+	  update files_foot_pressure_asc
+      set url = #{url},
+      id_query = #{id_query},
+      files_name = #{files_name}
+      where expid = #{expid}
+	</update>
+
+    <!-- 增加一条学生数据 -->
+    <insert id="add" parameterType="cn.tycoding.pojo.FilesFootPressureAsc">
+		insert into files_foot_pressure_asc
+		values(#{expid},#{url},#{id_query},#{files_name});
+	</insert>
+
+    <!-- 按学号删除学生 -->
+    <delete id="del" parameterType="string">
+		delete from files_foot_pressure_asc
+		where expid=#{expid}
+	</delete>
+
+    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFiltersSum" parameterType="string"
+            resultType="int">
+		${_parameter}
+	</select>
+	
+	<!--根据expid返回url  -->
+	<select id="getPathByExpid"  resultType="String">
+    SELECT url from files_foot_pressure_asc where expid = #{expid}
+  </select>
+  
+	<!--根据expid返回url  -->
+	<select id="getFile_name"  resultType="String">
+    SELECT files_name from files_foot_pressure_asc where expid = #{expid}
+  </select>
+</mapper>
