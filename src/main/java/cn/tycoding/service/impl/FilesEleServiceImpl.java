@@ -110,7 +110,13 @@ public class FilesEleServiceImpl implements FilesEleService {
                 // 会按st_id来删除，考虑到存在多选，此时主键id是数组
                 int count = 0;
                 for (int i = 0; i < id.length; i++) {
+                    int expid = Integer.parseInt(id[i]);
+                	String url = filesElectromyographyMapper.getPathByExpid(expid);
                 	filesElectromyographyMapper.del(id[i]);
+                	File file = new File(url);
+                	if(file.delete() == false){
+                		System.out.println("未删除成功");
+                	}
                     count++;
                 }
                 String str = count + "条成功删除" + (id.length - count) + "条删除失败";

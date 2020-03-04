@@ -17,7 +17,9 @@ public class FilesFolder {
 	private String sm = null;
 	private Boolean success = false;
 	private String info = null;
-
+	private String preec = null;
+	private String expid = null;
+	private String egcontrast = null;
     public FilesFolder() {
     	this.datetime = null;
     	this.kand = null;
@@ -29,6 +31,7 @@ public class FilesFolder {
     	this.sm = null;
     	this.success = false;
     	this.info = null;
+    	this.egcontrast = null;
     }
 
 	public String getDatetime() {
@@ -109,6 +112,30 @@ public class FilesFolder {
 
 	public void setInfo(String info) {
 		this.info = info;
+	}
+
+	public String getPreec() {
+		return preec;
+	}
+
+	public void setPreec(String preec) {
+		this.preec = preec;
+	}
+
+	public String getExpid() {
+		return expid;
+	}
+
+	public void setExpid(String expid) {
+		this.expid = expid;
+	}
+
+	public String getEgcontrast() {
+		return egcontrast;
+	}
+
+	public void setEgcontrast(String egcontrast) {
+		this.egcontrast = egcontrast;
 	}
 
    

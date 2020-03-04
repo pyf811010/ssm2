@@ -9,5 +9,6 @@ public interface QueryService {
 	int SelectMaxExpid();
 	
 	void insert(Query record);
-
+	
+	int insertAndReturnExpid(Query record);
 }

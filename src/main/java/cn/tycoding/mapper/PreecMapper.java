@@ -7,7 +7,7 @@ import cn.tycoding.pojo.Preec;
 public interface PreecMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(Preec record);
+    void insert(Preec record);
 
     int insertSelective(Preec record);
 

@@ -221,7 +221,7 @@
 					//data: grid_data,
 					datatype: "json",
 					height: 400,
-					colNames: ['操作','下载', '', 'ID', '关联查询ID', '文件名','文件地址'],
+					colNames: ['操作','下载', '', 'ID', '文件名','文件地址'],
 					colModel: [{
 							name: 'op',
 							index: 'op',
@@ -250,6 +250,7 @@
 						{
 							name: 'operate', 
 							index: 'operate',
+							search: false,
 							width: 55,
 							formatter: function (value, grid, rows, state) {
 								       return "<a href=\"#\" style=\"color:#f60\" onclick=\"Modify(" + rows.expid + ")\"><img src='image/b.png'></a>" }  
@@ -278,19 +279,6 @@
 							}
 
 						},
-						{
-							name: 'id_query',
-							index: 'id_query',
-							width: 100,
-							sortable: false,
-							editable: true,
-							edittype: "textarea",
-							editoptions: {
-								rows: "2",
-								cols: "15"
-							}
-						},
-						
 						{
 							name: 'files_name',
 							index: 'files_name',

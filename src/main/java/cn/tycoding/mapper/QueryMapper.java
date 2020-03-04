@@ -16,4 +16,6 @@ public interface QueryMapper {
     int updateByPrimaryKey(Query record);
     
     int selectMaxExpid();
+    
+    int insertWithIdReturned(Query record);
 }
