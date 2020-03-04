@@ -19,6 +19,10 @@ public class Preec {
     
     private String elec_info=null; //肌电数据信息
     
+    private String advance;  //实验条件
+
+    private String remark;  //追加实验条件
+    
     public Preec() {
     	
     }
@@ -91,9 +95,6 @@ public class Preec {
 		this.elec_info = elec_info;
 	}
 
-	private String advance;  //实验条件
-
-    private String remark;  //追加实验条件
 
     public Integer getExpid() {
         return expid;

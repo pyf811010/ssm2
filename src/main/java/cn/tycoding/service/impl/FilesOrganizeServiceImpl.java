@@ -232,7 +232,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 						}catch(Exception e) {
 							System.out.println("解析肌肉对照表出现问题");
 							e.printStackTrace();
-							state.setInfo("解析Datetime:"+fs.getDatetime()+"实验:"+originexpid+"的肌肉对照表时出现问题，停止改所有"+originexpid+"的实验插\n");
+							state.setInfo("解析Datetime:"+fs.getDatetime()+"实验:"+originexpid+"的肌肉对照表时出现问题，停止改所有"+originexpid+"的实验插入 \n");
 							state.setInfo(e.toString());
 							continue;
 						}	
@@ -310,7 +310,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 							tmpEgContrast = this.egcontrastMap.get(fs.getDatetime()).get(originexpid);
 							tmpEgContrast.setExpid(expid);
 							tmpEgContrast.setId_query(expid);
-							state.setInfo("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的egcontrast表");
+							System.out.println("开始插入Datetime:"+fs.getDatetime()+"实验:"+originexpid+"的Egcontrast表");
 							egContrastMapper.insert(tmpEgContrast);
 							query.setExpid_eg_contrast(expid);
 						} else {
