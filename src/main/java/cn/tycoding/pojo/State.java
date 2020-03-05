@@ -25,7 +25,11 @@ public class State {
     }
 
     public void setInfo(String info) {
-        this.info = info;
+    	if(this.info == null) {
+    		this.info = info;
+    	} else {
+    		this.info = this.info + info;
+    	}
     }
 
 

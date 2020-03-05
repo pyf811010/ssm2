@@ -49,7 +49,8 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
         String path = file0.getAbsolutePath();
 
         System.out.println("插入表格个数为：" + files.length);
-
+        int count = 0;
+        String repeatName = "";
         for (MultipartFile f : files) {
             System.out.println("=========================");
             File file1;
@@ -74,12 +75,13 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
                         file1.mkdirs();
                     }
                     String fileName = f2.getOriginalFilename();
-//                    String fileName = originalFilename.substring(0, originalFilename.lastIndexOf("."));
-                    //运动学与动力学插入url contain
-
                     File newFile = new File(file1, fileName);
                     if (!newFile.exists()) {
                         f.transferTo(newFile);
+                    }else{
+                    	count = count + 1;
+                    	repeatName = repeatName + "  " + fileName; 
+                    	continue;
                     }
                     GaitCyclePic gaitCyclePic = new GaitCyclePic();
                     gaitCyclePic.setName(fileName);
@@ -101,8 +103,13 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
         }
         System.out.println("=================");
         state.setSuccess(1);
-        state.setInfo("文件上传成功");
-        System.out.println("文件上传成功");
+        if(count == 0){
+        	state.setInfo("文件上传成功");
+        	System.out.println("全部文件上传成功");
+        }else{
+        	state.setInfo("因系统已存在同名文件,以下"+count+"个文件上传失败:"+repeatName+" 请修改上传文件名或将系统中同名文件删除后上传");
+        	System.out.println("部分文件上传成功");
+        }
         return state;
     }
 }

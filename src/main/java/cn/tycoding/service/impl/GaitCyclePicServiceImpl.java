@@ -119,11 +119,14 @@ public class GaitCyclePicServiceImpl implements GaitCyclePicService {
                 for (int i = 0; i < id.length; i++) {
                 	Integer p_id = Integer.valueOf(id[i]);
                 	String url = gaitCyclePicMapper.getPathByp_id(p_id);
-                	gaitCyclePicMapper.del(id[i]);
                 	File file = new File(url);
-                	if(file.delete() == false){
-                		System.out.println("未删除成功");
-                	}
+                	boolean result = file.delete();
+                    int tryCount = 0;
+                    while (!result && tryCount++ < 10) {
+                        System.gc();    //回收资源
+                        result = file.delete();
+                    }
+                	gaitCyclePicMapper.del(id[i]);
                     count++;
                 }
                 String str = count + "条成功删除" + (id.length - count) + "条删除失败";
@@ -178,19 +181,34 @@ public class GaitCyclePicServiceImpl implements GaitCyclePicService {
         String path = gaitCyclePicMapper.getPathByp_id(p_id);
         String filename = gaitCyclePicMapper.getName(p_id);
         //获取输入流
-        InputStream bis = new BufferedInputStream(new FileInputStream(new File(path)));
-        String fileName = URLEncoder.encode(filename, "utf-8");
-        response.addHeader("Content-Disposition", "attachment;filename=" + fileName);
-        //1.设置文件ContentType类型，这样设置，会自动判断下载文件类型
-        response.setContentType("multipart/form-data");
-        BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
-        int len = 0;
-        while ((len = bis.read()) != -1) {
-            out.write(len);
-            out.flush();
-        }
-        out.close();
-        bis.close();
+        InputStream bis = null;
+		BufferedOutputStream out = null;
+		try {
+			bis = new BufferedInputStream(new FileInputStream(new File(path)));
+			String fileName = URLEncoder.encode(filename, "utf-8");
+			response.addHeader("Content-Disposition", "attachment;filename=" + fileName);
+			//1.设置文件ContentType类型，这样设置，会自动判断下载文件类型
+			response.setContentType("multipart/form-data");
+			out = new BufferedOutputStream(response.getOutputStream());
+			int len = 0;
+			while ((len = bis.read()) != -1) {
+			    out.write(len);
+			    out.flush();
+			}
+		} catch (Exception e) {
+			System.out.println("错误");
+			e.printStackTrace();
+		}
+		finally{
+			if(out!=null){
+				out.close();
+				out=null;
+			}
+			if(bis!=null){
+				bis.close();
+				bis=null;
+			}
+		}
 	}
 
 	

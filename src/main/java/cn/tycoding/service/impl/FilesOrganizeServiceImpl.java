@@ -7,6 +7,7 @@ import cn.tycoding.service.QueryService;
 import org.apache.commons.io.filefilter.AndFileFilter;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.hamcrest.SelfDescribing;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,8 @@ import cn.tycoding.pojo.FilesSlotMachine;
 import cn.tycoding.pojo.Preec;
 import cn.tycoding.util.SmallExcelReaderUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import static org.junit.Assert.assertFalse;
 
 import java.awt.RenderingHints.Key;
 import java.awt.print.Printable;
@@ -85,7 +88,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 	private Map<String, Map<String, Preec>> preecMap;
 	@Autowired
 	private Map<String, Map<String, EgContrast>> egcontrastMap;
-	
+
 	@Override
 	public void insertFilesMC(FilesMontionCapture record) {
 		if (record != null) filesMCMapper.insert(record);
@@ -128,6 +131,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 	
 	@Override
 	public void getAnalyzedPreec(String Datetime, String preecUrl) throws Exception {
+		
 		System.out.println("日期:"+Datetime+"包含preec:"+preecUrl+",开始解析");
 		this.preecMap.put(Datetime, new HashMap<String, Preec>());
 		List<List<List<Object>>> sheets = SmallExcelReaderUtil.getListByExcel(preecUrl, 2);
@@ -189,9 +193,17 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 			this.egcontrastMap.get(Datetime).put(expid, egContrast);
 		}
 	}
+	@Override 
+	public String fileNameTransferm(String fileUrl) throws Exception {
+		String filename = null;
+		String tmpfilename = fileUrl.split("\\/")[4];
+		filename = tmpfilename.split("_")[0] + "_" + tmpfilename.split("_")[1] + "." + tmpfilename.split("\\.")[1];
+		return filename;
+	}
 	@Override	
 	public State insertByString(List<FilesFolder> filesfoldersList) {
 		State state = new State();
+
 		this.preecMap = new HashMap<String, Map<String,Preec>>();
 		this.egcontrastMap = new HashMap<String, Map<String,EgContrast>>();
 		for (FilesFolder fs : filesfoldersList) {
@@ -202,11 +214,11 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 				System.out.println("******************expid is :"+expid);
 				Query query = new Query();
 				query.setExpid(expid);
-				query.setId_preec(expid);
 				query.setDatetime(fs.getDatetime());
 				String originexpid = fs.getExpid();
 				String preecUrl = fs.getPreec();
 				String egcontrastUrl = fs.getEgcontrast();
+				Boolean hasEle = false;
 				if (preecUrl!=null) {
 					System.out.println("探测到前置实验表");
 					if (!this.preecMap.containsKey(fs.getDatetime())) {
@@ -216,7 +228,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 						}catch(Exception e) {
 							System.out.println("解析前置实验条件表出现问题");
 							e.printStackTrace();
-							state.setInfo("解析Datetime:"+fs.getDatetime()+"实验:"+originexpid+"的前置实验条件时出现问题，停止改所有"+originexpid+"的实验插\n");
+							state.setInfo("解析Datetime:"+fs.getDatetime()+" Expid:"+originexpid+"的前置实验条件表时出现问题，停止改所有 Expid为"+originexpid+"的实验插入，其他实验不受影响，问题如下,\n");
 							state.setInfo(e.toString());
 							continue;
 						}	
@@ -225,14 +237,14 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 				if (egcontrastUrl != null) {
 					System.out.println("探测到肌肉对照表");
 					if (!this.egcontrastMap.containsKey(fs.getDatetime())) {
-						System.out.println("开始解析Datetime:" + fs.getDatetime() + " expid:"+originexpid+"的肌肉对照表");
+						System.out.println("开始解析Datetime:" + fs.getDatetime() + " Expid:"+originexpid+"的肌肉对照表");
 						try {
 							getAnalyzedEgContrast(fs.getDatetime(), egcontrastUrl);
 							System.out.println("成功解析");
 						}catch(Exception e) {
 							System.out.println("解析肌肉对照表出现问题");
 							e.printStackTrace();
-							state.setInfo("解析Datetime:"+fs.getDatetime()+"实验:"+originexpid+"的肌肉对照表时出现问题，停止改所有"+originexpid+"的实验插\n");
+							state.setInfo("解析Datetime:"+fs.getDatetime()+" Expid:"+originexpid+"的肌肉对照表时出现问题，停止改所有Expid为"+originexpid+"的实验插入，其他实验不受影响，问题如下, \n");
 							state.setInfo(e.toString());
 							continue;
 						}	
@@ -244,13 +256,13 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 						query.setExpid_mc(expid);
 						//realExpidByDate = fs.getMc().split("\\/")[4].split("_")[1];
 						System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的mc表");
-						insertFilesMC(new FilesMontionCapture(expid, fs.getMc(), expid, null));
+						insertFilesMC(new FilesMontionCapture(expid, fs.getMc(), expid, fileNameTransferm(fs.getMc())));
 					}
 					if (fs.getSm() != null) {
 						query.setExpid_sm(expid);
 						//realExpidByDate = fs.getSm().split("\\/")[4].split("_")[1];
 						System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的sm表");
-						insertFilesSM(new FilesSlotMachine(expid, fs.getSm(), expid, null));
+						insertFilesSM(new FilesSlotMachine(expid, fs.getSm(), expid, fileNameTransferm(fs.getSm())));
 
 						
 					}
@@ -258,31 +270,32 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 						query.setExpid_kd(expid);
 						//realExpidByDate = fs.getKand().split("\\/")[4].split("_")[1];
 						System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的kand表");
-						insertFilesKand(new FilesKand(expid, fs.getKand(), expid, null));
+						insertFilesKand(new FilesKand(expid, fs.getKand(), expid, fileNameTransferm(fs.getKand())));
 
 					}
 					if (fs.getOx() != null) {
 						query.setExpid_ox(expid);
 						System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的ox表");
-						insertFilesOxygen(new FilesOxygen(expid, fs.getOx(), expid, null));
+						insertFilesOxygen(new FilesOxygen(expid, fs.getOx(), expid, fileNameTransferm(fs.getOx())));
 					}
 					if (fs.getEle() != null) {
 						query.setExpid_eg(expid);
 						//realExpidByDate = fs.getEle().split("\\/")[4].split("_")[1];
 						System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的Ele表");
-						insertFilesEle(new FilesElectromyography(expid, fs.getEle(), expid, null));
+						hasEle = true;
+						insertFilesEle(new FilesElectromyography(expid, fs.getEle(), expid, fileNameTransferm(fs.getEle())));
 					}
 					if (fs.getFpa() != null) {
 						query.setExpid_fpa(expid);
 						//realExpidByDate = fs.getFpa().split("\\/")[4].split("_")[1];
 						System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的fpa表");
-						insertFilesFPA(new FilesFootPressureAsc(expid, fs.getFpa(), expid, null));
+						insertFilesFPA(new FilesFootPressureAsc(expid, fs.getFpa(), expid, fileNameTransferm(fs.getFpa())));
 					}
 					if (fs.getFpf() != null) {
 						query.setExpid_fpf(expid);
 						//realExpidByDate = fs.getFpf().split("\\/")[4].split("_")[1];
 						System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的fpf表");
-						insertFilesFPF(new FilesFootPressureFgt(expid, fs.getFpf(), expid, null));
+						insertFilesFPF(new FilesFootPressureFgt(expid, fs.getFpf(), expid, fileNameTransferm(fs.getFpf())));
 					}
 					Preec tmpPreec = null;
 					if (this.preecMap.containsKey(fs.getDatetime())) {
@@ -291,38 +304,44 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 							tmpPreec = this.preecMap.get(fs.getDatetime()).get(originexpid);			
 							tmpPreec.setExpid(expid);
 							tmpPreec.setId_query(expid);
-							System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的preec表");
+							System.out.println("插入Datetime:" + fs.getDatetime() + " Expid:"+originexpid+"的preec表");
+							query.setId_preec(expid);
 							PreecMapper.insert(tmpPreec);
 							query.setId_preec(expid);
 						} else {
 							System.out.println("Datetime:"+fs.getDatetime()+"不存在preec");
-							state.setInfo("Datetime:"+fs.getDatetime()+"实验:"+originexpid+"的无前置实验表，请后期加入\n");
+							state.setInfo("Datetime:"+fs.getDatetime()+" Expid:"+originexpid+"的实验无前置实验表，请后期加入\n");
 						}
 					} else {
 						System.out.println("Datetime:"+fs.getDatetime()+"不存在preec");
-						state.setInfo("Datetime:"+fs.getDatetime()+"实验:"+originexpid+"的无前置实验表，请后期加入\n");
+						state.setInfo("Datetime:"+fs.getDatetime()+" Expid:"+originexpid+"的实验无前置实验表，请后期加入\n");
 					}
 					EgContrast tmpEgContrast = null;
 					System.out.println("OriginExpid:"+originexpid);
 					if (this.egcontrastMap.containsKey(fs.getDatetime())) {
 						if (egcontrastMap.get(fs.getDatetime()).containsKey(originexpid)) {
-							System.out.println("Datetime:"+fs.getDatetime()+"实验:"+originexpid+"存在Egcontrast");
+							System.out.println("Datetime:"+fs.getDatetime()+" Expid:"+originexpid+"存在Egcontrast");
 							tmpEgContrast = this.egcontrastMap.get(fs.getDatetime()).get(originexpid);
 							tmpEgContrast.setExpid(expid);
 							tmpEgContrast.setId_query(expid);
-							state.setInfo("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的egcontrast表");
+							System.out.println("开始插入Datetime:"+fs.getDatetime()+" Expid:"+originexpid+"的Egcontrast表");
 							egContrastMapper.insert(tmpEgContrast);
 							query.setExpid_eg_contrast(expid);
 						} else {
-							System.out.println("Datetime:"+fs.getDatetime()+"不存在egcontrast");
-							state.setInfo("Datetime:"+fs.getDatetime()+"实验:"+originexpid+"的无肌肉对照表，若该次有肌电数据，请后期加入\n");
+							if (hasEle == true) {
+								System.out.println("Datetime:"+fs.getDatetime()+" Expid:"+originexpid+"的实验无肌肉对照表\n");
+								state.setInfo("Datetime:"+fs.getDatetime()+" Expid:"+originexpid+"的实验无肌肉对照表，若该次有肌电数据，请后期加入\n");
+							}
 						}
 					} else {
-						System.out.println("Datetime:"+fs.getDatetime()+"不存肌肉对照表");
-						state.setInfo("Datetime:"+fs.getDatetime()+"实验:"+originexpid+"的无肌肉对照表，若该次有肌电数据，请后期加入\n");
+						if (hasEle == true) {
+							System.out.println("Datetime:"+fs.getDatetime()+"不存在肌肉对照表");
+							state.setInfo("Datetime:"+fs.getDatetime()+" Expid:"+originexpid+"的无肌肉对照表，若该次有肌电数据，请后期加入\n");
+						}
 					}
 					System.out.println("插入Datetime:" + fs.getDatetime() + " expid:"+expid+"的query表");
 					insertQuery(query);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.out.println("开始删除");
@@ -337,7 +356,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 					egContrastMapper.deleteByPrimaryKey(expid);
 					queryMapper.deleteByPrimaryKey(expid);
 					System.out.println("删除结束");
-					state.setInfo("在插入Datetime:"+fs.getDatetime()+" expid:"+originexpid+"的实验室出现问题,已回滚该id的所有实验\n");
+					state.setInfo("在插入Datetime:"+fs.getDatetime()+" Expid:"+originexpid+"的实验时出现问题,已回滚该id的所有实验\n");
 					state.setInfo(e.toString());
 					continue;
 				}
