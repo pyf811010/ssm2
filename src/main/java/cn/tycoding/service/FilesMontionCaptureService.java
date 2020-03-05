@@ -22,6 +22,7 @@ public interface FilesMontionCaptureService {
 
 	String handle(String oper, FilesMontionCapture filesMontionCapture, String[] id);
 
-	
+	void open(int expid) throws IOException;
+
 
 }

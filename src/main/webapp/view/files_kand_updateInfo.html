@@ -187,6 +187,17 @@
 		</script>
 
 		<script type="text/javascript">
+		function Open(u_id) { 
+			$.ajax({
+				type: "post",
+				url: "/KandUpdate/open/",
+				dataType: "json",
+				data: {
+					"u_id": u_id
+				},
+			});
+	       }
+		
 		function Modify(u_id) { 
 			window.open("/KandUpdate/download/" + u_id);
 	       }  
@@ -221,7 +232,7 @@
 					//data: grid_data,
 					datatype: "json",
 					height: 400,
-					colNames: ['操作','下载', '', 'ID', '文件名', '修改内容', '修改时间', '文件地址'],
+					colNames: ['操作','查看','下载', '', 'ID', '文件名', '修改内容', '修改时间', '文件地址'],
 					colModel: [{
 							name: 'op',
 							index: 'op',
@@ -246,6 +257,14 @@
 
 							}
 						},
+						{
+							name: 'operate2', 
+							index: 'operate2',
+							search: false,
+							width: 55,
+							formatter: function (value, grid, rows, state) {
+								       return "<a href=\"#\" style=\"color:#f60\" onclick=\"Open(" + rows.u_id + ")\">查看</a>" }  
+			            },
 						
 						{
 							name: 'operate', 

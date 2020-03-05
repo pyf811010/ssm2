@@ -20,6 +20,7 @@ public interface FilesKandUpdateService {
 
 	String handle(String oper, FilesKandUpdateinfo filesKandUpdateinfo, String[] id);
 
-	
+	void open(int expid) throws IOException;
+
 
 }

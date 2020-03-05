@@ -170,8 +170,6 @@ public class GaitCyclePicServiceImpl implements GaitCyclePicService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-       
-		
 	}
 	
 	@Override

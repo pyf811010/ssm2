@@ -21,6 +21,7 @@ public interface FilesKandService {
 
 	String handle(String oper, FilesKand filesKand, String[] id);
 
-	
+	void open(int expid) throws IOException;
+
 
 }

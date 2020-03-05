@@ -75,5 +75,15 @@ public class FilesOxygenController {
             e.printStackTrace();
         }
     }
+    
+    @RequestMapping("/open")
+    @ResponseBody
+    public void open(int expid) {
+    	try {
+    		filesOxygenService.open(expid);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

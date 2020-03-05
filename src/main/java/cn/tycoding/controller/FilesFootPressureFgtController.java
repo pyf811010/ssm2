@@ -77,5 +77,15 @@ public class FilesFootPressureFgtController {
             e.printStackTrace();
         }
     }
+    
+    @RequestMapping("/open")
+    @ResponseBody
+    public void open(int expid) {
+    	try {
+    		filesFootPressureFgtService.open(expid);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

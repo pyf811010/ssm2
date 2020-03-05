@@ -77,5 +77,15 @@ public class FilesMontionCaptureController {
             e.printStackTrace();
         }
     }
+    
+    @RequestMapping("/open")
+    @ResponseBody
+    public void open(int expid) {
+    	try {
+    		filesMontionCaptureService.open(expid);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

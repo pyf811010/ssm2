@@ -1,5 +1,6 @@
 package cn.tycoding.service.impl;
 
+import java.awt.Desktop;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -112,11 +113,14 @@ public class FilesEleServiceImpl implements FilesEleService {
                 for (int i = 0; i < id.length; i++) {
                     int expid = Integer.parseInt(id[i]);
                 	String url = filesElectromyographyMapper.getPathByExpid(expid);
-                	filesElectromyographyMapper.del(id[i]);
                 	File file = new File(url);
-                	if(file.delete() == false){
-                		System.out.println("未删除成功");
-                	}
+                	boolean result = file.delete();
+                    int tryCount = 0;
+                    while (!result && tryCount++ < 10) {
+                        System.gc();    //回收资源
+                        result = file.delete();
+                    }
+                    filesElectromyographyMapper.del(id[i]);
                     count++;
                 }
                 String str = count + "条成功删除" + (id.length - count) + "条删除失败";
@@ -156,7 +160,21 @@ public class FilesEleServiceImpl implements FilesEleService {
             out.flush();
         }
         out.close();
-		
+	}
+	
+	@Override
+	public void open(int expid) throws IOException {
+		// TODO Auto-generated method stub
+        State state = new State();
+        String path = filesElectromyographyMapper.getPathByExpid(expid);
+        String filename = filesElectromyographyMapper.getFile_name(expid);
+        File file = new File(path);
+		try {
+			Desktop.getDesktop().open(file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

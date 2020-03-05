@@ -77,5 +77,15 @@ public class FilesFootPressureAscController {
             e.printStackTrace();
         }
     }
+    
+    @RequestMapping("/open")
+    @ResponseBody
+    public void open(int expid) {
+    	try {
+    		filesFootPressureAscService.open(expid);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -73,5 +73,15 @@ public class FilesKandUpdateController {
             e.printStackTrace();
         }
     }
+    
+    @RequestMapping("/open")
+    @ResponseBody
+    public void open(int u_id) {
+    	try {
+    		filesKandUpdateService.open(u_id);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -1,5 +1,6 @@
 package cn.tycoding.service.impl;
 
+import java.awt.Desktop;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -116,11 +117,14 @@ public class FilesKandUpdateServiceImpl implements FilesKandUpdateService {
 				for (int i = 0; i < id.length; i++) {
                 	int u_id = Integer.parseInt(id[i]);
                 	String url = filesKandUpdateinfoMapper.getPathByExpid(u_id);
-                	filesKandUpdateinfoMapper.del(id[i]);
                 	File file = new File(url);
-                	if(file.delete() == false){
-                		System.out.println("未删除成功");
-                	}
+                	boolean result = file.delete();
+                    int tryCount = 0;
+                    while (!result && tryCount++ < 10) {
+                        System.gc();    //回收资源
+                        result = file.delete();
+                    }
+                    filesKandUpdateinfoMapper.del(id[i]);
                     count++;
                 }
 			} catch (Exception e) {
@@ -168,7 +172,21 @@ public class FilesKandUpdateServiceImpl implements FilesKandUpdateService {
         }
         out.close();
         bis.close();
-		
+	}
+	
+	@Override
+	public void open(int u_id) throws IOException {
+		// TODO Auto-generated method stub
+        State state = new State();
+        String path = filesKandUpdateinfoMapper.getPathByExpid(u_id);
+        String filename = filesKandUpdateinfoMapper.getFile_name(u_id);
+        File file = new File(path);
+		try {
+			Desktop.getDesktop().open(file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -73,5 +73,15 @@ public class FilesKandController {
             e.printStackTrace();
         }
     }
+    
+    @RequestMapping("/open")
+    @ResponseBody
+    public void open(int expid) {
+    	try {
+    		filesKandService.open(expid);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

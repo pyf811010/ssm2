@@ -23,6 +23,7 @@ public interface FilesFootPressureFgtService {
 
 	String handle(String oper, FilesFootPressureFgt FilesFootPressureFgt, String[] id);
 
-	
+	void open(int expid) throws IOException;
+
 
 }
