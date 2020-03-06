@@ -36,4 +36,6 @@ public interface FilesFootPressureFgtMapper {
 	String getFile_name(int expid);
 
 	void del(String string);
+	
+	boolean dataifexist(String url); 
 }

@@ -34,4 +34,6 @@ public interface PreecMapper {
 	int add(Preec preec);
 
 	List<Preec> findAllById(int id);
+	
+	
 }

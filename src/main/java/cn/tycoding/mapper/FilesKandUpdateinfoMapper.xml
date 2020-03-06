@@ -17,6 +17,8 @@
     from files_kand_updateinfo
     where u_id = #{u_id,jdbcType=INTEGER}
   </select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from files_kand_updateinfo
     where u_id = #{u_id,jdbcType=INTEGER}

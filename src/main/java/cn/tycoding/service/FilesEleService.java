@@ -18,6 +18,4 @@ public interface FilesEleService {
 
 	void download(int expid, HttpServletResponse response) throws IOException;
 
-	
-
 }

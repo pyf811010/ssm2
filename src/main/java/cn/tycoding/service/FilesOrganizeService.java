@@ -40,5 +40,9 @@ public interface FilesOrganizeService {
 	public void getAnalyzedEgContrast(String Datetime, String egcontrastUrl) throws Exception;
 			
 	public String fileNameTransferm(String fileUrl) throws Exception;
+	
+	public void Rollback (int expid);
+	
+	public String sliceUrl(String datetime, String fileType, String originExpid);
 
 }
