@@ -108,13 +108,13 @@
       where m_id = #{m_id}
 	</update>
 
-    <!-- 增加一条学生数据 -->
+    <!-- 增加一条实验机器数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.Machine">
 		insert into machine
-		values(#{m_id},#{name},#{type},#{remark});
+		values(default ,#{name},#{type},#{remark});
 	</insert>
 
-    <!-- 按学号删除学生 -->
+    <!-- 按学号删除实验机器信息 -->
     <delete id="del" parameterType="string">
 		delete from machine
 		where m_id=#{m_id}
@@ -132,5 +132,8 @@
 		${_parameter}
 	</select>
 	
-  
+    <select id="findDbTableComment" resultType="cn.tycoding.entity.assist.DBTableComment">
+        show full fields from machine
+    </select>
+
 </mapper>

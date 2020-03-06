@@ -20,7 +20,7 @@ import cn.tycoding.service.FilesEleService;
 import cn.tycoding.service.FilesKandUpdateService;
 
 /**
- * 肌电数据
+ * 运动学与动力学更新数据
  * @author pyf
  *
  */

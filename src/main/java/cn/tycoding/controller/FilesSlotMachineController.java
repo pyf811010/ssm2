@@ -24,7 +24,7 @@ import cn.tycoding.service.FilesOxygenService;
 import cn.tycoding.service.FilesSlotMachineService;
 
 /**
- * 肌电数据
+ * 跑台数据
  * @author pyf
  *
  */

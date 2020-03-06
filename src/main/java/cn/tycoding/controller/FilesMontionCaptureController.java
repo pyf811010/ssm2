@@ -24,7 +24,7 @@ import cn.tycoding.service.FilesMontionCaptureService;
 import cn.tycoding.service.FilesOxygenService;
 
 /**
- * 肌电数据
+ * 动补数据
  * @author pyf
  *
  */

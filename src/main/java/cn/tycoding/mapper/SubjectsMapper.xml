@@ -60,5 +60,9 @@
             resultType="int">
 		${_parameter}
 	</select>
+
+	<select id="findDbTableComment" resultType="cn.tycoding.entity.assist.DBTableComment">
+		show full fields from subjects
+	</select>
   
 </mapper>

@@ -22,7 +22,7 @@ import cn.tycoding.service.FilesKandService;
 import cn.tycoding.service.FilesOxygenService;
 
 /**
- * 肌电数据
+ * 耗氧量数据
  * @author pyf
  *
  */

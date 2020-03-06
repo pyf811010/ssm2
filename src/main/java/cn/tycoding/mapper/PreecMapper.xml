@@ -33,7 +33,7 @@
 		order by expid desc
 		
 	</select>
-	
+
     <update id="edit" parameterType="cn.tycoding.pojo.Preec">
 		update preec set
 		id_subjects=#{id_subjects},advance=#{advance},remark=#{remark},motion_capture_info=#{motion_capture_info},slot_machine_info=#{slot_machine_info},asc_info=#{asc_info},fgt_info=#{fgt_info},elec_info=#{elec_info},id_machine=#{id_machine}                                                
@@ -76,5 +76,10 @@
 		insert into preec (id_Subjects, remark, advance) values (#{id_subjects,jdbcType=INTEGER},
 		 #{remark,jdbcType=VARCHAR}, #{advance,jdbcType=LONGVARCHAR})
 	</insert>
+
+	<!-- 查找表中字段的信息，字段名称和字段备注-->
+	<select id="findDbTableComment" resultType="cn.tycoding.entity.assist.DBTableComment">
+        show full fields from preec
+    </select>
 
 </mapper>

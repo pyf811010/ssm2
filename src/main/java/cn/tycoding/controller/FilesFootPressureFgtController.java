@@ -24,7 +24,7 @@ import cn.tycoding.service.FilesKandService;
 import cn.tycoding.service.FilesOxygenService;
 
 /**
- * 肌电数据
+ * 足底压力.fgt
  * @author pyf
  *
  */
