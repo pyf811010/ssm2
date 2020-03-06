@@ -36,4 +36,6 @@ public interface FilesMontionCaptureMapper {
 	int add(FilesMontionCapture filesMontionCapture);
 
 	void del(String string);
+
+	boolean dataifexist(String url); 
 }

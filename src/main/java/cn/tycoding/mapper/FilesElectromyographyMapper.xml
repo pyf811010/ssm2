@@ -10,11 +10,15 @@
   <sql id="Base_Column_List">
     expid, url, id_query, file_name
   </sql>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from files_electromyography
     where expid = #{expid,jdbcType=INTEGER}
+  </select>
+  <select id="dataifexist" parameterType="string" resultType="boolean">
+		SELECT case WHEN COUNT(*) > 0 THEN true else false END from files_electromyography where url like CONCAT('%',#{url,jdbcType=VARCHAR},'%')
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from files_electromyography

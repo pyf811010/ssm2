@@ -16,6 +16,9 @@
     from files_foot_pressure_asc
     where expid = #{expid,jdbcType=INTEGER}
   </select>
+   <select id="dataifexist" parameterType="string" resultType="boolean">
+		SELECT case WHEN COUNT(*) > 0 THEN true else false END from files_foot_pressure_asc where url like CONCAT('%',#{url,jdbcType=VARCHAR},'%')
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from files_foot_pressure_asc
     where expid = #{expid,jdbcType=INTEGER}

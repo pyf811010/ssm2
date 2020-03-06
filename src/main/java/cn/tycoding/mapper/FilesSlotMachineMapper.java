@@ -36,4 +36,6 @@ public interface FilesSlotMachineMapper {
 	int add(FilesSlotMachine filesSlotMachine);
 
 	String getFile_name(int expid);
+	
+	boolean dataifexist(String url); 
 }
