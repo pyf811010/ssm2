@@ -28,11 +28,11 @@
 			Find: "查找",
 			Reset: "重置",
 			odata: [{
-				oper: "eq",
-				text: "&nbsp;等于&nbsp; "
-			}, {
 				oper: "cn",
-				text: "&nbsp;相似&nbsp;"
+				text: "&nbsp;相似&nbsp; "
+			}, {
+				oper: "eq",
+				text: "&nbsp;等于&nbsp;"
 			}],
 			groupOps: [{
 				op: "AND",
