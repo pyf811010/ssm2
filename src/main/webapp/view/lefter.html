@@ -76,6 +76,13 @@
 
 								<b class="arrow"></b>
 							</li>
+							<li class="">
+								<a href="/view/machine.html">
+									<i class="menu-icon fa fa-caret-right"></i> 实验机器管理
+								</a>
+
+								<b class="arrow"></b>
+							</li>
 						
 						<li class="">
 								<a href="/view/preec.html">
@@ -154,6 +161,13 @@
 
 								<b class="arrow"></b>
 							</li>
+							<li class="">
+								<a href="/view/gait_cycle_pic.html">
+									<i class="menu-icon fa fa-caret-right"></i> 步态周期图像信息管理
+								</a>
+
+								<b class="arrow"></b>
+							</li>
 							
 							
 							
@@ -165,7 +179,7 @@
 
 					<li class="">
 						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-bar-chart-o"></i>
+							<i class="menu-icon fa fa-folder-open-o"></i>
 							<span class="menu-text"> 数据分析 </span>
 
 							<b class="arrow fa fa-angle-down"></b>
@@ -174,124 +188,37 @@
 						<b class="arrow"></b>
 
 						<ul class="submenu" style="display: block;"> <!-- 可以使左侧导航栏默认展开 -->
-							<!-- <li class="">
-								<a href="#" class="dropdown-toggle">
-									<i class="menu-icon fa fa-caret-right"></i> 个人情况分析
-									<b class="arrow fa fa-angle-down"></b>
-								</a>
-
-								<b class="arrow"></b>
-
-								<ul class="submenu">
-									<li class="">
-										<a href="/views/dataAnalysis/student/personalGrade.html">
-											<i class="menu-icon fa fa-leaf green"></i>个人成绩查询
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-									<li class="">
-										<a href="/views/dataAnalysis/student/personalAllInfo.html">
-											<i class="menu-icon fa fa-leaf green"></i>发展综合分析
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-
-								</ul>
-							</li> -->
-
-							<!-- <li class="">
-								<a href="/views/dataAnalysis/dorm/dormAtmosphere.html">
-									<i class="menu-icon fa fa-caret-right"></i> 宿舍情况分析
+							<li class="">
+								<a id="open">
+									<i class="menu-icon fa fa-caret-right"></i> matlab数据处理
 								</a>
 
 								<b class="arrow"></b>
 							</li>
- -->
 							<!-- <li class="">
-								<a href="/views/dataAnalysis/classroom/classAtmosphere.html">
-									<i class="menu-icon fa fa-caret-right"></i> 班级情况分析
+								<a href="/view/file/updatefileUpload.html">
+									<i class="menu-icon fa fa-caret-right"></i> 修改数据文件上传
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/view/file/gaitPicUpload.html">
+									<i class="menu-icon fa fa-caret-right"></i> 步态周期图像文件上传
 								</a>
 
 								<b class="arrow"></b>
 							</li> -->
-
 							<!-- <li class="">
-								<a href="#" class="dropdown-toggle">
-									<i class="menu-icon fa fa-caret-right"></i> 整体学业分析
-									<b class="arrow fa fa-angle-down"></b>
+								<a href="/views/file/fileDownload.html">
+									<i class="menu-icon fa fa-caret-right"></i> 文件下载
 								</a>
 
 								<b class="arrow"></b>
-
-								<ul class="submenu">
-									<li class="">
-										<a href="/views/dataAnalysis/all/allGrade.html">
-											<i class="menu-icon fa fa-leaf green"></i>学分积欠情况分析
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-									<li class="">
-										<a href="/views/dataAnalysis/all/make_up_rebuild.html">
-											<i class="menu-icon fa fa-leaf green"></i>补考重修情况分析
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-
-								</ul>
 							</li> -->
 
 						</ul>
 					</li>
-
-<!-- 					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-book"></i>
-							<span class="menu-text"> 数据预测 </span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="">
-								<a href="/views/bigDataAnalysis/courseDependence.html">
-									<i class="menu-icon fa fa-caret-right"></i> 课程通过预警
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="">
-								<a href="/views/bigDataAnalysis/scorePosition.html">
-									<i class="menu-icon fa fa-caret-right"></i> 成绩位置预测
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="">
-								<a href="/views/bigDataAnalysis/postGraduate.html">
-									<i class="menu-icon fa fa-caret-right"></i> 考研录取预测
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="">
-								<a href="/views/bigDataAnalysis/partyMember.html">
-									<i class="menu-icon fa fa-caret-right"></i> 入党情况预测
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-						</ul>
-					</li> -->
 
 					<li class="">
 						<a href="#" class="dropdown-toggle">
@@ -305,8 +232,10 @@
 
 						<ul class="submenu" style="display: block;"> <!-- 可以使左侧导航栏默认展开 -->
 							<li class="">
-								<a href="/view/file/fileUpload.html">
-									<i class="menu-icon fa fa-caret-right"></i> 文件上传
+								<!-- <a href="#" runat="server" onserverclick="open">
+					即用a标签调用后台Admincontroller层中open方法,onserverclick中为@RequestMapping中value值  -->
+					<a href="/view/file/fileUpload.html">
+									<i class="menu-icon fa fa-caret-right"></i> 原始测试数据文件上传
 								</a>
 
 								<b class="arrow"></b>
@@ -314,6 +243,13 @@
 							<li class="">
 								<a href="/view/file/updatefileUpload.html">
 									<i class="menu-icon fa fa-caret-right"></i> 修改数据文件上传
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/view/file/gaitPicUpload.html">
+									<i class="menu-icon fa fa-caret-right"></i> 步态周期图像文件上传
 								</a>
 
 								<b class="arrow"></b>
@@ -331,6 +267,17 @@
 
 				</ul>
 				<!-- /.nav-list -->
-				
+		<script type="text/javascript">
+			//ajax请求数据
+			$(function() {
+				$("#open").click(function() {
+					//清空之前的行
+					$.ajax({
+						type: "post",
+						url: "/admin/open",
+					});
+				});
+			});
+		</script>				
 				
 				

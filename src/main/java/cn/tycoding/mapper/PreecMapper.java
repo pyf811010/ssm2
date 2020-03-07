@@ -2,6 +2,7 @@ package cn.tycoding.mapper;
 
 import java.util.List;
 
+import cn.tycoding.entity.assist.DBTableComment;
 import cn.tycoding.pojo.Preec;
 
 public interface PreecMapper {
@@ -34,4 +35,10 @@ public interface PreecMapper {
 	int add(Preec preec);
 
 	List<Preec> findAllById(int id);
+
+	/**
+	 * 查找表格中所有字段的详细描述信息
+	 * @return 封装了字段信息的list集合
+	 */
+	List<DBTableComment> findDbTableComment();
 }

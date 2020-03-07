@@ -1,5 +1,6 @@
 package cn.tycoding.service.impl;
 
+import java.awt.Desktop;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -113,7 +114,16 @@ public class FilesKandServiceImpl implements FilesKandService {
                 // 会按st_id来删除，考虑到存在多选，此时主键id是数组
                 int count = 0;
                 for (int i = 0; i < id.length; i++) {
-                	filesKandMapper.del(id[i]);
+                    int expid = Integer.parseInt(id[i]);
+                	String url = filesKandMapper.getPathByExpid(expid);
+                	File file = new File(url);
+                	boolean result = file.delete();
+                    int tryCount = 0;
+                    while (!result && tryCount++ < 10) {
+                        System.gc();    //回收资源
+                        result = file.delete();
+                    }
+                    filesKandMapper.del(id[i]);
                     count++;
                 }
                 String str = count + "条成功删除" + (id.length - count) + "条删除失败";
@@ -156,6 +166,19 @@ public class FilesKandServiceImpl implements FilesKandService {
 		
 	}
 
-	
+	@Override
+	public void open(int expid) throws IOException {
+		// TODO Auto-generated method stub
+        State state = new State();
+        String path = filesKandMapper.getPathByExpid(expid);
+        String filename = filesKandMapper.getFile_name(expid);
+        File file = new File(path);
+		try {
+			Desktop.getDesktop().open(file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

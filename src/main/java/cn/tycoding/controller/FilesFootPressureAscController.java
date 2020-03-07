@@ -24,7 +24,7 @@ import cn.tycoding.service.FilesKandService;
 import cn.tycoding.service.FilesOxygenService;
 
 /**
- * 肌电数据
+ * 足底压力.asc
  * @author pyf
  *
  */
@@ -73,6 +73,16 @@ public class FilesFootPressureAscController {
     public void download(@PathVariable int expid, HttpServletResponse response) {
     	try {
     		filesFootPressureAscService.download(expid, response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @RequestMapping("/open")
+    @ResponseBody
+    public void open(int expid) {
+    	try {
+    		filesFootPressureAscService.open(expid);
         } catch (IOException e) {
             e.printStackTrace();
         }

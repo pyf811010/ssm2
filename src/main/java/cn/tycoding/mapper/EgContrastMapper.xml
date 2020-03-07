@@ -511,4 +511,9 @@
 		${_parameter}
 	</select>
 
+    <!-- 查找表中字段的信息，字段名称和字段备注-->
+    <select id="findDbTableComment" resultType="cn.tycoding.entity.assist.DBTableComment">
+        show full fields from eg_contrast
+    </select>
+
 </mapper>

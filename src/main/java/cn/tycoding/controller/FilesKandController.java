@@ -20,7 +20,7 @@ import cn.tycoding.service.FilesEleService;
 import cn.tycoding.service.FilesKandService;
 
 /**
- * 肌电数据
+ * 运动学和动力学数据
  * @author pyf
  *
  */
@@ -69,6 +69,16 @@ public class FilesKandController {
     public void download(@PathVariable int expid, HttpServletResponse response) {
     	try {
     		filesKandService.download(expid, response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @RequestMapping("/open")
+    @ResponseBody
+    public void open(int expid) {
+    	try {
+    		filesKandService.open(expid);
         } catch (IOException e) {
             e.printStackTrace();
         }

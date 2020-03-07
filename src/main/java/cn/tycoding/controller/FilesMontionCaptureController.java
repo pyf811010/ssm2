@@ -24,7 +24,7 @@ import cn.tycoding.service.FilesMontionCaptureService;
 import cn.tycoding.service.FilesOxygenService;
 
 /**
- * 肌电数据
+ * 动补数据
  * @author pyf
  *
  */
@@ -73,6 +73,16 @@ public class FilesMontionCaptureController {
     public void download(@PathVariable int expid, HttpServletResponse response) {
     	try {
     		filesMontionCaptureService.download(expid, response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @RequestMapping("/open")
+    @ResponseBody
+    public void open(int expid) {
+    	try {
+    		filesMontionCaptureService.open(expid);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -36,4 +36,5 @@ public interface FilesFootPressureAscMapper {
 	void del(String string);
 
 	int edit(FilesFootPressureAsc filesFootPressureAsc);
+	boolean dataifexist(String url); 
 }

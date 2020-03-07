@@ -18,4 +18,6 @@ public interface QueryMapper {
     int selectMaxExpid();
     
     int insertWithIdReturned(Query record);
+    
+    
 }

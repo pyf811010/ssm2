@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.tycoding.pojo.FilesElectromyography;
 import cn.tycoding.pojo.FilesKand;
+import cn.tycoding.pojo.GaitCyclePic;
 import cn.tycoding.pojo.ObjectQuery;
 
 public interface FilesKandService {
@@ -15,10 +16,12 @@ public interface FilesKandService {
 
 	List find();
 
-	String handle(String oper, FilesKand filesKand, String[] id);
 
 	void download(int expid, HttpServletResponse response) throws IOException;
 
-	
+	String handle(String oper, FilesKand filesKand, String[] id);
+
+	void open(int expid) throws IOException;
+
 
 }

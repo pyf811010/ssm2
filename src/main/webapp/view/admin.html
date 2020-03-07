@@ -50,30 +50,97 @@
 				
 			</div>
 
-			<div class="main-content">
-				<div class="main-content-inner">
-					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
-						<ul class="breadcrumb">
-							<li>
-								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="/views/index.html">首页</a>
-							</li>
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="/views/index.html">首页</a>
+                    </li>
 
-							<li class="active">管理员信息管理</li>
-						</ul>
-						<!-- /.breadcrumb -->
+                    <li class="active">管理员信息管理</li>
+                </ul>
+                <!-- /.breadcrumb -->
 
-					</div>
+            </div>
 
-					<div class="page-content">
+            <div class="page-content">
 
-						<div class="row">
-							<div class="col-xs-12">
-								<!-- PAGE CONTENT BEGINS -->
-								<table id="grid-table"></table>
-								<div id="grid-pager"></div>
-								<!-- PAGE CONTENT ENDS -->
-							</div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+                        <!-- 下载模板 -->
+                        <div class="row" style="margin-bottom: 5px;">
+                            <div class="row" style="float:right;margin-right: 12px;">
+                                <!-- 导入现有数据 -->
+                                <div class="btn-group" style="">
+                                    <a href="/excel/downloadTemplate?name=admin" class="btn btn-success bigger-120"
+                                       role="button">
+                                        下载导入摸板
+                                        <i class="ace-icon fa icon-on-right"></i>
+                                    </a>
+                                </div>
+                                <div class="btn-group">
+                                    <button data-toggle="dropdown" class="btn btn-success bigger-120 dropdown-toggle">
+                                        导入现有数据
+                                        <i class="ace-icon fa fa-angle-down icon-on-right"></i>
+                                    </button>
+
+                                    <ul class="dropdown-menu dropdown-info dropdown-menu-right">
+
+                                        <li class="divider"></li>
+
+                                        <li>
+
+                                            <form method="POST" enctype="multipart/form-data" id="form1"
+                                                  action="#">
+
+                                                <div style="margin-left: 10px;margin-top: 15px;">
+                                                    <input id="upfile" type="file" name="uploadAdmin" style="padding-bottom: 2px;">
+                                                </div>
+
+                                                <div style="margin-top: 15px;margin-left: 10px;">
+                                                    <!--<a href="#" onclick="importData()">由模版导入数据</a>-->
+                                                    <button class="btn btn-info2" type="button" id="fileCommit" style="height: 40px;">
+                                                        <i class="ace-icon fa fa-check bigger-110"></i>
+                                                         确定上传
+                                                    </button>
+                                                    <button class="btn" type="reset">
+                                                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                                                        重置
+                                                    </button>
+                                                </div>
+                                            </form>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- 导出查询数据 -->
+                                <!--<div class="btn-group">
+                                    <button data-toggle="dropdown" class="btn btn-warning bigger-120 dropdown-toggle">
+                                        导出查询数据
+                                        <i class="ace-icon fa fa-angle-down icon-on-right"></i>
+                                    </button>
+
+                                    <ul class="dropdown-menu dropdown-info dropdown-menu-right">
+                                        <li>
+                                            <a href="#" onclick="exportSinglePage()">导出本页数据</a>
+                                        </li>
+
+                                        <li class="divider"></li>
+
+                                        <li>
+                                            <a href="#" onclick="exportAllData()">导出全部数据</a>
+                                        </li>
+                                    </ul>
+                                </div>-->
+                            </div>
+                        </div>
+                        <table id="grid-table"></table>
+                        <div id="grid-pager"></div>
+                        <!-- PAGE CONTENT ENDS -->
+                    </div>
 							<!-- /.col -->
 						</div>
 						<!-- /.row -->
@@ -174,6 +241,47 @@
  	} 
  </style> 
  <!--上面代码用来设置水平滚动条  -->
+<!--文件上传-->
+<script type="text/javascript">
+
+    jQuery(function ($) {
+        $("#fileCommit").click(function (e) {
+            var formData = new FormData();
+            var files = $("#upfile")[0].files;
+            // e.preventDefault();
+            formData.append("file",files[0]);
+
+            if (files.length != 0){
+                $.ajax({
+                    type: "post",
+                    url: "/excel/uploadFile",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+
+                    success: function (data) {
+                        console.log(data.success);
+                        /*if (data.success != 0) {
+                            /!*hideloading();*!/
+                            if (data.success == 2) alert(data.info);
+                        } else {
+                            /!*hideloading();*!/
+                            alert(data.info);
+                        }*/
+                        alert(data.info);
+                    },
+                    error: function (err) {
+                        hideloading();
+                        alert("文件上传遇到错误!" + JSON.stringify(err));
+                        alert("上传失败!");
+                    }
+                });
+            } else {
+                alert("请选择上传的文件");
+            }
+        })
+    });
+</script>
 
 		<script>
 		$("#header").load("/view/header.html");

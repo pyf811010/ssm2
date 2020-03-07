@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * @author：pyf 
  * @date
- * @description：上传修改后的动补数据文件
+ * @description：上传修改后的运动学与动力学数据文件
  */
 @Controller
 @RequestMapping("/updateExcel")
