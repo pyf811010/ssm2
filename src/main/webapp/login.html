@@ -315,6 +315,7 @@
 								$.cookie("us_name", data.info, {
 									path: "/"
 								});
+								sessionStorage.setItem("us_name", data.info); 
 
 							} else {
 								alert(data.info);

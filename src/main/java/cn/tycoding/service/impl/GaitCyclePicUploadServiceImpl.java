@@ -39,7 +39,7 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
         //file.setFi_is_checked(false);
         State state = new State();
         //由file的属性创建对应文件夹（若无）
-        String basePath = FileConstant.UPDATE_FILE_UPLOAD_URL + File.separator;
+        String basePath = FileConstant.PICTURE_FILE_UPLOAD_URL + File.separator;
         //月
         String date = new SimpleDateFormat("yyyy-MM").format(new Date());
         //日
