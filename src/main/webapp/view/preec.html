@@ -234,7 +234,6 @@
 
     .frozen-div, .frozen-bdiv {
         background-color: #E4E6E9; /*与网页背景色一致*/
-        */
     }
 </style>
 <!--上面代码用来设置水平滚动条  -->
@@ -244,7 +243,11 @@
 </script>
 
 <script>
-    $("#lefter").load("/view/lefter.html");
+    $("#lefter").load("/view/lefter.html", function () {
+        $("#main").prop("class", "");
+        $(".preec").prop("class", "active");
+        $("#dataManageSubMenu").prop("style", "display: block");
+    });
 </script>
 
 <script>

@@ -26,7 +26,7 @@ public class ExcelConstant {
     /**
      * 实验者信息 subject
      */
-    public static final int[] SUBJECT_INDEX = {1,2,3,4};
+    public static final int[] SUBJECT_INDEX = {1,2,3,4,5,6};
 
     /**
      * 肌电传感器 egcontrast
