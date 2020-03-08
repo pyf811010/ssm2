@@ -1,892 +1,1654 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta charset="utf-8" />
-		<title>运动学与动力学数据</title>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <title>运动学与动力学数据</title>
 
-		<meta name="description" content="Dynamic tables and grids using jqGrid plugin" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="description" content="Dynamic tables and grids using jqGrid plugin"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
-		<!-- bootstrap & fontawesome -->
-		<link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/assets/font-awesome/4.5.0/css/font-awesome.min.css"/>
 
-		<!-- page specific plugin styles -->
-		<link rel="stylesheet" href="/assets/css/jquery-ui.min.css" />
-		<link rel="stylesheet" href="/assets/css/bootstrap-datepicker3.min.css" />
-		<link rel="stylesheet" href="/assets/css/ui.jqgrid.min.css" />
-		<link rel="stylesheet" href="/assets/css/loading.css" />
-		<link rel="stylesheet" href="/assets/css/chosen.min.css" />
-		<link rel="stylesheet" href="/assets/css/bootstrap-timepicker.min.css" />
-		<link rel="stylesheet" href="/assets/css/daterangepicker.min.css" />
-		<link rel="stylesheet" href="/assets/css/bootstrap-datetimepicker.min.css" />
-		<link rel="stylesheet" href="/assets/css/bootstrap-colorpicker.min.css" />
-		<!-- text fonts -->
-		<link rel="stylesheet" href="/assets/css/fonts.googleapis.com.css" />
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="/assets/css/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="/assets/css/bootstrap-datepicker3.min.css"/>
+    <link rel="stylesheet" href="/assets/css/ui.jqgrid.min.css"/>
+    <link rel="stylesheet" href="/assets/css/loading.css"/>
+    <link rel="stylesheet" href="/assets/css/chosen.min.css"/>
+    <link rel="stylesheet" href="/assets/css/bootstrap-timepicker.min.css"/>
+    <link rel="stylesheet" href="/assets/css/daterangepicker.min.css"/>
+    <link rel="stylesheet" href="/assets/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="/assets/css/bootstrap-colorpicker.min.css"/>
+    <!-- text fonts -->
+    <link rel="stylesheet" href="/assets/css/fonts.googleapis.com.css"/>
 
-		<!-- ace styles -->
-		<link rel="stylesheet" href="/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+    <!-- ace styles -->
+    <link rel="stylesheet" href="/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
 
-		<!--[if lte IE 9]>
-			<link rel="stylesheet" href="/assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
-		<![endif]-->
-		<link rel="stylesheet" href="/assets/css/ace-skins.min.css" />
-		<link rel="stylesheet" href="/assets/css/ace-rtl.min.css" />
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="/assets/css/ace-part2.min.css" class="ace-main-stylesheet"/>
+    <![endif]-->
+    <link rel="stylesheet" href="/assets/css/ace-skins.min.css"/>
+    <link rel="stylesheet" href="/assets/css/ace-rtl.min.css"/>
 
-		<!--[if lte IE 9]>
-		  <link rel="stylesheet" href="/assets/css/ace-ie.min.css" />
-		<![endif]-->
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="/assets/css/ace-ie.min.css"/>
+    <![endif]-->
 
-		<!-- inline styles related to this page -->
+    <!-- inline styles related to this page -->
 
-		<!-- ace settings handler -->
-		<script src="/assets/js/ace-extra.min.js"></script>
+    <!-- ace settings handler -->
+    <script src="/assets/js/ace-extra.min.js"></script>
 
-		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
-		<!--[if lte IE 8]>
-		<script src="/assets/js/html5shiv.min.js"></script>
-		<script src="/assets/js/respond.min.js"></script>
-		<![endif]-->
-	</head>
+    <!--[if lte IE 8]>
+    <script src="/assets/js/html5shiv.min.js"></script>
+    <script src="/assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
 
-	<body class="no-skin">
-	<div id="loading">
-    	<img src="/assets/css/images/loading.gif">
-	</div>
-		<div id="navbar" class="navbar navbar-default          ace-save-state"></div>
+<body class="no-skin">
+<div id="loading">
+    <img src="/assets/css/images/loading.gif">
+</div>
+<div id="navbar" class="navbar navbar-default          ace-save-state"></div>
 
-		<div class="main-container ace-save-state" id="main-container">
-			<script type="text/javascript">
-				try {
-					ace.settings.loadState('main-container')
-				} catch(e) {}
-			</script>
+<div class="main-container ace-save-state" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.loadState('main-container')
+        } catch (e) {
+        }
+    </script>
 
-			<div id="sidebar" class="sidebar                  responsive                    ace-save-state"></div>
+    <div id="sidebar" class="sidebar                  responsive                    ace-save-state"></div>
 
-			<div class="main-content">
-				<div class="main-content-inner">
-					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
-						<ul class="breadcrumb">
-							<li>
-								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="/view/index.html">首页</a>
-							</li>
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="/view/index.html">首页</a>
+                    </li>
 
-							<li class="active">运动学与动力学数据</li>
-						</ul>
-						<!-- /.breadcrumb -->
+                    <li class="active">运动学与动力学数据</li>
+                </ul>
+                <!-- /.breadcrumb -->
 
-					</div>
+            </div>
 
-					<div class="page-content">
+            <div class="page-content">
 
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="row">
-									<div class="col-sm-10">
-										<h3 class="header blue lighter smaller">
-											<i class="ace-icon fa fa-spinner"></i>
-											运动学与动力学数据
-										</h3>
-									</div>
-								</div>
-								<div class="row">
-									
-									<div class="col-sm-10">
-									  <span style="float: left; height: 34px; width: auto; line-height: 34px;">请输入中间表ID:</span>
-										<div class="col-sm-10">
-											<form class="form-inline" id="multiIdQuery">
-												<div class="input-group" style="width:60px">
-													<input type="text" style="width:50px" class="form-control search-query">
-													<span class="input-group-btn"><button type="button" class="close" onClick="addIdQuery()"><i class="ace-icon glyphicon glyphicon-plus green"></i></button></span>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-								
-								<div class="space-4"></div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <h3 class="header blue lighter smaller">
+                                    <i class="ace-icon fa fa-spinner"></i>
+                                    运动学与动力学数据
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="row">
 
-								<div class="row">
-									<button type="button" id="bt_gettmp" class="btn btn-xs btn-info">
-										<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>&nbsp;查&nbsp;找&nbsp;
-									</button>
-									<button type="button" id="bt_addIdQuery" class="btn btn-xs btn-info" onClick="addIdQuery()">
-										<span class="ace-icon glyphicon glyphicon-plus"></span>&nbsp;添&nbsp;加&nbsp;
-									</button>
-									<button type="button" id="bt_removeAllIdQuery" class="btn btn-xs btn-info">
-										<span class="ace-icon glyphicon glyphicon-remove"></span>&nbsp;清&nbsp;空&nbsp;
-									</button>
-									
-									<button type="button" id="bt_save" class="btn btn-xs btn-info">
-										<span class="ace-icon glyphicon glyphicon-save"></span>&nbsp;保&nbsp;存&nbsp;
-									</button>
-								</div>
-								
-								
+                            <div class="col-sm-10">
+                                <span style="float: left; height: 34px; width: auto; line-height: 34px;">请输入中间表ID:</span>
+                                <div class="col-sm-10">
+                                    <form class="form-inline" id="multiIdQuery">
+                                        <div class="input-group" style="width:60px">
+                                            <input type="text" style="width:50px" class="form-control search-query">
+                                            <span class="input-group-btn"><button type="button" class="close"
+                                                                                  onClick="addIdQuery()"><i
+                                                    class="ace-icon glyphicon glyphicon-plus green"></i></button></span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
 
-								<div class="row">
-									<div class="col-sm-10">
-										<h3 class="header blue lighter smaller">
-										</h3>
-									</div>
-								</div>
-								<table id="grid-table"></table>
+                        <div class="space-4"></div>
 
-								<div id="grid-pager"></div>
+                        <div class="row">
+                            <button type="button" id="bt_gettmp" class="btn btn-xs btn-info">
+                                <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>&nbsp;查&nbsp;找&nbsp;
+                            </button>
+                            <button type="button" id="bt_addIdQuery" class="btn btn-xs btn-info" onClick="addIdQuery()">
+                                <span class="ace-icon glyphicon glyphicon-plus"></span>&nbsp;添&nbsp;加&nbsp;
+                            </button>
+                            <button type="button" id="bt_removeAllIdQuery" class="btn btn-xs btn-info">
+                                <span class="ace-icon glyphicon glyphicon-remove"></span>&nbsp;清&nbsp;空&nbsp;
+                            </button>
 
-								<!-- PAGE CONTENT ENDS -->
-							</div>
-							<!-- /.col -->
-						</div>
-						<!-- /.row -->
-					</div>
-					<!-- /.page-content -->
-				</div>
-			</div>
-			<!-- /.main-content -->
+                            <button type="button" id="bt_save" class="btn btn-xs btn-info">
+                                <span class="ace-icon glyphicon glyphicon-save"></span>&nbsp;保&nbsp;存&nbsp;
+                            </button>
+                        </div>
 
-			<div id="footer" class="footer"></div>
 
-			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-			</a>
-		</div>
-		<!-- /.main-container -->
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <h3 class="header blue lighter smaller">
+                                </h3>
+                            </div>
+                        </div>
+                        <table id="grid-table"></table>
 
-		<!-- basic scripts -->
+                        <div id="grid-pager"></div>
 
-		<!--[if !IE]> -->
-		<script src="/assets/js/jquery-2.1.4.min.js"></script>
-		<script src="/assets/js/jquery.form.js"></script>
-		<script src="/assets/js/jquery.cookie.js"></script>
-		<script src="/assets/js/ssm2.util.js"></script>
+                        <!-- PAGE CONTENT ENDS -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.page-content -->
+        </div>
+    </div>
+    <!-- /.main-content -->
 
-		<!-- <![endif]-->
+    <div id="footer" class="footer"></div>
 
-		<!--[if IE]>
-		<script src="/assets/js/jquery-1.11.3.min.js"></script>
-		<![endif]-->
-		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
-		</script>
-		<script src="/assets/js/bootstrap.min.js"></script>
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
+</div>
+<!-- /.main-container -->
 
-		<!-- page specific plugin scripts -->
-		<script src="/assets/js/bootstrap-datepicker.min.js"></script>
-		<script src="/assets/js/jquery.jqGrid.min.js"></script>
-		<script src="/assets/js/grid.locale-cn.js"></script>
-		
-		<script src="/assets/js/jquery-ui.custom.min.js"></script>
-		<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="/assets/js/chosen.jquery.min.js"></script>
-		<script src="/assets/js/spinbox.min.js"></script>
-		<script src="/assets/js/bootstrap-timepicker.min.js"></script>
-		<script src="/assets/js/moment.min.js"></script>
-		<script src="/assets/js/daterangepicker.min.js"></script>
-		<script src="/assets/js/bootstrap-datetimepicker.min.js"></script>
-		<script src="/assets/js/bootstrap-colorpicker.min.js"></script>
-		<script src="/assets/js/jquery.knob.min.js"></script>
-		<script src="/assets/js/autosize.min.js"></script>
-		<script src="/assets/js/jquery.inputlimiter.min.js"></script>
-		<script src="/assets/js/jquery.maskedinput.min.js"></script>
-		<script src="/assets/js/bootstrap-tag.min.js"></script>
+<!-- basic scripts -->
 
-		<!-- ace scripts -->
-		<script src="/assets/js/ace-elements.min.js"></script>
-		<script src="/assets/js/ace.min.js"></script>
+<!--[if !IE]> -->
+<script src="/assets/js/jquery-2.1.4.min.js"></script>
+<script src="/assets/js/jquery.form.js"></script>
+<script src="/assets/js/jquery.cookie.js"></script>
+<script src="/assets/js/ssm2.util.js"></script>
 
-		<!-- inline scripts related to this page -->
+<!-- <![endif]-->
 
-		<STYLE type="text/css">
-			/* Jqgrid */
-			
-			.ui-jqgrid .ui-jqgrid-view {
-				font-size: 14px;
-			}
-			/*修改grid标题的字体大小*/
-			
-			.ui-jqgrid .ui-jqgrid-pager {
-				font-size: 14px;
-			}
-			/*修改grid标题的字体大小*/
-			
-			.ui-jqgrid .ui-jqgrid-titlebar {
-				font-size: 16px;
-			}
-			
-			.ui-jqdialog-title {
-				font-size: 14px;
-			}
-			
-			.ui-jqgrid-sortable {
-				font-size: 14px;
-			}
-			/*修改列名的字体大小*/
-			
-			.ui-widget-content .jqgrow .ui-row-ltr .ui-jqgrid-view {
-				font-size: 14px;
-			}
-			/*修改表格内容字体,不起作用*/
-			
-			.CaptionTD {
-				font-size: 14px
-			}
-			
-			.fm-button {
-				font-size: 14px
-			}
-			
-			.ui-jqdialog {
-				font-size: 14px
-			}
-		</style>
-		<style> 
- 		.ui-jqgrid .ui-jqgrid-bdiv { 
-    		border-top: 1px solid #E1E1E1; 
-   			overflow-x: auto; 
-   		} 
-   		.frozen-div, .frozen-bdiv {
-   			background-color: #E4E6E9;/*与网页背景色一致*/ */
-   		} 
-   		</style> 
-		 <!--上面代码用来设置水平滚动条  -->
+<!--[if IE]>
+<script src="/assets/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+    if ('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+</script>
+<script src="/assets/js/bootstrap.min.js"></script>
 
-		<script type="text/javascript">	
-			
-			$("#bt_gettmp").click(function(){
-				var formlist = new Array();
-				$("#multiIdQuery input[type='text']").each(function(){
-					var value = $(this).val();
-					if (value != "" && value != null)
-						formlist.push(value);
-				});
-				console.log("formlist"+formlist);
-				if (formlist.length != 0){
-					showloading();
-					$.ajax({
-						url : '/kand/findByIdQuery', // 请求地址, 就是你的控制器, 如 test.com/home/index/index
-						data : {
-							"jsonIdQuery" : JSON.stringify(formlist)
-						}, // 需要传送的参数
-						type : 'POST', // 请求方式
-						dataType : 'json', // 返回数据的格式, 通常为JSON
-						//contentType: 'application/json',             
-						success : function(data) {
-							console.log(data.success);
-							if (data.success!='0') {
-								hideloading();
-								if (data.success == 2) alert(data.info);
-								$("#grid-table").jqGrid('setGridParam',{datatype:'json'}).trigger('reloadGrid');
-							} else {
-								hideloading();
-								alert(data.info);
-							}
-						},
-						error : function() {
-							hideloading();
-							alert('Send Request Fail..'); // 请求失败时的回调函数
-						}
-					});
-				}else {
-					alert("请输入id-query");
-				}
-			});
-			
-			
-			/*用于将页面修改后的数据传输到excel文件中，并保存在指定位置  */
-			$("#bt_save").click(function(){
-					showloading();
-					$.ajax({
-						url : '/admin/save', // 请求地址, 就是你的控制器, 如 test.com/home/index/index
-						type : 'POST', // 请求方式
-						dataType : 'json', // 返回数据的格式, 通常为JSON
-						success : function(data) {
-							console.log(data.success);
-							alert(data.info)
-							hideloading();
-							/* alert(data.info); */
-						},
-						error : function() {
-							hideloading();
-							alert(data.info); // 请求失败时的回调函数
-						}
-					});
-			});
-			
-			function hideloading(){
-				$("#loading").attr("style","display:none;");
-				console.log("hide");
-			}
-			
-			function addIdQuery(){
-				var tmpdiv = document.createElement('div');
-				tmpdiv.className='input-group';
-				tmpdiv.style.width='60px';
-				code = '<input type="text" style="width:50px" class="form-control search-query"><span class="input-group-btn"><button type="button" onClick="bt_removeIdQuery(this)" class="close"><i class="ace-icon glyphicon glyphicon-trash red"></i></button></span>'
-				tmpdiv.innerHTML=code;
+<!-- page specific plugin scripts -->
+<script src="/assets/js/bootstrap-datepicker.min.js"></script>
+<script src="/assets/js/jquery.jqGrid.min.js"></script>
+<script src="/assets/js/grid.locale-cn.js"></script>
 
-				document.getElementById('multiIdQuery').appendChild(tmpdiv);
-			}
+<script src="/assets/js/jquery-ui.custom.min.js"></script>
+<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="/assets/js/chosen.jquery.min.js"></script>
+<script src="/assets/js/spinbox.min.js"></script>
+<script src="/assets/js/bootstrap-timepicker.min.js"></script>
+<script src="/assets/js/moment.min.js"></script>
+<script src="/assets/js/daterangepicker.min.js"></script>
+<script src="/assets/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/assets/js/bootstrap-colorpicker.min.js"></script>
+<script src="/assets/js/jquery.knob.min.js"></script>
+<script src="/assets/js/autosize.min.js"></script>
+<script src="/assets/js/jquery.inputlimiter.min.js"></script>
+<script src="/assets/js/jquery.maskedinput.min.js"></script>
+<script src="/assets/js/bootstrap-tag.min.js"></script>
 
-			function bt_removeIdQuery(Obj){
-				Obj.parentNode.parentNode.parentNode.removeChild(Obj.parentNode.parentNode);
-			}
+<!-- ace scripts -->
+<script src="/assets/js/ace-elements.min.js"></script>
+<script src="/assets/js/ace.min.js"></script>
 
-			$("#bt_removeAllIdQuery").click(function(){
-				var form = document.getElementById('multiIdQuery');
-				form.innerHTML='<div class="input-group" style="width:60px"><input type="text" style="width:50px" class="form-control search-query"><span class="input-group-btn"><button type="button" class="close" onClick="addIdQuery()"><i class="ace-icon glyphicon glyphicon-plus green"></i></button></span></div>';		
-			});
-			
-			function showloading(){
-				$("#loading").attr("style","display:block;");
-				console.log("show");
-			}
-			
+<!-- inline scripts related to this page -->
 
-		</script>
+<STYLE type="text/css">
+    /* Jqgrid */
 
-		<script type="text/javascript">
-			
-		 	
-			jQuery(function($) {
-				$("#navbar").load("/view/header.html");
-				$("#sidebar").load("/view/lefter.html");
-				$("#footer").load("/view/footer.html");
-				var grid_selector = "#grid-table";
-				var pager_selector = "#grid-pager";
+    .ui-jqgrid .ui-jqgrid-view {
+        font-size: 14px;
+    }
 
-				var parent_column = $(grid_selector).closest('[class*="col-"]');
-				//resize to fit page size
-				var tag_input = $('#form-field-tags');
-				try{
-					tag_input.tag(
-					  {
-						placeholder:tag_input.attr('placeholder'),
-						//enable typeahead by specifying the source array
-						source: ace.vars['US_STATES'],//defined in ace.js >> ace.enable_search_ahead
-						/**
-						//or fetch data from database, fetch those that match "query"
-						source: function(query, process) {
+    /*修改grid标题的字体大小*/
+
+    .ui-jqgrid .ui-jqgrid-pager {
+        font-size: 14px;
+    }
+
+    /*修改grid标题的字体大小*/
+
+    .ui-jqgrid .ui-jqgrid-titlebar {
+        font-size: 16px;
+    }
+
+    .ui-jqdialog-title {
+        font-size: 14px;
+    }
+
+    .ui-jqgrid-sortable {
+        font-size: 14px;
+    }
+
+    /*修改列名的字体大小*/
+
+    .ui-widget-content .jqgrow .ui-row-ltr .ui-jqgrid-view {
+        font-size: 14px;
+    }
+
+    /*修改表格内容字体,不起作用*/
+
+    .CaptionTD {
+        font-size: 14px
+    }
+
+    .fm-button {
+        font-size: 14px
+    }
+
+    .ui-jqdialog {
+        font-size: 14px
+    }
+</style>
+<style>
+    .ui-jqgrid .ui-jqgrid-bdiv {
+        border-top: 1px solid #E1E1E1;
+        overflow-x: auto;
+    }
+
+    .frozen-div, .frozen-bdiv {
+        background-color: #E4E6E9; /*与网页背景色一致*/
+    }
+</style>
+<!--上面代码用来设置水平滚动条  -->
+
+<script type="text/javascript">
+
+    $("#bt_gettmp").click(function () {
+        var formlist = new Array();
+        $("#multiIdQuery input[type='text']").each(function () {
+            var value = $(this).val();
+            if (value != "" && value != null)
+                formlist.push(value);
+        });
+        console.log("formlist" + formlist);
+        if (formlist.length != 0) {
+            showloading();
+            $.ajax({
+                url: '/kand/findByIdQuery', // 请求地址, 就是你的控制器, 如 test.com/home/index/index
+                data: {
+                    "jsonIdQuery": JSON.stringify(formlist)
+                }, // 需要传送的参数
+                type: 'POST', // 请求方式
+                dataType: 'json', // 返回数据的格式, 通常为JSON
+                //contentType: 'application/json',
+                success: function (data) {
+                    console.log(data.success);
+                    if (data.success != '0') {
+                        hideloading();
+                        if (data.success == 2) alert(data.info);
+                        $("#grid-table").jqGrid('setGridParam', {datatype: 'json'}).trigger('reloadGrid');
+                    } else {
+                        hideloading();
+                        alert(data.info);
+                    }
+                },
+                error: function () {
+                    hideloading();
+                    alert('Send Request Fail..'); // 请求失败时的回调函数
+                }
+            });
+        } else {
+            alert("请输入id-query");
+        }
+    });
+
+
+    /*用于将页面修改后的数据传输到excel文件中，并保存在指定位置  */
+    $("#bt_save").click(function () {
+        showloading();
+        $.ajax({
+            url: '/admin/save', // 请求地址, 就是你的控制器, 如 test.com/home/index/index
+            type: 'POST', // 请求方式
+            dataType: 'json', // 返回数据的格式, 通常为JSON
+            success: function (data) {
+                console.log(data.success);
+                alert(data.info)
+                hideloading();
+                /* alert(data.info); */
+            },
+            error: function () {
+                hideloading();
+                alert(data.info); // 请求失败时的回调函数
+            }
+        });
+    });
+
+    function hideloading() {
+        $("#loading").attr("style", "display:none;");
+        console.log("hide");
+    }
+
+    function addIdQuery() {
+        var tmpdiv = document.createElement('div');
+        tmpdiv.className = 'input-group';
+        tmpdiv.style.width = '60px';
+        code = '<input type="text" style="width:50px" class="form-control search-query"><span class="input-group-btn"><button type="button" onClick="bt_removeIdQuery(this)" class="close"><i class="ace-icon glyphicon glyphicon-trash red"></i></button></span>'
+        tmpdiv.innerHTML = code;
+
+        document.getElementById('multiIdQuery').appendChild(tmpdiv);
+    }
+
+    function bt_removeIdQuery(Obj) {
+        Obj.parentNode.parentNode.parentNode.removeChild(Obj.parentNode.parentNode);
+    }
+
+    $("#bt_removeAllIdQuery").click(function () {
+        var form = document.getElementById('multiIdQuery');
+        form.innerHTML = '<div class="input-group" style="width:60px"><input type="text" style="width:50px" class="form-control search-query"><span class="input-group-btn"><button type="button" class="close" onClick="addIdQuery()"><i class="ace-icon glyphicon glyphicon-plus green"></i></button></span></div>';
+    });
+
+    function showloading() {
+        $("#loading").attr("style", "display:block;");
+        console.log("show");
+    }
+
+
+</script>
+
+<script type="text/javascript">
+
+
+    jQuery(function ($) {
+        $("#navbar").load("/view/header.html");
+        $("#sidebar").load("/view/lefter.html", function () {
+            $("#main").prop("class", "");
+            $(".kand").prop("class", "active");
+            $("#dataManageSubMenu").prop("style", "display: block");
+        });
+
+        $("#footer").load("/view/footer.html");
+        var grid_selector = "#grid-table";
+        var pager_selector = "#grid-pager";
+
+        var parent_column = $(grid_selector).closest('[class*="col-"]');
+        //resize to fit page size
+        var tag_input = $('#form-field-tags');
+        try {
+            tag_input.tag(
+                {
+                    placeholder: tag_input.attr('placeholder'),
+                    //enable typeahead by specifying the source array
+                    source: ace.vars['US_STATES'],//defined in ace.js >> ace.enable_search_ahead
+                    /**
+                     //or fetch data from database, fetch those that match "query"
+                     source: function(query, process) {
 						  $.ajax({url: 'remote_source.php?q='+encodeURIComponent(query)})
 						  .done(function(result_items){
 							process(result_items);
 						  });
 						}
-						*/
-					  }
-					)
+                     */
+                }
+            )
 
-					//programmatically add/remove a tag
-					/* var $tag_obj = $('#form-field-tags').data('tag');
-					$tag_obj.add('Programmatically Added');
-					
-					var index = $tag_obj.inValues('some tag');
-					$tag_obj.remove(index); */
-				}
-				catch(e) {
-					console.log(e);
-					//display a textarea for old IE, because it doesn't support this plugin or another one I tried!
-					tag_input.after('<textarea id="'+tag_input.attr('id')+'" name="'+tag_input.attr('name')+'" rows="3">'+tag_input.val()+'</textarea>').remove();
-					//autosize($('#form-field-tags'));
-				}
-				
-				
-				
-				$(window).on('resize.jqGrid', function() {
-					$(grid_selector).jqGrid('setGridWidth', parent_column.width());
-				})
+            //programmatically add/remove a tag
+            /* var $tag_obj = $('#form-field-tags').data('tag');
+            $tag_obj.add('Programmatically Added');
 
-				//resize on sidebar collapse/expand
-				$(document).on('settings.ace.jqGrid', function(ev, event_name, collapsed) {
-					if(event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed') {
-						//setTimeout is for webkit only to give time for DOM changes and then redraw!!!
-						setTimeout(function() {
-							$(grid_selector).jqGrid('setGridWidth', parent_column.width());
-						}, 20);
-					}
-				})
+            var index = $tag_obj.inValues('some tag');
+            $tag_obj.remove(index); */
+        } catch (e) {
+            console.log(e);
+            //display a textarea for old IE, because it doesn't support this plugin or another one I tried!
+            tag_input.after('<textarea id="' + tag_input.attr('id') + '" name="' + tag_input.attr('name') + '" rows="3">' + tag_input.val() + '</textarea>').remove();
+            //autosize($('#form-field-tags'));
+        }
 
-				//if your grid is inside another element, for example a tab pane, you should use its parent's width:
-				/**
-				$(window).on('resize.jqGrid', function () {
+
+        $(window).on('resize.jqGrid', function () {
+            $(grid_selector).jqGrid('setGridWidth', parent_column.width());
+        })
+
+        //resize on sidebar collapse/expand
+        $(document).on('settings.ace.jqGrid', function (ev, event_name, collapsed) {
+            if (event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed') {
+                //setTimeout is for webkit only to give time for DOM changes and then redraw!!!
+                setTimeout(function () {
+                    $(grid_selector).jqGrid('setGridWidth', parent_column.width());
+                }, 20);
+            }
+        })
+
+        //if your grid is inside another element, for example a tab pane, you should use its parent's width:
+        /**
+         $(window).on('resize.jqGrid', function () {
 					var parent_width = $(grid_selector).closest('.tab-pane').width();
 					$(grid_selector).jqGrid( 'setGridWidth', parent_width );
 				})
-				//and also set width when tab pane becomes visible
-				$('#myTab a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+         //and also set width when tab pane becomes visible
+         $('#myTab a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 				  if($(e.target).attr('href') == '#mygrid') {
 					var parent_width = $(grid_selector).closest('.tab-pane').width();
 					$(grid_selector).jqGrid( 'setGridWidth', parent_width );
 				  }
 				})
-				*/
+         */
 
-				jQuery(grid_selector).jqGrid({
-					//direction: "rtl",
+        jQuery(grid_selector).jqGrid({
+            //direction: "rtl",
 
-					url: "/kand/findByPage",
+            url: "/kand/findByPage",
 
-					//data: grid_data,
-					datatype: "localjson",
-					height: 800,
-					shrinkToFit: false,
-					colNames:['操作', '', '实验编号', '序号', '时间戳','右髋前摆角度','右髋侧摆角度','右髋旋转角度','右膝角度','右踝角度','腰角度','右肩前摆角度','右肩侧摆角度','右肩旋转角度','右肘弯曲角度','右肘旋转角度','左髋前摆角度','左髋侧摆角度','左髋旋转角度','左膝角度','左踝角度','左肩前摆角度','左肩侧摆角度','左肩旋转角度','左肘弯曲角度','左肘旋转角度','右髋前摆角速度','右髋侧摆角速度','右髋旋转角速度','右膝角速度','右踝角速度','腰角速度','右肩前摆角速度','右肩侧摆角速度','右肩旋转角速度','右肘弯曲角速度','右肘旋转角速度','左髋前摆角速度','左髋侧摆角速度','左髋旋转角速度','左膝角速度','左踝角速度','左肩前摆角速度','左肩侧摆角速度','左肩旋转角速度','左肘弯曲角速度','左肘旋转角速度','右髋前摆力矩','右髋侧摆力矩','右髋旋转力矩','右膝力矩','右踝力矩','腰力矩','右肩前摆力矩','右肩侧摆力矩','右肩旋转力矩','右肘弯曲力矩','右肘旋转力矩','左髋前摆力矩','左髋侧摆力矩','左髋旋转力矩','左膝力矩','左踝力矩','左肩前摆力矩','左肩侧摆力矩','左肩旋转力矩','左肘弯曲力矩','左肘旋转力矩','右髋前摆功率','右髋侧摆功率','右髋旋转功率','右膝功率','右踝功率','腰功率','右肩前摆功率','右肩侧摆功率','右肩旋转功率','右肘弯曲功率','右肘旋转功率','左髋前摆功率','左髋侧摆功率','左髋旋转功率','左膝功率','左踝功率','左肩前摆功率','左肩侧摆功率','左肩旋转功率','左肘弯曲功率','左肘旋转功率','右脚X方向力','右脚Y方向力（竖直方向）','右脚Z方向力','左脚X方向力','左脚Y方向力（竖直方向）','左脚Z方向力'],
-					colModel: [{
-							name: 'op',
-							index: 'op',
-							align: 'center',
-							width: 80,
-							fixed: true,
-							sortable: false,
-							resize: false,
-							search: false,
-							formatter: 'actions',
-							formatoptions: {
-								keys: true,
-								//delbutton: false,//disable delete button
-								editOptions: {
-									recreateForm: true,
-									beforeShowForm: beforeEditCallback
-								},
-								delOptions: {
-									recreateForm: true,
-									beforeShowForm: beforeDeleteCallback
-								},
+            //data: grid_data,
+            datatype: "localjson",
+            height: 800,
+            shrinkToFit: false,
+            colNames: ['操作', '', '实验编号', '序号', '时间戳', '右髋前摆角度', '右髋侧摆角度', '右髋旋转角度', '右膝角度', '右踝角度', '腰角度', '右肩前摆角度', '右肩侧摆角度', '右肩旋转角度', '右肘弯曲角度', '右肘旋转角度', '左髋前摆角度', '左髋侧摆角度', '左髋旋转角度', '左膝角度', '左踝角度', '左肩前摆角度', '左肩侧摆角度', '左肩旋转角度', '左肘弯曲角度', '左肘旋转角度', '右髋前摆角速度', '右髋侧摆角速度', '右髋旋转角速度', '右膝角速度', '右踝角速度', '腰角速度', '右肩前摆角速度', '右肩侧摆角速度', '右肩旋转角速度', '右肘弯曲角速度', '右肘旋转角速度', '左髋前摆角速度', '左髋侧摆角速度', '左髋旋转角速度', '左膝角速度', '左踝角速度', '左肩前摆角速度', '左肩侧摆角速度', '左肩旋转角速度', '左肘弯曲角速度', '左肘旋转角速度', '右髋前摆力矩', '右髋侧摆力矩', '右髋旋转力矩', '右膝力矩', '右踝力矩', '腰力矩', '右肩前摆力矩', '右肩侧摆力矩', '右肩旋转力矩', '右肘弯曲力矩', '右肘旋转力矩', '左髋前摆力矩', '左髋侧摆力矩', '左髋旋转力矩', '左膝力矩', '左踝力矩', '左肩前摆力矩', '左肩侧摆力矩', '左肩旋转力矩', '左肘弯曲力矩', '左肘旋转力矩', '右髋前摆功率', '右髋侧摆功率', '右髋旋转功率', '右膝功率', '右踝功率', '腰功率', '右肩前摆功率', '右肩侧摆功率', '右肩旋转功率', '右肘弯曲功率', '右肘旋转功率', '左髋前摆功率', '左髋侧摆功率', '左髋旋转功率', '左膝功率', '左踝功率', '左肩前摆功率', '左肩侧摆功率', '左肩旋转功率', '左肘弯曲功率', '左肘旋转功率', '右脚X方向力', '右脚Y方向力（竖直方向）', '右脚Z方向力', '左脚X方向力', '左脚Y方向力（竖直方向）', '左脚Z方向力'],
+            colModel: [{
+                name: 'op',
+                index: 'op',
+                align: 'center',
+                width: 80,
+                fixed: true,
+                sortable: false,
+                resize: false,
+                search: false,
+                formatter: 'actions',
+                formatoptions: {
+                    keys: true,
+                    //delbutton: false,//disable delete button
+                    editOptions: {
+                        recreateForm: true,
+                        beforeShowForm: beforeEditCallback
+                    },
+                    delOptions: {
+                        recreateForm: true,
+                        beforeShowForm: beforeDeleteCallback
+                    },
 
-							}
-						},
-						{
-							name: '',
-							index: '',
-							width: 0.1,
-							editable: true,
-							sortable: false,
-							search: false
+                }
+            },
+                {
+                    name: '',
+                    index: '',
+                    width: 0.1,
+                    editable: true,
+                    sortable: false,
+                    search: false
 
-						},
+                },
 
-						{name: 'expid',index: 'expid',align: 'center',key: true,fixed: true,width:70,resize: false, editable: false,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'id',index: 'id',key:true,fixed: true,resize: false,width:40, sortable: false,editable: false,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'timestamp',index: 'timestamp',width:160,resize: false, sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature001',index: 'feature001', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature002',index: 'feature002', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature003',index: 'feature003', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature004',index: 'feature004', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature005',index: 'feature005', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature006',index: 'feature006', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature007',index: 'feature007', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature008',index: 'feature008', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature009',index: 'feature009', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature010',index: 'feature010', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature011',index: 'feature011', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature012',index: 'feature012', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature013',index: 'feature013', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature014',index: 'feature014', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature015',index: 'feature015', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature016',index: 'feature016', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature017',index: 'feature017', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature018',index: 'feature018', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature019',index: 'feature019', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature020',index: 'feature020', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature021',index: 'feature021', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature022',index: 'feature022', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature023',index: 'feature023', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature024',index: 'feature024', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature025',index: 'feature025', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature026',index: 'feature026', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature027',index: 'feature027', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature028',index: 'feature028', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature029',index: 'feature029', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature030',index: 'feature030', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature031',index: 'feature031', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature032',index: 'feature032', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature033',index: 'feature033', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature034',index: 'feature034', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature035',index: 'feature035', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature036',index: 'feature036', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature037',index: 'feature037', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature038',index: 'feature038', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature039',index: 'feature039', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature040',index: 'feature040', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature041',index: 'feature041', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature042',index: 'feature042', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature043',index: 'feature043', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature044',index: 'feature044', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature045',index: 'feature045', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature046',index: 'feature046', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature047',index: 'feature047', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature048',index: 'feature048', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature049',index: 'feature049', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature050',index: 'feature050', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature051',index: 'feature051', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature052',index: 'feature052', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature053',index: 'feature053', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature054',index: 'feature054', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature055',index: 'feature055', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature056',index: 'feature056', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature057',index: 'feature057', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature058',index: 'feature058', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature059',index: 'feature059', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature060',index: 'feature060', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature061',index: 'feature061', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature062',index: 'feature062', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature063',index: 'feature063', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature064',index: 'feature064', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature065',index: 'feature065', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature066',index: 'feature066', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature067',index: 'feature067', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature068',index: 'feature068', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature069',index: 'feature069', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature070',index: 'feature070', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature071',index: 'feature071', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature072',index: 'feature072', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature073',index: 'feature073', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature074',index: 'feature074', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature075',index: 'feature075', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature076',index: 'feature076', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature077',index: 'feature077', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature078',index: 'feature078', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature079',index: 'feature079', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature080',index: 'feature080', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature081',index: 'feature081', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature082',index: 'feature082', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature083',index: 'feature083', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature084',index: 'feature084', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature085',index: 'feature085', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature086',index: 'feature086', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature087',index: 'feature087', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature088',index: 'feature088', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature089',index: 'feature089', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}},
-						{name: 'feature090',index: 'feature090', width:145,sortable: false,editable: true,edittype: "textarea",editoptions: {rows: "2",cols: "15"}}
-					],
+                {
+                    name: 'expid',
+                    index: 'expid',
+                    align: 'center',
+                    key: true,
+                    fixed: true,
+                    width: 70,
+                    resize: false,
+                    editable: false,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'id',
+                    index: 'id',
+                    key: true,
+                    fixed: true,
+                    resize: false,
+                    width: 40,
+                    sortable: false,
+                    editable: false,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'timestamp',
+                    index: 'timestamp',
+                    width: 160,
+                    resize: false,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature001',
+                    index: 'feature001',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature002',
+                    index: 'feature002',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature003',
+                    index: 'feature003',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature004',
+                    index: 'feature004',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature005',
+                    index: 'feature005',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature006',
+                    index: 'feature006',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature007',
+                    index: 'feature007',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature008',
+                    index: 'feature008',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature009',
+                    index: 'feature009',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature010',
+                    index: 'feature010',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature011',
+                    index: 'feature011',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature012',
+                    index: 'feature012',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature013',
+                    index: 'feature013',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature014',
+                    index: 'feature014',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature015',
+                    index: 'feature015',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature016',
+                    index: 'feature016',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature017',
+                    index: 'feature017',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature018',
+                    index: 'feature018',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature019',
+                    index: 'feature019',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature020',
+                    index: 'feature020',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature021',
+                    index: 'feature021',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature022',
+                    index: 'feature022',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature023',
+                    index: 'feature023',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature024',
+                    index: 'feature024',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature025',
+                    index: 'feature025',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature026',
+                    index: 'feature026',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature027',
+                    index: 'feature027',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature028',
+                    index: 'feature028',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature029',
+                    index: 'feature029',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature030',
+                    index: 'feature030',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature031',
+                    index: 'feature031',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature032',
+                    index: 'feature032',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature033',
+                    index: 'feature033',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature034',
+                    index: 'feature034',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature035',
+                    index: 'feature035',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature036',
+                    index: 'feature036',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature037',
+                    index: 'feature037',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature038',
+                    index: 'feature038',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature039',
+                    index: 'feature039',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature040',
+                    index: 'feature040',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature041',
+                    index: 'feature041',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature042',
+                    index: 'feature042',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature043',
+                    index: 'feature043',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature044',
+                    index: 'feature044',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature045',
+                    index: 'feature045',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature046',
+                    index: 'feature046',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature047',
+                    index: 'feature047',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature048',
+                    index: 'feature048',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature049',
+                    index: 'feature049',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature050',
+                    index: 'feature050',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature051',
+                    index: 'feature051',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature052',
+                    index: 'feature052',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature053',
+                    index: 'feature053',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature054',
+                    index: 'feature054',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature055',
+                    index: 'feature055',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature056',
+                    index: 'feature056',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature057',
+                    index: 'feature057',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature058',
+                    index: 'feature058',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature059',
+                    index: 'feature059',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature060',
+                    index: 'feature060',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature061',
+                    index: 'feature061',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature062',
+                    index: 'feature062',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature063',
+                    index: 'feature063',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature064',
+                    index: 'feature064',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature065',
+                    index: 'feature065',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature066',
+                    index: 'feature066',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature067',
+                    index: 'feature067',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature068',
+                    index: 'feature068',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature069',
+                    index: 'feature069',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature070',
+                    index: 'feature070',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature071',
+                    index: 'feature071',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature072',
+                    index: 'feature072',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature073',
+                    index: 'feature073',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature074',
+                    index: 'feature074',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature075',
+                    index: 'feature075',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature076',
+                    index: 'feature076',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature077',
+                    index: 'feature077',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature078',
+                    index: 'feature078',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature079',
+                    index: 'feature079',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature080',
+                    index: 'feature080',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature081',
+                    index: 'feature081',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature082',
+                    index: 'feature082',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature083',
+                    index: 'feature083',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature084',
+                    index: 'feature084',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature085',
+                    index: 'feature085',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature086',
+                    index: 'feature086',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature087',
+                    index: 'feature087',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature088',
+                    index: 'feature088',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature089',
+                    index: 'feature089',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                },
+                {
+                    name: 'feature090',
+                    index: 'feature090',
+                    width: 145,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "15"}
+                }
+            ],
 
-					viewrecords: true, //是否显示总数  如View 1 - 10 of 23
-					rowNum: 500, //每页显示10条
-					rowList: [500, 1000, 2000], //可选的每页显示条数
-					pager: pager_selector, //指定工具栏
-					altRows: true,
+            viewrecords: true, //是否显示总数  如View 1 - 10 of 23
+            rowNum: 500, //每页显示10条
+            rowList: [500, 1000, 2000], //可选的每页显示条数
+            pager: pager_selector, //指定工具栏
+            altRows: true,
 
-					multiselect: true, //是否支持多选
-					//multikey: "ctrlKey",
-					multiboxonly: true, //选中行，即可选中行前面的多选框，点击另外一行，此行效果取消，选中当前行，只能实现选中一条
+            multiselect: true, //是否支持多选
+            //multikey: "ctrlKey",
+            multiboxonly: true, //选中行，即可选中行前面的多选框，点击另外一行，此行效果取消，选中当前行，只能实现选中一条
 
-					loadComplete: function() {
-						var table = this;
-						setTimeout(function() {
-							styleCheckbox(table);
+            loadComplete: function () {
+                var table = this;
+                setTimeout(function () {
+                    styleCheckbox(table);
 
-							updateActionIcons(table);
-							updatePagerIcons(table);
-							enableTooltips(table);
-						}, 0);
-						//jqgridColResize();
-						
-					},
+                    updateActionIcons(table);
+                    updatePagerIcons(table);
+                    enableTooltips(table);
+                }, 0);
+                //jqgridColResize();
 
-					editurl: "/kand/handle", //nothing is saved
-					caption: "数据表" //表名
+            },
 
-					//,autowidth: true,
+            editurl: "/kand/handle", //nothing is saved
+            caption: "数据表" //表名
 
-					/**
-					,
-					grouping:true, 
-					groupingView : { 
+            //,autowidth: true,
+
+            /**
+             ,
+             grouping:true,
+             groupingView : {
 						 groupField : ['name'],
 						 groupDataSorted : true,
 						 plusicon : 'fa fa-chevron-down bigger-110',
 						 minusicon : 'fa fa-chevron-up bigger-110'
 					},
-					caption: "Grouping"
-					*/
+             caption: "Grouping"
+             */
 
-				});
-				$(window).triggerHandler('resize.jqGrid'); //trigger window resize to make the grid get the correct size
+        });
+        $(window).triggerHandler('resize.jqGrid'); //trigger window resize to make the grid get the correct size
 
-				//enable search/filter toolbar
-				//jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
-				//jQuery(grid_selector).filterToolbar({});
+        //enable search/filter toolbar
+        //jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
+        //jQuery(grid_selector).filterToolbar({});
 
-				
-				//switch element when editing inline
-				//编辑表格时,yes与no的切换
-				function aceSwitch(cellvalue, options, cell) {
-					setTimeout(function() {
-						$(cell).find('input[type=checkbox]')
-							.addClass('ace ace-switch ace-switch-5')
-							.after('<span class="lbl"></span>');
-					}, 0);
-				}
-				//enable datepicker
-				//编辑表格时,选择日期
-				function pickDate(cellvalue, options, cell) {
-					setTimeout(function() {
-						$(cell).find('input[type=text]')
-							.datepicker({
-								format: 'yyyy-mm-dd',
-								autoclose: true
-							});
-					}, 0);
-				};
 
-				var fn_editSubmit = function(response, postdata) {
-					var json = response.responseText;
-					alert(json); //显示返回值
-				};
+        //switch element when editing inline
+        //编辑表格时,yes与no的切换
+        function aceSwitch(cellvalue, options, cell) {
+            setTimeout(function () {
+                $(cell).find('input[type=checkbox]')
+                    .addClass('ace ace-switch ace-switch-5')
+                    .after('<span class="lbl"></span>');
+            }, 0);
+        }
 
-				//重写editOptions
-				var editOptions = {
-					top: 100,
-					left: 100,
-					width: 600,
-					closeOnEscape: true,
-					closeAfterEdit: true,
-					//afterSubmit: fn_editSubmit
-					errorTextFormat: function(data) {
-						return 'Error: ' + data.responseText
-					}
-				};
+        //enable datepicker
+        //编辑表格时,选择日期
+        function pickDate(cellvalue, options, cell) {
+            setTimeout(function () {
+                $(cell).find('input[type=text]')
+                    .datepicker({
+                        format: 'yyyy-mm-dd',
+                        autoclose: true
+                    });
+            }, 0);
+        };
 
-				//navButtons  底部工具栏的选项按钮
-				jQuery(grid_selector).jqGrid('navGrid', pager_selector, { //navbar options
-					edit: true,
-					editicon: 'ace-icon fa fa-pencil blue',
-					add: true,
-					addicon: 'ace-icon fa fa-plus-circle purple',
-					del: true,
-					delicon: 'ace-icon fa fa-trash-o red',
-					search: true,
-					searchicon: 'ace-icon fa fa-search orange',
-					refresh: true,
-					refreshicon: 'ace-icon fa fa-refresh green',
-					view: true,
-					viewicon: 'ace-icon fa fa-search-plus grey',
-				}, {
-					//编辑
-					top: 100,
-					left: 100,
-					width: 600,
-					closeOnEscape: true,
-					closeAfterEdit: true,
-					//提交后的回调
-					afterSubmit: function(response, postdata) {
-						if(response.responseText == "success") {
-							$(this).jqGrid('setGridParam', {
-								datatype: 'json'
-							}).trigger('reloadGrid'); //Reloads the grid after edit
-							return [true, "编辑成功!"];
-						} else {
-							$(this).jqGrid('setGridParam', {
-								datatype: 'json'
-							}).trigger('reloadGrid'); //Reloads the grid after edit
-							return [false, decodeURIComponent(response.responseText)]; //Captures and displays the response text on th Edit window
-						}
-					},
+        var fn_editSubmit = function (response, postdata) {
+            var json = response.responseText;
+            alert(json); //显示返回值
+        };
 
-				}, {
-					//新增数据
+        //重写editOptions
+        var editOptions = {
+            top: 100,
+            left: 100,
+            width: 600,
+            closeOnEscape: true,
+            closeAfterEdit: true,
+            //afterSubmit: fn_editSubmit
+            errorTextFormat: function (data) {
+                return 'Error: ' + data.responseText
+            }
+        };
 
-					closeAfterAdd: true,
-					recreateForm: true,
-					//提交后的回调
-					afterSubmit: function(response, postdata) {
-						if(response.responseText == "success") {
-							$(this).jqGrid('setGridParam', {
-								datatype: 'json'
-							}).trigger('reloadGrid'); //Reloads the grid after edit
-							return [true, "新增成功!"];
-						} else {
-							$(this).jqGrid('setGridParam', {
-								datatype: 'json'
-							}).trigger('reloadGrid'); //Reloads the grid after edit
-							return [false, decodeURIComponent(response.responseText)]; //Captures and displays the response text on th Edit window
-						}
-					},
+        //navButtons  底部工具栏的选项按钮
+        jQuery(grid_selector).jqGrid('navGrid', pager_selector, { //navbar options
+            edit: true,
+            editicon: 'ace-icon fa fa-pencil blue',
+            add: true,
+            addicon: 'ace-icon fa fa-plus-circle purple',
+            del: true,
+            delicon: 'ace-icon fa fa-trash-o red',
+            search: true,
+            searchicon: 'ace-icon fa fa-search orange',
+            refresh: true,
+            refreshicon: 'ace-icon fa fa-refresh green',
+            view: true,
+            viewicon: 'ace-icon fa fa-search-plus grey',
+        }, {
+            //编辑
+            top: 100,
+            left: 100,
+            width: 600,
+            closeOnEscape: true,
+            closeAfterEdit: true,
+            //提交后的回调
+            afterSubmit: function (response, postdata) {
+                if (response.responseText == "success") {
+                    $(this).jqGrid('setGridParam', {
+                        datatype: 'json'
+                    }).trigger('reloadGrid'); //Reloads the grid after edit
+                    return [true, "编辑成功!"];
+                } else {
+                    $(this).jqGrid('setGridParam', {
+                        datatype: 'json'
+                    }).trigger('reloadGrid'); //Reloads the grid after edit
+                    return [false, decodeURIComponent(response.responseText)]; //Captures and displays the response text on th Edit window
+                }
+            },
 
-					beforeShowForm: function(e) {
+        }, {
+            //新增数据
 
-						var form = $(e[0]);
-						form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
-							.wrapInner('<div class="widget-header" />')
-						style_edit_form(form);
-					}
-				}, {
-					//delete record form
-					recreateForm: true,
-					beforeShowForm: function(e) {
-						var form = $(e[0]);
-						if(form.data('styled')) return false;
+            closeAfterAdd: true,
+            recreateForm: true,
+            //提交后的回调
+            afterSubmit: function (response, postdata) {
+                if (response.responseText == "success") {
+                    $(this).jqGrid('setGridParam', {
+                        datatype: 'json'
+                    }).trigger('reloadGrid'); //Reloads the grid after edit
+                    return [true, "新增成功!"];
+                } else {
+                    $(this).jqGrid('setGridParam', {
+                        datatype: 'json'
+                    }).trigger('reloadGrid'); //Reloads the grid after edit
+                    return [false, decodeURIComponent(response.responseText)]; //Captures and displays the response text on th Edit window
+                }
+            },
 
-						form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-						style_delete_form(form);
+            beforeShowForm: function (e) {
 
-						form.data('styled', true);
-					},
-					onClick: function(e) {
-						//alert(1);
-					}
-				}, {
-					//search form
-					recreateForm: true,
-					closeOnEscape: true,
-					closeAfterSearch: true,
-					afterShowSearch: function(e) {
-						var form = $(e[0]);
-						form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
-						style_search_form(form);
-					},
-					afterRedraw: function() {
-						style_search_filters($(this));
-					},
-					multipleSearch: true,
-					sopt : ['cn','eq'],
-					/**
-					multipleGroup:true,
-					showQuery: true
-					*/
-				}, {
-					//view record form
-					recreateForm: true,
-					beforeShowForm: function(e) {
-						var form = $(e[0]);
-						form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
-					}
-				})
+                var form = $(e[0]);
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
+                    .wrapInner('<div class="widget-header" />')
+                style_edit_form(form);
+            }
+        }, {
+            //delete record form
+            recreateForm: true,
+            beforeShowForm: function (e) {
+                var form = $(e[0]);
+                if (form.data('styled')) return false;
 
-				function style_edit_form(form) {
-					//enable datepicker on "sdate" field and switches for "stock" field
-					form.find('input[name=sdate]').datepicker({
-						format: 'yyyy-mm-dd',
-						autoclose: true
-					})
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                style_delete_form(form);
 
-					form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
-					//don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
-					//.addClass('ace ace-switch ace-switch-5').wrap('<label class="inline" />').after('<span class="lbl"></span>');
+                form.data('styled', true);
+            },
+            onClick: function (e) {
+                //alert(1);
+            }
+        }, {
+            //search form
+            recreateForm: true,
+            closeOnEscape: true,
+            closeAfterSearch: true,
+            afterShowSearch: function (e) {
+                var form = $(e[0]);
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+                style_search_form(form);
+            },
+            afterRedraw: function () {
+                style_search_filters($(this));
+            },
+            multipleSearch: true,
+            sopt: ['cn', 'eq'],
+            /**
+             multipleGroup:true,
+             showQuery: true
+             */
+        }, {
+            //view record form
+            recreateForm: true,
+            beforeShowForm: function (e) {
+                var form = $(e[0]);
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+            }
+        })
 
-					//update buttons classes
-					var buttons = form.next().find('.EditButton .fm-button');
-					buttons.addClass('btn btn-sm').find('[class*="-icon"]').hide(); //ui-icon, s-icon
-					buttons.eq(0).addClass('btn-primary').prepend('<i class="ace-icon fa fa-check"></i>');
-					buttons.eq(1).prepend('<i class="ace-icon fa fa-times"></i>')
+        function style_edit_form(form) {
+            //enable datepicker on "sdate" field and switches for "stock" field
+            form.find('input[name=sdate]').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true
+            })
 
-					buttons = form.next().find('.navButton a');
-					buttons.find('.ui-icon').hide();
-					buttons.eq(0).append('<i class="ace-icon fa fa-chevron-left"></i>');
-					buttons.eq(1).append('<i class="ace-icon fa fa-chevron-right"></i>');
-				}
+            form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
+            //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
+            //.addClass('ace ace-switch ace-switch-5').wrap('<label class="inline" />').after('<span class="lbl"></span>');
 
-				function style_delete_form(form) {
-					var buttons = form.next().find('.EditButton .fm-button');
-					buttons.addClass('btn btn-sm btn-white btn-round').find('[class*="-icon"]').hide(); //ui-icon, s-icon
-					buttons.eq(0).addClass('btn-danger').prepend('<i class="ace-icon fa fa-trash-o"></i>');
-					buttons.eq(1).addClass('btn-default').prepend('<i class="ace-icon fa fa-times"></i>')
-				}
+            //update buttons classes
+            var buttons = form.next().find('.EditButton .fm-button');
+            buttons.addClass('btn btn-sm').find('[class*="-icon"]').hide(); //ui-icon, s-icon
+            buttons.eq(0).addClass('btn-primary').prepend('<i class="ace-icon fa fa-check"></i>');
+            buttons.eq(1).prepend('<i class="ace-icon fa fa-times"></i>')
 
-				function style_search_filters(form) {
-					form.find('.delete-rule').val('X');
-					form.find('.add-rule').addClass('btn btn-xs btn-primary');
-					form.find('.add-group').addClass('btn btn-xs btn-success');
-					form.find('.delete-group').addClass('btn btn-xs btn-danger');
-				}
+            buttons = form.next().find('.navButton a');
+            buttons.find('.ui-icon').hide();
+            buttons.eq(0).append('<i class="ace-icon fa fa-chevron-left"></i>');
+            buttons.eq(1).append('<i class="ace-icon fa fa-chevron-right"></i>');
+        }
 
-				function style_search_form(form) {
-					var dialog = form.closest('.ui-jqdialog');
-					var buttons = dialog.find('.EditTable')
-					buttons.find('.EditButton a[id*="_reset"]').addClass('btn btn-sm btn-info').find('.ui-icon').attr('class', 'ace-icon fa fa-retweet');
-					buttons.find('.EditButton a[id*="_query"]').addClass('btn btn-sm btn-inverse').find('.ui-icon').attr('class', 'ace-icon fa fa-comment-o');
-					buttons.find('.EditButton a[id*="_search"]').addClass('btn btn-sm btn-purple').find('.ui-icon').attr('class', 'ace-icon fa fa-search');
-				}
+        function style_delete_form(form) {
+            var buttons = form.next().find('.EditButton .fm-button');
+            buttons.addClass('btn btn-sm btn-white btn-round').find('[class*="-icon"]').hide(); //ui-icon, s-icon
+            buttons.eq(0).addClass('btn-danger').prepend('<i class="ace-icon fa fa-trash-o"></i>');
+            buttons.eq(1).addClass('btn-default').prepend('<i class="ace-icon fa fa-times"></i>')
+        }
 
-				function beforeDeleteCallback(e) {
-					var form = $(e[0]);
-					if(form.data('styled')) return false;
+        function style_search_filters(form) {
+            form.find('.delete-rule').val('X');
+            form.find('.add-rule').addClass('btn btn-xs btn-primary');
+            form.find('.add-group').addClass('btn btn-xs btn-success');
+            form.find('.delete-group').addClass('btn btn-xs btn-danger');
+        }
 
-					form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-					style_delete_form(form);
+        function style_search_form(form) {
+            var dialog = form.closest('.ui-jqdialog');
+            var buttons = dialog.find('.EditTable')
+            buttons.find('.EditButton a[id*="_reset"]').addClass('btn btn-sm btn-info').find('.ui-icon').attr('class', 'ace-icon fa fa-retweet');
+            buttons.find('.EditButton a[id*="_query"]').addClass('btn btn-sm btn-inverse').find('.ui-icon').attr('class', 'ace-icon fa fa-comment-o');
+            buttons.find('.EditButton a[id*="_search"]').addClass('btn btn-sm btn-purple').find('.ui-icon').attr('class', 'ace-icon fa fa-search');
+        }
 
-					form.data('styled', true);
-				}
+        function beforeDeleteCallback(e) {
+            var form = $(e[0]);
+            if (form.data('styled')) return false;
 
-				function beforeEditCallback(e) {
-					var form = $(e[0]);
-					form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-					style_edit_form(form);
-				}
+            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+            style_delete_form(form);
 
-				//it causes some flicker when reloading or navigating grid
-				//it may be possible to have some custom formatter to do this as the grid is being created to prevent this
-				//or go back to default browser checkbox styles for the grid
-				function styleCheckbox(table) {
-					/**
-					$(table).find('input:checkbox').addClass('ace')
-					.wrap('<label />')
-					.after('<span class="lbl align-top" />')
-			
-			
-					$('.ui-jqgrid-labels th[id*="_cb"]:first-child')
-					.find('input.cbox[type=checkbox]').addClass('ace')
-					.wrap('<label />').after('<span class="lbl align-top" />');
-				*/
-				}
+            form.data('styled', true);
+        }
 
-				//unlike navButtons icons, action icons in rows seem to be hard-coded
-				//you can change them like this in here if you want
-				function updateActionIcons(table) {
-					/**
-					var replacement = 
-					{
+        function beforeEditCallback(e) {
+            var form = $(e[0]);
+            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+            style_edit_form(form);
+        }
+
+        //it causes some flicker when reloading or navigating grid
+        //it may be possible to have some custom formatter to do this as the grid is being created to prevent this
+        //or go back to default browser checkbox styles for the grid
+        function styleCheckbox(table) {
+            /**
+             $(table).find('input:checkbox').addClass('ace')
+             .wrap('<label />')
+             .after('<span class="lbl align-top" />')
+
+
+             $('.ui-jqgrid-labels th[id*="_cb"]:first-child')
+             .find('input.cbox[type=checkbox]').addClass('ace')
+             .wrap('<label />').after('<span class="lbl align-top" />');
+             */
+        }
+
+        //unlike navButtons icons, action icons in rows seem to be hard-coded
+        //you can change them like this in here if you want
+        function updateActionIcons(table) {
+            /**
+             var replacement =
+             {
 						'ui-ace-icon fa fa-pencil' : 'ace-icon fa fa-pencil blue',
 						'ui-ace-icon fa fa-trash-o' : 'ace-icon fa fa-trash-o red',
 						'ui-icon-disk' : 'ace-icon fa fa-check green',
 						'ui-icon-cancel' : 'ace-icon fa fa-times red'
 					};
-					$(table).find('.ui-pg-div span.ui-icon').each(function(){
+             $(table).find('.ui-pg-div span.ui-icon').each(function(){
 						var icon = $(this);
 						var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
 						if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
 					})
-					*/
-				}
+             */
+        }
 
-				//replace icons with FontAwesome icons like above
-				function updatePagerIcons(table) {
-					var replacement = {
-						'ui-icon-seek-first': 'ace-icon fa fa-angle-double-left bigger-140',
-						'ui-icon-seek-prev': 'ace-icon fa fa-angle-left bigger-140',
-						'ui-icon-seek-next': 'ace-icon fa fa-angle-right bigger-140',
-						'ui-icon-seek-end': 'ace-icon fa fa-angle-double-right bigger-140'
-					};
-					$('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function() {
-						var icon = $(this);
-						var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+        //replace icons with FontAwesome icons like above
+        function updatePagerIcons(table) {
+            var replacement = {
+                'ui-icon-seek-first': 'ace-icon fa fa-angle-double-left bigger-140',
+                'ui-icon-seek-prev': 'ace-icon fa fa-angle-left bigger-140',
+                'ui-icon-seek-next': 'ace-icon fa fa-angle-right bigger-140',
+                'ui-icon-seek-end': 'ace-icon fa fa-angle-double-right bigger-140'
+            };
+            $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function () {
+                var icon = $(this);
+                var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
 
-						if($class in replacement) icon.attr('class', 'ui-icon ' + replacement[$class]);
-					})
-				}
+                if ($class in replacement) icon.attr('class', 'ui-icon ' + replacement[$class]);
+            })
+        }
 
-				function enableTooltips(table) {
-					$('.navtable .ui-pg-button').tooltip({
-						container: 'body'
-					});
-					$(table).find('.ui-pg-div').tooltip({
-						container: 'body'
-					});
-				}
+        function enableTooltips(table) {
+            $('.navtable .ui-pg-button').tooltip({
+                container: 'body'
+            });
+            $(table).find('.ui-pg-div').tooltip({
+                container: 'body'
+            });
+        }
 
-				//var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
+        //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
 
-				$(document).one('ajaxloadstart.page', function(e) {
-					$.jgrid.gridDestroy(grid_selector);
-					$('.ui-jqdialog').remove();
-				});
-			});
-		</script>
-	</body>
+        $(document).one('ajaxloadstart.page', function (e) {
+            $.jgrid.gridDestroy(grid_selector);
+            $('.ui-jqdialog').remove();
+        });
+    });
+</script>
+</body>
 
 </html>

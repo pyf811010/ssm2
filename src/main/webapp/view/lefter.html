@@ -1,289 +1,286 @@
 <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-						<button class="btn btn-success">
-							<i class="ace-icon fa fa-signal"></i>
-						</button>
+    <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+        <button class="btn btn-success">
+            <i class="ace-icon fa fa-signal"></i>
+        </button>
 
-						<button class="btn btn-info">
-							<i class="ace-icon fa fa-pencil"></i>
-						</button>
+        <button class="btn btn-info">
+            <i class="ace-icon fa fa-pencil"></i>
+        </button>
 
-						<button class="btn btn-warning">
-							<i class="ace-icon fa fa-users"></i>
-						</button>
+        <button class="btn btn-warning">
+            <i class="ace-icon fa fa-users"></i>
+        </button>
 
-						<button class="btn btn-danger">
-							<i class="ace-icon fa fa-cogs"></i>
-						</button>
-					</div>
+        <button class="btn btn-danger">
+            <i class="ace-icon fa fa-cogs"></i>
+        </button>
+    </div>
 
-					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-						<span class="btn btn-success"></span>
+    <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+        <span class="btn btn-success"></span>
 
-						<span class="btn btn-info"></span>
+        <span class="btn btn-info"></span>
 
-						<span class="btn btn-warning"></span>
+        <span class="btn btn-warning"></span>
 
-						<span class="btn btn-danger"></span>
-					</div>
-				</div>
-				<!-- /.sidebar-shortcuts -->
+        <span class="btn btn-danger"></span>
+    </div>
+</div>
+<!-- /.sidebar-shortcuts -->
 
 
 <ul class="nav nav-list">
-					<li class="active">
-						<a href="/view/index.html">
-							<i class="menu-icon fa fa-tachometer"></i>
-							<span class="menu-text"> 我的首页 </span>
-						</a>
+    <li id="main" class="active">
+        <a href="/view/index.html">
+            <i class="menu-icon fa fa-tachometer"></i>
+            <span class="menu-text"> 我的首页 </span>
+        </a>
 
-						<b class="arrow"></b>
-					</li>
+        <b class="arrow"></b>
+    </li>
 
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-tasks"></i>
-							<span class="menu-text"> 数据管理 </span>
+    <li class="">
+        <a href="#" class="dropdown-toggle">
+            <i class="menu-icon fa fa-tasks"></i>
+            <span class="menu-text"> 数据管理 </span>
 
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
 
-						<b class="arrow"></b>
+        <b class="arrow"></b>
 
-						<ul class="submenu" style="display: block;"> <!-- 可以使左侧导航栏默认展开 -->
-						
-						
-						<li class="">
-								<a href="/view/admin.html">
-									<i class="menu-icon fa fa-caret-right"></i> 管理员信息管理
-								</a>
+        <ul id="dataManageSubMenu" class="submenu"> <!-- 可以使左侧导航栏默认展开 -->
 
-								<b class="arrow"></b>
-							</li>
-						
-						<li class="">
-								<a href="/view/subjects.html">
-									<i class="menu-icon fa fa-caret-right"></i> 实验者信息管理
-								</a>
 
-								<b class="arrow"></b>
-							</li>
-							
-							<li class="">
-								<a href="/view/egcontrast.html">
-									<i class="menu-icon fa fa-caret-right"></i> 肌电传感器管理
-								</a>
+            <li class="admin">
+                <a href="/view/admin.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 管理员信息管理
+                </a>
 
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="/view/machine.html">
-									<i class="menu-icon fa fa-caret-right"></i> 实验机器管理
-								</a>
+                <b class="arrow"></b>
+            </li>
 
-								<b class="arrow"></b>
-							</li>
-						
-						<li class="">
-								<a href="/view/preec.html">
-									<i class="menu-icon fa fa-caret-right"></i> 前提实验条件管理
-								</a>
+            <li class="subjects">
+                <a href="/view/subjects.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 实验者信息管理
+                </a>
 
-								<b class="arrow"></b>
-							</li>
-						
-						<li class="">
-								<a href="/view/kand.html">
-									<i class="menu-icon fa fa-caret-right"></i> 运动学与动力学数据信息
-								</a>
+                <b class="arrow"></b>
+            </li>
 
-								<b class="arrow"></b>
-							</li>
-							
-							<li class="">
-								<a href="/view/files_kand.html">
-									<i class="menu-icon fa fa-caret-right"></i> 运动学与动力学数据文件信息管理
-								</a>
+            <li class="egcontrast">
+                <a href="/view/egcontrast.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 肌电传感器管理
+                </a>
 
-								<b class="arrow"></b>
-							</li>
-							
-							
-							<li class="">
-								<a href="/view/files_kand_updateInfo.html">
-									<i class="menu-icon fa fa-caret-right"></i> 运动学和动力学数据文件修改信息管理
-								</a>
+                <b class="arrow"></b>
+            </li>
+            <li class="machine">
+                <a href="/view/machine.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 实验机器管理
+                </a>
 
-								<b class="arrow"></b>
-							</li>
-							
-						<li class="">
-								<a href="/view/files_electromyography.html">
-									<i class="menu-icon fa fa-caret-right"></i> 肌电数据文件信息管理
-								</a>
+                <b class="arrow"></b>
+            </li>
 
-								<b class="arrow"></b>
-							</li>
-							
-						<li class="">
-								<a href="/view/files_oxygen.html">
-									<i class="menu-icon fa fa-caret-right"></i> 耗氧量数据文件信息管理
-								</a>
+            <li class="preec">
+                <a href="/view/preec.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 前提实验条件管理
+                </a>
 
-								<b class="arrow"></b>
-							</li>
-						
-							<li class="">
-								<a href="/view/files_montion_capture.html">
-									<i class="menu-icon fa fa-caret-right"></i> 动补数据文件信息管理
-								</a>
+                <b class="arrow"></b>
+            </li>
 
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="/view/files_slot_machine.html">
-									<i class="menu-icon fa fa-caret-right"></i> 跑台数据文件信息管理
-								</a>
+            <li class="kand">
+                <a href="/view/kand.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 运动学与动力学数据信息
+                </a>
 
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="/view/files_foot_pressure_asc.html">
-									<i class="menu-icon fa fa-caret-right"></i> 足底压力数据文件信息管理
-								</a>
+                <b class="arrow"></b>
+            </li>
 
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="/view/files_foot_pressure_fgt.html">
-									<i class="menu-icon fa fa-caret-right"></i> 足底压力（合力大小及位置）数据文件信息管理
-								</a>
+            <li class="files_kand">
+                <a href="/view/files_kand.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 运动学与动力学数据文件信息管理
+                </a>
 
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="/view/gait_cycle_pic.html">
-									<i class="menu-icon fa fa-caret-right"></i> 步态周期图像信息管理
-								</a>
+                <b class="arrow"></b>
+            </li>
 
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="/view/files_video.html">
-									<i class="menu-icon fa fa-caret-right"></i> 视频文件管理
-								</a>
 
-								<b class="arrow"></b>
-							</li>
-							
-							
+            <li class="files_kand_updateInfo">
+                <a href="/view/files_kand_updateInfo.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 运动学和动力学数据文件修改信息管理
+                </a>
 
-							
+                <b class="arrow"></b>
+            </li>
 
-						</ul>
-					</li>
+            <li class="files_electromyography">
+                <a href="/view/files_electromyography.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 肌电数据文件信息管理
+                </a>
 
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-folder-open-o"></i>
-							<span class="menu-text"> 数据分析 </span>
+                <b class="arrow"></b>
+            </li>
 
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
+            <li class="files_oxygen">
+                <a href="/view/files_oxygen.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 耗氧量数据文件信息管理
+                </a>
 
-						<b class="arrow"></b>
+                <b class="arrow"></b>
+            </li>
 
-						<ul class="submenu" style="display: block;"> <!-- 可以使左侧导航栏默认展开 -->
-							<li class="">
-								<a id="open">
-									<i class="menu-icon fa fa-caret-right"></i> matlab数据处理
-								</a>
+            <li class="files_montion_capture">
+                <a href="/view/files_montion_capture.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 动补数据文件信息管理
+                </a>
 
-								<b class="arrow"></b>
-							</li>
-							<!-- <li class="">
-								<a href="/view/file/updatefileUpload.html">
-									<i class="menu-icon fa fa-caret-right"></i> 修改数据文件上传
-								</a>
+                <b class="arrow"></b>
+            </li>
+            <li class="files_slot_machine">
+                <a href="/view/files_slot_machine.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 跑台数据文件信息管理
+                </a>
 
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="/view/file/gaitPicUpload.html">
-									<i class="menu-icon fa fa-caret-right"></i> 步态周期图像文件上传
-								</a>
+                <b class="arrow"></b>
+            </li>
+            <li class="files_foot_pressure_asc">
+                <a href="/view/files_foot_pressure_asc.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 足底压力数据文件信息管理
+                </a>
 
-								<b class="arrow"></b>
-							</li> -->
-							<!-- <li class="">
-								<a href="/views/file/fileDownload.html">
-									<i class="menu-icon fa fa-caret-right"></i> 文件下载
-								</a>
+                <b class="arrow"></b>
+            </li>
+            <li class="files_foot_pressure_fgt">
+                <a href="/view/files_foot_pressure_fgt.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 足底压力（合力大小及位置）数据文件信息管理
+                </a>
 
-								<b class="arrow"></b>
-							</li> -->
+                <b class="arrow"></b>
+            </li>
+            <li class="gait_cycle_pic">
+                <a href="/view/gait_cycle_pic.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 步态周期图像信息管理
+                </a>
 
-						</ul>
-					</li>
+                <b class="arrow"></b>
+            </li>
+            <li class="files_video">
+                <a href="/view/files_video.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 视频文件管理
+                </a>
 
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-folder-open-o"></i>
-							<span class="menu-text"> 文件操作 </span>
+                <b class="arrow"></b>
+            </li>
 
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
 
-						<b class="arrow"></b>
+        </ul>
+    </li>
 
-						<ul class="submenu" style="display: block;"> <!-- 可以使左侧导航栏默认展开 -->
-							<li class="">
-								<!-- <a href="#" runat="server" onserverclick="open">
-					即用a标签调用后台Admincontroller层中open方法,onserverclick中为@RequestMapping中value值  -->
-					<a href="/view/file/fileUpload.html">
-									<i class="menu-icon fa fa-caret-right"></i> 原始测试数据文件上传
-								</a>
+    <li class="">
+        <a href="#" class="dropdown-toggle">
+            <i class="menu-icon glyphicon glyphicon-equalizer"></i>
+            <span class="menu-text"> 数据分析 </span>
 
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="/view/file/updatefileUpload.html">
-									<i class="menu-icon fa fa-caret-right"></i> 修改数据文件上传
-								</a>
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
 
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="/view/file/gaitPicUpload.html">
-									<i class="menu-icon fa fa-caret-right"></i> 步态周期图像文件上传
-								</a>
+        <b class="arrow"></b>
 
-								<b class="arrow"></b>
-							</li>
-							<!-- <li class="">
-								<a href="/views/file/fileDownload.html">
-									<i class="menu-icon fa fa-caret-right"></i> 文件下载
-								</a>
+        <ul id="dataAnalyse" class="submenu"> <!-- 可以使左侧导航栏默认展开 -->
+            <li class="">
+                <a id="open">
+                    <i class="menu-icon fa fa-caret-right"></i> matlab数据处理
+                </a>
 
-								<b class="arrow"></b>
-							</li> -->
+                <b class="arrow"></b>
+            </li>
+            <!-- <li class="">
+                <a href="/view/file/updatefileUpload.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 修改数据文件上传
+                </a>
 
-						</ul>
-					</li>
+                <b class="arrow"></b>
+            </li>
+            <li class="">
+                <a href="/view/file/gaitPicUpload.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 步态周期图像文件上传
+                </a>
 
-				</ul>
-				<!-- /.nav-list -->
-		<script type="text/javascript">
-			//ajax请求数据
-			$(function() {
-				$("#open").click(function() {
-					//清空之前的行
-					$.ajax({
-						type: "post",
-						url: "/admin/open",
-					});
-				});
-			});
-		</script>				
+                <b class="arrow"></b>
+            </li> -->
+            <!-- <li class="">
+                <a href="/views/file/fileDownload.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 文件下载
+                </a>
+
+                <b class="arrow"></b>
+            </li> -->
+
+        </ul>
+    </li>
+
+    <li class="">
+        <a href="#" class="dropdown-toggle">
+            <i class="menu-icon fa fa-folder-open-o"></i>
+            <span class="menu-text"> 文件操作 </span>
+
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
+
+        <b class="arrow"></b>
+
+        <ul id="filesManager" class="submenu"> <!-- 可以使左侧导航栏默认展开 -->
+            <li class="fileUpload">
+                <!-- <a href="#" runat="server" onserverclick="open">
+    即用a标签调用后台Admincontroller层中open方法,onserverclick中为@RequestMapping中value值  -->
+                <a href="/view/file/fileUpload.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 原始测试数据文件上传
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+            <li class="updatefileUpload">
+                <a href="/view/file/updatefileUpload.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 修改数据文件上传
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+            <li class="gaitPicUpload">
+                <a href="/view/file/gaitPicUpload.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 步态周期图像文件上传
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+            <!-- <li class="">
+                <a href="/views/file/fileDownload.html">
+                    <i class="menu-icon fa fa-caret-right"></i> 文件下载
+                </a>
+
+                <b class="arrow"></b>
+            </li> -->
+
+        </ul>
+    </li>
+
+</ul>
+<!-- /.nav-list -->
+<script type="text/javascript">
+    //ajax请求数据
+    $(function () {
+        $("#open").click(function () {
+            //清空之前的行
+            $.ajax({
+                type: "post",
+                url: "/admin/open",
+            });
+        });
+    });
+</script>
 				
 				
