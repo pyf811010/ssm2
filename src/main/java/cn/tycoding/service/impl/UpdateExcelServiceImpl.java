@@ -67,6 +67,9 @@ public class UpdateExcelServiceImpl implements UpdateExcelService {
                 if (f instanceof CommonsMultipartFile) {
                     CommonsMultipartFile f2 = (CommonsMultipartFile) f;
                     name = f2.getFileItem().getName();//获取文件名
+                    System.out.println(name);
+                    Integer expid = filesKandMapper.getExpidByFileName(name);
+                    System.out.println("expid:"+expid);
                     String subname = name.substring(0, name.lastIndexOf("."));
                     String suffixname = name.substring(name.lastIndexOf("."),name.length());
                     System.out.println(suffixname);
@@ -108,10 +111,19 @@ public class UpdateExcelServiceImpl implements UpdateExcelService {
             		SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :HH:mm:ss");
             		String updatetime = dateFormat.format(date);
                     filesKandUpdateinfo.setUpdatetime(updatetime);
+                    filesKandUpdateinfo.setExpid(expid);
                     int insert = filesKandUpdateinfoMapper.insert(filesKandUpdateinfo);
                         if (insert > 0) {
                             System.out.println("---------------插入成功！---------------");
                         }
+                    int nameCount = filesKandUpdateinfoMapper.getNameCount(subname);
+                    FilesKand filesKand = new FilesKand();
+                    filesKand.setExpid(expid);
+                    filesKand.setUpdate_times(nameCount);
+                    int updateByPrimaryKeySelective = filesKandMapper.updateByPrimaryKeySelective(filesKand);
+                    if(updateByPrimaryKeySelective>0){
+                    	System.out.println("------------插入修改次数成功-----------");
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();

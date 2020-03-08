@@ -73,6 +73,7 @@ public class SubjectsController {
             throws UnsupportedEncodingException {
     	
         String temp = subjectsService.handle(oper, subjects, id);
+        System.out.println(temp);
         // 对传回的中文进行编码
         return URLEncoder.encode(temp, "UTF-8");
     }

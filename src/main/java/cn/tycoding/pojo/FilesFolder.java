@@ -15,6 +15,7 @@ public class FilesFolder {
 	private String fpa = null;
 	private String fpf = null;
 	private String sm = null;
+	private String video = null;
 	private Boolean success = false;
 	private String info = null;
 	private String preec = null;
@@ -32,7 +33,16 @@ public class FilesFolder {
     	this.success = false;
     	this.info = null;
     	this.egcontrast = null;
+    	this.video = null;
     }
+
+	public String getVideo() {
+		return video;
+	}
+
+	public void setVideo(String video) {
+		this.video = video;
+	}
 
 	public String getDatetime() {
 		return datetime;
@@ -117,6 +127,7 @@ public class FilesFolder {
     		this.info = this.info + info;
     	}
 	}
+
 
 	public String getPreec() {
 		return preec;

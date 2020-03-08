@@ -11,6 +11,7 @@ import cn.tycoding.pojo.FilesFolder;
 import cn.tycoding.pojo.FilesFootPressureAsc;
 import cn.tycoding.pojo.FilesFootPressureFgt;
 import cn.tycoding.pojo.FilesSlotMachine;
+import cn.tycoding.pojo.FilesVideo;
 import cn.tycoding.pojo.Preec;
 import cn.tycoding.pojo.Query;
 import cn.tycoding.pojo.State;
@@ -39,10 +40,14 @@ public interface FilesOrganizeService {
 	
 	public void getAnalyzedEgContrast(String Datetime, String egcontrastUrl) throws Exception;
 			
-	public String fileNameTransferm(String fileUrl) throws Exception;
+
 	
 	public void Rollback (int expid);
 	
 	public String sliceUrl(String datetime, String fileType, String originExpid);
+
+	public void insertFilesVideo(FilesVideo record);
+
+	public String fileNameTransform(String fileUrl) throws Exception;
 
 }

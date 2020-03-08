@@ -59,7 +59,7 @@
 								<a href="/view/index.html">首页</a>
 							</li>
 
-							<li class="active">运动学与动力学数据文件信息管理</li>
+							<li class="active">视频文件管理</li>
 						</ul>
 						<!-- /.breadcrumb -->
 
@@ -190,7 +190,7 @@
 		function Open(expid) { 
 			$.ajax({
 				type: "post",
-				url: "/FilesKand/open/",
+				url: "/FilesVideo/open/",
 				dataType: "json",
 				data: {
 					"expid": expid
@@ -199,7 +199,7 @@
 	       }
 		
 		function Modify(expid) { 
-			window.open("/FilesKand/download/" + expid, "_blank");
+			window.open("/FilesVideo/download/" + expid, "_blank");
 	       }  
 		
 		
@@ -227,12 +227,12 @@
 				jQuery(grid_selector).jqGrid({
 					//direction: "rtl",
 
-					url: "/FilesKand/findsome",
+					url: "/FilesVideo/findsome",
 
 					//data: grid_data,
 					datatype: "json",
 					height: 400,
-					colNames: ['操作','查看','下载', '', 'ID', '文件名','文件地址','文件修改次数'],
+					colNames: ['操作','查看','下载', '', 'ID', '文件名','文件地址'],
 					colModel: [{
 							name: 'op',
 							index: 'op',
@@ -323,18 +323,6 @@
 								cols: "15"
 							}
 						},
-						{
-							name: 'update_times',
-							index: 'update_times',
-							width: 100,
-							sortable: false,
-							editable: true,
-							edittype: "textarea",
-							editoptions: {
-								rows: "2",
-								cols: "15"
-							}
-						},
 						
 
 					],
@@ -362,8 +350,8 @@
 						}, 0);
 					},
 
-					editurl: "/FilesKand/handle", //nothing is saved
-					caption: "运动学与动力学数据文件信息管理" //表名
+					editurl: "/FilesVideo/handle", //nothing is saved
+					caption: "视频文件管理" //表名
 
 
 				});

@@ -71,7 +71,7 @@
             resultType="int">
 		${_parameter}
 	</select>
-
+	
 	<insert id="insertSelective" parameterType="cn.tycoding.pojo.Preec">
 		insert into preec (id_Subjects, remark, advance) values (#{id_subjects,jdbcType=INTEGER},
 		 #{remark,jdbcType=VARCHAR}, #{advance,jdbcType=LONGVARCHAR})

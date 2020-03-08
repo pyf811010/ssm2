@@ -25,6 +25,8 @@ public class Query {
 
     private Integer expid_fpf;
     
+    private Integer expid_video;
+    
     public Query() {
     	this.expid = null;
     	this.datetime = null;
@@ -38,12 +40,13 @@ public class Query {
     	this.expid_eg_contrast = null;
     	this.expid_fpa = null;
     	this.expid_fpf = null;
+    	this.expid_video = null;
     }
     public Query(
     	Integer expid, String datetime, Integer id_preec,
     	Integer expid_mc, Integer expid_sm, Integer expid_kd,
     	String name_kand, Integer expid_ox, Integer expid_eg,
-    	Integer expid_eg_contrast, Integer expid_fpa, Integer expid_fpf
+    	Integer expid_eg_contrast, Integer expid_fpa, Integer expid_fpf,Integer expid_video
     	) {
     	this.expid = expid;
     	this.datetime = datetime;
@@ -57,8 +60,15 @@ public class Query {
     	this.expid_eg_contrast = expid_eg_contrast;
     	this.expid_fpa = expid_fpa;
     	this.expid_fpf = expid_fpf;	
+    	this.expid_video = expid_video;
     }
-    public Integer getExpid() {
+    public Integer getExpid_video() {
+		return expid_video;
+	}
+	public void setExpid_video(Integer expid_video) {
+		this.expid_video = expid_video;
+	}
+	public Integer getExpid() {
         return expid;
     }
 

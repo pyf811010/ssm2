@@ -232,7 +232,7 @@
 					//data: grid_data,
 					datatype: "json",
 					height: 400,
-					colNames: ['操作','查看','下载', '', 'ID', '文件名', '修改内容', '修改时间', '文件地址'],
+					colNames: ['操作','查看','下载', '', 'ID','原文件ID', '文件名', '修改内容', '修改时间', '文件地址'],
 					colModel: [{
 							name: 'op',
 							index: 'op',
@@ -297,6 +297,18 @@
 								cols: "15"
 							}
 
+						},
+						{
+							name: 'expid',
+							index: 'expid',
+							width: 100,
+							sortable: false,
+							editable: true,
+							edittype: "textarea",
+							editoptions: {
+								rows: "2",
+								cols: "15"
+							}
 						},
 						{
 							name: 'file_name',

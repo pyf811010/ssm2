@@ -38,5 +38,6 @@ public interface FilesKandUpdateinfoMapper {
 	String getFile_name(int id);
 
 	int getNameCount(String subname);
+	
 
 }

@@ -34,9 +34,9 @@
 
   <!-- 插入信息 -->
   <insert id="insert" parameterType="cn.tycoding.pojo.FilesKand">
-    insert into files_kand (expid, url, id_query ,files_name
+    insert into files_kand (expid, url, id_query ,files_name,update_times
       )
-    values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, #{files_name,jdbcType=VARCHAR}
+    values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, #{files_name,jdbcType=VARCHAR},#{update_times,jdbcType=INTEGER}
       )
   </insert>
 
@@ -58,6 +58,9 @@
       <if test="files_name != null">
         files_name = #{files_name,jdbcType=VARCHAR},
       </if>
+      <if test="update_times != null">
+        update_times = #{update_times,jdbcType=INTEGER},
+      </if>
     </set>
     where expid = #{expid,jdbcType=INTEGER}
   </update>
@@ -68,6 +71,7 @@
     set url = #{url,jdbcType=VARCHAR},
       id_query = #{id_query,jdbcType=INTEGER}
       files_name = #{files_name,jdbcType=VARCHAR}
+      update_times = #{update_times,jdbcType=INTEGER}
     where expid = #{expid,jdbcType=INTEGER}
   </update>
   
@@ -102,14 +106,15 @@
 	  update files_kand
       set url = #{url},
       id_query = #{id_query},
-      files_name = #{files_name}
+      files_name = #{files_name},
+      update_times = #{update_times}
       where expid = #{expid}
 	</update>
 
     <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.FilesKand">
 		insert into files_kand
-		values(#{expid},#{url},#{id_query},#{files_name});
+		values(#{expid},#{url},#{id_query},#{files_name},#{update_times});
 	</insert>
 
     <!-- 按学号删除学生 -->
@@ -139,6 +144,12 @@
 	<select id="getFile_name"  resultType="String">
     SELECT files_name from files_kand where expid = #{expid}
   </select>
+  
+	<!--根据file_name返回expid  -->
+	<select id="getExpidByFileName"  resultType="Integer">
+    SELECT expid from files_kand where files_name = #{files_name}
+  </select>
+  
   
   
 </mapper>

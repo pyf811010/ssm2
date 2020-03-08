@@ -346,7 +346,7 @@
             //data: grid_data,
             datatype: "json",
             height: 400,
-            colNames: ['操作', '', 'ID', '实验者姓名', '测试日期', '体重', '身高'],
+            colNames: ['操作', '', 'ID', '身份证号' ,'实验者姓名','年龄','测试日期', '体重', '身高'],
             colModel: [{
                 name: 'op',
                 index: 'op',
@@ -395,8 +395,32 @@
 
                 },
                 {
+                    name: 'identity_card',
+                    index: 'identity_card',
+                    width: 100,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                },
+                {
                     name: 'name',
                     index: 'name',
+                    width: 100,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                },
+                {
+                    name: 'age',
+                    index: 'age',
                     width: 100,
                     sortable: false,
                     editable: true,

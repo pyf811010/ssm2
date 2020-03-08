@@ -4,18 +4,57 @@ public class Subjects {
     private Integer sub_id;
 
     private String name;
-
+    
+    private String identity_card;
+    
     private String testdate;
+    
+    private Integer age;
+    
+    private float weight;
 
-    private Integer weight;
+    private float height;
+    
+    public Subjects() {
+    	
+    }
+    
 
-    private Integer height;
 
-    public Integer getSub_id() {
+    public Subjects(String name, String identity_card, String testdate, Integer age, float weight,
+			float height) {
+		super();
+		this.name = name;
+		this.identity_card = identity_card;
+		this.testdate = testdate;
+		this.age = age;
+		this.weight = weight;
+		this.height = height;
+	}
+
+
+
+	public Integer getSub_id() {
         return sub_id;
     }
 
-    public void setSub_id(Integer sub_id) {
+    public String getIdentity_card() {
+		return identity_card;
+	}
+
+	public void setIdentity_card(String identity_card) {
+		this.identity_card = identity_card;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public void setSub_id(Integer sub_id) {
         this.sub_id = sub_id;
     }
 
@@ -35,19 +74,28 @@ public class Subjects {
         this.testdate = testdate;
     }
 
-    public Integer getWeight() {
-        return weight;
-    }
 
-    public void setWeight(Integer weight) {
-        this.weight = weight;
-    }
 
-    public Integer getHeight() {
-        return height;
-    }
+	public float getWeight() {
+		return weight;
+	}
 
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
+
+
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
+
+
+
+	public float getHeight() {
+		return height;
+	}
+
+
+
+	public void setHeight(float height) {
+		this.height = height;
+	}
+
 }
