@@ -37,7 +37,7 @@ public class ReadExcel {
         Iterator<Sheet> sheetIterator;
         String endFile = (fileName.lastIndexOf(".") == -1 ? "" :
                 fileName.substring(fileName.lastIndexOf(".") + 1)).trim();
-        System.out.println(endFile);
+        System.out.println("文件后缀为："+endFile);
         //文件类型
         if ("xls".equals(endFile)) {
             sheetIterator = new HSSFWorkbook(file.getInputStream()).iterator();
@@ -83,14 +83,21 @@ public class ReadExcel {
                 }
                 if (o instanceof Subjects){
                     Subjects subjects = new Subjects();
+                    /*row.getCell(0).setCellType(CellType.STRING);*/
+                    //身份证
                     subjects.setIdentity_card(row.getCell(0).getStringCellValue());
+                    //姓名
                     subjects.setName(row.getCell(1).getStringCellValue());
                     row.getCell(2).setCellType(CellType.STRING);
                     //excel必须为文本格式
                     row.getCell(3).setCellType(CellType.STRING);
+                    //年龄
                     subjects.setAge(Integer.valueOf(row.getCell(2).getStringCellValue()));
+                    //日期
                     subjects.setTestdate(row.getCell(3).getStringCellValue());
+                    //体重
                     subjects.setWeight((float) row.getCell(4).getNumericCellValue());
+                    //身高
                     subjects.setHeight((float) row.getCell(5).getNumericCellValue());
                     list.add(subjects);
                 }

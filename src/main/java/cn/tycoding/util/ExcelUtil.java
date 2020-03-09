@@ -4,6 +4,9 @@ import cn.tycoding.constant.ExcelConstant;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
@@ -24,7 +27,7 @@ public class ExcelUtil {
      * @param workbook HSSFWorkbook对象
      * @param fileName 文件名，包含后缀名
      */
-    public static void downloadExcel(HttpServletResponse response, HSSFWorkbook workbook, String fileName) {
+    public static void downloadExcel(HttpServletResponse response, XSSFWorkbook workbook, String fileName) {
         System.out.println("已经进入到导出的程序");
         // 6.设置reponse参数
         response.setHeader("Content-Disposition", "inline; filename=" + fileName);
@@ -46,8 +49,8 @@ public class ExcelUtil {
      * 设置列宽
      * @param sheet
      */
-    public static void setColumnSize(HSSFSheet sheet) {
-        HSSFRow row = sheet.getRow(0);
+    public static void setColumnSize(XSSFSheet sheet) {
+        XSSFRow row = sheet.getRow(0);
         for (int i = 0; i < row.getLastCellNum(); i++) {
             sheet.setColumnWidth(i, ExcelConstant.COLUMN_WIDTH);
         }

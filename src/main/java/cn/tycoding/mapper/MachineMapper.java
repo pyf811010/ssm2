@@ -48,4 +48,11 @@ public interface MachineMapper {
 	 * @return 封装了字段信息的list集合
 	 */
 	List<DBTableComment> findDbTableComment();
+
+	/**
+	 * 从模板文件中导入信息
+	 * @param machine excel文件中一行信息封装的machine对象
+	 * @return 返回插入成功的数据数量
+	 */
+	int addTemplate(Machine machine);
 }
