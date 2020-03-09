@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/assets/css/bootstrap-datepicker3.min.css"/>
     <link rel="stylesheet" href="/assets/css/bootstrap-timepicker.min.css"/>
     <link rel="stylesheet" href="/assets/css/daterangepicker.min.css"/>
-    <link rel="stylesheet" href="/assets/css/loading.css" />
+    <link rel="stylesheet" href="/assets/css/loading.css"/>
     <link rel="stylesheet" href="/assets/css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" href="/assets/css/bootstrap-colorpicker.min.css"/>
 
@@ -55,8 +55,8 @@
 
 <body class="no-skin">
 <div id="loading">
-    	<img src="/assets/css/images/loading.gif">
-	</div>
+    <img src="/assets/css/images/loading.gif">
+</div>
 <div id="navbar" class="navbar navbar-default          ace-save-state">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
@@ -138,7 +138,7 @@
             }
         </script>
         <!-- /.sidebar-shortcuts -->
-       <div id = "lefter"></div>
+        <div id="lefter"></div>
 
         <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
             <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
@@ -155,7 +155,7 @@
                         <a href="/view/index.html">我的主页</a>
                     </li>
 
-                    <li class="active">文件上传</li>
+                    <li class="active">步态周期图像文件上传</li>
                 </ul>
                 <!-- /.breadcrumb -->
 
@@ -165,7 +165,7 @@
 
                 <div class="page-header">
                     <h1>
-                        文件上传
+                        步态周期图像文件上传
                         <small>
                             <i class="ace-icon fa fa-angle-double-right"></i>
                             <span style="font-size: 16px;">可支持同时上传多份文件</span>
@@ -447,15 +447,17 @@
 
 <!--文件上传-->
 <script type="text/javascript">
-	function hideloading(){
-		$("#loading").attr("style","display:none;");
-		console.log("hide");
-	}
-	function showloading(){
-		$("#loading").attr("style","display:block;");
-		console.log("show");
-	}
-	jQuery(function ($) {
+    function hideloading() {
+        $("#loading").attr("style", "display:none;");
+        console.log("hide");
+    }
+
+    function showloading() {
+        $("#loading").attr("style", "display:block;");
+        console.log("show");
+    }
+
+    jQuery(function ($) {
         $("#fileCommit").click(function () {
             var formData = new FormData();
             var files = $("#files")[0].files;
@@ -472,16 +474,16 @@
                 contentType: false,
 
                 success: function (data) {
-                	if (data.success == '2') {
-						hideloading();
-						alert(data.info);
-					} else {
-						hideloading();
-						alert(data.info);
-					}
+                    if (data.success == '2') {
+                        hideloading();
+                        alert(data.info);
+                    } else {
+                        hideloading();
+                        alert(data.info);
+                    }
                 },
                 error: function (err) {
-                	hideloading();
+                    hideloading();
                     alert("文件上传遇到错误!" + JSON.stringify(err));
                     alert("上传失败!");
                 }
@@ -492,8 +494,12 @@
 </script>
 
 <script>
-		$("#lefter").load("/view/lefter.html");
-		</script>
+    $("#lefter").load("/view/lefter.html", function () {
+        $("#main").prop("class", "");
+        $(".gaitPicUpload").prop("class", "active");
+        $("#filesManager").prop("style", "display: block;");
+    });
+</script>
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">

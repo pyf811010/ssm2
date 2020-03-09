@@ -3,6 +3,7 @@ package cn.tycoding.util;
 import cn.tycoding.pojo.Admin;
 import cn.tycoding.pojo.Machine;
 import cn.tycoding.pojo.Subjects;
+import com.sun.org.apache.bcel.internal.generic.FLOAD;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
@@ -82,13 +83,15 @@ public class ReadExcel {
                 }
                 if (o instanceof Subjects){
                     Subjects subjects = new Subjects();
-                    subjects.setName(row.getCell(0).getStringCellValue());
-                    row.getCell(1).setCellType(CellType.STRING);
-                    subjects.setTestdate(row.getCell(1).getStringCellValue());
+                    subjects.setIdentity_card(row.getCell(0).getStringCellValue());
+                    subjects.setName(row.getCell(1).getStringCellValue());
                     row.getCell(2).setCellType(CellType.STRING);
+                    //excel必须为文本格式
                     row.getCell(3).setCellType(CellType.STRING);
-                    subjects.setWeight(Integer.valueOf(row.getCell(2).getStringCellValue()));
-                    subjects.setHeight(Integer.valueOf(row.getCell(3).getStringCellValue()));
+                    subjects.setAge(Integer.valueOf(row.getCell(2).getStringCellValue()));
+                    subjects.setTestdate(row.getCell(3).getStringCellValue());
+                    subjects.setWeight((float) row.getCell(4).getNumericCellValue());
+                    subjects.setHeight((float) row.getCell(5).getNumericCellValue());
                     list.add(subjects);
                 }
             }

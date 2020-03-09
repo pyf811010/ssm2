@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/assets/css/bootstrap-datepicker3.min.css"/>
     <link rel="stylesheet" href="/assets/css/bootstrap-timepicker.min.css"/>
     <link rel="stylesheet" href="/assets/css/daterangepicker.min.css"/>
-    <link rel="stylesheet" href="/assets/css/loading.css" />
+    <link rel="stylesheet" href="/assets/css/loading.css"/>
     <link rel="stylesheet" href="/assets/css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" href="/assets/css/bootstrap-colorpicker.min.css"/>
 
@@ -55,8 +55,8 @@
 
 <body class="no-skin">
 <div id="loading">
-    	<img src="/assets/css/images/loading.gif">
-	</div>
+    <img src="/assets/css/images/loading.gif">
+</div>
 <div id="navbar" class="navbar navbar-default          ace-save-state">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
@@ -138,7 +138,7 @@
             }
         </script>
         <!-- /.sidebar-shortcuts -->
-       <div id = "lefter"></div>
+        <div id="lefter"></div>
 
         <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
             <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
@@ -447,34 +447,35 @@
 
 <!--文件上传-->
 <script type="text/javascript">
-	function hideloading(){
-		$("#loading").attr("style","display:none;");
-		console.log("hide");
-	}
-	function showloading(){
-		$("#loading").attr("style","display:block;");
-		console.log("show");
-	}
+    function hideloading() {
+        $("#loading").attr("style", "display:none;");
+        console.log("hide");
+    }
+
+    function showloading() {
+        $("#loading").attr("style", "display:block;");
+        console.log("show");
+    }
+
     jQuery(function ($) {
         $("#fileCommit").click(function (e) {
-        	
-        	// e.preventDefault();
+
+            // e.preventDefault();
             var formData = new FormData();
             var files = $("#files")[0].files;
-            
-            
-            
+
+
             /*formData.append("fi_user_id", $.cookie("us_id"));
             formData.append("fi_grade", $("#fi_grade").val());
             formData.append("fi_major", $("#fi_major").val());
             //文件简介
             formData.append("fi_info", $("#fi_info").val());
             formData.append("fi_course", $("#fi_course").val())*/
-            if (files.length !=  0){
-            	for (var i = 0; i < files.length; i++) {
+            if (files.length != 0) {
+                for (var i = 0; i < files.length; i++) {
                     formData.append("files", files[i]);
                 }
-            	showloading();
+                showloading();
                 $.ajax({
                     type: "post",
                     url: "/excel/upload",
@@ -484,32 +485,36 @@
                     contentType: false,
 
                     success: function (data) {
-                    	console.log(data.success);
-    					if (data.success!='0') {
-    						hideloading();
-    						if (data.success == 2) alert(data.info);
-    					} else {
-    						hideloading();
-    						alert(data.info);
-    					}
+                        console.log(data.success);
+                        if (data.success != '0') {
+                            hideloading();
+                            if (data.success == 2) alert(data.info);
+                        } else {
+                            hideloading();
+                            alert(data.info);
+                        }
                     },
                     error: function (err) {
-                    	hideloading();
+                        hideloading();
                         alert("文件上传遇到错误!" + JSON.stringify(err));
                         alert("上传失败!");
                     }
 
                 });
             } else {
-            	alert("请选择上传的文件");
+                alert("请选择上传的文件");
             }
         })
     });
 </script>
 
 <script>
-		$("#lefter").load("/view/lefter.html");
-		</script>
+    $("#lefter").load("/view/lefter.html", function () {
+        $("#main").prop("class", "");
+        $(".fileUpload").prop("class", "active");
+        $("#filesManager").prop("style", "display: block;");
+    });
+</script>
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">

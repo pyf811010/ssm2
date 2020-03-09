@@ -244,7 +244,12 @@
 </script>
 
 <script>
-    $("#lefter").load("/view/lefter.html");
+    $("#lefter").load("/view/lefter.html", function () {
+        $("#main").prop("class", "");
+        $(".egcontrast").prop("class", "active");
+        $("#dataManageSubMenu").prop("style", "display: block;");
+        $("#dataManageSubMenuSub").prop("style", "display: block;");
+    });
 </script>
 
 <script>

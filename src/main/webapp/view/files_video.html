@@ -61,7 +61,7 @@
                         <a href="/view/index.html">首页</a>
                     </li>
 
-                    <li class="active">足底压力(合力大小及位置)数据文件信息管理</li>
+                    <li class="active">视频文件管理</li>
                 </ul>
                 <!-- /.breadcrumb -->
 
@@ -188,8 +188,8 @@
 <script>
     $("#lefter").load("/view/lefter.html", function () {
         $("#main").prop("class", "");
-        $(".files_foot_pressure_fgt").prop("class", "active");
-        $("#dataManageSubMenu").prop("style", "display: block");
+        $(".files_video").prop("class", "active");
+        $("#dataManageSubMenu").prop("style", "display: block;");
         $("#dataManageSubMenuSub2").prop("style", "display: block");
 
     });
@@ -203,7 +203,7 @@
     function Open(expid) {
         $.ajax({
             type: "post",
-            url: "/FilesFootPressureFgt/open/",
+            url: "/FilesVideo/open/",
             dataType: "json",
             data: {
                 "expid": expid
@@ -212,7 +212,7 @@
     }
 
     function Modify(expid) {
-        window.open("/FilesFootPressureFgt/download/" + expid, "_blank");
+        window.open("/FilesVideo/download/" + expid, "_blank");
     }
 
 
@@ -240,7 +240,7 @@
         jQuery(grid_selector).jqGrid({
             //direction: "rtl",
 
-            url: "/FilesFootPressureFgt/findsome",
+            url: "/FilesVideo/findsome",
 
             //data: grid_data,
             datatype: "json",
@@ -305,7 +305,7 @@
                     index: 'expid',
                     width: 100,
                     key: true,
-                    editable: false,
+                    editable: true,
                     edittype: "textarea",
                     editoptions: {
                         rows: "2",
@@ -365,8 +365,8 @@
                 }, 0);
             },
 
-            editurl: "/FilesFootPressureFgt/handle", //nothing is saved
-            caption: "足底压力(合力大小及位置)数据文件信息管理" //表名
+            editurl: "/FilesVideo/handle", //nothing is saved
+            caption: "视频文件管理" //表名
 
 
         });

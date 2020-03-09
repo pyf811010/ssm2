@@ -110,21 +110,6 @@ public class ExcelServiceImpl implements ExcelService {
                 state.setInfo("上传错误：文件名无法识别！");
                 state.setSuccess(0);
             }
-                /*switch (fileName) {
-                    case "admin":
-                        System.out.println(o);
-                        break;
-                    case "machine":
-
-                        break;
-                    case "subjects":
-
-                        break;
-                    default:
-
-                        break;
-                }*/
-
         }
         //判断上传状态
         if (number > 0) {

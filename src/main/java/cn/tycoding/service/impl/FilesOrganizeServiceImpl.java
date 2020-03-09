@@ -381,7 +381,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 						//realExpidByDate = fs.getKand().split("\\/")[4].split("_")[1];
 						System.out.println("插入Datetime:" + datetime + " expid:"+expid+" originExpid:" + originexpid + "的kand表");
 						if (ifexist==false && filesKandMapper.dataifexist(sliceUrl(datetime, "kand", originexpid)) == false)
-							insertFilesKand(new FilesKand(expid, fs.getKand(), expid, fileNameTransform(fs.getKand())));
+							insertFilesKand(new FilesKand(expid, fs.getKand(), expid, fileNameTransform(fs.getKand()),0));
 						else {
 							ifexist = true;
 							Rollback(expid);

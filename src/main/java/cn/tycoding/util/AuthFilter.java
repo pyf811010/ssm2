@@ -10,51 +10,42 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import cn.tycoding.pojo.Admin;
 /**
- * 拦截器，查看用户是否登录过，未登录禁止访问页面
+ *  查看用户是否登录过，未登录禁止访问页面(重定向到登陆页面)
+ *	作者		:	pyf<br>
  */
 public class AuthFilter implements Filter {
 	public void destroy() {
 	}
  
-	public void doFilter(ServletRequest servletRequest,
-			ServletResponse servletResponse, FilterChain filterChain)
-			throws IOException, ServletException {
-		/**
-		 * 1,doFilter方法的第一个参数为ServletRequest对象。此对象给过滤器提供了对进入的信息（包括*
-		 * 表单数据、cookie和HTTP请求头）的完全访问。第二个参数为ServletResponse，通常在简单的过*
-		 * 滤器中忽略此参数。最后一个参数为FilterChain，此参数用来调用servlet或JSP页。
-		 */
-		HttpServletRequest request = (HttpServletRequest) servletRequest;
-		/**
-		 * 如果处理HTTP请求，并且需要访问诸如getHeader或getCookies等在ServletRequest中*
-		 * 无法得到的方法，就要把此request对象构造成HttpServletRequest
-		 */
-		HttpServletResponse response = (HttpServletResponse) servletResponse;
-		String currentURL = request.getRequestURI();
-		// 取得根目录所对应的绝对路径:
-		String targetURL = currentURL.substring(currentURL.indexOf("/", 1),
-				currentURL.length());
-		// 截取到当前文件名用于比较
-		HttpSession session = request.getSession(false);
-		if (!"/login.html".equals(targetURL)) {// 判断当前页是否是重定向以后的登录页面页面，如果是就不做session的判断，防止出现死循环
-			if (session == null || session.getAttribute("us_id") == null) {
-				// *用户登录以后需手动添加session
-				System.out.println("request.getContextPath()="
-						+ request.getContextPath());
-				response.sendRedirect(request.getContextPath() + "/WEB-INF/login.html");
-				// 如果session为空表示用户没有登录就重定向到login.jsp页面
-				return;
-			}
-		}
-		// 加入filter链继续向下执行
-		filterChain.doFilter(request, response);
-		/**
-		 * 调用FilterChain对象的doFilter方法。Filter接口的doFilter方法取一个FilterChain对象作* 为它
-		 * 的一个参数。在调用此对象的doFilter方法时，激活下一个相关的过滤器。如果没有另*
-		 * 一个过滤器与servlet或JSP页面关联，则servlet或JSP页面被激活。
-		 */
-	}
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)  throws IOException, ServletException {        
+        HttpServletRequest httpServletRequest = (HttpServletRequest)request;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+
+        HttpSession session = httpServletRequest.getSession();
+        if(session == null){
+        System.out.println(session);
+        }
+        String us_name = (String) session.getAttribute("us_name");
+        System.out.println(us_name);
+
+        String url = httpServletRequest.getRequestURI();
+
+        //若不进行url.endsWith("login.html")判断则会出现无限循环重定向的问题；
+        //若登陆成功之后则us_id不为null，继续执行
+        if(url.endsWith("login.html") || us_name!=null){        
+               chain.doFilter(httpServletRequest, httpServletResponse);
+               return;
+        }
+
+        //若该if放在上一if语句之前，仍然会出现无限循环重定向的问题
+        if(us_name==null){
+               httpServletResponse.sendRedirect("/login.html");
+               return;
+        }
+  }
  
 	public void init(FilterConfig filterConfig) throws ServletException {
 	}

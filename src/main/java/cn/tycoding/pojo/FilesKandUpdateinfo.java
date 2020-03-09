@@ -9,6 +9,8 @@ import java.util.Date;
 public class FilesKandUpdateinfo {
 	
     private Integer u_id;
+    
+    private Integer expid;
 
     private String file_name;
 
@@ -18,8 +20,15 @@ public class FilesKandUpdateinfo {
 
     private String url;
 
+    public Integer getExpid() {
+		return expid;
+	}
 
-    public Integer getU_id() {
+	public void setExpid(Integer expid) {
+		this.expid = expid;
+	}
+
+	public Integer getU_id() {
 		return u_id;
 	}
 

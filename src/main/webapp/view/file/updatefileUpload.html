@@ -134,7 +134,7 @@
             }
         </script>
         <!-- /.sidebar-shortcuts -->
-       <div id = "lefter"></div>
+        <div id="lefter"></div>
 
         <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
             <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
@@ -151,7 +151,7 @@
                         <a href="/view/index.html">我的主页</a>
                     </li>
 
-                    <li class="active">文件上传</li>
+                    <li class="active">修改数据文件上传</li>
                 </ul>
                 <!-- /.breadcrumb -->
 
@@ -161,7 +161,7 @@
 
                 <div class="page-header">
                     <h1>
-                       修改数据文件上传
+                        修改数据文件上传
                         <!-- <small>
                             <i class="ace-icon fa fa-angle-double-right"></i>
                             <span style="font-size: 16px;">可支持同时上传多份文件</span>
@@ -190,7 +190,7 @@
                                             <div class="widget-main">
                                                 <div class="form-group" style="margin-top: 20px;">
                                                     <div class="col-xs-12">
-                                                        <input type="file" id="files" />
+                                                        <input type="file" id="files"/>
                                                     </div>
                                                 </div>
 
@@ -204,11 +204,11 @@
                                                     <div class="col-md-offset-3 col-md-9">
                                                         <button class="btn btn-info" type="button" id="fileCommit">
                                                             <i class="ace-icon fa fa-check bigger-110"></i>
-                                                           		 确定上传
+                                                            确定上传
                                                         </button> &nbsp; &nbsp; &nbsp;
                                                         <button class="btn" type="reset">
                                                             <i class="ace-icon fa fa-undo bigger-110"></i>
-                                                           		 重置
+                                                            重置
                                                         </button>
                                                     </div>
                                                 </div>
@@ -303,7 +303,6 @@
 <script src="/assets/js/ace.min.js"></script>
 
 
-
 <!--文件上传-->
 <script type="text/javascript">
     jQuery(function ($) {
@@ -343,8 +342,12 @@
 </script>
 
 <script>
-		$("#lefter").load("/view/lefter.html");
-		</script>
+    $("#lefter").load("/view/lefter.html",function () {
+        $("#main").prop("class", "");
+        $(".updatefileUpload").prop("class", "active");
+        $("#filesManager").prop("style", "display: block;");
+    });
+</script>
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
@@ -579,7 +582,7 @@
             file_input
                 .off('file.error.ace')
                 .on('file.error.ace', function (e, info) {
-                    
+
                 });
 
         });

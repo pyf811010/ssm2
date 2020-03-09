@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +37,9 @@ public class AdminServiceImpl implements AdminService {
      */
     @Autowired
     private AdminMapper adminMapper;
+    
+    @Autowired
+    private HttpSession session;
 
     /**
      * 登录的功能
@@ -87,10 +93,10 @@ public class AdminServiceImpl implements AdminService {
             return state;
         }else{
         	String us_name = a.getA_name();
-
-            //没有异常，将用户名设置进消息中
+        	//将us_name放入session中,用于拦截器判断是否登陆
+        	session.setAttribute("us_name", us_name);
+        	//没有异常，将用户名设置进消息中
             state = new State(1, us_name);
-
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             System.out.println(state);
             System.out.println("用户ID:" + a.getA_id() + " 姓名:" + a.getA_name() + " 于" + df.format(new Date()) + " 登录系统");
