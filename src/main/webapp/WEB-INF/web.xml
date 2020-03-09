@@ -24,14 +24,14 @@
     </filter-mapping>
  
  <!--过滤器 :查看用户是否登录过，未登录禁止访问页面(重定向到登陆页面)  -->   
-  <filter>
+   <filter>
 	<filter-name>AuthFilter</filter-name>
 	<filter-class>cn.tycoding.util.AuthFilter</filter-class>
 </filter>
 <filter-mapping>
 	<filter-name>AuthFilter</filter-name>
 	<url-pattern>*.html</url-pattern>
-</filter-mapping> 
+</filter-mapping>  
 
     <!-- 加载spring的过滤器 -->
     <context-param>
