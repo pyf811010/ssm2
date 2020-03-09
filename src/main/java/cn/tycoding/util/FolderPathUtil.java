@@ -170,7 +170,10 @@ public class FolderPathUtil {
 						filesFolder.setFpf(filePath);
 					} else if (fileType.equals("sm")) {
 						filesFolder.setSm(filePath);
-					} else {
+					} else if (fileType.equals("video")) {
+						filesFolder.setVideo(filePath);
+					}
+					else {
 						filesFolder.setInfo("文件命名格式存在问题:" + filePath + ", 实验id与其相同的文件全部未存入数据库\n");
 						System.out.println("warning:文件名存在问题");
 						filesFolder.setSuccess(false);
