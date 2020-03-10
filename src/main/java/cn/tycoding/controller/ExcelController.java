@@ -45,6 +45,14 @@ public class ExcelController {
     	
     	System.out.println("开始分析文件");
     	Map<String,List<FilesFolder>> filesFoldersList = FolderPathUtil.getFolderInfo("D:/ProgrammData/", files);
+    	if (filesFoldersList.containsKey("false")) {
+    		State state = new State();
+    		state.setSuccess(0);
+    		for (FilesFolder fs: filesFoldersList.get("false")) {
+    			state.setInfo(fs.getInfo());
+    		}
+    		return state;
+    	}
     	System.out.println("成功获取文件信息");
         State state = filesOrganizeService.insertByString(filesFoldersList);
         return state;

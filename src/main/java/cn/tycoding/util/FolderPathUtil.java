@@ -33,7 +33,8 @@ import java.util.Map;
 import java.util.HashMap;
 import javax.activation.MailcapCommandMap;
 import javax.print.attribute.standard.DateTimeAtCompleted;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 public class FolderPathUtil {
 	 /*
 	  * 文件上传存储格式： BasePath/日期(yyyy-mm-dd)/filetype_expid.xxx
@@ -49,6 +50,15 @@ public class FolderPathUtil {
 		file.transferTo(new File(pfile, targetFile));
 		return (uploadPath + targetFile);
 	}
+	
+	public static boolean assertFileName(String str) {
+		String pattern = "\\d{4}\\-\\d{2}\\-\\d{2}(/|//|\\\\|\\\\\\\\)(video|mc|ele|kand|ox|fpa|fpf|sm)_\\d\\d\\..*";
+		Pattern r = Pattern.compile(pattern);
+		Matcher m = r.matcher(str);
+		
+		return m.matches();
+	}
+	
 	public static Map<String, List<FilesFolder>> getFolderInfo(String basePath,MultipartFile[] files){
 		Map<String, List<FilesFolder>> filesFoldersList = new HashMap<String, List<FilesFolder>>();
 		State state = new State();
@@ -57,6 +67,25 @@ public class FolderPathUtil {
 		// <String:日期 , <String:expid, <String:exptype, TransforFile<file,pfile,targetfile>>>
 		Map<String, Boolean> failedList= new HashMap<String, Boolean>();//如果本地已存在文件，则当日所有实验都不上传
 		System.out.println("进入文件名分析阶段");
+		for (int i = 0; i < files.length; i++) {		
+			MultipartFile file = files[i];
+			FileItem fileItem = ((CommonsMultipartFile) file).getFileItem();
+	        
+			String fpath = fileItem.getName();//上传文件的相对地址：eg. "ExpData/2020-02-28/fpa_01.asc"
+			//System.out.println("fpath:"+fpath);
+	        String fname = file.getOriginalFilename();//上传文件的原名：eg. "fpa_01.asc"
+	        //System.out.println("fname:"+fname);
+	        if(assertFileName(fpath) != true && !fname.equals("egcontrast.xlsx") && !fname.equals("egcontrast.xls") && !fname.equals("preec.xlsx") && !fname.equals("preec.xls")) {
+	        	FilesFolder fileFolder = new FilesFolder();
+	        	fileFolder.setInfo("文件名"+fpath+"出错，本次上传全部取消，请修改后重新上传!\n");
+	        	if (!filesFoldersList.containsKey("false"))
+	        		filesFoldersList.put("false", new ArrayList<FilesFolder>());
+	        	filesFoldersList.get("false").add(fileFolder);
+	        }
+		}
+		if (filesFoldersList.containsKey("false")) {
+			return filesFoldersList;
+		}
 		for (int i = 0; i < files.length; i++) {		
 			MultipartFile file = files[i];
 			FileItem fileItem = ((CommonsMultipartFile) file).getFileItem();
