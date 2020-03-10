@@ -8,6 +8,7 @@ import cn.tycoding.util.ExcelUtil;
 import cn.tycoding.util.FolderPathUtil;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class ExcelController {
     public State upload_multi( @RequestParam("files") MultipartFile[] files) {
     	
     	System.out.println("开始分析文件");
-    	List<FilesFolder> filesFoldersList = FolderPathUtil.getFolderInfo("D:/ProgrammData/", files);
+    	Map<String,List<FilesFolder>> filesFoldersList = FolderPathUtil.getFolderInfo("D:/ProgrammData/", files);
     	System.out.println("成功获取文件信息");
         State state = filesOrganizeService.insertByString(filesFoldersList);
         return state;

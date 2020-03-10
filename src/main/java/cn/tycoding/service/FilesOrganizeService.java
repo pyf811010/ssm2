@@ -34,7 +34,7 @@ public interface FilesOrganizeService {
 	
 	public void insertFilesSM(FilesSlotMachine record);
 	
-	public State insertByString(List<FilesFolder> filesfoldersList);
+	public State insertByString(Map<String, List<FilesFolder>> filesfoldersList);
 	
 	public void getAnalyzedPreec(String Datetime, String preecUrl) throws Exception;
 	
@@ -42,7 +42,7 @@ public interface FilesOrganizeService {
 			
 
 	
-	public void Rollback (int expid);
+	public void Rollback (List<Integer> failedExpidList, List<FilesFolder> fsList,boolean ifexist) throws Exception;
 	
 	public String sliceUrl(String datetime, String fileType, String originExpid);
 
