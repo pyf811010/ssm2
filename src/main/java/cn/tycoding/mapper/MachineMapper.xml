@@ -136,4 +136,15 @@
         show full fields from machine
     </select>
 
+    <insert id="addTemplate" parameterType="cn.tycoding.pojo.Machine">
+        insert into machine (name,type,remark)
+			select #{name},#{type},#{remark} from dual where not exists (
+			 	select * from machine where
+			 		name = #{name} and
+			 		type = #{type} and
+			 		remark = #{remark}
+			 		limit 1
+			 );
+    </insert>
+
 </mapper>

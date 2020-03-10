@@ -48,4 +48,6 @@ public interface SubjectsMapper {
 	Integer selectExistSubject(@Param("identity_card") String identity_card, @Param("name")String name, @Param("age")Integer age,@Param("weight") Float weight,@Param("height") Float height);
 	
 	Integer insertReturnID(Subjects record);
+
+	int addTemplate(Subjects subjects);
 }

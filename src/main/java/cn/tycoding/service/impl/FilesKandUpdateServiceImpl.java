@@ -165,10 +165,10 @@ public class FilesKandUpdateServiceImpl implements FilesKandUpdateService {
         response.setContentType("multipart/form-data");
         BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
         int len = 0;
-        while ((len = bis.read()) != -1) {
-            out.write(len);
+        byte[] buffer = new byte[8192];
+        while ((len = bis.read(buffer, 0, 8192)) != -1) {
+            out.write(buffer, 0, len);
             out.flush();
-//          if(bis.available()<=0) break;  
         }
         out.close();
         bis.close();

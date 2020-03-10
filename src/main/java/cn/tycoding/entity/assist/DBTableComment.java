@@ -15,6 +15,14 @@ public class DBTableComment {
      */
     private String comment;
 
+    public DBTableComment() {
+    }
+
+    public DBTableComment(String field, String comment) {
+        this.field = field;
+        this.comment = comment;
+    }
+
     public String getField() {
         return field;
     }

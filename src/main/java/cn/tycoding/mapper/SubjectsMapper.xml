@@ -75,5 +75,19 @@
 	<select id="findDbTableComment" resultType="cn.tycoding.entity.assist.DBTableComment">
 		show full fields from subjects
 	</select>
+
+	<insert id="addTemplate" parameterType="cn.tycoding.pojo.Subjects" >
+		insert into subjects (identity_card,name,age,testdate,weight,height)
+			select #{identity_card},#{name},#{age},#{testdate},#{weight},#{height} from dual where not exists (
+			 	select * from subjects where
+			 		identity_card = #{identity_card} and
+			 		name = #{name} and
+			 		age = #{age} and
+			 		testdate = #{testdate} and
+			 		weight = #{weight} and
+			 		height = #{height}
+			 		limit 1
+			 );
+	</insert>
   
 </mapper>
