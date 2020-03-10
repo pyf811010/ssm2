@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,8 +57,8 @@ public class ExcelController {
     @ResponseBody
     @RequestMapping("/downloadTemplate")
     public void  downloadTemplate(HttpServletResponse response, @RequestParam(value = "name") String name){
-        HSSFWorkbook workbook = excelService.getTemplate(name);
-        String fileName = name + ".xls";
+        XSSFWorkbook workbook = excelService.getTemplate(name);
+        String fileName = name + ".xlsx";
         ExcelUtil.downloadExcel(response, workbook, fileName);
     }
 

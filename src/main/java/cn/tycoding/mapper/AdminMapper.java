@@ -43,4 +43,10 @@ public interface AdminMapper {
 	 */
 	List<DBTableComment> findDbTableComment();
 
+	/**
+	 * 从模板中导入信息
+	 * @param admin 模板文件中一行封装的admin对象
+	 * @return 成功导入数据库的数量
+	 */
+	int addTemplate(Admin admin);
 }
