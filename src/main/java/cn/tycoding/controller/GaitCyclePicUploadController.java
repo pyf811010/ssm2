@@ -27,7 +27,6 @@ public class GaitCyclePicUploadController {
     @RequestMapping(value = "/upload")
     @ResponseBody
     public State upload_multi(@RequestParam("files") MultipartFile[] files) {
-    	
         State state = gaitCyclePicUploadService.readExcelFile(files);
         return state;
     }

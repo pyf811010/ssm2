@@ -461,6 +461,7 @@
         $("#fileCommit").click(function () {
             var formData = new FormData();
             var files = $("#files")[0].files;
+            if(files.length!=0){
             for (var i = 0; i < files.length; i++) {
                 formData.append("files", files[i]);
             }
@@ -489,6 +490,9 @@
                 }
 
             });
+            }else{
+            	alert("请选择上传文件");
+            }
         })
     });
 </script>
