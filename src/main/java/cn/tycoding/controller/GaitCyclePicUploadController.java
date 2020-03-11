@@ -23,11 +23,22 @@ public class GaitCyclePicUploadController {
 
     @Autowired
     private GaitCyclePicUploadService gaitCyclePicUploadService;
-
+    
     @RequestMapping(value = "/upload")
     @ResponseBody
     public State upload_multi(@RequestParam("files") MultipartFile[] files) {
-        State state = gaitCyclePicUploadService.readExcelFile(files);
-        return state;
+    	if(files.length != 0) {
+            State state = gaitCyclePicUploadService.readExcelFile(files);
+            return state;
+        }else {
+            return new State(0, "请选择上传文件");
+        }
+    }
+    
+    @RequestMapping(value = "/singlePicUpload")
+    @ResponseBody
+    public State upload_single(@RequestParam("files") MultipartFile[] files,String fi_info) {
+    	State state = gaitCyclePicUploadService.readSingleFile(fi_info,files);
+    	return state;
     }
 }
