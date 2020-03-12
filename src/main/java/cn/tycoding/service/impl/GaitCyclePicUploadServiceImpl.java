@@ -42,9 +42,28 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
     @Autowired
     private GaitCyclePicMapper gaitCyclePicMapper;
 
+    
+    private boolean assertFileName(String fpath) {
+		String pattern = "..*/\\d{4}\\-\\d{2}\\-\\d{2}(/|//|\\\\|\\\\\\\\)..*";
+		Pattern r = Pattern.compile(pattern);
+		Matcher m = r.matcher(fpath);
+		return m.matches();
+	}
+
     @Override
     public State readExcelFile(MultipartFile[] files) {
         Map<String, String> map = findRemarkExcel(files);
+        if(map.isEmpty()){
+        	int filelength = files.length;
+        	for (MultipartFile f : files){
+        		if (f instanceof CommonsMultipartFile) {
+        			String originalFilename = f.getOriginalFilename();
+        			String name = originalFilename.substring(0, originalFilename.lastIndexOf("."));
+        			map.put(name, "未添加记录");
+        		}
+        	}
+        	
+        }
         State state = new State();
         //由file的属性创建对应文件夹（若无）
         String basePath = FileConstant.PICTURE_FILE_UPLOAD_URL;
@@ -56,6 +75,7 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
         List<String> list = new ArrayList<String>();
         for (MultipartFile f : files) {
 			String fpath = ((CommonsMultipartFile) f).getFileItem().getName();
+			System.out.println(fpath);
 			if(!fpath.contains("xlsx")&&!fpath.contains("xls")){
 			if(assertFileName(fpath) != true){
 				list.add("文件名"+fpath+"格式有误，本次上传全部取消，请修改后重新上传!\n");
@@ -121,13 +141,7 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
         return returnState(count, stringBuffer);
     }
     
-    private boolean assertFileName(String fpath) {
-		String pattern = "\\d{4}\\-\\d{2}\\-\\d{2}(/|//|\\\\|\\\\\\\\)*";
-		Pattern r = Pattern.compile(pattern);
-		Matcher m = r.matcher(fpath);
-		return m.matches();
-	}
-
+    
 	/**
      * 获取备注信息
      *
