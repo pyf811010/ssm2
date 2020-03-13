@@ -231,7 +231,7 @@
                                 <small>(v 1.0)</small>
                                 <br>
                                 <span style="font-size: 15px;">文件导入说明：</span>
-                            </strong> <span style="font-size: 15px;">此模块用于上传原始测试数据文件，用户需按照日期设立文件夹，将同一天所测数据文件放到同一文件夹下，可一次上传单个日期文件夹，也可将多个日期文件夹汇总到一个文件夹，选中此文件夹后一同上传，日期文件夹下测试数据文件及相对应的测试信息文件命名需按照以下规则:
+                            </strong> <span style="font-size: 15px;">此模块用于上传原始测试数据文件，用户需按照日期设立文件夹(命名格式:2020-02-23)，将同一天所测数据文件放到同一文件夹下，一次上传单个日期文件夹，日期文件夹下测试数据文件及相对应的测试信息文件命名需按照以下规则:
                              <br>
                              <strong class="green">
                              <span style="font-size: 15px;">肌电数据文件:ele_01.xxx &nbsp;&nbsp;ele_02.xxx &nbsp;&nbsp; ele_03.xxx......</span>
@@ -250,9 +250,9 @@
                              <br>
                              <span style="font-size: 15px;">视频文件:video_01.xxx &nbsp;&nbsp;video_02.xxx &nbsp;&nbsp; video_03.xxx......</span>
                              <br>
-                             <span style="font-size: 15px;">肌电传感器对照表:egcontrast.xlsx</span>
+                             <span style="font-size: 15px;">肌电传感器对照表:egcontrast.xlsx/xls</span>
                              <br>
-                             <span style="font-size: 15px;">前置实验条件表:preec.xlsx</span>
+                             <span style="font-size: 15px;">前置实验条件表:preec.xlsx/xls</span>
                              </strong>
                         </div>
                                 <!-- /.span -->
@@ -498,13 +498,8 @@
 
                     success: function (data) {
                         console.log(data.success);
-                        if (data.success != '0') {
-                            hideloading();
-                            if (data.success == 2) alert(data.info);
-                        } else {
                             hideloading();
                             alert(data.info);
-                        }
                     },
                     error: function (err) {
                         hideloading();

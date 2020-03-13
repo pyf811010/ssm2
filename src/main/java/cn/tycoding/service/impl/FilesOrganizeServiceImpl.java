@@ -559,7 +559,10 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 		}//for (Map.Entry<String, List<FilesFolder>> folderBydate : filesfoldersList.entrySet())
 		if (state.getInfo() != null) {
 			state.setSuccess(2);
-		} else state.setSuccess(1);
+		} else {
+			state.setSuccess(1);
+			state.setInfo("全部文件上传成功");
+		}
 		return state;
 	}
 	

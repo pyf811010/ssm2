@@ -299,7 +299,7 @@
             //data: grid_data,
             datatype: "json",
             height: 400,
-            colNames: ['操作', '', 'ID', '实验者信息ID', '实验机器ID', '动补数据信息', '跑台数据信息', '足底压力数据信息', '足底压力合力大小、位置数据信息', '肌电数据信息', '实验条件', '追加实验条件'],
+            colNames: ['操作', '', 'ID', '实验条件', '追加实验条件', '实验者信息ID', '实验机器ID', '动补数据信息', '跑台数据信息', '足底压力数据信息', '足底压力合力大小、位置数据信息', '肌电数据信息'],
             colModel: [{
                 name: 'op',
                 index: 'op',
@@ -346,6 +346,30 @@
                         cols: "15"
                     }
 
+                },
+                {
+                    name: 'advance',
+                    index: 'advance',
+                    width: 350,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                },
+                {
+                    name: 'remark',
+                    index: 'remark',
+                    width: 500,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
                 },
 
                 {
@@ -431,30 +455,7 @@
                         cols: "15"
                     }
                 },
-                {
-                    name: 'advance',
-                    index: 'advance',
-                    width: 150,
-                    sortable: false,
-                    editable: true,
-                    edittype: "textarea",
-                    editoptions: {
-                        rows: "2",
-                        cols: "15"
-                    }
-                },
-                {
-                    name: 'remark',
-                    index: 'remark',
-                    width: 1000,
-                    sortable: false,
-                    editable: true,
-                    edittype: "textarea",
-                    editoptions: {
-                        rows: "2",
-                        cols: "15"
-                    }
-                },
+                
 
 
             ],

@@ -37,7 +37,7 @@
 	</select>
   <update id="edit" parameterType="cn.tycoding.pojo.Subjects">
 		update subjects set
-		name=#{name},testdate=#{testdate},weight=#{weight},height=#{height}
+		identity_card=#{identity_card},name=#{name},age=#{age},testdate=#{testdate},weight=#{weight},height=#{height}
 		where
 		sub_id=#{sub_id}
 	</update>

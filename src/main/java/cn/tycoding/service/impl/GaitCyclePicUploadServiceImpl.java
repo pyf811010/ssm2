@@ -44,7 +44,7 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
 
     
     private boolean assertFileName(String fpath) {
-		String pattern = "..*/\\d{4}\\-\\d{2}\\-\\d{2}(/|//|\\\\|\\\\\\\\)..*";
+		String pattern = ".*/\\d{4}\\-\\d{2}\\-\\d{2}(/|//|\\\\|\\\\\\\\).*";
 		Pattern r = Pattern.compile(pattern);
 		Matcher m = r.matcher(fpath);
 		return m.matches();
@@ -53,17 +53,18 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
     @Override
     public State readExcelFile(MultipartFile[] files) {
         Map<String, String> map = findRemarkExcel(files);
-        if(map.isEmpty()){
+        
+        /*if(map.isEmpty()){
         	int filelength = files.length;
         	for (MultipartFile f : files){
         		if (f instanceof CommonsMultipartFile) {
         			String originalFilename = f.getOriginalFilename();
         			String name = originalFilename.substring(0, originalFilename.lastIndexOf("."));
-        			map.put(name, "未添加记录");
+        			map.put(name, "未添加任何记录");
         		}
         	}
         	
-        }
+        }*/
         State state = new State();
         //由file的属性创建对应文件夹（若无）
         String basePath = FileConstant.PICTURE_FILE_UPLOAD_URL;
@@ -182,7 +183,7 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
         State state = new State();
         if (count == 0) {
             state.setSuccess(1);
-            state.setInfo("文件上传成功");
+            state.setInfo("全部文件上传成功");
             System.out.println("全部文件上传成功");
         } else {
             state.setSuccess(2);
@@ -209,6 +210,11 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
         if (!map.isEmpty() && map.keySet().contains(name)) {
             String remark = map.get(name);
             gaitCyclePic.setRemark(remark);
+        }
+        else {
+        	System.out.println("2");
+        	String remark = "未添加任何记录";
+        	gaitCyclePic.setRemark(remark);
         }
         int add = gaitCyclePicMapper.add(gaitCyclePic);
         if (add > 0) {

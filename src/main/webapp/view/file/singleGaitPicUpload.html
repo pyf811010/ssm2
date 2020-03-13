@@ -222,6 +222,20 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="alert alert-block alert-success" style="left: 450px; position: absolute; top: 0px; height:130px">
+                            <button type="button" class="close" data-dismiss="alert">
+                                <i class="ace-icon fa fa-times"></i>
+                            </button>
+
+                            <i class="ace-icon fa fa-check green"></i> <span style="font-size: 15px;">欢迎使用&nbsp;</span>
+                            <strong class="green">
+                                <span style="font-size: 15px;">人体运动测试数据分析与管理系统</span>
+                                <small>(v 1.0)</small>
+                                <br>
+                                <span style="font-size: 15px;">文件导入说明：</span>
+                            </strong> <span style="font-size: 15px;">此模块用于上传单个步态周期图像，并可输入备注信息同步上传
+                             <br>
+                        </div>
                                 <!-- /.span -->
                             </div>
                             <!-- /.row -->
@@ -365,7 +379,7 @@
 <script>
     $("#lefter").load("/view/lefter.html", function () {
         $("#main").prop("class", "");
-        $(".gaitPicUpload").prop("class", "active");
+        $(".singleGaitPicUpload").prop("class", "active");
         $("#filesManager").prop("style", "display: block;");
         $("#filesManagerSub").prop("style", "display: block;");
     });

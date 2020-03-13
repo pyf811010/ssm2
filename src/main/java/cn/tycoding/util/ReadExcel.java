@@ -97,7 +97,11 @@ public class ReadExcel {
                 if (o instanceof GaitPicRemark){
                     GaitPicRemark gaitPicRemark = new GaitPicRemark();
                     gaitPicRemark.setFileName(row.getCell(0).getStringCellValue());
-                    gaitPicRemark.setFileInfo(row.getCell(1).getStringCellValue());
+                    if(row.getCell(1)!= null){
+                    	gaitPicRemark.setFileInfo(row.getCell(1).getStringCellValue());
+                    }else{
+                    	gaitPicRemark.setFileInfo("未添加任何记录");
+                    }
                     list.add(gaitPicRemark);
                 }
             }
