@@ -55,6 +55,7 @@ public class ExcelController {
     	}
     	System.out.println("成功获取文件信息");
         State state = filesOrganizeService.insertByString(filesFoldersList);
+        System.err.println(state.getInfo()+state.getSuccess());
         return state;
     }
 

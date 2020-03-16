@@ -1,21 +1,18 @@
 package cn.tycoding.util;
 
 import cn.tycoding.pojo.Admin;
+import cn.tycoding.pojo.GaitPicRemark;
 import cn.tycoding.pojo.Machine;
 import cn.tycoding.pojo.Subjects;
 import com.sun.org.apache.bcel.internal.generic.FLOAD;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author： pyf lsy fdd
@@ -30,13 +27,9 @@ public class ReadExcel {
      * @return
      */
     public static List<Object> readExcel(CommonsMultipartFile file, Object o) throws Exception {
-
-        String fileName = file.getOriginalFilename();
-        System.out.println("文件名：" + fileName);
-        //获取后缀
         Iterator<Sheet> sheetIterator;
-        String endFile = (fileName.lastIndexOf(".") == -1 ? "" :
-                fileName.substring(fileName.lastIndexOf(".") + 1)).trim();
+        //获取后缀
+        String endFile = getSuffix(file);
         System.out.println("文件后缀为："+endFile);
         //文件类型
         if ("xls".equals(endFile)) {
@@ -101,8 +94,40 @@ public class ReadExcel {
                     subjects.setHeight((float) row.getCell(5).getNumericCellValue());
                     list.add(subjects);
                 }
+                if (o instanceof GaitPicRemark){
+                    GaitPicRemark gaitPicRemark = new GaitPicRemark();
+                    gaitPicRemark.setFileName(row.getCell(0).getStringCellValue());
+                    if(row.getCell(1)!= null){
+                    	gaitPicRemark.setFileInfo(row.getCell(1).getStringCellValue());
+                    }else{
+                    	gaitPicRemark.setFileInfo("未添加任何记录");
+                    }
+                    list.add(gaitPicRemark);
+                }
             }
         }
         return list;
+    }
+
+    /**
+     * 获取文件后缀，文件类型
+     * @param file 判断文件
+     * @return 文件类型
+     */
+    public static String getSuffix (CommonsMultipartFile file){
+        String fileName = file.getOriginalFilename();
+        System.out.println("文件名：" + fileName);
+        return (fileName.lastIndexOf(".") == -1 ? "" :
+                fileName.substring(fileName.lastIndexOf(".") + 1)).trim();
+    }
+
+    /**
+     * 判断文件是不是excel
+     * @param file 进行判断的文件
+     * @return 如果是文件返回true，否则返回false
+     */
+    public static boolean isExcel(CommonsMultipartFile file){
+        String suffix = getSuffix(file);
+        return ("xls".equals(suffix) || "xlsx".equals(suffix));
     }
 }
