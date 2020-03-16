@@ -26,7 +26,7 @@ public class ExcelConstant {
     /**
      * 实验者信息 subject
      */
-    public static final int[] SUBJECT_INDEX = {1,2,3,4,5,6};
+    public static final int[] SUBJECT_INDEX = {1,2,3,4,5,6,7};
 
     /**
      * 肌电传感器 egcontrast
@@ -39,6 +39,6 @@ public class ExcelConstant {
     /**
      * 前提实验条件 preec
      */
-    public static final int[] PREEC_INDEX = {0,11,12,13,14,15,16,2,6,7,8,9,10,4,5};
+    public static final int[] PREEC_INDEX = {0,11,12,13,14,15,16,17,2,6,7,8,9,10,4,5};
 
 }

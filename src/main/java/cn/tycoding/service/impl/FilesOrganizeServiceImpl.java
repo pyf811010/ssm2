@@ -164,6 +164,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 				String id_SubjectString = columns.get(1).equals("") ? null : columns.get(1).toString();
 				Integer id_Subjects = null;
 				String subject_name = null;
+				String subject_remark = null;
 				Integer subject_age = null;
 				Float subject_weight = null;
 				Float subject_height = null;
@@ -193,10 +194,13 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 						subject_height = Float.parseFloat(subject_height_String);
 					System.out.println("    subject_height:"+subject_height);
 					
-					Integer unknown_Id_subject = subjectMapper.selectExistSubject(identity_card, subject_name, subject_age, subject_weight, subject_height);
+					subject_remark = columns.get(7).equals("") ? null : columns.get(7).toString();
+					System.out.println("    subject_remark:"+subject_remark);
+					
+					Integer unknown_Id_subject = subjectMapper.selectExistSubject(identity_card, subject_name, subject_age, subject_weight, subject_height,subject_remark);
 					
 					if(unknown_Id_subject == null) {
-						Subjects subject = new Subjects(subject_name, identity_card, Datetime,subject_age,subject_weight, subject_height);
+						Subjects subject = new Subjects(subject_name, identity_card, Datetime,subject_age,subject_weight, subject_height,subject_remark);
 						Integer rownum = subjectMapper.insertReturnID(subject);
 						System.out.println("    didn't find exist subject\n    newly input subjectID:"+subject.getSub_id());
 						id_Subjects = subject.getSub_id();
@@ -207,28 +211,28 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 				}
 				
 				
-				String id_Machine = columns.get(7).equals("") ? null : columns.get(7).toString();	
+				String id_Machine = columns.get(8).equals("") ? null : columns.get(8).toString();	
 				System.out.println("    id_Machine:"+id_Machine);
 				
-				String motion_capture_info = columns.get(8).equals("") ? null : columns.get(8).toString();
+				String motion_capture_info = columns.get(9).equals("") ? null : columns.get(9).toString();
 				System.out.println("    motion_capture_info:"+motion_capture_info);
 				
-				String slot_machine_info = columns.get(9).equals("") ? null : columns.get(9).toString();
+				String slot_machine_info = columns.get(10).equals("") ? null : columns.get(10).toString();
 				System.out.println("    slot_machine_info:"+slot_machine_info);
 				
-				String asc_info = columns.get(10).equals("") ? null : columns.get(10).toString();
+				String asc_info = columns.get(11).equals("") ? null : columns.get(11).toString();
 				System.out.println("    asc_info:"+asc_info);
 				
-				String fgt_info = columns.get(11).equals("") ? null : columns.get(11).toString();
+				String fgt_info = columns.get(12).equals("") ? null : columns.get(12).toString();
 				System.out.println("    fgt_info:"+fgt_info);
 				
-				String elec_info = columns.get(12).equals("") ? null : columns.get(12).toString();
+				String elec_info = columns.get(13).equals("") ? null : columns.get(13).toString();
 				System.out.println("    elec_info:"+elec_info);
 				
-				String advance = columns.get(13).equals("") ? null : columns.get(13).toString();
+				String advance = columns.get(14).equals("") ? null : columns.get(14).toString();
 				System.out.println("    advance:"+advance);
 				
-				String remark = columns.get(14).equals("") ? null : columns.get(14).toString();
+				String remark = columns.get(15).equals("") ? null : columns.get(15).toString();
 				System.out.println("    remark:"+remark);
 				
 				Preec tmpPreec = new Preec(null, null, id_Subjects,id_Machine, motion_capture_info, slot_machine_info, asc_info, fgt_info, elec_info,advance,remark);

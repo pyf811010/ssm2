@@ -61,7 +61,7 @@
                         <a href="/view/index.html">首页</a>
                     </li>
 
-                    <li class="active">实验者信息管理</li>
+                    <li class="active">受试者信息管理</li>
                 </ul>
                 <!-- /.breadcrumb -->
 
@@ -364,7 +364,7 @@
             //data: grid_data,
             datatype: "json",
             height: 400,
-            colNames: ['操作', '', 'ID', '身份证号', '实验者姓名', '年龄', '测试日期', '体重', '身高'],
+            colNames: ['操作', '', 'ID', '身份证号', '实验者姓名', '年龄', '测试日期', '体重', '身高','备注信息'],
             colModel: [{
                 name: 'op',
                 index: 'op',
@@ -484,6 +484,18 @@
                         cols: "15"
                     }
                 },
+                {
+                    name: 'remark',
+                    index: 'remark',
+                    width: 150,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                },
 
             ],
 
@@ -511,7 +523,7 @@
             },
 
             editurl: "/subjects/handle", //nothing is saved
-            caption: "实验者信息管理" //表名
+            caption: "受试者信息管理" //表名
 
             //,autowidth: true,
 

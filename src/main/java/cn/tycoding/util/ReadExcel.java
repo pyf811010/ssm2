@@ -92,6 +92,8 @@ public class ReadExcel {
                     subjects.setWeight((float) row.getCell(4).getNumericCellValue());
                     //身高
                     subjects.setHeight((float) row.getCell(5).getNumericCellValue());
+                    //备注信息
+                    subjects.setRemark(row.getCell(6).getStringCellValue());
                     list.add(subjects);
                 }
                 if (o instanceof GaitPicRemark){

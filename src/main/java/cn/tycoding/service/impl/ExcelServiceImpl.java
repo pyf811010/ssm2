@@ -165,6 +165,7 @@ public class ExcelServiceImpl implements ExcelService {
         XSSFRow row = sheet.createRow(0);
         List<String> header = getExcelHeader(name);
         //根据name表的字段信息创建excel表格的表头。
+        System.out.println(header.size());
         for (int i = 0; i < header.size(); i++) {
             XSSFCell cell = row.createCell(i);
             cell.setCellValue(header.get(i));
@@ -208,6 +209,7 @@ public class ExcelServiceImpl implements ExcelService {
                 list.add(new DBTableComment("age", "受试者年龄"));
                 list.add(new DBTableComment("weight", "受试者体重"));
                 list.add(new DBTableComment("height", "受试者身高"));
+                list.add(new DBTableComment("remark", "受试者备注信息"));
                 index = ExcelConstant.PREEC_INDEX;
                 break;
         }

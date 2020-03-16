@@ -139,11 +139,6 @@
         </script>
         <!-- /.sidebar-shortcuts -->
         <div id="lefter"></div>
-
-        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-            <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
-               data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
-        </div>
     </div>
 
     <div class="main-content">
@@ -278,16 +273,9 @@
     </div>
     <!-- /.main-content -->
 
-    <div class="footer">
-        <div class="footer-inner">
-            <div class="footer-content">
-						<span class="bigger-120">
-							<span class="blue bolder" style="margin-right: 10px;">人体运动测试数据分析与管理系统</span> 中国航天二院 &copy;
-						</span>
+    <div id="footer"></div>
+    <!--页面底部栏  -->
 
-            </div>
-        </div>
-    </div>
 
     <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
         <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
@@ -456,6 +444,11 @@
         });
     })*/
 </script>-->
+
+<script>
+    $("#footer").load("/view/footer.html");
+</script>
+
 
 <!--文件上传-->
 <script type="text/javascript">

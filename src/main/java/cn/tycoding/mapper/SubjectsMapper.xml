@@ -33,11 +33,11 @@
 	</select>
   	
   	<select id="selectExistSubject" resultType="integer">
-		select sub_id from subjects where identity_card=#{identity_card} and name=#{name} and age=#{age} and weight=#{weight} and height=#{height}
+		select sub_id from subjects where identity_card=#{identity_card} and name=#{name} and age=#{age} and weight=#{weight} and height=#{height} and remark=#{remark}
 	</select>
   <update id="edit" parameterType="cn.tycoding.pojo.Subjects">
 		update subjects set
-		identity_card=#{identity_card},name=#{name},age=#{age},testdate=#{testdate},weight=#{weight},height=#{height}
+		identity_card=#{identity_card},name=#{name},age=#{age},testdate=#{testdate},weight=#{weight},height=#{height},remark=#{remark}
 		where
 		sub_id=#{sub_id}
 	</update>
@@ -45,14 +45,14 @@
 	 <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.Subjects">
 		insert into subjects
-		values(default ,#{identity_card},#{name},#{age},#{testdate},#{weight},#{height});
+		values(default ,#{identity_card},#{name},#{age},#{testdate},#{weight},#{height},#{remark});
 	</insert>
 
 	 <!-- 插入并返回主键 -->
    	<insert id="insertReturnID" parameterType="cn.tycoding.pojo.Subjects" useGeneratedKeys="true" keyProperty="sub_id" >
-    insert into subjects (identity_card, name, age, testdate, weight, height)
+    insert into subjects (identity_card, name, age, testdate, weight, height,remark)
     values (#{identity_card,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
-      #{testdate,jdbcType=VARCHAR}, #{weight,jdbcType=FLOAT}, #{height,jdbcType=FLOAT})
+      #{testdate,jdbcType=VARCHAR}, #{weight,jdbcType=FLOAT}, #{height,jdbcType=FLOAT},#{remark,jdbcType=VARCHAR})
   	</insert>
     <!-- 按学号删除学生 -->
     <delete id="del" parameterType="string">
@@ -77,15 +77,16 @@
 	</select>
 
 	<insert id="addTemplate" parameterType="cn.tycoding.pojo.Subjects" >
-		insert into subjects (identity_card,name,age,testdate,weight,height)
-			select #{identity_card},#{name},#{age},#{testdate},#{weight},#{height} from dual where not exists (
+		insert into subjects (identity_card,name,age,testdate,weight,height,remark)
+			select #{identity_card},#{name},#{age},#{testdate},#{weight},#{height},#{remark} from dual where not exists (
 			 	select * from subjects where
 			 		identity_card = #{identity_card} and
 			 		name = #{name} and
 			 		age = #{age} and
 			 		testdate = #{testdate} and
 			 		weight = #{weight} and
-			 		height = #{height}
+			 		height = #{height} and
+			 		remark = #{remark}
 			 		limit 1
 			 );
 	</insert>

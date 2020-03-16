@@ -15,6 +15,8 @@ public class Subjects {
 
     private float height;
     
+    private String remark;
+    
     public Subjects() {
     	
     }
@@ -22,7 +24,7 @@ public class Subjects {
 
 
     public Subjects(String name, String identity_card, String testdate, Integer age, float weight,
-			float height) {
+			float height,String remark) {
 		super();
 		this.name = name;
 		this.identity_card = identity_card;
@@ -30,6 +32,20 @@ public class Subjects {
 		this.age = age;
 		this.weight = weight;
 		this.height = height;
+		this.remark = remark;
+	}
+
+
+
+    
+	public String getRemark() {
+		return remark;
+	}
+
+
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 
