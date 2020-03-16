@@ -38,7 +38,7 @@ import java.util.regex.Pattern;
 public class FolderPathUtil {
 	 /*
 	  * 文件上传存储格式： BasePath/日期(yyyy-mm-dd)/filetype_expid.xxx
-	  * filetype:mc, sm, video, fpf, fpa, ele, ox, video
+	  * filetype:mc, sm, video, fpf, fpa, ele, ox, video, picture
 	  * 
 	  * 上传过程：
 	  * 首先对所有文件进行解析，解析出每个文件对应的要存储的目标位置及其父文件夹（datetime)，判断目标文件是否已经存在，如果存在，则说明之前已经上传过相应日期相应expid的文件，则该日所有文件都不再处理，将冲突日期加入failedList，
@@ -52,10 +52,17 @@ public class FolderPathUtil {
 	}
 	
 	public static boolean assertFileName(String str) {
-		String pattern = "\\d{4}\\-\\d{2}\\-\\d{2}(/|//|\\\\|\\\\\\\\)(video|mc|ele|kand|ox|fpa|fpf|sm)_\\d\\d\\..*";
+		String pattern = "\\d{4}\\-\\d{2}\\-\\d{2}(/|//|\\\\|\\\\\\\\)(video|picture|mc|ele|kand|ox|fpa|fpf|sm)_\\d\\d\\..*";
 		Pattern r = Pattern.compile(pattern);
 		Matcher m = r.matcher(str);
 		
+		return m.matches();
+	}
+	public static boolean assertMedia(String str) {
+		String pattern = "\\d{4}\\-\\d{2}\\-\\d{2}(/|//|\\\\\\\\|\\\\)media.(rar|zip|7z|tar|tar.gz)";
+
+		Pattern r = Pattern.compile(pattern);
+		Matcher m = r.matcher(str);
 		return m.matches();
 	}
 	
@@ -75,7 +82,7 @@ public class FolderPathUtil {
 			//System.out.println("fpath:"+fpath);
 	        String fname = file.getOriginalFilename();//上传文件的原名：eg. "fpa_01.asc"
 	        //System.out.println("fname:"+fname);
-	        if(assertFileName(fpath) != true && !fname.equals("egcontrast.xlsx") && !fname.equals("egcontrast.xls") && !fname.equals("preec.xlsx") && !fname.equals("preec.xls")) {
+	        if(assertFileName(fpath) != true && assertMedia(fpath) != true && !fname.equals("egcontrast.xlsx") && !fname.equals("egcontrast.xls") && !fname.equals("preec.xlsx") && !fname.equals("preec.xls")) {
 	        	FilesFolder fileFolder = new FilesFolder();
 	        	fileFolder.setInfo("文件名"+fpath+"出错，本次上传全部取消，请修改后重新上传!\n");
 	        	if (!filesFoldersList.containsKey("false"))
@@ -115,12 +122,17 @@ public class FolderPathUtil {
 		        	System.out.println("get preec:"+fname);
 		        	fileType = "preec";
 		        	expid = "0P";
-		        	suffix = "_"+ShortUUID.generateUUID() +".xlsx";
+		        	suffix = "." + fname.split("\\.")[1];
 		        } else if (fname.equals("egcontrast.xlsx") || fname.equals("egcontrast.xls")) {//肌电对照实验条件判断
 		        	System.out.println("get egcontrast:"+fname);
 		        	fileType = "egcontrast";
 		        	expid = "0E";
-		        	suffix = "_"+ShortUUID.generateUUID() +".xlsx";
+		        	suffix = "." + fname.split("\\.")[1];
+		        } else if (assertMedia(fpath) == true) {
+		        	System.out.println("get Media:"+fname);
+		        	fileType = "media";
+		        	expid = "0M";
+		        	suffix = "." + fname.split("\\.")[1];
 		        } else {
 			        fileType = fname.split("_")[0];//上传文件的类型：eg. "fpa"
 			        System.out.println("ftype:"+fileType);
@@ -179,8 +191,10 @@ public class FolderPathUtil {
 			System.out.println("开始解析preec");
 			TransforFile preecTransforFile = null;
 			TransforFile egcontrastTransforFile = null;
+			TransforFile mediaTransforFile = null;
 			String preec = null;
 			String egcontrast = null;
+			String media = null;
 			if (folderBydate.containsKey("0P")) {
 				preecTransforFile = folderBydate.get("0P").get("preec");
 				folderBydate.remove("0P");
@@ -216,6 +230,30 @@ public class FolderPathUtil {
 					System.out.println("转存上传的"+ dt + "的肌肉对照表到服务器时出现问题，该日期所有实验均不上传，问题如下\n");
 					e.printStackTrace();
 					filefolder.setInfo("转存上传的"+ dt + "的肌肉对照表到服务器时出现问题，该日期所有实验均不上传，问题如下\n");
+					filefolder.setInfo(e.toString()+"\n");
+					if (!filesFoldersList.containsKey(dt)) {
+	        			filesFoldersList.put(dt, new ArrayList<FilesFolder>());
+	        			filesFoldersList.get(dt).add(filefolder);
+	        		} else {
+	        			filesFoldersList.get(dt).clear();
+	        			filesFoldersList.get(dt).add(filefolder);
+	        		}
+					failedList.put(dt, true);
+					continue;
+				}
+			}
+			if (folderBydate.containsKey("0M")) {
+				mediaTransforFile = folderBydate.get("0M").get("media");
+				folderBydate.remove("0M");
+				System.out.println("gotMedia"+media);
+				try {
+					media = transferFile(mediaTransforFile.getFile(), mediaTransforFile.getPfile(), mediaTransforFile.getUploadPath(), mediaTransforFile.getTargetfile());
+				} catch (Exception e) {
+					FilesFolder filefolder = new FilesFolder();
+					filefolder.setSuccess(false);
+					System.out.println("转存上传的"+ dt + "的多媒体压缩包Media到服务器时出现问题，该日期所有实验均不上传，问题如下\n");
+					e.printStackTrace();
+					filefolder.setInfo("转存上传的"+ dt + "的多媒体压缩包Media时出现问题，该日期所有实验均不上传，问题如下\n");
 					filefolder.setInfo(e.toString()+"\n");
 					if (!filesFoldersList.containsKey(dt)) {
 	        			filesFoldersList.put(dt, new ArrayList<FilesFolder>());
@@ -264,6 +302,7 @@ public class FolderPathUtil {
 					}
 					filesFolder.setPreec(preec);
 					filesFolder.setExpid(expid);
+					filesFolder.setMedia(media);
 					if (fileType.equals("kand")) {
 						filesFolder.setKand(filePath);
 					} else if (fileType.equals("mc")) {
@@ -281,6 +320,8 @@ public class FolderPathUtil {
 						filesFolder.setSm(filePath);
 					} else if (fileType.equals("video")) {
 						filesFolder.setVideo(filePath);
+					} else if (fileType.equals("picture")) {
+						filesFolder.setPicture(filePath);
 					}
 					else {
 						filesFolder.setInfo("文件命名格式存在问题:" + filePath + ", 实验id与其相同的文件全部未存入数据库\n");

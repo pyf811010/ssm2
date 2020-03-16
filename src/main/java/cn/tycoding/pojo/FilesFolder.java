@@ -21,6 +21,8 @@ public class FilesFolder {
 	private String preec = null;
 	private String expid = null;
 	private String egcontrast = null;
+	private String picture = null;
+	private String media = null;
     public FilesFolder() {
     	this.datetime = null;
     	this.kand = null;
@@ -34,7 +36,25 @@ public class FilesFolder {
     	this.info = null;
     	this.egcontrast = null;
     	this.video = null;
+    	this.picture = null;
+    	this.media = null;
     }
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+	public String getMedia() {
+		return media;
+	}
+
+	public void setMedia(String media) {
+		this.media = media;
+	}
 
 	public String getVideo() {
 		return video;

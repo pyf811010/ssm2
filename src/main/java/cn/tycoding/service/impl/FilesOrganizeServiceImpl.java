@@ -18,11 +18,13 @@ import cn.tycoding.mapper.QueryMapper;
 import cn.tycoding.mapper.SubjectsMapper;
 import cn.tycoding.mapper.FilesMontionCaptureMapper;
 import cn.tycoding.mapper.FilesKandMapper;
+import cn.tycoding.mapper.FilesMediaMapper;
 import cn.tycoding.mapper.EgContrastMapper;
 import cn.tycoding.mapper.FilesElectromyographyMapper;
 import cn.tycoding.mapper.FilesFootPressureAscMapper;
 import cn.tycoding.mapper.FilesFootPressureFgtMapper;
 import cn.tycoding.mapper.FilesOxygenMapper;
+import cn.tycoding.mapper.FilesPictureMapper;
 import cn.tycoding.mapper.FilesSlotMachineMapper;
 import cn.tycoding.mapper.FilesVideoMapper;
 import cn.tycoding.mapper.PreecMapper;
@@ -31,7 +33,9 @@ import cn.tycoding.pojo.Query;
 import cn.tycoding.pojo.State;
 import cn.tycoding.pojo.Subjects;
 import cn.tycoding.pojo.FilesKand;
+import cn.tycoding.pojo.FilesMedia;
 import cn.tycoding.pojo.FilesOxygen;
+import cn.tycoding.pojo.FilesPicture;
 import cn.tycoding.pojo.EgContrast;
 import cn.tycoding.pojo.FilesElectromyography;
 import cn.tycoding.pojo.FilesFolder;
@@ -97,6 +101,11 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 	private SubjectsMapper subjectMapper;
 	@Autowired
 	private FilesVideoMapper filesVideoMapper;
+	@Autowired
+	private FilesPictureMapper filesPictureMapper;
+	@Autowired
+	private FilesMediaMapper filesMediaMapper;
+	
 	private Map<String, Map<String, Preec>> preecMap;
 	
 	private Map<String, Map<String, EgContrast>> egcontrastMap;
@@ -143,6 +152,16 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 	@Override
 	public void insertFilesVideo(FilesVideo record) { 
 		if (record != null) filesVideoMapper.insert(record);
+	}
+	
+	@Override
+	public void insertFilesPicture(FilesPicture record) { 
+		if (record != null) filesPictureMapper.insert(record);
+	}
+	
+	@Override
+	public void insertFilesMedia(FilesMedia record) { 
+		if (record != null) filesMediaMapper.insert(record);
 	}
 	
 	@Override
@@ -257,9 +276,10 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 	@Override 
 	public String fileNameTransform(String fileUrl) throws Exception {
 		String filename = null;
+		//System.out.println("fileUrl:"+fileUrl);
 		String datetime = fileUrl.split("\\/")[2];
 		String tmpfilename = fileUrl.split("\\/")[4];
-		filename = datetime + "_" + tmpfilename.split("_")[0] + "_" + tmpfilename.split("_")[1] + "." + tmpfilename.split("\\.")[1];
+		filename = datetime + "_" + tmpfilename;
 		return filename;
 	}
 	@Override 
@@ -274,6 +294,8 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 			filesFPFMapper.deleteByPrimaryKey(expid);
 			PreecMapper.deleteByPrimaryKey(expid);
 			filesVideoMapper.deleteByPrimaryKey(expid);
+			filesMediaMapper.deleteByPrimaryKey(expid);
+			filesPictureMapper.deleteByPrimaryKey(expid);
 			egContrastMapper.deleteByPrimaryKey(expid);
 			queryMapper.deleteByPrimaryKey(expid);
 		}
@@ -289,6 +311,8 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 				if(fs.getVideo()!=null) FileOperator.deleteFile(fs.getVideo());
 				if(fs.getPreec()!=null) FileOperator.deleteFile(fs.getPreec());
 				if(fs.getEgcontrast()!=null) FileOperator.deleteFile(fs.getEgcontrast());
+				if(fs.getPicture()!=null) FileOperator.deleteFile(fs.getPicture());
+				if(fs.getMedia()!=null) try {FileOperator.deleteFile(fs.getMedia());} catch (Exception e) {}
 			}
 		}
 	}
@@ -475,6 +499,36 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 							System.out.println("插入Datetime:" + datetime + " expid:"+expid+" originExpid:" + originexpid + "的video");
 							if (ifexist == false && filesVideoMapper.dataifexist(sliceUrl(datetime, "video", originexpid)) == false) {
 								insertFilesVideo(new FilesVideo(expid, fs.getVideo(), expid, fileNameTransform(fs.getVideo())));
+							} else {
+								ifexist = true;
+								failed = true;
+								state.setInfo("数据库中"+datetime + "已存在expid为" + originexpid + "的实验，该expid下所有实验均不插入，请检查\n");
+								System.out.println("数据库中"+datetime + "已存在expid为" + originexpid + "的实验，该expid下所有实验均不插入，请检查");
+								break;
+							}
+						}
+						if (fs.getPicture() != null) {
+							query.setExpid_picture(expid);
+							//realExpidByDate = fs.getFpf().split("\\/")[4].split("_")[1];
+							System.out.println("插入Datetime:" + datetime + " expid:"+expid+" originExpid:" + originexpid + "的picture");
+							if (ifexist == false && filesPictureMapper.dataifexist(sliceUrl(datetime, "picture", originexpid)) == false) {
+								//System.out.println("开始插入picture");
+								insertFilesPicture(new FilesPicture(expid, fs.getPicture(), expid, fileNameTransform(fs.getPicture())));
+								//System.out.println("开始结束picture");
+							} else {
+								ifexist = true;
+								failed = true;
+								state.setInfo("数据库中"+datetime + "已存在expid为" + originexpid + "的实验，该expid下所有实验均不插入，请检查\n");
+								System.out.println("数据库中"+datetime + "已存在expid为" + originexpid + "的实验，该expid下所有实验均不插入，请检查");
+								break;
+							}
+						}
+						if (fs.getMedia() != null) {
+							query.setExpid_media(expid);
+							//realExpidByDate = fs.getFpf().split("\\/")[4].split("_")[1];
+							System.out.println("插入Datetime:" + datetime + " expid:"+expid+" originExpid:" + originexpid + "的Media");
+							if (ifexist == false && filesMediaMapper.dataifexist(sliceUrl(datetime, "media", originexpid)) == false) {
+								insertFilesMedia(new FilesMedia(expid, fs.getMedia(), expid, fileNameTransform(fs.getMedia())));
 							} else {
 								ifexist = true;
 								failed = true;

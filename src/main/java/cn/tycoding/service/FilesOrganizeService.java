@@ -1,7 +1,9 @@
 package cn.tycoding.service;
 import cn.tycoding.pojo.FilesMontionCapture;
 import cn.tycoding.pojo.FilesKand;
+import cn.tycoding.pojo.FilesMedia;
 import cn.tycoding.pojo.FilesOxygen;
+import cn.tycoding.pojo.FilesPicture;
 
 import java.util.List;
 import java.util.Map;
@@ -33,6 +35,10 @@ public interface FilesOrganizeService {
 	public void insertFilesFPF(FilesFootPressureFgt record);
 	
 	public void insertFilesSM(FilesSlotMachine record);
+	
+	public void insertFilesPicture(FilesPicture record);
+	
+	public void insertFilesMedia(FilesMedia record);
 	
 	public State insertByString(Map<String, List<FilesFolder>> filesfoldersList);
 	

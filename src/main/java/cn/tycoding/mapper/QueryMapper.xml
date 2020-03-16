@@ -15,10 +15,13 @@
     <result column="expid_fpa" jdbcType="INTEGER" property="expid_fpa" />
     <result column="expid_fpf" jdbcType="INTEGER" property="expid_fpf" />
     <result column="expid_video" jdbcType="INTEGER" property="expid_video" />
+    <result column="expid_picture" jdbcType="INTEGER" property="expid_picture" />
+    <result column="expid_media" jdbcType="INTEGER" property="expid_media" />
+    
   </resultMap>
   <sql id="Base_Column_List">
     expid, datetime, id_preec, expid_mc, expid_sm, expid_kd, name_kand, expid_ox, expid_eg, 
-    expid_eg_contrast, expid_fpa, expid_fpf,expid_video
+    expid_eg_contrast, expid_fpa, expid_fpf,expid_video,expid_picture,expid_media
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -38,12 +41,13 @@
     insert into query (expid, datetime, id_preec, 
       expid_mc, expid_sm, expid_kd, 
       name_kand, expid_ox, expid_eg, 
-      expid_eg_contrast, expid_fpa, expid_fpf,expid_video
+      expid_eg_contrast, expid_fpa, expid_fpf,expid_video,expid_picture,expid_media
       )
     values (#{expid,jdbcType=INTEGER}, #{datetime,jdbcType=VARCHAR}, #{id_preec,jdbcType=INTEGER}, 
       #{expid_mc,jdbcType=INTEGER}, #{expid_sm,jdbcType=INTEGER}, #{expid_kd,jdbcType=INTEGER}, 
       #{name_kand,jdbcType=VARCHAR}, #{expid_ox,jdbcType=INTEGER}, #{expid_eg,jdbcType=INTEGER}, 
-      #{expid_eg_contrast,jdbcType=INTEGER}, #{expid_fpa,jdbcType=INTEGER}, #{expid_fpf,jdbcType=INTEGER},#{expid_video,jdbcType=INTEGER}
+      #{expid_eg_contrast,jdbcType=INTEGER}, #{expid_fpa,jdbcType=INTEGER}, #{expid_fpf,jdbcType=INTEGER},
+      #{expid_video,jdbcType=INTEGER},#{expid_picture,jdbcType=INTEGER},#{expid_media,jdbcType=INTEGER}
       )
   </insert>
   
@@ -51,12 +55,15 @@
 	insert into query (expid, datetime, id_preec, 
       expid_mc, expid_sm, expid_kd, 
       name_kand, expid_ox, expid_eg, 
-      expid_eg_contrast, expid_fpa, expid_fpf,expid_video
+      expid_eg_contrast, expid_fpa, 
+      expid_fpf,expid_video,
+      expid_picture,expid_media
       )
     values (#{expid,jdbcType=INTEGER}, #{datetime,jdbcType=VARCHAR}, #{id_preec,jdbcType=INTEGER}, 
       #{expid_mc,jdbcType=INTEGER}, #{expid_sm,jdbcType=INTEGER}, #{expid_kd,jdbcType=INTEGER}, 
       #{name_kand,jdbcType=VARCHAR}, #{expid_ox,jdbcType=INTEGER}, #{expid_eg,jdbcType=INTEGER}, 
-      #{expid_eg_contrast,jdbcType=INTEGER}, #{expid_fpa,jdbcType=INTEGER}, #{expid_fpf,jdbcType=INTEGER},#{expid_video,jdbcType=INTEGER}
+      #{expid_eg_contrast,jdbcType=INTEGER}, #{expid_fpa,jdbcType=INTEGER}, #{expid_fpf,jdbcType=INTEGER},
+      #{expid_video,jdbcType=INTEGER},#{expid_picture,jdbcType=INTEGER},#{expid_media,jdbcType=INTEGER}
       )
 	<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="expid">
 	SELECT LAST_INSERT_ID() AS id
@@ -105,6 +112,12 @@
       <if test="expid_video != null">
         expid_video,
       </if>
+      <if test="expid_picture != null">
+        expid_picture,
+      </if>
+      <if test="expid_media != null">
+        expid_media,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="expid != null">
@@ -145,6 +158,12 @@
       </if>
       <if test="expid_video != null">
         #{expid_video,jdbcType=INTEGER},
+      </if>
+      <if test="expid_picture != null">
+        #{expid_picture,jdbcType=INTEGER},
+      </if>
+      <if test="expid_media != null">
+       #{expid_media,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -187,6 +206,12 @@
       <if test="expid_video != null">
         expid_fpf = #{expid_video,jdbcType=INTEGER},
       </if>
+      <if test="expid_picture != null">
+        #{expid_picture,jdbcType=INTEGER},
+      </if>
+      <if test="expid_media != null">
+       #{expid_media,jdbcType=INTEGER},
+      </if>
     </set>
     where expid = #{expid,jdbcType=INTEGER}
   </update>
@@ -203,7 +228,9 @@
       expid_eg_contrast = #{expid_eg_contrast,jdbcType=INTEGER},
       expid_fpa = #{expid_fpa,jdbcType=INTEGER},
       expid_fpf = #{expid_fpf,jdbcType=INTEGER},
-      expid_video = #{expid_video,jdbcType=INTEGER}
+      expid_video = #{expid_video,jdbcType=INTEGER},
+      expid_picture = #{expid_picture,jdbcType=INTEGER},
+      expid_media = #{expid_media,jdbcType=INTEGER}
     where expid = #{expid,jdbcType=INTEGER}
   </update>
 </mapper>
