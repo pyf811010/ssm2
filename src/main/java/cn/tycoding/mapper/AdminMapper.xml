@@ -71,7 +71,7 @@
     <!-- 增加一条管理员数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.Admin">
 		insert into admin
-		values(#{a_id},#{a_name},#{a_password});
+		values(default,#{a_name},#{a_password});
 	</insert>
 
     <!-- 按id删除管理员 -->
@@ -92,7 +92,19 @@
 		${_parameter}
 	</select>
 
-	
-    
+    <!-- 查找表中字段的信息，字段名称和字段备注-->
+    <select id="findDbTableComment" resultType="cn.tycoding.entity.assist.DBTableComment">
+        show full fields from admin
+    </select>
+
+    <insert id="addTemplate" parameterType="cn.tycoding.pojo.Admin">
+        insert into admin (a_name,a_password)
+			select #{a_name},#{a_password} from dual where not exists (
+			 	select * from admin where
+			 		a_name = #{a_name} and
+			 		a_password = #{a_password}
+			 		limit 1
+			 );
+    </insert>
     
 </mapper>

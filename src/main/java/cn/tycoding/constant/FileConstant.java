@@ -5,7 +5,10 @@ public class FileConstant {
     public static final String FILE_UPLOAD_URL = "D:/其他/谷歌浏览器/SDDB";
     
     //修改数据文件上传基地址
-    public static final String UPDATE_FILE_UPLOAD_URL = "D:/其他/谷歌浏览器/ssm2";
+    public static final String UPDATE_FILE_UPLOAD_URL = "D:/ProgramUpdateData";
+    
+    //图像上传基地址
+    public static final String PICTURE_FILE_UPLOAD_URL = "D:/PictureData";
 
     //头像的保存地址
     public static final String PHOTO_UPLOAD_URL = FILE_UPLOAD_URL + "/photo";

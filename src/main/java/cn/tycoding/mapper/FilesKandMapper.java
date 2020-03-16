@@ -45,6 +45,11 @@ public interface FilesKandMapper {
 
 	String getFile_name(int expid);
 	
+	Integer getExpidByFileName(String file_name);
+	
 	boolean dataifexist(String url); 
+	
+	
+	
 
 }

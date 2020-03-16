@@ -22,7 +22,7 @@ import cn.tycoding.service.FilesKandService;
 import cn.tycoding.service.FilesOxygenService;
 
 /**
- * 肌电数据
+ * 耗氧量数据
  * @author pyf
  *
  */
@@ -71,6 +71,16 @@ public class FilesOxygenController {
     public void download(@PathVariable int expid, HttpServletResponse response) {
     	try {
     		filesOxygenService.download(expid, response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @RequestMapping("/open")
+    @ResponseBody
+    public void open(int expid) {
+    	try {
+    		filesOxygenService.open(expid);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,13 +1,21 @@
 package cn.tycoding.service.impl;
 
+import cn.tycoding.constant.ExcelConstant;
 import cn.tycoding.constant.FileConstant;
-import cn.tycoding.mapper.EgContrastMapper;
-import cn.tycoding.mapper.FilesKandMapper;
-import cn.tycoding.mapper.FilesOxygenMapper;
-import cn.tycoding.mapper.PreecMapper;
+import cn.tycoding.entity.assist.DBTableComment;
+import cn.tycoding.mapper.*;
 import cn.tycoding.pojo.*;
 import cn.tycoding.service.ExcelService;
+import cn.tycoding.util.ExcelUtil;
 import cn.tycoding.util.ReadExcel;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,8 +23,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author：pyf lsy fdd
@@ -34,109 +41,179 @@ public class ExcelServiceImpl implements ExcelService {
     private FilesOxygenMapper filesOxygenMapper;
 
     @Autowired
+    private SubjectsMapper subjectsMapper;
+
+    @Autowired
+    private AdminMapper adminMapper;
+
+    @Autowired
     private PreecMapper preecMapper;
 
     @Autowired
     private EgContrastMapper egContrastMapper;
 
+    @Autowired
+    private MachineMapper machineMapper;
+
     @Override
-    public State readExcelFile(MultipartFile[] files) {
-
-        //file.setFi_is_checked(false);
+    public synchronized State readExcelFile(MultipartFile file) {
+        //保存上传结果信息
         State state = new State();
-        //由file的属性创建对应文件夹（若无）
-        String basePath = FileConstant.FILE_UPLOAD_URL + File.separator;
-
-        /*String path = basePath +
-                file.getFi_grade().trim() + File.separator +
-                file.getFi_major() + File.separator +
-                file.getFi_course() + File.separator;*/
-
-        //月
-        String date = new SimpleDateFormat("yyyy-MM").format(new Date());
-        //日
-        String format = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        //File dataFile = new File(basePath + date);
-        File file0 = new File(basePath + date + "/" + format);
-        String path = file0.getAbsolutePath();
-
-        MultipartFile[] newFiles = ReadExcel.sort(files);
-        System.out.println("插入表格个数为：" + newFiles.length);
-
-        for (MultipartFile f : newFiles) {
-            System.out.println("=========================");
-            File file1;
-            String name = "";
-            try {
-                if (f instanceof CommonsMultipartFile) {
-                    CommonsMultipartFile f2 = (CommonsMultipartFile) f;
-                    name = f2.getFileItem().getName();
-                    int index = name.indexOf("/");
-                    String intNumber = name.substring(0,index);
-                    System.out.println("相对路径:" + name);
-                    String url = path + "/" + name;
-                    String dir = path + "/" + intNumber;
-                    System.out.println("服务器绝对路径:" + url);
-                    System.out.println("文件夹路径:" + dir);
-                    file1 = new File(dir);
-                    if (!file1.exists()) {
-                        file1.mkdirs();
-                    }
-                    String originalFilename = f2.getOriginalFilename();
-                    String fileName = originalFilename.substring(0, originalFilename.lastIndexOf("."));
-                    //运动学与动力学插入url contain
-                    if ("运动学与动力学".equals(fileName)) {
-                        //动力学与运动学
-                        FilesKand filesKand = new FilesKand();
-                        filesKand.setUrl(url);
-                        System.out.println(filesKand);
-                        int i = filesKandMapper.insertSelective(filesKand);
-                        if (i > 0) {
-                            System.out.println("---------------插入成功！---------------");
-                        }
-                    }
-                    //耗氧量数据插入url
-                    else if ("耗氧量".equals(fileName)) {
-                        //耗氧量
-                        FilesOxygen filesOxygen = new FilesOxygen();
-                        filesOxygen.setUrl(url);
-                        System.out.println(filesOxygen);
-                        int i = filesOxygenMapper.insertSelective(filesOxygen);
-                        if (i > 0) {
-                            System.out.println("---------------插入成功！---------------");
-                        }
-                    }
-                    //将数据插入到数据库中(肌电数据传感器对照表，前置实验条件)
-                    else {
-                        if ("肌电数据传感器对照表".equals(fileName)) {
-                            List<Object> list = ReadExcel.readExcel(f2, new EgContrast());
-                            for (Object o : list) {
-                                egContrastMapper.insert((EgContrast) o);
-                            }
-                        }
-                        if ("前置实验条件".equals(fileName)) {
-                            List<Object> list = ReadExcel.readExcel(f2, new Preec());
-                            for (Object o : list) {
-                                preecMapper.insertSelective((Preec) o);
-                            }
-                        }
-                    }
-                    File newFile = new File(file1, originalFilename);
-                    if (!newFile.exists()) {
-                        f.transferTo(newFile);
-                    }
-                    /*file1.createNewFile();
-                    f.transferTo(file1);*/
+        StringBuffer stringBuffer = new StringBuffer();
+        int number = 0;
+        //存放excel表中的信息封装的对象。
+        List<Object> list = null;
+        if (file instanceof CommonsMultipartFile) {
+            CommonsMultipartFile f = (CommonsMultipartFile) file;
+            String originalFilename = f.getOriginalFilename();
+            System.out.println("文件名：" + originalFilename);
+            //文件名
+            String fileName = originalFilename.substring(0, originalFilename.lastIndexOf(".")).trim().toLowerCase();
+            //文件后缀，即文件类型
+            String suffix = (originalFilename.lastIndexOf(".") == -1 ? "" :
+                    originalFilename.substring(originalFilename.lastIndexOf(".") + 1)).trim();
+            System.out.println("文件类型：" + suffix);
+            //判断文件类型是否在正确
+            if (!"xls".equals(suffix) && !"xlsx".equals(suffix)) {
+                return new State(0, "请选择正确的上传文件类型（.xls;.xlsx）");
+            }
+            //管理员导入
+            if ("admin".equals(fileName)) {
+                try {
+                    //如果文件类型正确，对文件进行解析，封装成实体类，并保存在list集合中
+                    list = ReadExcel.readExcel(f, new Admin());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                //System.out.println(f.getOriginalFilename());
-            } catch (Exception e) {
-                e.printStackTrace();
+                //遍历list集合，依次存入数据库
+                // 要判断数据库中是否已经有这条数据：如果已经存在一条相同数据，就提示而不导入数据库。
+                // 可以先从数据库中读出数据封装成对象，然后比较，需要对象重写equals方法
+                for (int i = 0; i < list.size(); i++){
+                    int num = adminMapper.addTemplate((Admin) list.get(i));
+                    if (num != 0){
+                        number += num;
+                    }else {
+                        stringBuffer.append("第" + (i + 1) + "行信息重复上传" + "\n");
+                    }
+                }
+            }
+            //实验机器
+            else if ("machine".equals(fileName)) {
+                try {
+                    list = ReadExcel.readExcel(f, new Machine());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                for (int i = 0; i < list.size(); i++){
+                    int num = machineMapper.addTemplate((Machine) list.get(i));
+                    if (num != 0){
+                        number += num;
+                    }else {
+                        stringBuffer.append("第" + (i + 1) + "行信息重复上传" + "\n");
+                    }
+                }
+            }
+            //实验对象
+            else if ("subjects".equals(fileName)) {
+                try {
+                    list = ReadExcel.readExcel(f, new Subjects());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                for (int i = 0; i < list.size(); i++){
+                //for (Object o : list) {
+                    int num = subjectsMapper.addTemplate((Subjects) list.get(i));
+                    if (num != 0){
+                        number += num;
+                    }else {
+                        stringBuffer.append("第" + (i + 1) + "行信息重复上传" + "\n");
+                    }
+                }
+            }
+            else {
+                state.setInfo("上传错误：文件名无法识别！");
+                state.setSuccess(0);
             }
         }
-        System.out.println("=================");
-        state.setSuccess(1);
-        state.setInfo("文件上传成功");
-        System.out.println("文件上传成功");
+        //判断上传状态
+        if (number > 0) {
+            if (number == list.size()) {
+                state.setSuccess(1);
+                state.setInfo("全部信息上传成功");
+            } else {
+                state.setSuccess(2);
+                state.setInfo("部分信息上传成功" + "\n" + stringBuffer.toString());
+            }
+        } else {
+            state.setSuccess(0);
+            if (stringBuffer.length() == 0){
+                state.setInfo("上传失败：文件内容可能为空");
+            }else {
+                state.setInfo("上传失败："  + "\n" + stringBuffer.toString());
+            }
+
+        }
+        //返回上传信息
         return state;
+    }
+
+
+    @Override
+    public XSSFWorkbook getTemplate(String name) {
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet();
+        XSSFRow row = sheet.createRow(0);
+        List<String> header = getExcelHeader(name);
+        //根据name表的字段信息创建excel表格的表头。
+        for (int i = 0; i < header.size(); i++) {
+            XSSFCell cell = row.createCell(i);
+            cell.setCellValue(header.get(i));
+        }
+        ExcelUtil.setColumnSize(sheet);
+        return workbook;
+    }
+
+    /**
+     * 从数据库中获取name表的字段信息。
+     *
+     * @param name 模板表格的名字，对应数据库中的相应的表格
+     * @return 数据库中相应表格的字段信息。
+     */
+    public List<String> getExcelHeader(String name) {
+        int[] index = new int[33];
+        List<DBTableComment> list = new ArrayList<>();
+        List<String> result = new ArrayList<>();
+        switch (name) {
+            case "egcontrast":
+                list = egContrastMapper.findDbTableComment();
+                index = ExcelConstant.EGCONTRAST_INDEX;
+                break;
+            case "machine":
+                list = machineMapper.findDbTableComment();
+                index = ExcelConstant.MACHINE_INDEX;
+                break;
+            case "subjects":
+                list = subjectsMapper.findDbTableComment();
+                index = ExcelConstant.SUBJECT_INDEX;
+                break;
+            case "admin":
+                list = adminMapper.findDbTableComment();
+                index = ExcelConstant.ADMIN_INDEX;
+                break;
+            case "preec":
+                list = preecMapper.findDbTableComment();
+                list.add(new DBTableComment("sub_id", "受试者ID(受试者ID与受试者信息二选一进行填写，若二者都填写，则只按受试者ID进行处理）"));
+                list.add(new DBTableComment("identity_card", "受试者身份证"));
+                list.add(new DBTableComment("name", "受试者姓名"));
+                list.add(new DBTableComment("age", "受试者年龄"));
+                list.add(new DBTableComment("weight", "受试者体重"));
+                list.add(new DBTableComment("height", "受试者身高"));
+                index = ExcelConstant.PREEC_INDEX;
+                break;
+        }
+        for (int i = 0; i < index.length; i++) {
+            result.add(list.get(index[i]).getComment());
+        }
+        return result;
     }
 }

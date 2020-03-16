@@ -19,4 +19,7 @@ public interface FilesOxygenService {
 	String handle(String oper, FilesOxygen filesOxygen, String[] id);
 
 	void download(int expid, HttpServletResponse response) throws IOException;
+	
+	void open(int expid) throws IOException;
+
 }

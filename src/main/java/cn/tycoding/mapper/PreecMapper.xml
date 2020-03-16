@@ -71,10 +71,15 @@
             resultType="int">
 		${_parameter}
 	</select>
-
+	
 	<insert id="insertSelective" parameterType="cn.tycoding.pojo.Preec">
 		insert into preec (id_Subjects, remark, advance) values (#{id_subjects,jdbcType=INTEGER},
 		 #{remark,jdbcType=VARCHAR}, #{advance,jdbcType=LONGVARCHAR})
 	</insert>
+
+	<!-- 查找表中字段的信息，字段名称和字段备注-->
+	<select id="findDbTableComment" resultType="cn.tycoding.entity.assist.DBTableComment">
+        show full fields from preec
+    </select>
 
 </mapper>

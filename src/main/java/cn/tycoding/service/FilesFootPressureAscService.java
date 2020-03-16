@@ -21,6 +21,7 @@ public interface FilesFootPressureAscService {
 
 	void download(int expid, HttpServletResponse response) throws IOException;
 
-	
+	void open(int expid) throws IOException;
+
 
 }

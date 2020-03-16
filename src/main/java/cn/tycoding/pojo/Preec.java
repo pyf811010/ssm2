@@ -7,7 +7,7 @@ public class Preec {
 
     private Integer id_subjects=null;
     
-    private Integer id_machine=null;
+    private String id_machine=null;
     
 	private String motion_capture_info=null; //动补数据信息
     
@@ -28,7 +28,7 @@ public class Preec {
     }
     
 
-	public Preec(Integer expid, Integer id_query, Integer id_subjects, Integer id_machine, String motion_capture_info,
+	public Preec(Integer expid, Integer id_query, Integer id_subjects, String id_machine, String motion_capture_info,
 			String slot_machine_info, String asc_info, String fgt_info, String elec_info, String advance,
 			String remark) {
 		super();
@@ -48,13 +48,13 @@ public class Preec {
 
 
 
-	public Integer getId_machine() {
+	public String getId_machine() {
 		return id_machine;
 	}
-	public void setId_machine(Integer id_machine) {
+	public void setId_machine(String id_machine) {
 		this.id_machine = id_machine;
 	}
-    
+	
     public String getMotion_capture_info() {
 		return motion_capture_info;
 	}

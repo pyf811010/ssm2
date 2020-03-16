@@ -11,6 +11,7 @@ import cn.tycoding.pojo.FilesFolder;
 import cn.tycoding.pojo.FilesFootPressureAsc;
 import cn.tycoding.pojo.FilesFootPressureFgt;
 import cn.tycoding.pojo.FilesSlotMachine;
+import cn.tycoding.pojo.FilesVideo;
 import cn.tycoding.pojo.Preec;
 import cn.tycoding.pojo.Query;
 import cn.tycoding.pojo.State;
@@ -33,7 +34,7 @@ public interface FilesOrganizeService {
 	
 	public void insertFilesSM(FilesSlotMachine record);
 	
-	public State insertByString(List<FilesFolder> filesfoldersList);
+	public State insertByString(Map<String, List<FilesFolder>> filesfoldersList);
 	
 	public void getAnalyzedPreec(String Datetime, String preecUrl) throws Exception;
 	
@@ -44,5 +45,14 @@ public interface FilesOrganizeService {
 	public void Rollback (int expid);
 	
 	public String sliceUrl(String datetime, String fileType, String originExpid);
+
+	
+	public void Rollback (List<Integer> failedExpidList, List<FilesFolder> fsList,boolean ifexist) throws Exception;
+	
+	public String sliceUrl(String datetime, String fileType, String originExpid);
+
+	public void insertFilesVideo(FilesVideo record);
+
+	public String fileNameTransform(String fileUrl) throws Exception;
 
 }

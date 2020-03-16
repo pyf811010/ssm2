@@ -22,6 +22,7 @@ public interface FilesSlotMachineService {
 
 	String handle(String oper, FilesSlotMachine filesSlotMachine, String[] id);
 
-	
+	void open(int expid) throws IOException;
+
 
 }

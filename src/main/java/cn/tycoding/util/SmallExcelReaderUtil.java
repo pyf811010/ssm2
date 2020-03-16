@@ -18,9 +18,11 @@ import java.util.Map;
 import cn.tycoding.pojo.EgContrast;
 import cn.tycoding.pojo.ExcelBean;
 import org.apache.http.client.utils.DateUtils;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -35,8 +37,8 @@ import ch.qos.logback.core.pattern.color.ANSIConstants;
 import java.io.FileInputStream;
 public class SmallExcelReaderUtil {
 
-    private final static String excel2003L = ".xls"; // 2003- 版本的excel
-    private final static String excel2007U = ".xlsx"; // 2007+ 版本的excel
+    private final static String excel2003L = "xls"; // 2003- 版本的excel
+    private final static String excel2007U = "xlsx"; // 2007+ 版本的excel
 
     /**
      * Excel导入
@@ -46,16 +48,7 @@ public class SmallExcelReaderUtil {
     	List<List<Object>> list = null;
         // 创建Excel工作薄
         FileInputStream instr = new FileInputStream(filePath); 
-    	Workbook work = null;
-        String fileType = filePath.substring(filePath.lastIndexOf("."));
-        if (excel2003L.equals(fileType)) {
-            work = new HSSFWorkbook(instr); // 2003-
-        } else if (excel2007U.equals(fileType)) {
-            work = new XSSFWorkbook(instr); // 2007+
-        } else {
-            throw new Exception("解析的文件格式有误！");
-        }
-
+    	Workbook work = getWorkbook(filePath);
         if (null == work) {
             throw new Exception("创建Excel工作薄为空！");
         }
@@ -75,7 +68,7 @@ public class SmallExcelReaderUtil {
             // 包含头部，所以要小于等于最后一列数,这里也可以在初始值加上头部行数，以便跳过头部
             list = new ArrayList<List<Object>>();
             System.out.println("共"+sheet.getLastRowNum()+"行");
-            int totalColumn = sheet.getRow(0).getLastCellNum();
+            int totalColumn = sheet.getRow(startrow-2<0?0:startrow-2).getLastCellNum();
             for (int j = sheet.getFirstRowNum()+startrow-1; j <= sheet.getLastRowNum(); j++) {
                 // 读取一行
             	//System.out.println("	第"+j+"行");
@@ -125,11 +118,30 @@ public class SmallExcelReaderUtil {
     public static Workbook getWorkbook(String filePath) throws Exception {
     	FileInputStream instr = new FileInputStream(filePath); 
     	Workbook wb = null;
-        String fileType = filePath.substring(filePath.lastIndexOf("."));
+        String fileType = filePath.split("\\.")[1];
+        System.out.println("the excel filetype ==  "+fileType);
         if (excel2003L.equals(fileType)) {
-            wb = new HSSFWorkbook(instr); // 2003-
+        	try {
+        		wb = new HSSFWorkbook(instr); // 2003-
+        	} catch (org.apache.poi.poifs.filesystem.OfficeXmlFileException e) {
+        		try {
+        			wb = new XSSFWorkbook(instr);
+        		} catch (Exception error) {
+        			throw error;
+        		}  		
+        	}
+            ///System.out.println("use xssf");
         } else if (excel2007U.equals(fileType)) {
-            wb = new XSSFWorkbook(instr); // 2007+
+        	try {
+        		wb = new XSSFWorkbook(instr); // 2007-
+        	} catch (org.apache.poi.poifs.filesystem.OfficeXmlFileException e) {
+        		try {
+        			wb = new HSSFWorkbook(instr);
+        		} catch (Exception error) {
+        			throw error;
+        		}  		
+        	}
+            //System.out.println("use hssf");
         } else {
             throw new Exception("解析的文件格式有误！");
         }
@@ -143,8 +155,17 @@ public class SmallExcelReaderUtil {
         Object value = null;
         if (cell.getCellType() == CellType.STRING) {
             value = cell.getRichStringCellValue().getString();
-        } else if (cell.getCellType() == CellType.NUMERIC) {
-            value = String.valueOf(cell.getNumericCellValue());
+        } else if (DateUtil.isCellDateFormatted(cell)) {
+        	/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = HSSFDateUtil.getJavaDate(cell.getNumericCellValue());
+            value = sdf.format(date);*/
+        	cell.setCellType(CellType.STRING);
+        	value = cell.getRichStringCellValue().getString();
+		}else if (cell.getCellType() == CellType.NUMERIC) {
+			cell.setCellType(CellType.STRING);
+        	value = cell.getRichStringCellValue().getString();
+        	
+            //value = String.valueOf(cell.getNumericCellValue());
         } else if (cell.getCellType() == CellType.BOOLEAN) {
             value = cell.getBooleanCellValue();
         } else if (cell.getCellType() == CellType.BLANK) {

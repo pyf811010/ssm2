@@ -24,7 +24,7 @@ import cn.tycoding.service.FilesOxygenService;
 import cn.tycoding.service.FilesSlotMachineService;
 
 /**
- * 肌电数据
+ * 跑台数据
  * @author pyf
  *
  */
@@ -73,6 +73,16 @@ public class FilesSlotMachineController {
     public void download(@PathVariable int expid, HttpServletResponse response) {
     	try {
     		filesSlotMachineService.download(expid, response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @RequestMapping("/open")
+    @ResponseBody
+    public void open(int expid) {
+    	try {
+    		filesSlotMachineService.open(expid);
         } catch (IOException e) {
             e.printStackTrace();
         }

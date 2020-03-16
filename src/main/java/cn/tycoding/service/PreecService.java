@@ -17,6 +17,7 @@ public interface PreecService {
 	List find();
 
 	String handle(String oper, Preec preec, String[] id);
+	
 	List<Preec> findAllById(int id);
 
 //	List<Preec> findAllByRelateType(int type);

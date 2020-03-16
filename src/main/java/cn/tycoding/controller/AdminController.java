@@ -167,6 +167,11 @@ public class AdminController {
         return URLEncoder.encode(temp, "UTF-8");
     }
     
+    /**
+     * 用于将修改后的数据保存为excel格式的文件
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/save")
 	@ResponseBody
 	public State save() throws Exception {

@@ -24,9 +24,9 @@
     where u_id = #{u_id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.tycoding.pojo.FilesKandUpdateinfo">
-    insert into files_kand_updateinfo (file_name, comment, 
+    insert into files_kand_updateinfo (expid,file_name, comment, 
       updatetime, url)
-    values (#{file_name,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, 
+    values (#{expid,jdbcType=INTEGER},#{file_name,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, 
       #{updatetime,jdbcType=TIMESTAMP}, #{url,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.tycoding.pojo.FilesKandUpdateinfo">
@@ -92,6 +92,7 @@
       url = #{url,jdbcType=VARCHAR}
     where u_id = #{u_id,jdbcType=INTEGER}
   </update>
+
   
      <!-- 第一个参数为页数，第二个参数为每页多少行 -->
     <select id="findByPage" resultType="cn.tycoding.pojo.FilesKandUpdateinfo">
@@ -116,6 +117,7 @@
     <update id="edit" parameterType="cn.tycoding.pojo.FilesKandUpdateinfo">
 	  update files_kand_updateinfo
       set
+      expid = #{expid},
       file_name = #{file_name},
        comment = #{comment},
       updatetime = #{updatetime},
@@ -126,7 +128,7 @@
     <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.FilesKandUpdateinfo">
 		insert into files_kand_updateinfo
-		values(#{u_id},#{file_name},#{comment},#{updatetime},#{url});
+		values(#{u_id},#{expid},#{file_name},#{comment},#{updatetime},#{url});
 	</insert>
 
     <!-- 按学号删除学生 -->
