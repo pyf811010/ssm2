@@ -298,8 +298,8 @@
 
             //data: grid_data,
             datatype: "json",
-            height: 400,
-            colNames: ['操作', '', 'ID', '实验条件', '追加实验条件', '实验者信息ID', '实验机器ID', '动补数据信息', '跑台数据信息', '足底压力数据信息', '足底压力合力大小、位置数据信息', '肌电数据信息'],
+            height: 600,
+            colNames: ['操作', '', 'ID', '实验条件', '实验者信息ID', '测试设备ID', '动捕数据信息', '跑台数据信息', 'pedar足底压力数据信息', '耗氧量数据信息', '肌电数据信息', '视频数据文件','备注信息'],
             colModel: [{
                 name: 'op',
                 index: 'op',
@@ -359,18 +359,6 @@
                         cols: "15"
                     }
                 },
-                {
-                    name: 'remark',
-                    index: 'remark',
-                    width: 500,
-                    sortable: false,
-                    editable: true,
-                    edittype: "textarea",
-                    editoptions: {
-                        rows: "2",
-                        cols: "15"
-                    }
-                },
 
                 {
                     name: 'id_subjects',
@@ -422,8 +410,8 @@
                         cols: "15"
                     }
                 }, {
-                    name: 'asc_info',
-                    index: 'asc_info',
+                    name: 'pedar_info',
+                    index: 'pedar_info',
                     width: 150,
                     sortable: false,
                     editable: true,
@@ -433,8 +421,8 @@
                         cols: "15"
                     }
                 }, {
-                    name: 'fgt_info',
-                    index: 'fgt_info',
+                    name: 'ox_info',
+                    index: 'ox_info',
                     width: 150,
                     sortable: false,
                     editable: true,
@@ -455,14 +443,38 @@
                         cols: "15"
                     }
                 },
+                {
+                    name: 'video_info',
+                    index: 'video_info',
+                    width: 150,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                },
+                {
+                    name: 'remark',
+                    index: 'remark',
+                    width: 500,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                },
                 
 
 
             ],
 
             viewrecords: true, //是否显示总数  如View 1 - 10 of 23
-            rowNum: 10, //每页显示10条
-            rowList: [10, 20, 30], //可选的每页显示条数
+            rowNum: 30, //每页显示10条
+            rowList: [30, 50, 100], //可选的每页显示条数
             pager: pager_selector, //指定工具栏
             altRows: true,
             shrinkToFit: false,

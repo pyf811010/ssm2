@@ -49,7 +49,6 @@
         <div id="lefter"></div>
         <!--页面左部导航栏  -->
 
-
     </div>
 
     <div class="main-content">
@@ -61,7 +60,7 @@
                         <a href="/view/index.html">首页</a>
                     </li>
 
-                    <li class="active">受试者信息管理</li>
+                    <li class="active">前置实验条件管理</li>
                 </ul>
                 <!-- /.breadcrumb -->
 
@@ -76,13 +75,13 @@
                         <div class="row" style="margin-bottom: 5px;">
                             <div class="row" style="float:right;margin-right: 12px;">
                                 <div class="btn-group" style="">
-                                    <a href="/excel/downloadTemplate?name=subjects" class="btn btn-success bigger-120"
+                                    <a href="/excel/downloadTemplate?name=preec" class="btn btn-success bigger-120"
                                        role="button">
                                         下载导入摸板
                                         <i class="ace-icon fa icon-on-right"></i>
                                     </a>
                                 </div>
-                                <div class="btn-group">
+                                <!--<div class="btn-group">
                                     <button data-toggle="dropdown" class="btn btn-success bigger-120 dropdown-toggle">
                                         导入现有数据
                                         <i class="ace-icon fa fa-angle-down icon-on-right"></i>
@@ -97,28 +96,18 @@
                                             <form method="POST" enctype="multipart/form-data" id="form1"
                                                   action="uploadExcel/upload.do">
 
-                                                <div style="margin-left: 10px;margin-top: 15px;">
-                                                    <input id="upfile" type="file" name="uploadAdmin"
-                                                           style="padding-bottom: 2px;">
+                                                <div style="margin-left: 10px;">
+                                                    <input id="upfile" type="file" name="upfile">
                                                 </div>
-
                                                 <div style="margin-top: 15px;margin-left: 10px;">
-                                                    <!--<a href="#" onclick="importData()">由模版导入数据</a>-->
-                                                    <button class="btn btn-info2" type="button" id="fileCommit"
-                                                            style="height: 40px;">
-                                                        <i class="ace-icon fa fa-check bigger-110"></i>
-                                                        确定上传
-                                                    </button>
-                                                    <button class="btn" type="reset">
-                                                        <i class="ace-icon fa fa-undo bigger-110"></i>
-                                                        重置
-                                                    </button>
+                                                    &lt;!&ndash;<a href="#" onclick="importData()">由模版导入数据</a>&ndash;&gt;
+                                                    <span>由模版导入数据</span>
                                                 </div>
                                             </form>
 
                                         </li>
                                     </ul>
-                                </div>
+                                </div>-->
                                 <!--<div class="btn-group">
                                     <button data-toggle="dropdown" class="btn btn-warning bigger-120 dropdown-toggle">
                                         导出查询数据
@@ -158,6 +147,7 @@
         <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
     </a>
 </div>
+<!-- /.main-container -->
 
 <!-- basic scripts -->
 
@@ -248,60 +238,6 @@
 </style>
 <!--上面代码用来设置水平滚动条  -->
 
-<!--文件上传-->
-<script type="text/javascript">
-
-    jQuery(function ($) {
-        $("#fileCommit").click(function (e) {
-            var formData = new FormData();
-            var files = $("#upfile")[0].files;
-            // e.preventDefault();
-            //判断是否选择了上传文件
-            if (files.length != 0) {
-                //可以获得文件名字包括后缀 subjects.xlsx
-                var name = files[0].name;
-                //alert(name);
-                //分割文件名与后缀（文件类型） {"subjects", "xlsx"}
-                var names = name.split(".");
-                //alert(names[0]); //subjects
-                //alert(names[1]); //xlsx
-                //判断文件格式
-                if (names[1] == "xlsx" || names[1] == "xls") {
-                    //判断文件名字
-                    if (names[0] == "subjects") {
-                        formData.append("file", files[0]);
-
-                        $.ajax({
-                            type: "post",
-                            url: "/excel/uploadFile",
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-
-                            success: function (data) {
-                                console.log(data.success);
-                                alert(data.info);
-                            },
-                            error: function (err) {
-                                hideloading();
-                                alert("文件上传遇到错误!" + JSON.stringify(err));
-                                alert("上传失败!");
-                            }
-                        });
-
-                    } else {
-                        alert("文件名错误(提示：subjects)");
-                    }
-                } else {
-                    alert("文件类型错误(提示：xls或xlsx格式)")
-                }
-            } else {
-                alert("请选择上传的文件");
-            }
-        })
-    });
-</script>
-
 <script>
     $("#header").load("/view/header.html");
 </script>
@@ -309,9 +245,8 @@
 <script>
     $("#lefter").load("/view/lefter.html", function () {
         $("#main").prop("class", "");
-        $(".subjects").prop("class", "active");
-        $("#dataManageSubMenu").prop("style", "display: block;");
-		$("#dataManageSubMenuSub").prop("style", "display: block;");
+        $(".preeccopy").prop("class", "active");
+        $("#dataSearch").prop("style", "display: block");
     });
 </script>
 
@@ -320,8 +255,7 @@
 </script>
 
 <script type="text/javascript">
-
-    jQuery(function($) {
+    jQuery(function ($) {
         var grid_selector = "#grid-table";
         var pager_selector = "#grid-pager";
 
@@ -359,12 +293,12 @@
         jQuery(grid_selector).jqGrid({
             //direction: "rtl",
 
-            url: "/subjects/findsome",
+            url: "/preec/findsome",
 
             //data: grid_data,
             datatype: "json",
             height: 600,
-            colNames: ['操作', '', 'ID', '身份证号', '实验者姓名', '年龄', '测试日期', '体重', '身高','备注信息'],
+            colNames: ['操作', '', 'ID', '实验条件', '实验者信息ID', '测试设备ID', '动捕数据信息', '跑台数据信息', 'pedar足底压力数据信息', '耗氧量数据信息', '肌电数据信息', '视频数据文件','备注信息'],
             colModel: [{
                 name: 'op',
                 index: 'op',
@@ -400,11 +334,11 @@
                 },
 
                 {
-                    name: 'sub_id',
-                    index: 'sub_id',
+                    name: 'expid',
+                    index: 'expid',
                     width: 100,
                     key: true,
-                    editable: false,
+                    editable: true,
                     edittype: "textarea",
                     editoptions: {
                         rows: "2",
@@ -413,9 +347,9 @@
 
                 },
                 {
-                    name: 'identity_card',
-                    index: 'identity_card',
-                    width: 100,
+                    name: 'advance',
+                    index: 'advance',
+                    width: 350,
                     sortable: false,
                     editable: true,
                     edittype: "textarea",
@@ -424,10 +358,11 @@
                         cols: "15"
                     }
                 },
+
                 {
-                    name: 'name',
-                    index: 'name',
-                    width: 100,
+                    name: 'id_subjects',
+                    index: 'id_subjects',
+                    width: 150,
                     sortable: false,
                     editable: true,
                     edittype: "textarea",
@@ -436,10 +371,11 @@
                         cols: "15"
                     }
                 },
+
                 {
-                    name: 'age',
-                    index: 'age',
-                    width: 100,
+                    name: 'id_machine',
+                    index: 'id_machine',
+                    width: 150,
                     sortable: false,
                     editable: true,
                     edittype: "textarea",
@@ -448,21 +384,10 @@
                         cols: "15"
                     }
                 },
+
                 {
-                    name: 'testdate',
-                    index: 'testdate',
-                    width: 100,
-                    sortable: false,
-                    editable: true,
-                    edittype: "textarea",
-                    editoptions: {
-                        rows: "2",
-                        cols: "15"
-                    }
-                },
-                {
-                    name: 'weight',
-                    index: 'weight',
+                    name: 'motion_capture_info',
+                    index: 'motion_capture_info',
                     width: 150,
                     sortable: false,
                     editable: true,
@@ -473,8 +398,53 @@
                     }
                 },
                 {
-                    name: 'height',
-                    index: 'height',
+                    name: 'slot_machine_info',
+                    index: 'slot_machine_info',
+                    width: 150,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                }, {
+                    name: 'pedar_info',
+                    index: 'pedar_info',
+                    width: 150,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                }, {
+                    name: 'ox_info',
+                    index: 'ox_info',
+                    width: 150,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                }, {
+                    name: 'elec_info',
+                    index: 'elec_info',
+                    width: 150,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                },
+                {
+                    name: 'video_info',
+                    index: 'video_info',
                     width: 150,
                     sortable: false,
                     editable: true,
@@ -487,7 +457,7 @@
                 {
                     name: 'remark',
                     index: 'remark',
-                    width: 150,
+                    width: 500,
                     sortable: false,
                     editable: true,
                     edittype: "textarea",
@@ -496,6 +466,8 @@
                         cols: "15"
                     }
                 },
+                
+
 
             ],
 
@@ -522,8 +494,8 @@
                 }, 0);
             },
 
-            editurl: "/subjects/handle", //nothing is saved
-            caption: "受试者信息管理" //表名
+            editurl: "/preec/handle", //nothing is saved
+            caption: "前置实验条件管理" //表名
 
             //,autowidth: true,
 
@@ -678,7 +650,7 @@
                 style_search_filters($(this));
             },
             multipleSearch: true,
-            sopt: ['cn', 'eq'],
+            sopt : ['cn','eq'], 
             /**
              multipleGroup:true,
              showQuery: true

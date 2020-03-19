@@ -62,7 +62,7 @@ h1,h2,h3,h4,h5,h6 {
 	clear:both
 }
 .sidebar+.main-content {
-	margin-left:190px
+	margin-left:210px
 }
 .page-content {
 	background-color:#FFF;
@@ -1631,7 +1631,7 @@ li.open .user-info {
 	margin-left:7px
 }
 .sidebar {
-	width:190px;
+	width:210px;
 	float:left;
 	position:static;
 	padding-left:0;

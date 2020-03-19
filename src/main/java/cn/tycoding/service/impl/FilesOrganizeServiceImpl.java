@@ -220,22 +220,25 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 				String slot_machine_info = columns.get(10).equals("") ? null : columns.get(10).toString();
 				System.out.println("    slot_machine_info:"+slot_machine_info);
 				
-				String asc_info = columns.get(11).equals("") ? null : columns.get(11).toString();
-				System.out.println("    asc_info:"+asc_info);
+				String pedar_info = columns.get(11).equals("") ? null : columns.get(11).toString();
+				System.out.println("    pedar_info:"+pedar_info);
 				
-				String fgt_info = columns.get(12).equals("") ? null : columns.get(12).toString();
-				System.out.println("    fgt_info:"+fgt_info);
+				String ox_info = columns.get(12).equals("") ? null : columns.get(12).toString();
+				System.out.println("    ox_info:"+ox_info);
 				
 				String elec_info = columns.get(13).equals("") ? null : columns.get(13).toString();
 				System.out.println("    elec_info:"+elec_info);
 				
-				String advance = columns.get(14).equals("") ? null : columns.get(14).toString();
+				String video_info = columns.get(14).equals("") ? null : columns.get(14).toString();
+				System.out.println("    video_info:"+video_info);
+				
+				String advance = columns.get(15).equals("") ? null : columns.get(15).toString();
 				System.out.println("    advance:"+advance);
 				
-				String remark = columns.get(15).equals("") ? null : columns.get(15).toString();
+				String remark = columns.get(16).equals("") ? null : columns.get(16).toString();
 				System.out.println("    remark:"+remark);
 				
-				Preec tmpPreec = new Preec(null, null, id_Subjects,id_Machine, motion_capture_info, slot_machine_info, asc_info, fgt_info, elec_info,advance,remark);
+				Preec tmpPreec = new Preec(null, null, id_Subjects,id_Machine, motion_capture_info, slot_machine_info, pedar_info, ox_info, elec_info,advance,remark,video_info);
 				//Preec(Integer expid, Integer id_query, Integer id_subjects ,String motion_capture_info,String slot_machine_info,String asc_info,String fgt_info,String elec_info)
 				this.preecMap.get(Datetime).put(preexpid, tmpPreec);
 			}
@@ -261,9 +264,10 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 	@Override 
 	public String fileNameTransform(String fileUrl) throws Exception {
 		String filename = null;
+		//System.out.println("fileUrl:"+fileUrl);
 		String datetime = fileUrl.split("\\/")[2];
 		String tmpfilename = fileUrl.split("\\/")[4];
-		filename = datetime + "_" + tmpfilename.split("_")[0] + "_" + tmpfilename.split("_")[1] + "." + tmpfilename.split("\\.")[1];
+		filename = datetime + "_" + tmpfilename;
 		return filename;
 	}
 	@Override 

@@ -355,8 +355,8 @@
 
             //data: grid_data,
             datatype: "json",
-            height: 400,
-            colNames: ['操作', '', '姓名', '密码'],
+            height: 600,
+            colNames: ['操作', '', 'ID','姓名', '密码'],
             colModel: [{
                 name: 'op',
                 index: 'op',
@@ -390,8 +390,19 @@
                     search: false
 
                 },
+                {
+                    name: 'a_id',
+                    index: 'a_id',
+                    width: 100,
+                    key: true,
+                    editable: false,//即不可编辑，新增时此属性也不能添加
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
 
-                
+                },
                 {
                     name: 'a_name',
                     index: 'a_name',
@@ -420,8 +431,8 @@
             ],
 
             viewrecords: true, //是否显示总数  如View 1 - 10 of 23
-            rowNum: 10, //每页显示10条
-            rowList: [10, 20, 30], //可选的每页显示条数
+            rowNum: 30, //每页显示10条
+            rowList: [30, 50, 100], //可选的每页显示条数
             pager: pager_selector, //指定工具栏
             altRows: true,
             shrinkToFit: false,

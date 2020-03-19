@@ -112,7 +112,7 @@ public class AdminController {
     public void open() {
     	Runtime runtime = Runtime.getRuntime();  
     	try {
-			Process exec = runtime.exec("C:\\Users\\pyf\\Desktop\\lab_mo_cap\\for_testing\\lab_mo_cap.exe");
+			Process exec = runtime.exec("D:\\matlab程序\\lab_mo_cap.exe");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

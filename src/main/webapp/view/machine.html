@@ -62,7 +62,7 @@
                         <a href="/view/index.html">首页</a>
                     </li>
 
-                    <li class="active">实验机器信息管理</li>
+                    <li class="active">测试设备信息管理</li>
                 </ul>
                 <!-- /.breadcrumb -->
 
@@ -340,8 +340,8 @@
 
             //data: grid_data,
             datatype: "json",
-            height: 400,
-            colNames: ['操作', '', 'ID', '机器名称', '类型', '备注'],
+            height: 600,
+            colNames: ['操作', '', 'ID', '设备名称', '设备型号', '所属单位','布置场地','备注'],
             colModel: [{
                 name: 'op',
                 index: 'op',
@@ -416,6 +416,30 @@
                     }
                 },
                 {
+                    name: 'company',
+                    index: 'company',
+                    width: 350,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                },
+                {
+                    name: 'place',
+                    index: 'place',
+                    width: 350,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                },
+                {
                     name: 'remark',
                     index: 'remark',
                     width: 500,
@@ -432,8 +456,8 @@
             ],
 
             viewrecords: true, //是否显示总数  如View 1 - 10 of 23
-            rowNum: 10, //每页显示10条
-            rowList: [10, 20, 30], //可选的每页显示条数
+            rowNum: 30, //每页显示10条
+            rowList: [30, 50, 100], //可选的每页显示条数
             pager: pager_selector, //指定工具栏
             altRows: true,
             shrinkToFit: false,
@@ -455,7 +479,7 @@
             },
 
             editurl: "/Machine/handle", //nothing is saved
-            caption: "实验机器信息管理" //表名
+            caption: "测试设备信息管理" //表名
 
 
         });

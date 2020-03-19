@@ -53,7 +53,7 @@ public class PreecServiceImpl implements PreecService {
 	            }
 
 	            String sql = SqlJointUtil.getSqlByFilters(queryCondition, (page - 1) * rows, rows, false, "preec");
-
+	            System.out.println(sql);
 	            List list = preecMapper.findByFilters(sql);
 	            String getSumSql = SqlJointUtil.getSqlByFilters(queryCondition, (page - 1) * rows, rows, true, "preec");
 	            int records = preecMapper.findByFiltersSum(getSumSql);

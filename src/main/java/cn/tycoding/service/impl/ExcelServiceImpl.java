@@ -165,7 +165,6 @@ public class ExcelServiceImpl implements ExcelService {
         XSSFRow row = sheet.createRow(0);
         List<String> header = getExcelHeader(name);
         //根据name表的字段信息创建excel表格的表头。
-        System.out.println(header.size());
         for (int i = 0; i < header.size(); i++) {
             XSSFCell cell = row.createCell(i);
             cell.setCellValue(header.get(i));

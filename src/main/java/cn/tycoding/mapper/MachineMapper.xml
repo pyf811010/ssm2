@@ -8,7 +8,7 @@
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Base_Column_List">
-    m_id, name, type, remark
+    m_id, name, type,company,place, remark
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -21,9 +21,8 @@
     where m_id = #{m_id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.tycoding.pojo.Machine">
-    insert into machine (m_id, name, type, 
-      remark)
-    values (#{m_id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+    insert into machine (m_id, name, type,company,place, remark)
+    values (#{m_id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR},#{company,jdbcType=VARCHAR},#{place,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.tycoding.pojo.Machine">
@@ -37,6 +36,12 @@
       </if>
       <if test="type != null">
         type,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="place != null">
+        place,
       </if>
       <if test="remark != null">
         remark,
@@ -52,6 +57,12 @@
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
       </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
       </if>
@@ -66,6 +77,12 @@
       <if test="type != null">
         type = #{type,jdbcType=VARCHAR},
       </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="place != null">
+        place,
+      </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
@@ -76,6 +93,8 @@
     update machine
     set name = #{name,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      place = #{place,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR}
     where m_id = #{m_id,jdbcType=INTEGER}
   </update>
@@ -104,6 +123,8 @@
 	  update machine
       set type = #{type},
       name = #{name},
+      company = #{company},
+      place = #{place},
       remark = #{remark}
       where m_id = #{m_id}
 	</update>
@@ -111,7 +132,7 @@
     <!-- 增加一条实验机器数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.Machine">
 		insert into machine
-		values(default ,#{name},#{type},#{remark});
+		values(default ,#{name},#{type},#{company},#{place},#{remark});
 	</insert>
 
     <!-- 按学号删除实验机器信息 -->

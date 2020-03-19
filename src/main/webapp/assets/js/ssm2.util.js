@@ -17,7 +17,7 @@ jQuery(function($) {
 jQuery(function($) {
 	//显示用户名
 	$("#us_name").html($.cookie("us_name"));
-		$("#profile").attr("href", "/view/userInformation/teacherProfile.html?id=" + $.cookie("us_id"));
-		$("#setting").attr("href", "/view/userInformation/teacherSetting.html");
+		$("#profile").attr("href", "/view/userInformation/userProfile.html?id=" + $.cookie("us_id"));
+		$("#setting").attr("href", "/view/userInformation/userSetting.html");
 });
 

@@ -6,6 +6,10 @@ public class Machine {
     private String name;
 
     private String type;
+    
+    private String company;
+    
+    private String place;
 
     private String remark;
 
@@ -40,4 +44,22 @@ public class Machine {
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+    
+    
 }
