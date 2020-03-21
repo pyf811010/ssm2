@@ -28,23 +28,38 @@ public class AuthFilter implements Filter {
         if(session == null){
         System.out.println(session);
         }
-        String us_name = (String) session.getAttribute("us_name");
-        System.out.println(us_name);
+        String type = (String) session.getAttribute("type");
+        System.out.println(type);
 
         String url = httpServletRequest.getRequestURI();
 
         //若不进行url.endsWith("login.html")判断则会出现无限循环重定向的问题；
-        //若登陆成功之后则us_id不为null，继续执行
-        if(url.endsWith("login.html") || us_name!=null){        
-               chain.doFilter(httpServletRequest, httpServletResponse);
-               return;
+        //若登陆成功之后则type(用户类型)不为null，继续执行
+        
+        if(url.endsWith("login.html") || type!=null){
+        	if(url.endsWith("login.html")){
+                chain.doFilter(httpServletRequest, httpServletResponse);
+                return;
+        	}else if(type.equals("管理员")&&url.endsWith("_user.html")){
+                httpServletResponse.sendRedirect("/login.html");
+                return;
+            }else if(type.equals("普通用户")&&!url.endsWith("_user.html")){
+                httpServletResponse.sendRedirect("/login.html");
+                return;
+            }else{
+                chain.doFilter(httpServletRequest, httpServletResponse);
+                return;
+            }
         }
 
         //若该if放在上一if语句之前，仍然会出现无限循环重定向的问题
-        if(us_name==null){
+        if(type==null){
                httpServletResponse.sendRedirect("/login.html");
                return;
         }
+        
+        
+        
   }
  
 	public void init(FilterConfig filterConfig) throws ServletException {

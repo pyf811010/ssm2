@@ -112,6 +112,7 @@
 		machine
 	</select>
 
+    <cache></cache>
     <select id="find" resultType="cn.tycoding.pojo.Machine">
 		select * from
 		machine

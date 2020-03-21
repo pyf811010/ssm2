@@ -63,10 +63,11 @@ public class AdminController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public State dealLogin(@RequestParam(value="us_id") String a_name, @RequestParam(value="us_password") String a_password) {
+    public State dealLogin(@RequestParam(value="us_id") String a_name, @RequestParam(value="us_password") String a_password,String type) {
     	Admin admin = new Admin();
     	admin.setA_name(a_name);
     	admin.setA_password(a_password);
+    	admin.setType(type);
         State state = adminService.dealLogin(admin);
         return state;
 
@@ -79,7 +80,7 @@ public class AdminController {
      */
     @RequestMapping("/register")
     @ResponseBody
-    public State dealRegister(@RequestParam(value="us_id") String a_name, @RequestParam(value="us_password") String a_password) {
+    public State dealRegister(@RequestParam(value="us_id") String a_name, @RequestParam(value="us_password") String a_password,String type) {
     	Admin admin = new Admin();
     	admin.setA_name(a_name);
     	admin.setA_password(a_password);
@@ -112,7 +113,7 @@ public class AdminController {
     public void open() {
     	Runtime runtime = Runtime.getRuntime();  
     	try {
-			Process exec = runtime.exec("D:\\matlab程序\\lab_mo_cap.exe");
+			Process exec = runtime.exec("C:\\Users\\pyf\\Desktop\\lab_mo_cap\\for_testing\\lab_mo_cap.exe");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

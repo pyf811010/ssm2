@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/assets/css/jquery-ui.min.css"/>
     <link rel="stylesheet" href="/assets/css/bootstrap-datepicker3.min.css"/>
     <link rel="stylesheet" href="/assets/css/ui.jqgrid.min.css"/>
+    <link rel="stylesheet" href="/assets/css/icon.css"/>
 
     <!-- text fonts -->
     <link rel="stylesheet" href="/assets/css/fonts.googleapis.com.css"/>
@@ -23,12 +24,20 @@
     <link rel="stylesheet" href="/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
     <link rel="stylesheet" href="/assets/css/ace-skins.min.css"/>
     <link rel="stylesheet" href="/assets/css/ace-rtl.min.css"/>
+    <style>
+    .icon{
+	diaplay:inline-block;
+	background-image:url(images/a.png);
+}
+    </style>
     <script src="/assets/js/ace-extra.min.js"></script>
 </head>
 
 
 <body class="no-skin">
-<div id="header"></div>
+<div id="header" >
+</div>
+
 <!--页面顶部栏  -->
 <div class="main-container ace-save-state" id="main-container">
     <script type="text/javascript">
@@ -336,7 +345,7 @@
                 {
                     name: 'expid',
                     index: 'expid',
-                    width: 100,
+                    width: 50,
                     key: true,
                     editable: true,
                     edittype: "textarea",
@@ -362,7 +371,7 @@
                 {
                     name: 'id_subjects',
                     index: 'id_subjects',
-                    width: 150,
+                    width: 93,
                     sortable: false,
                     editable: true,
                     edittype: "textarea",
@@ -375,7 +384,7 @@
                 {
                     name: 'id_machine',
                     index: 'id_machine',
-                    width: 150,
+                    width: 83,
                     sortable: false,
                     editable: true,
                     edittype: "textarea",
@@ -492,6 +501,49 @@
                     updatePagerIcons(table);
                     enableTooltips(table);
                 }, 0);
+                $(".jqgrow").each(function () {
+                    var row = $(this.cells[6]);
+                    var formData = new FormData();
+                    var text = row.text();
+                    formData.append("text", text);
+                    $.ajax({
+                        url: "/Machine/find1",
+                        data: formData,
+                        dataType:'json',
+                        type: 'post',
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        success: function (data) {
+                            row.prop("title", data);
+                        },
+                        error: function () {
+                            alert("失败!");
+                        }
+                    });
+                })
+                
+                $(".jqgrow").each(function () {
+                    var row = $(this.cells[5]);
+                    var formData = new FormData();
+                    var text = row.text();
+                    formData.append("text", text);
+                    $.ajax({
+                        url: "/subjects/find1",
+                        data: formData,
+                        dataType:'json',
+                        type: 'post',
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        success: function (data) {
+                            row.prop("title", data);
+                        },
+                        error: function () {
+                            alert("失败!");
+                        }
+                    });
+                })
             },
 
             editurl: "/preec/handle", //nothing is saved

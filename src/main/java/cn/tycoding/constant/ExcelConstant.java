@@ -21,7 +21,7 @@ public class ExcelConstant {
     /**
      * 管理员信息 admin
      */
-    public static final int[] ADMIN_INDEX = {1,2};
+    public static final int[] ADMIN_INDEX = {1,2,3};
 
     /**
      * 实验者信息 subject

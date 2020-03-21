@@ -5,6 +5,8 @@ import cn.tycoding.pojo.ObjectQuery;
 import cn.tycoding.service.AdminService;
 import cn.tycoding.service.SubjectsService;
 import cn.tycoding.service.UserTestService;
+import cn.tycoding.util.FindMachineInfo;
+import cn.tycoding.util.FindSubjectInfo;
 import cn.tycoding.pojo.State;
 import cn.tycoding.pojo.Subjects;
 import cn.tycoding.pojo.UserTest;
@@ -65,6 +67,13 @@ public class SubjectsController {
         
         return subjectsService.find();
 
+    }
+    
+    @RequestMapping("/find1")
+    @ResponseBody
+    public List find1(String text){
+
+        return FindSubjectInfo.findSubject(subjectsService.find(),FindSubjectInfo.splitString(text));
     }
     
     @RequestMapping("/handle")

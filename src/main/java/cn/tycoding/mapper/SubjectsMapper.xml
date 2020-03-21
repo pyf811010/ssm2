@@ -25,6 +25,7 @@
 		subjects
 	</select>
 	
+	<cache></cache>
 	<select id="find" resultType="cn.tycoding.pojo.Subjects">
 		select * from
 		subjects

@@ -1,6 +1,8 @@
 package cn.tycoding.pojo;
 
-public class Machine {
+import java.io.Serializable;
+
+public class Machine implements Serializable{
     private Integer m_id;
 
     private String name;

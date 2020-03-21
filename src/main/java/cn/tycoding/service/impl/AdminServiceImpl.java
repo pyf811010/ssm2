@@ -73,18 +73,19 @@ public class AdminServiceImpl implements AdminService {
 
 	public State dealLogin(Admin admin) {
 		State state = null;
+		String loginType = admin.getType();
         Admin a = adminMapper.findByName(admin.getA_name());
-
         //不存在此用户
         if (null == a) {
             state = new State(0, "此用户名不存在！");
             return state;
         }
-
-       /* if (a.getUs_type().equals("student")) {
-            state = new State(false, "请进入学生入口进行登录，当前系统为教师版!");
+        //获得用户类型
+        String realType = a.getType();
+        if (!loginType.equals(realType)) {
+            state = new State(0, "用户名或密码错误!");
             return state;
-        }*/
+        }
 
 
         String password = a.getA_password();
@@ -94,9 +95,10 @@ public class AdminServiceImpl implements AdminService {
         }else{
         	String us_name = a.getA_name();
         	//将us_name放入session中,用于拦截器判断是否登陆
-        	session.setAttribute("us_name", us_name);
+        	session.setAttribute("type", loginType);
         	//没有异常，将用户名设置进消息中
-            state = new State(1, us_name);
+        	String info = us_name+":"+loginType;
+            state = new State(1, info);
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             System.out.println(state);
             System.out.println("用户ID:" + a.getA_id() + " 姓名:" + a.getA_name() + " 于" + df.format(new Date()) + " 登录系统");

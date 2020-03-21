@@ -65,6 +65,8 @@ public class ReadExcel {
                     admin.setA_name(row.getCell(0).getStringCellValue());
                     row.getCell(1).setCellType(CellType.STRING);
                     admin.setA_password(row.getCell(1).getStringCellValue());
+                    row.getCell(2).setCellType(CellType.STRING);
+                    admin.setType(row.getCell(2).getStringCellValue());
                     list.add(admin);
                 }
                 if (o instanceof Machine){

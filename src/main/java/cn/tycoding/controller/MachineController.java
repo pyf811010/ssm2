@@ -20,6 +20,7 @@ import cn.tycoding.pojo.ObjectQuery;
 import cn.tycoding.service.FilesEleService;
 import cn.tycoding.service.FilesKandService;
 import cn.tycoding.service.MachineService;
+import cn.tycoding.util.FindMachineInfo;
 
 /**
  * 实验机器
@@ -54,6 +55,13 @@ public class MachineController {
         
         return machineService.find();
 
+    }
+    
+    @RequestMapping("/find1")
+    @ResponseBody
+    public List find1(String[] text){
+
+        return FindMachineInfo.findMachine(machineService.find(),FindMachineInfo.splitString(text));
     }
     
     @RequestMapping("/handle")
