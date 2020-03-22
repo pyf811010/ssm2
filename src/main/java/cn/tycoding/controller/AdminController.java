@@ -84,6 +84,7 @@ public class AdminController {
     	Admin admin = new Admin();
     	admin.setA_name(a_name);
     	admin.setA_password(a_password);
+    	admin.setType("普通用户");
     	State state = adminService.dealRegister(admin);
         return state;
     }

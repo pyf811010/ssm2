@@ -392,7 +392,7 @@
 <!--[if !IE]> -->
 <script src="/assets/js/jquery-2.1.4.min.js"></script>
 <script src="/assets/js/jquery.cookie.js"></script>
-<script src="/assets/js/ssm2.util.js"></script>
+<script src="/assets/js/ssm2_user.util.js"></script>
 <!--相当于jsp页面中的header，将每个页面的右上角当做一个模块，相关链接功能以及获取cookie中用户名的功能放在ssm2.util.js中实现  -->
 <!--  <script src="/assets/js/sddb.util.js"></script>  -->
 
@@ -617,8 +617,8 @@
     jQuery(function ($) {
         //显示用户名
         $("#us_name").html($.cookie("us_name"));
-        $("#profile").attr("href", "/view/userInformation/userProfile.html?id=" + $.cookie("us_id"));
-        $("#setting").attr("href", "/view/userInformation/userSetting.html");
+        $("#profile").attr("href", "/view_user/userInformation/userProfile_user.html?id=" + $.cookie("us_id"));
+        $("#setting").attr("href", "/view_user/userInformation/userSetting_user.html");
     });
 </script>
 

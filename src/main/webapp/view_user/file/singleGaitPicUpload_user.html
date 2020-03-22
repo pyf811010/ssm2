@@ -70,7 +70,7 @@
         </button>
 
         <div class="navbar-header pull-left">
-            <a href="/view/index.html" class="navbar-brand">
+            <a href="/view_user/index_user.html" class="navbar-brand">
                 <small>
                     <img src="../image/d.jpg" width=”170” height=”110”/>
                     人体运动测试数据分析与管理系统
@@ -147,10 +147,10 @@
                 <ul class="breadcrumb">
                     <li>
                         <i class="ace-icon fa fa-home home-icon"></i>
-                        <a href="/view/index.html">我的主页</a>
+                        <a href="/view_user/index_user.html">我的主页</a>
                     </li>
 
-                    <li class="active">原始测试数据文件上传</li>
+                    <li class="active">步态周期图像文件上传</li>
                 </ul>
                 <!-- /.breadcrumb -->
 
@@ -160,10 +160,10 @@
 
                 <div class="page-header">
                     <h1>
-                        原始测试数据文件上传
+                        步态周期图像文件上传
                         <small>
                             <i class="ace-icon fa fa-angle-double-right"></i>
-                            <span style="font-size: 16px;">可支持同时上传多份文件</span>
+                            <span style="font-size: 16px;">上传单个图像</span>
                         </small>
                     </h1>
                 </div>
@@ -188,25 +188,28 @@
                                         <div class="widget-body">
                                             <div class="widget-main">
 
+                                                
                                                 <div class="form-group" style="margin-top: 20px;">
                                                     <div class="col-xs-12">
-                                                        <input multiple="" type="file" id="files" webkitdirectory
-                                                               mozdirectory/>
+                                                        <input  type="file" id="files" />
                                                     </div>
                                                 </div>
 
-                                                <!-- <div style="margin-bottom: 12px;">
-                                                    <label for="fi_info" style="margin-bottom: 8px;">文件简介</label>
+                                                 <div style="margin-bottom: 12px;">
+                                                    <label for="fi_info" style="margin-bottom: 8px;">文件备注</label>
                                                     <textarea id="fi_info"
                                                               class="autosize-transition form-control"></textarea>
                                                 </div>
- -->
                                                 <div class="clearfix form-actions">
                                                     <div class="col-md-offset-3 col-md-9">
                                                         <button class="btn btn-info" type="button" id="fileCommit">
                                                             <i class="ace-icon fa fa-check bigger-110"></i>
                                                             确定上传
                                                         </button> &nbsp; &nbsp; &nbsp;
+                                                        <button class="btn" type="reset">
+                                                            <i class="ace-icon fa fa-undo bigger-110"></i>
+                                                            重置
+                                                        </button>
                                                     </div>
                                                 </div>
 
@@ -214,8 +217,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- PAGE CONTENT BEGINS -->
-                        <div  style="left: 450px; position: absolute; top: 0px; height:350px">
+                                <div  style="left: 450px; position: absolute; top: 0px; height:130px">
                             <!-- <button type="button" class="close" data-dismiss="alert">
                                 <i class="ace-icon fa fa-times"></i>
                             </button> -->
@@ -226,29 +228,8 @@
                                 <small>(v 1.0)</small>
                                 <br>
                                 <span style="font-size: 15px;">文件导入说明：</span>
-                            </strong> <span style="font-size: 15px;">此模块用于上传原始测试数据文件，用户需按照日期设立文件夹(命名格式:2020-02-23)，将同一天所测数据文件放到同一文件夹下，一次上传单个日期文件夹，日期文件夹下测试数据文件及相对应的测试信息文件命名需按照以下规则:
+                            </strong> <span style="font-size: 15px;color:#000000;">此模块用于上传单个步态周期图像，并可输入备注信息同步上传
                              <br>
-                             <strong class="black" style="font-size: 15px;color:#000000;">
-                             <span style="font-size: 15px;">肌电数据文件:ele_01.xxx &nbsp;&nbsp;ele_02.xxx &nbsp;&nbsp; ele_03.xxx......</span>
-                             <br>
-                             <span style="font-size: 15px;">足底压力.asc数据文件:fpa_01.xxx &nbsp;&nbsp;fpa_02.xxx &nbsp;&nbsp; fpa_03.xxx......</span>
-                             <br>
-                             <span style="font-size: 15px;">足底压力.fgt数据文件:fpf_01.xxx &nbsp;&nbsp;fpf_02.xxx &nbsp;&nbsp; fpf_03.xxx......</span>
-                             <br>
-                             <span style="font-size: 15px;">耗氧量数据文件:ox_01.xxx &nbsp;&nbsp;ox_02.xxx &nbsp;&nbsp; ox_03.xxx......</span>
-                             <br>
-                             <span style="font-size: 15px;">动补数据文件:mc_01.xxx &nbsp;&nbsp;mc_02.xxx &nbsp;&nbsp; mc_03.xxx......</span>
-                             <br>
-                             <span style="font-size: 15px;">跑台数据文件:sm_01.xxx &nbsp;&nbsp;sm_02.xxx &nbsp;&nbsp; sm_03.xxx......</span>
-                             <br>
-                             <span style="font-size: 15px;">运动学与动力学数据文件:kand_01.xxx &nbsp;&nbsp;kand_02.xxx &nbsp;&nbsp; kand_03.xxx......</span>
-                             <br>
-                             <span style="font-size: 15px;">视频文件:video_01.xxx &nbsp;&nbsp;video_02.xxx &nbsp;&nbsp; video_03.xxx......</span>
-                             <br>
-                             <span style="font-size: 15px;">肌电传感器对照表:egcontrast.xlsx/xls</span>
-                             <br>
-                             <span style="font-size: 15px;">前置实验条件表:preec.xlsx/xls</span>
-                             </strong>
                         </div>
                                 <!-- /.span -->
                             </div>
@@ -289,7 +270,7 @@
 <script src="/assets/js/jquery-2.1.4.min.js"></script>
 <script src="/assets/js/jquery.form.js"></script>
 <script src="/assets/js/jquery.cookie.js"></script>
-<script src="/assets/js/ssm2.util.js"></script>
+<script src="/assets/js/ssm2_user.util.js"></script>
 <script src="/assets/js/select2.min.js"></script>
 <script src="/assets/js/jquery.cookie.js"></script>
 
@@ -328,127 +309,9 @@
 <script src="/assets/js/ace-elements.min.js"></script>
 <script src="/assets/js/ace.min.js"></script>
 
-<!--选择年份、班级、专业-->
-<!--<script type="text/javascript">
-    //总体数据
-    var arrayGrade = [];
-    //判断数组中是否存在此数
-    function isExist(array, n) {
-        for (var i = 0; i < array.length; i++) {
-            if (array[i] == n) {
-                return true;
-            }
-        }
-        return false;
-    }
-    //先得到年级
-    function getGrade(arrayGrade) {
-        var grade = [""];
-        for (var i = 0; i < arrayGrade.length; i++) {
-            //先判断grade中是否存在该数字
-            var grade_item = arrayGrade[i].cl_grade;
-            if (!isExist(grade, grade_item)) {
-                grade.push(grade_item);
-            }
-        }
-        //遍历grade数组，将值填入进年级下拉框中
-        var sel_grade = document.getElementById("fi_grade");
-        for (var j = 0; j < grade.length; j++) {
-            var temp = grade[j];
-            sel_grade.options[j] = new Option(temp, temp);
-        }
-    }
-    //st_grade的改变事件
-    $("#fi_grade").change(function () {
-        var major = [""];
-        var grade = $("#fi_grade option:selected").val();
-        //取出指定年级的不重复的专业
-        for (var i = 0; i < arrayGrade.length; i++) {
-            var temp_grade = arrayGrade[i].cl_grade;
-            var temp_major = arrayGrade[i].cl_major;
-            if ((temp_grade == grade) && (!isExist(major, temp_major))) {
-                major.push(temp_major);
-            }
-        }
-        var sel_major = document.getElementById("fi_major");
-        //清空之前的专业、班级、课程下拉框
-        $("#fi_major").empty();
-        $("#fi_class").empty();
-        $("#fi_course").empty();
-        for (var j = 0; j < major.length; j++) {
-            sel_major.options[j] = new Option(major[j], major[j]);
-        }
-    });
-    //fi_major的改变事件
-    $("#fi_major").change(function () {
-        var sclass = [""];
-        var grade = $("#fi_grade option:selected").val();
-        var major = $("#fi_major option:selected").val();
-        //取出指定年级、专业的班级
-        for (var i = 0; i < arrayGrade.length; i++) {
-            var temp_grade = arrayGrade[i].cl_grade;
-            var temp_major = arrayGrade[i].cl_major;
-            if ((temp_grade == grade) && (temp_major == major)) {
-                sclass.push(arrayGrade[i].cl_name);
-            }
-        }
-        ///清空之前的班级、课程下拉框
-        $("#fi_class").empty();
-        $("#fi_course").empty();
-        var sel_class = document.getElementById("fi_class");
-        for (var j = 0; j < sclass.length; j++) {
-            sel_class.options[j] = new Option(sclass[j], sclass[j]);
-        }
-    });
-    //fi_class的改变事件
-    /*$("#fi_class").change(function () {
-        $.ajax({
-            type: "post",
-            url: "/file/findClass.do",
-            dataType: "json",
-            data: {
-                "sc_class_name": $("#fi_class").val()
-            },
-            success: function (data) {
-                //document.getElementById("fi_course").innerHTML = "";
-                //$("#fi_course_chosen > div > ul").html("");
-                $("#fi_course").empty();
-                //将数据填充到下拉框中
-                var sel_course = document.getElementById("fi_course");
-                var i = 0;
-                for (var str in data) {
-                    sel_course.options[i] = new Option(data[str], data[str]);
-                    i++;
-                }
-                //初始化select2
-                $("#fi_course").select2();
-            },
-            error: function (err) {
-            }
-        });
-    });*/
-    /*$(function () {
-        //ajax请求获取班级
-        $.ajax({
-            type: "post",
-            url: "/score/getClassroom.do",
-            dataType: "json",
-            data: {},
-            success: function (data) {
-                arrayGrade = data;
-                getGrade(data);
-            },
-            error: function () {
-                alert("获取信息失败!");
-            }
-        });
-    })*/
-</script>-->
-
 <script>
-    $("#footer").load("/view/footer.html");
+    $("#footer").load("/view_user/footer_user.html");
 </script>
-
 
 <!--文件上传-->
 <script type="text/javascript">
@@ -463,56 +326,52 @@
     }
 
     jQuery(function ($) {
-        $("#fileCommit").click(function (e) {
-
-            // e.preventDefault();
+        $("#fileCommit").click(function () {
             var formData = new FormData();
             var files = $("#files")[0].files;
-
-
-            /*formData.append("fi_user_id", $.cookie("us_id"));
-            formData.append("fi_grade", $("#fi_grade").val());
-            formData.append("fi_major", $("#fi_major").val());
-            //文件简介
+            if(files.length!=0){
+            for (var i = 0; i < files.length; i++) {
+                formData.append("files", files[i]);
+            }
             formData.append("fi_info", $("#fi_info").val());
-            formData.append("fi_course", $("#fi_course").val())*/
-            if (files.length != 0) {
-                for (var i = 0; i < files.length; i++) {
-                    formData.append("files", files[i]);
-                }
-                showloading();
-                $.ajax({
-                    type: "post",
-                    url: "/excel/upload",
-                    data: formData,
-                    cache: false,
-                    processData: false,
-                    contentType: false,
+            showloading();
+            $.ajax({
+                type: "post",
+                url: "/GaitCycle/singlePicUpload",
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
 
-                    success: function (data) {
-                        console.log(data.success);
-                            hideloading();
-                            alert(data.info);
-                    },
-                    error: function (err) {
+                success: function (data) {
+                    if (data.success == '2') {
                         hideloading();
-                        alert("文件上传遇到错误!" + JSON.stringify(err));
-                        alert("上传失败!");
+                        alert(data.info);
+                    } else {
+                        hideloading();
+                        alert(data.info);
                     }
+                },
+                error: function (err) {
+                    hideloading();
+                    alert("文件上传遇到错误!" + JSON.stringify(err));
+                    alert("上传失败!");
+                }
 
-                });
-            } else {
-                alert("请选择上传的文件");
+            });
+            }else{
+            	alert("请选择上传文件");
             }
         })
     });
 </script>
 
 <script>
-    $("#lefter").load("/view/lefter.html", function () {
+    $("#lefter").load("/view_user/lefter_user.html", function () {
         $("#main").prop("class", "");
-        $(".fileUpload").prop("class", "active");
+        $(".singleGaitPicUpload").prop("class", "active");
         $("#filesManager").prop("style", "display: block;");
+        $("#filesManagerSub").prop("style", "display: block;");
     });
 </script>
 

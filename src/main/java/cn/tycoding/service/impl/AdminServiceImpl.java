@@ -116,7 +116,7 @@ public class AdminServiceImpl implements AdminService {
             state = new State(0, "此用户名已经存在！");
             return state;
         }else{
-        	state = new State(1, "管理员注册成功");
+        	state = new State(1, "普通用户注册成功");
         	int i = adminMapper.insert(admin);
             if (i > 0) {
                 return state;
