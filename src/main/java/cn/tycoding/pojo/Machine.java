@@ -2,7 +2,7 @@ package cn.tycoding.pojo;
 
 import java.io.Serializable;
 
-public class Machine implements Serializable{
+public class Machine {
     private Integer m_id;
 
     private String name;

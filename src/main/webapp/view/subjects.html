@@ -363,7 +363,7 @@
 
             //data: grid_data,
             datatype: "json",
-            height: 600,
+            height: 500,
             colNames: ['操作', '', 'ID', '身份证号', '实验者姓名', '年龄', '测试日期', '体重', '身高','备注信息'],
             colModel: [{
                 name: 'op',
@@ -382,10 +382,21 @@
                         recreateForm: true,
                         beforeShowForm: beforeEditCallback
                     },
-                    delOptions: {
-                        recreateForm: true,
-                        beforeShowForm: beforeDeleteCallback
+                    delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback,afterSubmit:function(data,postdata){
+                    	if (data.responseText != "fail") {
+                            $(this).jqGrid('setGridParam', {
+                                datatype: 'json'
+                            }).trigger('reloadGrid'); //Reloads the grid after edit
+                        } else {
+                            $(this).jqGrid('setGridParam', {
+                                datatype: 'json'
+                            }).trigger('reloadGrid'); //Reloads the grid after edit
+                            return [false, "前置实验表中存在此条信息，受外键约束，此次删除失败！"]; //Captures and displays the response text on th Edit window
+                        }
                     },
+                        afterComplete:function(data,postdata){
+                            //完成操作后需要执行的内容
+                        }},
 
                 }
             },

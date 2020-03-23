@@ -1,5 +1,13 @@
 package cn.tycoding.service.impl;
 
+import cn.tycoding.mapper.FilesElectromyographyMapper;
+import cn.tycoding.mapper.FilesFootPressureAscMapper;
+import cn.tycoding.mapper.FilesFootPressureFgtMapper;
+import cn.tycoding.mapper.FilesKandMapper;
+import cn.tycoding.mapper.FilesMontionCaptureMapper;
+import cn.tycoding.mapper.FilesOxygenMapper;
+import cn.tycoding.mapper.FilesSlotMachineMapper;
+import cn.tycoding.mapper.FilesVideoMapper;
 import cn.tycoding.mapper.PreecMapper;
 import cn.tycoding.mapper.UserTestMapper;
 import cn.tycoding.pojo.Admin;
@@ -37,6 +45,22 @@ public class PreecServiceImpl implements PreecService {
      */
     @Autowired
     private PreecMapper preecMapper;
+    @Autowired
+    private FilesKandMapper filesKandMapper;
+    @Autowired
+    private FilesMontionCaptureMapper filesMotionCaptureMapper;
+    @Autowired
+    private FilesFootPressureAscMapper filesFootPressureAscMapper;
+    @Autowired
+    private FilesFootPressureFgtMapper filesFootPressureFgtMapper;
+    @Autowired
+    private FilesOxygenMapper filesOxygenMapper;
+    @Autowired
+    private FilesSlotMachineMapper filesSlotMachineMapper;
+    @Autowired
+    private FilesVideoMapper filesVideoMapper;
+    @Autowired
+    private FilesElectromyographyMapper filesElectromyographyMapper;
 
 
 	@Override
@@ -111,6 +135,14 @@ public class PreecServiceImpl implements PreecService {
                 int count = 0;
                 for (int i = 0; i < id.length; i++) {
                 	preecMapper.del(id[i]);
+                	filesKandMapper.del(id[i]);
+                	filesMotionCaptureMapper.del(id[i]);
+                	filesFootPressureAscMapper.del(id[i]);
+                	filesFootPressureFgtMapper.del(id[i]);
+                	filesOxygenMapper.del(id[i]);
+                	filesSlotMachineMapper.del(id[i]);
+                	filesVideoMapper.del(id[i]);
+                	filesElectromyographyMapper.del(id[i]);
                     count++;
                 }
                 String str = count + "条成功删除" + (id.length - count) + "条删除失败";

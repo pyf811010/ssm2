@@ -2,7 +2,7 @@ package cn.tycoding.pojo;
 
 import java.io.Serializable;
 
-public class Subjects implements Serializable {
+public class Subjects  {
     private Integer sub_id;
 
     private String name;
