@@ -41,8 +41,8 @@ public class ExcelController {
 
     @RequestMapping(value = "/upload")
     @ResponseBody
-    public State upload_multi( @RequestParam("files") MultipartFile[] files) {
-    	
+    public State upload_multi( @RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
+    	String user_name = (String) request.getSession().getAttribute("user_name");
     	System.out.println("开始分析文件");
     	Map<String,List<FilesFolder>> filesFoldersList = FolderPathUtil.getFolderInfo("D:/ProgrammData/", files);
     	if (filesFoldersList.containsKey("false")) {
@@ -54,7 +54,7 @@ public class ExcelController {
     		return state;
     	}
     	System.out.println("成功获取文件信息");
-        State state = filesOrganizeService.insertByString(filesFoldersList);
+        State state = filesOrganizeService.insertByString(filesFoldersList,user_name);
         System.err.println(state.getInfo()+state.getSuccess());
         return state;
     }
@@ -73,9 +73,10 @@ public class ExcelController {
 
     @ResponseBody
     @RequestMapping("/uploadFile")
-    public State uploadFile(@RequestParam("file") MultipartFile file){
+    public State uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request){
+    	String user_name = (String) request.getSession().getAttribute("user_name");
         if (!file.isEmpty()){
-            return excelService.readExcelFile(file);
+            return excelService.readExcelFile(file,user_name);
         }else {
             return new State(0, "请选择上传文件");
         }

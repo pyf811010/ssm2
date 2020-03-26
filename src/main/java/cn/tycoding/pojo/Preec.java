@@ -21,6 +21,8 @@ public class Preec {
     
     private String video_info=null; //视频数据信息
     
+    private String user_name=null; //视频数据信息
+    
     public Preec() {
     	
     }
@@ -28,7 +30,7 @@ public class Preec {
 
 	public Preec(Integer expid, Integer id_query, Integer id_subjects, String id_machine, String motion_capture_info,
 			String slot_machine_info, String pedar_info, String ox_info, String elec_info, String advance,
-			String remark,String video_info) {
+			String remark,String video_info,String user_name) {
 		super();
 		this.expid = expid;
 		this.id_query = id_query;
@@ -42,9 +44,20 @@ public class Preec {
 		this.advance = advance;
 		this.remark = remark;
 		this.video_info = video_info;
+		this.user_name = user_name;
 	}
 
 
+
+
+	public String getUser_name() {
+		return user_name;
+	}
+
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
 
 
 	public String getId_machine() {

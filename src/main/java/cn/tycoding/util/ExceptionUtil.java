@@ -34,6 +34,7 @@ public class ExceptionUtil {
                 //[3]外键依赖
                 String column = e.getMessage().split("FOREIGN KEY \\(`")[1].split("`\\) REFERENCES")[0];
                 return column + "列数据不存在，请输入一个已经存在的值.";
+//                return "实验者信息ID列输入的数据不存在，请输入一个已经存在的值.";
             }
         }
         return "success";

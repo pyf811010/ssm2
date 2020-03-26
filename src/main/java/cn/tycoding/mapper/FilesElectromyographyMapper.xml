@@ -26,9 +26,9 @@
   </delete>
   <insert id="insert" parameterType="cn.tycoding.pojo.FilesElectromyography">
     insert into files_electromyography (expid, url, id_query, 
-      file_name)
+      file_name,user_name)
     values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, 
-      #{file_name,jdbcType=VARCHAR})
+      #{file_name,jdbcType=VARCHAR},#{user_name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.tycoding.pojo.FilesElectromyography">
     insert into files_electromyography

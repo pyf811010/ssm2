@@ -11,8 +11,15 @@
     <result column="fgt_info" jdbcType="VARCHAR" property="fgt_info"/>
     <result column="elec_info" jdbcType="VARCHAR" property="elec_info" />
   </resultMap>
+  
+      <select id="selectByPrimaryKey" resultType="cn.tycoding.pojo.Preec">
+		select * from
+		preec
+		where expid = #{expid}
+	</select>
+  
   <sql id="Base_Column_List">
-    expid,id_query,id_subjects,motion_capture_info,slot_machine_info,pedar_info,ox_info,elec_info,video_info
+    expid,id_query,id_subjects,motion_capture_info,slot_machine_info,pedar_info,ox_info,elec_info,video_info,user_name
   </sql>
     <!-- 第一个参数为页数，第二个参数为每页多少行 -->
     <select id="findByPage" resultType="cn.tycoding.pojo.Preec">
@@ -44,12 +51,12 @@
     <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.Preec">
 		insert into preec
-		values(#{expid},#{id_query},#{id_machine},#{id_subjects},#{advance},#{remark},#{motion_capture_info},#{slot_machine_info},#{pedar_info},#{ox_info},#{elec_info},#{video_info});
+		values(#{expid},#{id_query},#{id_machine},#{id_subjects},#{advance},#{remark},#{motion_capture_info},#{slot_machine_info},#{pedar_info},#{ox_info},#{elec_info},#{video_info},#{user_name});
 	</insert>
 	
 	<insert id="insert" parameterType="cn.tycoding.pojo.Preec">
 		insert into preec
-		values(#{expid},#{id_query},#{id_machine},#{id_subjects},#{advance},#{remark},#{motion_capture_info},#{slot_machine_info},#{pedar_info},#{ox_info},#{elec_info},#{video_info});
+		values(#{expid},#{id_query},#{id_machine},#{id_subjects},#{advance},#{remark},#{motion_capture_info},#{slot_machine_info},#{pedar_info},#{ox_info},#{elec_info},#{video_info},#{user_name});
 	</insert>
     <!-- 按学号删除学生 -->
     <delete id="del" parameterType="string">

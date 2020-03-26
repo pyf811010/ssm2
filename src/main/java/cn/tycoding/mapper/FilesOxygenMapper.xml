@@ -27,9 +27,9 @@
   </delete>
 
   <insert id="insert" parameterType="cn.tycoding.pojo.FilesOxygen">
-    insert into files_oxygen (expid, url, id_query,files_name
+    insert into files_oxygen (expid, url, id_query,files_name,user_name
       )
-    values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, #{files_name,jdbcType=VARCHAR}
+    values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, #{files_name,jdbcType=VARCHAR},#{user_name,jdbcType=VARCHAR}
       )
   </insert>
 

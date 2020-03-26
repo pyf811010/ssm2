@@ -34,11 +34,11 @@ public interface FilesOrganizeService {
 	
 	public void insertFilesSM(FilesSlotMachine record);
 	
-	public State insertByString(Map<String, List<FilesFolder>> filesfoldersList);
+	public State insertByString(Map<String, List<FilesFolder>> filesfoldersList, String user_name);
 	
-	public void getAnalyzedPreec(String Datetime, String preecUrl) throws Exception;
+	public void getAnalyzedPreec(String Datetime, String preecUrl,String user_name) throws Exception;
 	
-	public void getAnalyzedEgContrast(String Datetime, String egcontrastUrl) throws Exception;
+	public void getAnalyzedEgContrast(String Datetime, String egcontrastUrl,String user_name) throws Exception;
 			
 
 	
@@ -49,5 +49,6 @@ public interface FilesOrganizeService {
 	public void insertFilesVideo(FilesVideo record);
 
 	public String fileNameTransform(String fileUrl) throws Exception;
+
 
 }

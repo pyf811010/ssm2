@@ -15,9 +15,10 @@ public interface ExcelService {
     /**
      *  上传文件内的数据
      * @param file 需要上传的文件
+     * @param user_name 
      * @return 上传结果信息
      */
-    State readExcelFile(MultipartFile file);
+    State readExcelFile(MultipartFile file, String user_name);
 
     /**
      * 下载模板对象

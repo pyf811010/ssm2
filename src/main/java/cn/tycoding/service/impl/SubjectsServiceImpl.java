@@ -1,5 +1,6 @@
 package cn.tycoding.service.impl;
 
+import cn.tycoding.mapper.AdminMapper;
 import cn.tycoding.mapper.SubjectsMapper;
 import cn.tycoding.mapper.UserTestMapper;
 import cn.tycoding.pojo.Admin;
@@ -16,9 +17,13 @@ import cn.tycoding.util.QueryCondition;
 import cn.tycoding.util.QueryUtil;
 import cn.tycoding.util.SqlJointUtil;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,9 +40,19 @@ public class SubjectsServiceImpl implements SubjectsService {
     /**
      * 注入service层
      */
+	
     @Autowired
     private SubjectsMapper subjectsMapper;
+    
+    @Autowired
+    private AdminMapper adminMapper;
 
+    
+    
+    @Override
+    public Subjects selectByPrimaryKey(Integer sub_id) {
+        return subjectsMapper.selectByPrimaryKey(sub_id);
+    }
 
 	@Override
 	public ObjectQuery findByPage(Boolean _search, String filters, int page, int rows) {
@@ -121,7 +136,7 @@ public class SubjectsServiceImpl implements SubjectsService {
 			}
                 String str = count + "条成功删除" + (id.length - count) + "条删除失败";
                 System.out.println(str);
-                return str;
+                return "success";
             case "add":
                 // 新增对象
                 System.out.println(subjects.toString());
@@ -142,6 +157,54 @@ public class SubjectsServiceImpl implements SubjectsService {
 		int size = findAllById.size();
 		return findAllById;
 		
+	}
+
+	
+	
+	//对用户权限进行判断，进行相应增删改查提示
+	@Override
+	public String authorityTemp(String oper, Subjects subjects, String[] id, HttpServletRequest request) throws UnsupportedEncodingException {
+		String user_name = (String) request.getSession().getAttribute("user_name");
+		String type = adminMapper.findTypeByUserName(user_name);
+		if(type.equals("管理员")){
+			System.out.println("用户为管理员");
+			return URLEncoder.encode(handle(oper, subjects, id), "UTF-8");
+		}
+        System.out.println("session中的user_name -----> " + user_name);
+        if(id == null){
+        	//点击页面下方编辑按钮会传入后台id，而直接在修改行提交修改则不会直接传入后台id
+        	String subjectUser_name2 = subjects.getUser_name();
+        	System.out.println(subjectUser_name2);
+            if (!user_name.equals(subjectUser_name2)) {
+                System.out.println("无权限修改");
+                return URLEncoder.encode("fail", "UTF-8");
+            }
+            String temp = handle(oper, subjects, id);
+            System.out.println(temp);
+            // 对传回的中文进行编码
+            return URLEncoder.encode(temp, "UTF-8");
+        }else{
+        	//增加受试者信息的判断(增加受试者信息时，id为_empty，需要数据库自增)
+        	 if(id[0].equals("_empty")){
+                 subjects.setUser_name(user_name);
+                 String temp = handle(oper, subjects, id);
+                 System.out.println(temp);
+                 // 对传回的中文进行编码
+                 return URLEncoder.encode(temp, "UTF-8");
+             }
+            for (int i = 0; i < id.length; i++) {
+                String subjectUser_name = (selectByPrimaryKey(Integer.valueOf(id[i]))).getUser_name();
+                System.out.println("数据库中的user_name -----> " + subjectUser_name);
+                if (!user_name.equals(subjectUser_name)) {
+                    System.out.println("无权限修改");
+                    return URLEncoder.encode("authority_fail", "UTF-8");
+                }
+            }
+            String temp = handle(oper, subjects, id);
+            System.out.println(temp);
+            // 对传回的中文进行编码
+            return URLEncoder.encode(temp, "UTF-8");
+        }
 	}
 
 	/*@Override

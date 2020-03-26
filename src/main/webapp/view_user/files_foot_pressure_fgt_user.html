@@ -246,7 +246,7 @@
             //data: grid_data,
             datatype: "json",
             height: 600,
-            colNames: ['操作', '查看', '下载', '', 'ID', '文件名', '文件地址'],
+            colNames: ['操作', '查看', '下载', '', 'ID', '文件名', '文件地址','操作用户'],
             colModel: [{
                 name: 'op',
                 index: 'op',
@@ -331,6 +331,18 @@
                     name: 'url',
                     index: 'url',
                     width: 500,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                },
+                {
+                    name: 'user_name',
+                    index: 'user_name',
+                    width: 150,
                     sortable: false,
                     editable: true,
                     edittype: "textarea",

@@ -51,8 +51,8 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
 	}
 
     @Override
-    public State readExcelFile(MultipartFile[] files) {
-        Map<String, String> map = findRemarkExcel(files);
+    public State readExcelFile(MultipartFile[] files,String user_name) {
+        Map<String, String> map = findRemarkExcel(files,user_name);
         
         /*if(map.isEmpty()){
         	int filelength = files.length;
@@ -147,9 +147,10 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
      * 获取备注信息
      *
      * @param files 上传文件
+	 * @param user_name 
      * @return map集合，如果没有备注信息或者备注文件内容不符合要求，返回空map
      */
-    private Map<String, String> findRemarkExcel(MultipartFile[] files) {
+    private Map<String, String> findRemarkExcel(MultipartFile[] files, String user_name) {
         Map<String, String> map = new HashMap<>(16);
         for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
@@ -158,7 +159,7 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
             //存在备注文件
             if (".xlsx".equals(suffix) || ".xls".equals(suffix)) {
                 try {
-                    List<Object> list = ReadExcel.readExcel((CommonsMultipartFile) file, new GaitPicRemark());
+                    List<Object> list = ReadExcel.readExcel((CommonsMultipartFile) file, new GaitPicRemark(),user_name);
                     for (int j = 0; j < list.size(); j++) {
                         GaitPicRemark gaitPicRemark = (GaitPicRemark) list.get(j);
                         map.put(gaitPicRemark.getFileName(), gaitPicRemark.getFileInfo());

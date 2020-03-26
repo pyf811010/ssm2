@@ -94,6 +94,7 @@ public class AdminServiceImpl implements AdminService {
             return state;
         }else{
         	String us_name = a.getA_name();
+        	 session.setAttribute("user_name", a.getA_name());
         	//将us_name放入session中,用于拦截器判断是否登陆
         	session.setAttribute("type", loginType);
         	//没有异常，将用户名设置进消息中
@@ -237,5 +238,5 @@ public class AdminServiceImpl implements AdminService {
 		admin = adminMapper.findAll();
 		return admin;
 	}
-	
+
 }

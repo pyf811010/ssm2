@@ -49,4 +49,6 @@ public interface AdminMapper {
 	 * @return 成功导入数据库的数量
 	 */
 	int addTemplate(Admin admin);
+
+	String findTypeByUserName(String user_name);
 }

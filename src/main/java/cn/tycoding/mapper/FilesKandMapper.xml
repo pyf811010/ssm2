@@ -34,9 +34,9 @@
 
   <!-- 插入信息 -->
   <insert id="insert" parameterType="cn.tycoding.pojo.FilesKand">
-    insert into files_kand (expid, url, id_query ,files_name,update_times
+    insert into files_kand (expid, url, id_query ,files_name,update_times,user_name
       )
-    values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, #{files_name,jdbcType=VARCHAR},#{update_times,jdbcType=INTEGER}
+    values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, #{files_name,jdbcType=VARCHAR},#{update_times,jdbcType=INTEGER},#{user_name,jdbcType=VARCHAR}
       )
   </insert>
 

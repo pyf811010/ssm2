@@ -16,7 +16,7 @@ public class ExcelConstant {
     /**
      * 实验机器表 machine
      */
-    public static final int[] MACHINE_INDEX = {1, 2, 3};
+    public static final int[] MACHINE_INDEX = {1,2,3,4,5};
 
     /**
      * 管理员信息 admin

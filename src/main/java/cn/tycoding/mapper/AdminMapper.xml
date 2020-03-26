@@ -93,6 +93,13 @@
             resultType="int">
 		${_parameter}
 	</select>
+	
+    <!-- 按照用户名查找用户类型 -->
+    <select id="findTypeByUserName" parameterType="string"
+            resultType="string">
+		select type from admin
+		where a_name = #{a_name}
+	</select>
 
     <!-- 查找表中字段的信息，字段名称和字段备注-->
     <select id="findDbTableComment" resultType="cn.tycoding.entity.assist.DBTableComment">

@@ -25,9 +25,9 @@
   </delete>
   <insert id="insert" parameterType="cn.tycoding.pojo.FilesFootPressureAsc">
     insert into files_foot_pressure_asc (expid, url, id_query, 
-      files_name)
+      files_name,user_name)
     values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, 
-      #{files_name,jdbcType=VARCHAR})
+      #{files_name,jdbcType=VARCHAR},#{user_name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.tycoding.pojo.FilesFootPressureAsc">
     insert into files_foot_pressure_asc

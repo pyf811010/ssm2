@@ -24,9 +24,10 @@ public class ReadExcel {
      * 解析excel，每一行封装为一个对象，存在list集合中
      *
      * @param file
+     * @param user_name 
      * @return
      */
-    public static List<Object> readExcel(CommonsMultipartFile file, Object o) throws Exception {
+    public static List<Object> readExcel(CommonsMultipartFile file, Object o, String user_name) throws Exception {
         Iterator<Sheet> sheetIterator;
         //获取后缀
         String endFile = getSuffix(file);
@@ -39,16 +40,17 @@ public class ReadExcel {
         } else {
             throw new IOException("不支持的文件类型");
         }
-        return listExcel(sheetIterator, o);
+        return listExcel(sheetIterator, o,user_name);
     }
 
     /**
      * 封装实体类
      *
      * @param sheetIterator 迭代器
+     * @param user_name 
      * @return  封装好excel数据的list
      */
-    private static List<Object> listExcel(Iterator<Sheet> sheetIterator, Object o) {
+    private static List<Object> listExcel(Iterator<Sheet> sheetIterator, Object o, String user_name) {
         ArrayList<Object> list = new ArrayList<>();
         Sheet sheet;
         while (sheetIterator.hasNext() && (sheet = sheetIterator.next()) != null) {
@@ -73,13 +75,17 @@ public class ReadExcel {
                     Machine machine = new Machine();
                     machine.setName(row.getCell(0).getStringCellValue());
                     machine.setType(row.getCell(1).getStringCellValue());
-                    machine.setRemark(row.getCell(2).getStringCellValue());
+                    machine.setCompany(row.getCell(2).getStringCellValue());
+                    machine.setPlace(row.getCell(3).getStringCellValue());
+                    machine.setRemark(row.getCell(4).getStringCellValue());
+                    machine.setUser_name(user_name);
                     list.add(machine);
                 }
                 if (o instanceof Subjects){
                     Subjects subjects = new Subjects();
                     /*row.getCell(0).setCellType(CellType.STRING);*/
                     //身份证
+                    System.out.println(row.getCell(0).getStringCellValue());
                     subjects.setIdentity_card(row.getCell(0).getStringCellValue());
                     //姓名
                     subjects.setName(row.getCell(1).getStringCellValue());
@@ -96,6 +102,7 @@ public class ReadExcel {
                     subjects.setHeight((float) row.getCell(5).getNumericCellValue());
                     //备注信息
                     subjects.setRemark(row.getCell(6).getStringCellValue());
+                    subjects.setUser_name(user_name);
                     list.add(subjects);
                 }
                 if (o instanceof GaitPicRemark){

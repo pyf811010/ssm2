@@ -356,201 +356,249 @@
 				})
          */
 
-        jQuery(grid_selector).jqGrid({
-            //direction: "rtl",
+         jQuery(grid_selector).jqGrid({
+             //direction: "rtl",
 
-            url: "/subjects/findsome",
+             url: "/subjects/findsome",
 
-            //data: grid_data,
-            datatype: "json",
-            height: 500,
-            colNames: ['操作', '', 'ID', '身份证号', '实验者姓名', '年龄', '测试日期', '体重', '身高','备注信息'],
-            colModel: [{
-                name: 'op',
-                index: 'op',
-                align: 'center',
-                width: 80,
-                fixed: true,
-                sortable: false,
-                resize: false,
-                search: false,
-                formatter: 'actions',
-                formatoptions: {
-                    keys: true,
-                    //delbutton: false,//disable delete button
-                    editOptions: {
-                        recreateForm: true,
-                        beforeShowForm: beforeEditCallback
-                    },
-                    delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback,afterSubmit:function(data,postdata){
-                    	if (data.responseText != "fail") {
-                            $(this).jqGrid('setGridParam', {
-                                datatype: 'json'
-                            }).trigger('reloadGrid'); //Reloads the grid after edit
-                        } else {
-                            $(this).jqGrid('setGridParam', {
-                                datatype: 'json'
-                            }).trigger('reloadGrid'); //Reloads the grid after edit
-                            return [false, "前置实验表中存在此条信息，受外键约束，此次删除失败！"]; //Captures and displays the response text on th Edit window
-                        }
-                    },
-                        afterComplete:function(data,postdata){
-                            //完成操作后需要执行的内容
-                        }},
+             //data: grid_data,
+             datatype: "json",
+             height: 500,
+             colNames: ['操作', '', 'ID', '身份证号', '实验者姓名', '年龄', '测试日期', '体重', '身高','备注信息','操作用户'],
+             colModel: [{
+                 name: 'op',
+                 index: 'op',
+                 align: 'center',
+                 width: 80,
+                 fixed: true,
+                 sortable: false,
+                 resize: false,
+                 search: false,
+                 formatter: 'actions',
+                 formatoptions: {
+                     keys: true,
+                     //delbutton: false,//disable delete button
+                      editOptions: {
+                         recreateForm: true,
+                         beforeShowForm: beforeEditCallback,
+                         afterSubmit: function (response, postdata) {
+                             if (response.responseText == "success") {
+                                 $(this).jqGrid('setGridParam', {
+                                     datatype: 'json'
+                                 }).trigger('reloadGrid'); //Reloads the grid after edit
+                                 return [true, "编辑成功!"];
+                             } else {
+                             	if(response.responseText == "authority_fail"){
+                             		$(this).jqGrid('setGridParam', {
+                                         datatype: 'json'
+                                     }).trigger('reloadGrid'); //Reloads the grid after edit
+                                     return [false, "无操作权限"];
+                             	}
+                             	$(this).jqGrid('setGridParam', {
+                                     datatype: 'json'
+                                 }).trigger('reloadGrid'); //Reloads the grid after edit
+                                 return [false, decodeURIComponent(response.responseText)];
+                             }
+                         },
+                          afterComplete:function(data,postdata){
+                        	  alert("无操作权限");
+                          }
+                     }, 
+                     delOptions: {
+                         recreateForm: true,
+                         beforeShowForm: beforeDeleteCallback,
+                         afterSubmit: function (response, postdata) {
+                             if (response.responseText == "success") {
+                                 $(this).jqGrid('setGridParam', {
+                                     datatype: 'json'
+                                 }).trigger('reloadGrid'); //Reloads the grid after edit
+                                 return [true, "编辑成功!"];
+                             } else {
+                             	if(response.responseText == "fail"){
+                             		$(this).jqGrid('setGridParam', {
+                                         datatype: 'json'
+                                     }).trigger('reloadGrid'); //Reloads the grid after edit
+                                     return [false, "数据查询表中存在此受试者ID，受外键约束，无法删除"]; //Captures and displays the response text on th Edit window
+                             	}
+                             	if(response.responseText == "authority_fail"){
+                             		$(this).jqGrid('setGridParam', {
+                                        datatype: 'json'
+                                    }).trigger('reloadGrid'); //Reloads the grid after edit
+                                    return [false, "无操作权限"];
+                             	}
+                             	$(this).jqGrid('setGridParam', {
+                                     datatype: 'json'
+                                 }).trigger('reloadGrid'); //Reloads the grid after edit
+                                 return [false, decodeURIComponent(response.responseText)];
+                             }
+                         }
+                     },
 
-                }
-            },
-                {
-                    name: '',
-                    index: '',
-                    width: 0.1,
-                    editable: true,
-                    sortable: false,
-                    search: false
+                 }
+             },
+                 {
+                     name: '',
+                     index: '',
+                     width: 0.1,
+                     editable: true,
+                     sortable: false,
+                     search: false
 
-                },
+                 },
 
-                {
-                    name: 'sub_id',
-                    index: 'sub_id',
-                    width: 50,
-                    key: true,
-                    editable: false,
-                    edittype: "textarea",
-                    editoptions: {
-                        rows: "2",
-                        cols: "15"
-                    }
+                 {
+                     name: 'sub_id',
+                     index: 'sub_id',
+                     width: 50,
+                     key: true,
+                     editable: false,
+                     edittype: "textarea",
+                     editoptions: {
+                         rows: "2",
+                         cols: "15"
+                     }
 
-                },
-                {
-                    name: 'identity_card',
-                    index: 'identity_card',
-                    width: 100,
-                    sortable: false,
-                    editable: true,
-                    edittype: "textarea",
-                    editoptions: {
-                        rows: "2",
-                        cols: "15"
-                    }
-                },
-                {
-                    name: 'name',
-                    index: 'name',
-                    width: 100,
-                    sortable: false,
-                    editable: true,
-                    edittype: "textarea",
-                    editoptions: {
-                        rows: "2",
-                        cols: "15"
-                    }
-                },
-                {
-                    name: 'age',
-                    index: 'age',
-                    width: 100,
-                    sortable: false,
-                    editable: true,
-                    edittype: "textarea",
-                    editoptions: {
-                        rows: "2",
-                        cols: "15"
-                    }
-                },
-                {
-                    name: 'testdate',
-                    index: 'testdate',
-                    width: 100,
-                    sortable: false,
-                    editable: true,
-                    edittype: "textarea",
-                    editoptions: {
-                        rows: "2",
-                        cols: "15"
-                    }
-                },
-                {
-                    name: 'weight',
-                    index: 'weight',
-                    width: 150,
-                    sortable: false,
-                    editable: true,
-                    edittype: "textarea",
-                    editoptions: {
-                        rows: "2",
-                        cols: "15"
-                    }
-                },
-                {
-                    name: 'height',
-                    index: 'height',
-                    width: 150,
-                    sortable: false,
-                    editable: true,
-                    edittype: "textarea",
-                    editoptions: {
-                        rows: "2",
-                        cols: "15"
-                    }
-                },
-                {
-                    name: 'remark',
-                    index: 'remark',
-                    width: 150,
-                    sortable: false,
-                    editable: true,
-                    edittype: "textarea",
-                    editoptions: {
-                        rows: "2",
-                        cols: "15"
-                    }
-                },
+                 },
+                 {
+                     name: 'identity_card',
+                     index: 'identity_card',
+                     width: 100,
+                     sortable: false,
+                     editable: true,
+                     edittype: "textarea",
+                     editoptions: {
+                         rows: "2",
+                         cols: "15"
+                     }
+                 },
+                 {
+                     name: 'name',
+                     index: 'name',
+                     width: 100,
+                     sortable: false,
+                     editable: true,
+                     edittype: "textarea",
+                     editoptions: {
+                         rows: "2",
+                         cols: "15"
+                     }
+                 },
+                 {
+                     name: 'age',
+                     index: 'age',
+                     width: 100,
+                     sortable: false,
+                     editable: true,
+                     edittype: "textarea",
+                     editoptions: {
+                         rows: "2",
+                         cols: "15"
+                     }
+                 },
+                 {
+                     name: 'testdate',
+                     index: 'testdate',
+                     width: 100,
+                     sortable: false,
+                     editable: true,
+                     edittype: "textarea",
+                     editoptions: {
+                         rows: "2",
+                         cols: "15"
+                     }
+                 },
+                 {
+                     name: 'weight',
+                     index: 'weight',
+                     width: 150,
+                     sortable: false,
+                     editable: true,
+                     edittype: "textarea",
+                     editoptions: {
+                         rows: "2",
+                         cols: "15"
+                     }
+                 },
+                 {
+                     name: 'height',
+                     index: 'height',
+                     width: 150,
+                     sortable: false,
+                     editable: true,
+                     edittype: "textarea",
+                     editoptions: {
+                         rows: "2",
+                         cols: "15"
+                     }
+                 },
+                 {
+                     name: 'remark',
+                     index: 'remark',
+                     width: 150,
+                     sortable: false,
+                     editable: true,
+                     edittype: "textarea",
+                     editoptions: {
+                         rows: "2",
+                         cols: "15"
+                     }
+                 },
+                 {
+                     name: 'user_name',
+                     index: 'user_name',
+                     width: 150,
+                     sortable: false,
+                     editable: true,
+                     edittype: "textarea",
+                     editoptions: {
+                         rows: "2",
+                         cols: "15"
+                     }
+                 },
 
-            ],
+             ],
 
-            viewrecords: true, //是否显示总数  如View 1 - 10 of 23
-            rowNum: 30, //每页显示10条
-            rowList: [30, 50, 100], //可选的每页显示条数
-            pager: pager_selector, //指定工具栏
-            altRows: true,
-            shrinkToFit: false,
-            autoScroll: true,
-            /*上面两个属性用于开启滚动条  */
-            multiselect: true, //是否支持多选
-            //multikey: "ctrlKey",
-            multiboxonly: true, //选中行，即可选中行前面的多选框，点击另外一行，此行效果取消，选中当前行，只能实现选中一条
+             viewrecords: true, //是否显示总数  如View 1 - 10 of 23
+             rowNum: 30, //每页显示10条
+             rowList: [30, 50, 100], //可选的每页显示条数
+             pager: pager_selector, //指定工具栏
+             altRows: true,
+             shrinkToFit: false,
+             autoScroll: true,
+             /*上面两个属性用于开启滚动条  */
+             multiselect: true, //是否支持多选
+             //multikey: "ctrlKey",
+             multiboxonly: true, //选中行，即可选中行前面的多选框，点击另外一行，此行效果取消，选中当前行，只能实现选中一条
 
-            loadComplete: function () {
-                var table = this;
-                setTimeout(function () {
-                    styleCheckbox(table);
+             loadComplete: function () {
+                 var table = this;
+                 setTimeout(function () {
+                     styleCheckbox(table);
 
-                    updateActionIcons(table);
-                    updatePagerIcons(table);
-                    enableTooltips(table);
-                }, 0);
-            },
+                     updateActionIcons(table);
+                     updatePagerIcons(table);
+                     enableTooltips(table);
+                 }, 0);
+             },
 
-            editurl: "/subjects/handle", //nothing is saved
-            caption: "受试者信息管理" //表名
+             editurl: "/subjects/handle", //nothing is saved
+             caption: "受试者信息管理" //表名
 
-            //,autowidth: true,
+             //,autowidth: true,
 
-            /**
-             ,
-             grouping:true,
-             groupingView : {
-						 groupField : ['name'],
-						 groupDataSorted : true,
-						 plusicon : 'fa fa-chevron-down bigger-110',
-						 minusicon : 'fa fa-chevron-up bigger-110'
-					},
-             caption: "Grouping"
-             */
+             /**
+              ,
+              grouping:true,
+              groupingView : {
+ 						 groupField : ['name'],
+ 						 groupDataSorted : true,
+ 						 plusicon : 'fa fa-chevron-down bigger-110',
+ 						 minusicon : 'fa fa-chevron-up bigger-110'
+ 					},
+              caption: "Grouping"
+              */
 
-        });
+         });
         $(window).triggerHandler('resize.jqGrid'); //trigger window resize to make the grid get the correct size
 
         //enable search/filter toolbar
@@ -582,6 +630,7 @@
         var fn_editSubmit = function (response, postdata) {
             var json = response.responseText;
             alert(json); //显示返回值
+            alert("1111"); //显示返回值
         };
 
         //重写editOptions
@@ -591,7 +640,7 @@
             width: 600,
             closeOnEscape: true,
             closeAfterEdit: true,
-            //afterSubmit: fn_editSubmit
+            /* afterSubmit: fn_editSubmit, */
             errorTextFormat: function (data) {
                 return 'Error: ' + data.responseText
             }
@@ -626,13 +675,18 @@
                     }).trigger('reloadGrid'); //Reloads the grid after edit
                     return [true, "编辑成功!"];
                 } else {
-                    $(this).jqGrid('setGridParam', {
+                	if(response.responseText == "authority_fail"){
+                		$(this).jqGrid('setGridParam', {
+                            datatype: 'json'
+                        }).trigger('reloadGrid'); //Reloads the grid after edit
+                        return [false, "无操作权限"];
+                	}
+                	$(this).jqGrid('setGridParam', {
                         datatype: 'json'
                     }).trigger('reloadGrid'); //Reloads the grid after edit
-                    return [false, decodeURIComponent(response.responseText)]; //Captures and displays the response text on th Edit window
+                    return [false, decodeURIComponent(response.responseText)];
                 }
             },
-
         }, {
             //新增数据
 
@@ -671,6 +725,31 @@
                 style_delete_form(form);
 
                 form.data('styled', true);
+            },
+            afterSubmit: function (response, postdata) {
+                if (response.responseText == "success") {
+                    $(this).jqGrid('setGridParam', {
+                        datatype: 'json'
+                    }).trigger('reloadGrid'); //Reloads the grid after edit
+                    return [true, "编辑成功!"];
+                } else {
+                	if(response.responseText == "fail"){
+                		$(this).jqGrid('setGridParam', {
+                            datatype: 'json'
+                        }).trigger('reloadGrid'); //Reloads the grid after edit
+                        return [false, "数据查询表中存在此受试者ID，受外键约束，无法删除"]; //Captures and displays the response text on th Edit window
+                	}
+                	if(response.responseText == "authority_fail"){
+                		$(this).jqGrid('setGridParam', {
+                           datatype: 'json'
+                       }).trigger('reloadGrid'); //Reloads the grid after edit
+                       return [false, "无操作权限"];
+                	}
+                	$(this).jqGrid('setGridParam', {
+                        datatype: 'json'
+                    }).trigger('reloadGrid'); //Reloads the grid after edit
+                    return [false, decodeURIComponent(response.responseText)];
+                }
             },
             onClick: function (e) {
                 //alert(1);

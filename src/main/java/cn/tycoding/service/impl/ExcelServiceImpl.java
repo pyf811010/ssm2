@@ -56,7 +56,7 @@ public class ExcelServiceImpl implements ExcelService {
     private MachineMapper machineMapper;
 
     @Override
-    public synchronized State readExcelFile(MultipartFile file) {
+    public synchronized State readExcelFile(MultipartFile file,String user_name) {
         //保存上传结果信息
         State state = new State();
         StringBuffer stringBuffer = new StringBuffer();
@@ -81,7 +81,7 @@ public class ExcelServiceImpl implements ExcelService {
             if ("admin".equals(fileName)) {
                 try {
                     //如果文件类型正确，对文件进行解析，封装成实体类，并保存在list集合中
-                    list = ReadExcel.readExcel(f, new Admin());
+                    list = ReadExcel.readExcel(f, new Admin(),user_name);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -100,7 +100,7 @@ public class ExcelServiceImpl implements ExcelService {
             //实验机器
             else if ("machine".equals(fileName)) {
                 try {
-                    list = ReadExcel.readExcel(f, new Machine());
+                    list = ReadExcel.readExcel(f, new Machine(),user_name);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -116,7 +116,7 @@ public class ExcelServiceImpl implements ExcelService {
             //实验对象
             else if ("subjects".equals(fileName)) {
                 try {
-                    list = ReadExcel.readExcel(f, new Subjects());
+                    list = ReadExcel.readExcel(f, new Subjects(),user_name);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

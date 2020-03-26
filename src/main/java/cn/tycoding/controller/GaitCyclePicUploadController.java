@@ -5,6 +5,8 @@ import cn.tycoding.service.ExcelService;
 import cn.tycoding.service.GaitCyclePicUploadService;
 import cn.tycoding.service.UpdateExcelService;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +28,10 @@ public class GaitCyclePicUploadController {
     
     @RequestMapping(value = "/upload")
     @ResponseBody
-    public State upload_multi(@RequestParam("files") MultipartFile[] files) {
+    public State upload_multi(@RequestParam("files") MultipartFile[] files,HttpServletRequest request) {
+    	String user_name = (String) request.getSession().getAttribute("user_name");
     	if(files.length != 0) {
-            State state = gaitCyclePicUploadService.readExcelFile(files);
+            State state = gaitCyclePicUploadService.readExcelFile(files,user_name);
             return state;
         }else {
             return new State(0, "请选择上传文件");

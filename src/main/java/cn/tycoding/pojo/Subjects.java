@@ -19,6 +19,8 @@ public class Subjects  {
     
     private String remark;
     
+    private String user_name;
+    
     public Subjects() {
     	
     }
@@ -26,7 +28,7 @@ public class Subjects  {
 
 
     public Subjects(String name, String identity_card, String testdate, Integer age, float weight,
-			float height,String remark) {
+			float height,String remark,String user_name) {
 		super();
 		this.name = name;
 		this.identity_card = identity_card;
@@ -35,11 +37,24 @@ public class Subjects  {
 		this.weight = weight;
 		this.height = height;
 		this.remark = remark;
+		this.user_name = user_name;
 	}
 
 
 
     
+	public String getUser_name() {
+		return user_name;
+	}
+
+
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
+
+
 	public String getRemark() {
 		return remark;
 	}

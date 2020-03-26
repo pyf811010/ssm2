@@ -27,9 +27,9 @@
   </delete>
 
   <insert id="insert" parameterType="cn.tycoding.pojo.FilesVideo">
-    insert into files_video (expid, url, id_query,files_name
+    insert into files_video (expid, url, id_query,files_name,user_name
       )
-    values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, #{files_name,jdbcType=VARCHAR}
+    values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, #{files_name,jdbcType=VARCHAR},#{user_name,jdbcType=VARCHAR}
       )
   </insert>
 

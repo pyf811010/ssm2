@@ -122,8 +122,6 @@ public class FilesMontionCaptureServiceImpl implements FilesMontionCaptureServic
                 for (int i = 0; i < id.length; i++) {
                 	int expid = Integer.parseInt(id[i]);
                 	String url = filesMontionCaptureMapper.getPathByExpid(expid);
-                	System.out.println(url);
-//                	url = url.substring(0, url.lastIndexOf("/"));
                 	File file = new File(url);
                 	boolean result = file.delete();
                     int tryCount = 0;

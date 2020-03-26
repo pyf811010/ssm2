@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,12 +67,10 @@ public class MachineController {
     
     @RequestMapping("/handle")
     @ResponseBody
-    public String handle(String oper, Machine machine, String id[])
+    public String handle(String oper, Machine machine, String id[],HttpServletRequest request)
             throws UnsupportedEncodingException {
-    	System.out.println(id);
-        String temp = machineService.handle(oper, machine, id);
-        // 对传回的中文进行编码
-        return URLEncoder.encode(temp, "UTF-8");
+        return machineService.authorityTemp(oper,machine,id,request);
+
     }
     
 
