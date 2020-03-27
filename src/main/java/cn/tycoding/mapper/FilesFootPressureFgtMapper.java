@@ -38,4 +38,6 @@ public interface FilesFootPressureFgtMapper {
 	void del(String string);
 	
 	boolean dataifexist(String url); 
+	
+	String findTypeByUserName(String user_name); 
 }

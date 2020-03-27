@@ -1,10 +1,12 @@
 package cn.tycoding.service.impl;
 
+import cn.tycoding.mapper.AdminMapper;
 import cn.tycoding.mapper.EgContrastMapper;
 import cn.tycoding.mapper.SubjectsMapper;
 import cn.tycoding.mapper.UserTestMapper;
 import cn.tycoding.pojo.Admin;
 import cn.tycoding.pojo.EgContrast;
+import cn.tycoding.pojo.FilesElectromyography;
 import cn.tycoding.pojo.ObjectQuery;
 import cn.tycoding.pojo.State;
 import cn.tycoding.pojo.Subjects;
@@ -19,9 +21,13 @@ import cn.tycoding.util.QueryCondition;
 import cn.tycoding.util.QueryUtil;
 import cn.tycoding.util.SqlJointUtil;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +47,8 @@ public class EgContrastServiceImpl implements EgContrastService {
     @Autowired
     private EgContrastMapper egContrastMapper;
 
+    @Autowired
+    private AdminMapper adminMapper;
 
 	@Override
 	public ObjectQuery findByPage(Boolean _search, String filters, int page, int rows) {
@@ -118,7 +126,7 @@ public class EgContrastServiceImpl implements EgContrastService {
                 }
                 String str = count + "条成功删除" + (id.length - count) + "条删除失败";
                 System.out.println(str);
-                return str;
+                return "success";
             case "add":
                 // 新增对象
                 System.out.println(egContrast.toString());
@@ -141,6 +149,56 @@ public class EgContrastServiceImpl implements EgContrastService {
 		
 	}
 
+	@Override
+	public String authorityTemp(String oper, EgContrast egContrast, String[] id, HttpServletRequest request) throws UnsupportedEncodingException {
+		String user_name = (String) request.getSession().getAttribute("user_name");
+		String type = adminMapper.findTypeByUserName(user_name);
+		if(type.equals("管理员")){
+			System.out.println("用户为管理员");
+			if(oper.equals("add")) egContrast.setUser_name(user_name);
+			return URLEncoder.encode(handle(oper, egContrast, id), "UTF-8");
+		}
+        System.out.println("session中的user_name -----> " + user_name);
+        if(id == null){
+        	//点击页面下方编辑按钮会传入后台id，而直接在修改行提交修改则不会直接传入后台id
+        	String machineUser_name2 = egContrast.getUser_name();
+        	System.out.println(machineUser_name2);
+            if (!user_name.equals(machineUser_name2)) {
+                System.out.println("无权限修改");
+                return URLEncoder.encode("fail", "UTF-8");
+            }
+            String temp = handle(oper, egContrast, id);
+            System.out.println(temp);
+            // 对传回的中文进行编码
+            return URLEncoder.encode(temp, "UTF-8");
+        }else{
+        	//增加受试者信息的判断(增加受试者信息时，id为_empty，需要数据库自增)
+        	 if(id[0].equals("_empty")){
+        		 egContrast.setUser_name(user_name);
+                 String temp = handle(oper, egContrast, id);
+                 System.out.println(temp);
+                 // 对传回的中文进行编码
+                 return URLEncoder.encode(temp, "UTF-8");
+             }
+            for (int i = 0; i < id.length; i++) {
+                String machineUser_name = (selectByPrimaryKey(Integer.valueOf(id[i]))).getUser_name();
+                System.out.println("数据库中的user_name -----> " + machineUser_name);
+                if (!user_name.equals(machineUser_name)) {
+                    System.out.println("无权限修改");
+                    return URLEncoder.encode("fail", "UTF-8");
+                }
+            }
+            String temp = handle(oper, egContrast, id);
+            System.out.println(temp);
+            // 对传回的中文进行编码
+            return URLEncoder.encode(temp, "UTF-8");
+        }
+	}
+
+	
+	private EgContrast selectByPrimaryKey(Integer expid) {
+		return egContrastMapper.selectByPrimaryKey(expid);
+	}
 	/*@Override
 	public List<UserTest> findAllByRelateType(int type) {
 		List<UserTest> findAllByRelateType = subjectsMapper.findAllByRelateType(type);

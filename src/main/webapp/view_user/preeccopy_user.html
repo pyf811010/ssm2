@@ -307,7 +307,7 @@
 
             //data: grid_data,
             datatype: "json",
-            height: 600,
+            height: 500,
             colNames: ['操作', '', 'ID', '实验条件', '实验者信息ID', '测试设备ID', '动捕数据信息', '跑台数据信息', 'pedar足底压力数据信息', '耗氧量数据信息', '肌电数据信息', '视频数据文件','备注信息','操作用户'],
             colModel: [{
                 name: 'op',
@@ -320,31 +320,27 @@
                 search: false,
                 formatter: 'actions',
                 formatoptions: {
+                	onSuccess: function(response) {
+                   	 if (response.responseText == "success") {
+                            $(this).jqGrid('setGridParam', {
+                                datatype: 'json'
+                            }).trigger('reloadGrid'); //Reloads the grid after edit
+                            alert("修改成功");
+                        	}else if(response.responseText == "fail"){
+                        		$(this).jqGrid('setGridParam', {
+                                    datatype: 'json'
+                                }).trigger('reloadGrid'); //Reloads the grid after edit
+                                alert("无修改权限"); //Captures and displays the response text on th Edit window
+                        	}
+                        	else{
+                        			$(this).jqGrid('setGridParam', {
+                                		datatype: 'json'
+                           		 }).trigger('reloadGrid'); //Reloads the grid after edit
+                            		alert(decodeURIComponent(response.responseText));
+                        		 }                    
+                   	 },
                     keys: true,
                     //delbutton: false,//disable delete button
-                    editOptions: {
-                        recreateForm: true,
-                        beforeShowForm: beforeEditCallback,
-                        afterSubmit: function (response, postdata) {
-                            if (response.responseText == "success") {
-                                $(this).jqGrid('setGridParam', {
-                                    datatype: 'json'
-                                }).trigger('reloadGrid'); //Reloads the grid after edit
-                                return [true, "编辑成功!"];
-                            } else {
-                            	if(response.responseText == "fail"){
-                            		$(this).jqGrid('setGridParam', {
-                                        datatype: 'json'
-                                    }).trigger('reloadGrid'); //Reloads the grid after edit
-                                    return [false, "无操作权限"]; //Captures and displays the response text on th Edit window
-                            	}
-                            	$(this).jqGrid('setGridParam', {
-                                    datatype: 'json'
-                                }).trigger('reloadGrid'); //Reloads the grid after edit
-                                return [false, decodeURIComponent(response.responseText)];
-                            }
-                        }
-                    },
                     delOptions: {
                         recreateForm: true,
                         beforeShowForm: beforeDeleteCallback,

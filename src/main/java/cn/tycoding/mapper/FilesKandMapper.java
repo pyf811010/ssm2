@@ -48,4 +48,6 @@ public interface FilesKandMapper {
 	
 	boolean dataifexist(String url); 
 	
+	String findTypeByUserName(String user_name); 
+	
 }

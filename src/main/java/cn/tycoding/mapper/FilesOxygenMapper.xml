@@ -9,7 +9,7 @@
   </resultMap>
 
   <sql id="Base_Column_List">
-    expid, url, id_query,files_name
+    expid, url, id_query,files_name,user_name
   </sql>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -85,14 +85,15 @@
 	  update files_oxygen
       set url = #{url},
       id_query = #{id_query},
-      files_name = #{files_name}
+      files_name = #{files_name},
+      user_name = #{user_name}
       where expid = #{expid}
 	</update>
 
     <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.FilesOxygen">
 		insert into files_oxygen
-		values(#{expid},#{url},#{id_query},#{files_name});
+		values(#{expid},#{url},#{id_query},#{files_name},#{user_name});
 	</insert>
 
     <!-- 按学号删除学生 -->
@@ -100,6 +101,12 @@
 		delete from files_oxygen
 		where expid=#{expid}
 	</delete>
+	
+	    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFilters" parameterType="string"
+            resultType="cn.tycoding.pojo.FilesOxygen">
+		${_parameter}
+	</select>
 
     <!-- 按照filter的复杂条件查找 -->
     <select id="findByFiltersSum" parameterType="string"

@@ -1,6 +1,9 @@
 package cn.tycoding.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import cn.tycoding.pojo.Admin;
 import cn.tycoding.pojo.EgContrast;
@@ -22,6 +25,8 @@ public interface EgContrastService {
 	List<EgContrast> findAllById(int id);
 
 	String handle(String oper, EgContrast egContrast, String[] id);
+
+	String authorityTemp(String oper, EgContrast egContrast, String[] id, HttpServletRequest request) throws UnsupportedEncodingException;
 
 //	List<UserTest> findAllByRelateType(int type);
 }

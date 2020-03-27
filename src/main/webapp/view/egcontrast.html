@@ -286,7 +286,7 @@
             //data: grid_data,
             datatype: "json",
             height: 500,
-            colNames: ['操作', '', 'ID', '传感器01', '传感器02', '传感器03', '传感器04', '传感器05', '传感器06', '传感器07', '传感器08', '传感器09', '传感器10', '传感器11', '传感器12', '传感器13', '传感器14', '传感器15', '传感器16', '传感器17', '传感器18', '传感器19', '传感器20', '传感器21', '传感器22', '传感器23', '传感器24', '传感器25', '传感器26', '传感器27', '传感器28', '传感器29', '传感器30', '传感器31', '传感器32'],
+            colNames: ['操作', '', 'ID', '传感器01', '传感器02', '传感器03', '传感器04', '传感器05', '传感器06', '传感器07', '传感器08', '传感器09', '传感器10', '传感器11', '传感器12', '传感器13', '传感器14', '传感器15', '传感器16', '传感器17', '传感器18', '传感器19', '传感器20', '传感器21', '传感器22', '传感器23', '传感器24', '传感器25', '传感器26', '传感器27', '传感器28', '传感器29', '传感器30', '传感器31', '传感器32','操作用户'],
             colModel: [{
                 name: 'op',
                 index: 'op',
@@ -298,17 +298,49 @@
                 search: false,
                 formatter: 'actions',
                 formatoptions: {
+                	onSuccess: function(response) {
+                      	 if (response.responseText == "success") {
+                               $(this).jqGrid('setGridParam', {
+                                   datatype: 'json'
+                               }).trigger('reloadGrid'); //Reloads the grid after edit
+                               alert("修改成功");
+                           	}else if(response.responseText == "fail"){
+                           		$(this).jqGrid('setGridParam', {
+                                      datatype: 'json'
+                                  }).trigger('reloadGrid'); //Reloads the grid after edit
+                                  alert("无修改权限");
+                           	}else{
+                           			$(this).jqGrid('setGridParam', {
+                                   		datatype: 'json'
+                              		 }).trigger('reloadGrid'); //Reloads the grid after edit
+                               		alert(decodeURIComponent(response.responseText));
+                           		 }                    
+                      	 },
                     keys: true,
                     //delbutton: false,//disable delete button
-                    editOptions: {
-                        recreateForm: true,
-                        beforeShowForm: beforeEditCallback
-                    },
                     delOptions: {
                         recreateForm: true,
-                        beforeShowForm: beforeDeleteCallback
+                        beforeShowForm: beforeDeleteCallback,
+                        afterSubmit: function (response, postdata) {
+                            if (response.responseText == "success") {
+                                $(this).jqGrid('setGridParam', {
+                                    datatype: 'json'
+                                }).trigger('reloadGrid'); //Reloads the grid after edit
+                                return [true, "删除成功!"];
+                            } else {
+                            	if(response.responseText == "fail"){
+                            		$(this).jqGrid('setGridParam', {
+                                        datatype: 'json'
+                                    }).trigger('reloadGrid'); //Reloads the grid after edit
+                                    return [false, "无操作权限"]; //Captures and displays the response text on th Edit window
+                            	}
+                            	$(this).jqGrid('setGridParam', {
+                                    datatype: 'json'
+                                }).trigger('reloadGrid'); //Reloads the grid after edit
+                                return [false, decodeURIComponent(response.responseText)];
+                            }
+                        }
                     },
-
                 }
             },
                 {
@@ -326,7 +358,7 @@
                     index: 'expid',
                     width: 50,
                     key: true,
-                    editable: false,//即不可编辑，新增时此属性也不能添加
+                    editable: true,//即不可编辑，新增时此属性也不能添加
                     edittype: "textarea",
                     editoptions: {
                         rows: "2",
@@ -677,9 +709,22 @@
                         rows: "2",
                         cols: "15"
                     }
-                }, {
+                }, 
+                {
                     name: 'sensor32',
                     index: 'sensor32',
+                    width: 100,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                },
+                {
+                    name: 'user_name',
+                    index: 'user_name',
                     width: 100,
                     sortable: false,
                     editable: true,
@@ -801,19 +846,25 @@
             closeOnEscape: true,
             closeAfterEdit: true,
             //提交后的回调
-            afterSubmit: function (response, postdata) {
-                if (response.responseText == "success") {
-                    $(this).jqGrid('setGridParam', {
-                        datatype: 'json'
-                    }).trigger('reloadGrid'); //Reloads the grid after edit
-                    return [true, "编辑成功!"];
-                } else {
-                    $(this).jqGrid('setGridParam', {
-                        datatype: 'json'
-                    }).trigger('reloadGrid'); //Reloads the grid after edit
-                    return [false, decodeURIComponent(response.responseText)]; //Captures and displays the response text on th Edit window
-                }
-            },
+           afterSubmit: function (response, postdata) {
+                            if (response.responseText == "success") {
+                                $(this).jqGrid('setGridParam', {
+                                    datatype: 'json'
+                                }).trigger('reloadGrid'); //Reloads the grid after edit
+                                return [true, "编辑成功!"];
+                            } else {
+                            	if(response.responseText == "fail"){
+                            		$(this).jqGrid('setGridParam', {
+                                        datatype: 'json'
+                                    }).trigger('reloadGrid'); //Reloads the grid after edit
+                                    return [false, "无操作权限"]; //Captures and displays the response text on th Edit window
+                            	}
+                            	$(this).jqGrid('setGridParam', {
+                                    datatype: 'json'
+                                }).trigger('reloadGrid'); //Reloads the grid after edit
+                                return [false, decodeURIComponent(response.responseText)];
+                            }
+                        },
 
         }, {
             //新增数据
@@ -853,6 +904,25 @@
                 style_delete_form(form);
 
                 form.data('styled', true);
+            },
+            afterSubmit: function (response, postdata) {
+                if (response.responseText == "success") {
+                    $(this).jqGrid('setGridParam', {
+                        datatype: 'json'
+                    }).trigger('reloadGrid'); //Reloads the grid after edit
+                    return [true, "编辑成功!"];
+                } else {
+                	if(response.responseText == "fail"){
+                		$(this).jqGrid('setGridParam', {
+                            datatype: 'json'
+                        }).trigger('reloadGrid'); //Reloads the grid after edit
+                        return [false, "无操作权限"]; //Captures and displays the response text on th Edit window
+                	}
+                	$(this).jqGrid('setGridParam', {
+                        datatype: 'json'
+                    }).trigger('reloadGrid'); //Reloads the grid after edit
+                    return [false, decodeURIComponent(response.responseText)];
+                }
             },
             onClick: function (e) {
                 //alert(1);

@@ -40,8 +40,9 @@ public class GaitCyclePicUploadController {
     
     @RequestMapping(value = "/singlePicUpload")
     @ResponseBody
-    public State upload_single(@RequestParam("files") MultipartFile[] files,String fi_info) {
-    	State state = gaitCyclePicUploadService.readSingleFile(fi_info,files);
+    public State upload_single(@RequestParam("files") MultipartFile[] files,String fi_info,HttpServletRequest request) {
+    	String user_name = (String) request.getSession().getAttribute("user_name");
+    	State state = gaitCyclePicUploadService.readSingleFile(fi_info,files,user_name);
     	return state;
     }
 }

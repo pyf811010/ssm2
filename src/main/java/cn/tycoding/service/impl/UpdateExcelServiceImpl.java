@@ -37,7 +37,7 @@ public class UpdateExcelServiceImpl implements UpdateExcelService {
     private FilesKandUpdateinfoMapper filesKandUpdateinfoMapper;
 
     @Override
-    public State readExcelFile(String fi_info,MultipartFile[] files) {
+    public State readExcelFile(String fi_info,MultipartFile[] files,String user_name) {
     	if(fi_info.equals("")){
     		fi_info = "未添加记录";
     	}
@@ -112,6 +112,7 @@ public class UpdateExcelServiceImpl implements UpdateExcelService {
             		String updatetime = dateFormat.format(date);
                     filesKandUpdateinfo.setUpdatetime(updatetime);
                     filesKandUpdateinfo.setExpid(expid);
+                    filesKandUpdateinfo.setUser_name(user_name);
                     int insert = filesKandUpdateinfoMapper.insert(filesKandUpdateinfo);
                         if (insert > 0) {
                             System.out.println("---------------插入成功！---------------");

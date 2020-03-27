@@ -39,5 +39,7 @@ public interface FilesKandUpdateinfoMapper {
 
 	int getNameCount(String subname);
 	
+	String findTypeByUserName(String user_name); 
+	
 
 }

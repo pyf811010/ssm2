@@ -74,7 +74,13 @@ public class ReadExcel {
                 if (o instanceof Machine){
                     Machine machine = new Machine();
                     machine.setName(row.getCell(0).getStringCellValue());
+                    String stringCellValue = row.getCell(1).getStringCellValue();
+                    if(stringCellValue==null){
+                    	System.out.println("StringCellValue:"+stringCellValue);
+                    	machine.setType("");
+                    }else{
                     machine.setType(row.getCell(1).getStringCellValue());
+                    }
                     machine.setCompany(row.getCell(2).getStringCellValue());
                     machine.setPlace(row.getCell(3).getStringCellValue());
                     machine.setRemark(row.getCell(4).getStringCellValue());

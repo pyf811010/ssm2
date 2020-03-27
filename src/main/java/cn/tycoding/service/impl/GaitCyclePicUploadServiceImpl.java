@@ -129,7 +129,7 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
                             stringBuffer.append(fileName + "\n");
                             continue;
                         }
-                        insertRemark(fileName, url, map);
+                        insertRemark(fileName, url, map,user_name);
                     }
                 }
             } catch (Exception e) {
@@ -201,8 +201,9 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
      * @param fileName 文件名
      * @param url      文件在服务器地址（绝对地址）
      * @param map      存放文件备注信息
+     * @param user_name 
      */
-    private void insertRemark(String fileName, String url, Map<String, String> map) {
+    private void insertRemark(String fileName, String url, Map<String, String> map, String user_name) {
         GaitCyclePic gaitCyclePic = new GaitCyclePic();
         //文件名。不含后缀
         String name = fileName.substring(0, fileName.indexOf("."));
@@ -217,6 +218,7 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
         	String remark = "未添加任何记录";
         	gaitCyclePic.setRemark(remark);
         }
+        gaitCyclePic.setUser_name(user_name);
         int add = gaitCyclePicMapper.add(gaitCyclePic);
         if (add > 0) {
             System.out.println("插入成功");
@@ -224,7 +226,7 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
     }
 
 	@Override
-	public State readSingleFile(String fi_info,MultipartFile[] files) {
+	public State readSingleFile(String fi_info,MultipartFile[] files,String user_name) {
     	if(fi_info.equals("")){
     		fi_info = "未添加记录";
     	}
@@ -278,6 +280,7 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
                     gaitCyclePic.setRemark(fi_info);
                     gaitCyclePic.setName(fileName);
                     gaitCyclePic.setUrl(url);
+                    gaitCyclePic.setUser_name(user_name);
                     int add = gaitCyclePicMapper.add(gaitCyclePic);
                     if(add>0){
                     	System.out.println("插入成功");

@@ -8,7 +8,7 @@
     <result column="url" jdbcType="VARCHAR" property="url" />
   </resultMap>
   <sql id="Base_Column_List">
-    p_id, name, remark, url
+    p_id, name, remark, url,user_name
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -22,9 +22,9 @@
   </delete>
   <insert id="insert" parameterType="cn.tycoding.pojo.GaitCyclePic">
     insert into gait_cycle_pic (p_id, name, remark, 
-      url)
+      url,user_name)
     values (#{p_id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{url,jdbcType=VARCHAR})
+      #{url,jdbcType=VARCHAR},#{user_name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.tycoding.pojo.GaitCyclePic">
     insert into gait_cycle_pic
@@ -76,7 +76,8 @@
     update gait_cycle_pic
     set name = #{name,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR}
+      url = #{url,jdbcType=VARCHAR},
+      user_name = #{user_name,jdbcType=VARCHAR}
     where p_id = #{p_id,jdbcType=INTEGER}
   </update>
   
@@ -104,14 +105,15 @@
 	  update gait_cycle_pic
       set url = #{url},
       name = #{name},
-      remark = #{remark}
+      remark = #{remark},
+      user_name = #{user_name}
       where p_id = #{p_id}
 	</update>
 
     <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.GaitCyclePic">
 		insert into gait_cycle_pic
-		values(#{p_id},#{name},#{remark},#{url});
+		values(#{p_id},#{name},#{remark},#{url},#{user_name});
 	</insert>
 
     <!-- 按学号删除学生 -->

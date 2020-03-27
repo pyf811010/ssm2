@@ -12,5 +12,5 @@ public interface GaitCyclePicUploadService {
 
     State readExcelFile(MultipartFile[] files, String user_name);
 
-	State readSingleFile(String fi_info, MultipartFile[] files);
+	State readSingleFile(String fi_info, MultipartFile[] files,String user_name);
 }

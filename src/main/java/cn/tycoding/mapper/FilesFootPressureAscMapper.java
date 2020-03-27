@@ -34,7 +34,9 @@ public interface FilesFootPressureAscMapper {
 	int add(FilesFootPressureAsc filesFootPressureAsc);
 
 	void del(String string);
-
+	
+	String findTypeByUserName(String user_name); 
+	
 	int edit(FilesFootPressureAsc filesFootPressureAsc);
 	boolean dataifexist(String url); 
 }

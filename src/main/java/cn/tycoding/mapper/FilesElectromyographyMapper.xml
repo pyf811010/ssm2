@@ -8,7 +8,7 @@
     <result column="file_name" jdbcType="VARCHAR" property="file_name" />
   </resultMap>
   <sql id="Base_Column_List">
-    expid, url, id_query, file_name
+    expid, url, id_query, file_name,user_name
   </sql>
   
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -108,14 +108,15 @@
 	  update files_electromyography
       set url = #{url},
       id_query = #{id_query},
-      file_name = #{file_name}
+      file_name = #{file_name},
+      user_name = #{user_name}
       where expid = #{expid}
 	</update>
 
     <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.FilesElectromyography">
 		insert into files_electromyography
-		values(#{expid},#{url},#{id_query},#{file_name});
+		values(#{expid},#{url},#{id_query},#{file_name},#{user_name});
 	</insert>
 
     <!-- 按学号删除学生 -->

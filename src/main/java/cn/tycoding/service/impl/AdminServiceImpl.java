@@ -216,7 +216,7 @@ public class AdminServiceImpl implements AdminService {
                 }
                 String str = count + "条成功删除" + (id.length - count) + "条删除失败";
                 System.out.println(str);
-                return str;
+                return "success";
             case "add":
                 // 新增对象
                 System.out.println(admin.toString());

@@ -9,7 +9,7 @@
     <result column="url" jdbcType="VARCHAR" property="url" />
   </resultMap>
   <sql id="Base_Column_List">
-    u_id, file_name, comment, updatetime, url
+    u_id, file_name, comment, updatetime, url,user_name
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -25,9 +25,9 @@
   </delete>
   <insert id="insert" parameterType="cn.tycoding.pojo.FilesKandUpdateinfo">
     insert into files_kand_updateinfo (expid,file_name, comment, 
-      updatetime, url)
+      updatetime, url,user_name)
     values (#{expid,jdbcType=INTEGER},#{file_name,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, 
-      #{updatetime,jdbcType=TIMESTAMP}, #{url,jdbcType=VARCHAR})
+      #{updatetime,jdbcType=TIMESTAMP}, #{url,jdbcType=VARCHAR}, #{user_name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.tycoding.pojo.FilesKandUpdateinfo">
     insert into files_kand_updateinfo
@@ -89,7 +89,8 @@
     set file_name = #{file_name,jdbcType=VARCHAR},
       comment = #{comment,jdbcType=VARCHAR},
       updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      url = #{url,jdbcType=VARCHAR}
+      url = #{url,jdbcType=VARCHAR},
+      user_name = #{user_name,jdbcType=VARCHAR}
     where u_id = #{u_id,jdbcType=INTEGER}
   </update>
 
@@ -121,14 +122,15 @@
       file_name = #{file_name},
        comment = #{comment},
       updatetime = #{updatetime},
-       url = #{url}
+       url = #{url},
+       user_name = #{user_name}
       where u_id = #{u_id}
 	</update>
 
     <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.FilesKandUpdateinfo">
 		insert into files_kand_updateinfo
-		values(#{u_id},#{expid},#{file_name},#{comment},#{updatetime},#{url});
+		values(#{u_id},#{expid},#{file_name},#{comment},#{updatetime},#{url},#{user_name});
 	</insert>
 
     <!-- 按学号删除学生 -->

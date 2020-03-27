@@ -150,6 +150,7 @@ public class MachineServiceImpl implements MachineService {
 		String type = adminMapper.findTypeByUserName(user_name);
 		if(type.equals("管理员")){
 			System.out.println("用户为管理员");
+			if(oper.equals("add")) machine.setUser_name(user_name);
 			return URLEncoder.encode(handle(oper, machine, id), "UTF-8");
 		}
         System.out.println("session中的user_name -----> " + user_name);

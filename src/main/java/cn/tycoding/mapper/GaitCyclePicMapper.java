@@ -38,5 +38,7 @@ public interface GaitCyclePicMapper {
 	void del(String string);
 
 	Integer getPidByFileName(String name);
+	
+	String findTypeByUserName(String user_name); 
 
 }

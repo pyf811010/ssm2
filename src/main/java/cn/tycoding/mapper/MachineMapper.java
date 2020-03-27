@@ -55,4 +55,6 @@ public interface MachineMapper {
 	 * @return 返回插入成功的数据数量
 	 */
 	int addTemplate(Machine machine);
+	
+	String findTypeByUserName(String user_name); 
 }
