@@ -118,7 +118,7 @@ public class FilesVideoServiceImpl implements FilesVideoService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_video");
                 }
                 break;
             case "del":
@@ -150,7 +150,7 @@ public class FilesVideoServiceImpl implements FilesVideoService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_video");
                 }
         }
         return "success";

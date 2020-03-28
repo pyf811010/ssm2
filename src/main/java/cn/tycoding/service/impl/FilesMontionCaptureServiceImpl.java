@@ -121,7 +121,7 @@ public class FilesMontionCaptureServiceImpl implements FilesMontionCaptureServic
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_montion_capture");
                 }
                 break;
             case "del":
@@ -153,7 +153,7 @@ public class FilesMontionCaptureServiceImpl implements FilesMontionCaptureServic
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_montion_capture");
                 }
         }
         return "success";

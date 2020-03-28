@@ -64,26 +64,56 @@ public class ReadExcel {
                 }
                 if (o instanceof Admin){
                     Admin admin = new Admin();
-                    admin.setA_name(row.getCell(0).getStringCellValue());
-                    row.getCell(1).setCellType(CellType.STRING);
-                    admin.setA_password(row.getCell(1).getStringCellValue());
-                    row.getCell(2).setCellType(CellType.STRING);
-                    admin.setType(row.getCell(2).getStringCellValue());
+                    if(row.getCell(0)==null) return null;
+                    else {
+                    	row.getCell(0).setCellType(CellType.STRING);
+                    	admin.setA_name(row.getCell(0).getStringCellValue());
+                    }
+                    if(row.getCell(1)==null) return null;
+                    else{
+                    	row.getCell(1).setCellType(CellType.STRING);
+                        admin.setA_password(row.getCell(1).getStringCellValue());
+                    }
+                    if(row.getCell(2)==null) return null;
+                    else{
+                    	row.getCell(2).setCellType(CellType.STRING);
+                        admin.setType(row.getCell(2).getStringCellValue());
+                    }
                     list.add(admin);
                 }
                 if (o instanceof Machine){
                     Machine machine = new Machine();
-                    machine.setName(row.getCell(0).getStringCellValue());
-                    String stringCellValue = row.getCell(1).getStringCellValue();
-                    if(stringCellValue==null){
-                    	System.out.println("StringCellValue:"+stringCellValue);
-                    	machine.setType("");
-                    }else{
-                    machine.setType(row.getCell(1).getStringCellValue());
+                    if(row.getCell(0)==null){
+                    	//设备名称列不能为空
+                    	return null;
+                    }else {
+                    	row.getCell(0).setCellType(CellType.STRING);
+                    	machine.setName(row.getCell(0).getStringCellValue());
                     }
-                    machine.setCompany(row.getCell(2).getStringCellValue());
-                    machine.setPlace(row.getCell(3).getStringCellValue());
-                    machine.setRemark(row.getCell(4).getStringCellValue());
+                    if(row.getCell(1)==null){
+                    	machine.setType("");
+                    }else {
+                    	row.getCell(1).setCellType(CellType.STRING);
+                    	machine.setType(row.getCell(1).getStringCellValue());
+                    }
+                    if(row.getCell(2)==null){
+                    	machine.setCompany("");
+                    }else {
+                    	row.getCell(2).setCellType(CellType.STRING);
+                    	machine.setCompany(row.getCell(2).getStringCellValue());
+                    }
+                    if(row.getCell(3)==null){
+                    	machine.setPlace("");
+                    }else{
+                    	row.getCell(3).setCellType(CellType.STRING);
+                    	machine.setPlace(row.getCell(3).getStringCellValue());
+                    } 
+                    if(row.getCell(4)==null){
+                    	machine.setRemark("");
+                    }else{
+                    	row.getCell(4).setCellType(CellType.STRING);
+                    	machine.setRemark(row.getCell(4).getStringCellValue());
+                    } 
                     machine.setUser_name(user_name);
                     list.add(machine);
                 }
@@ -91,23 +121,42 @@ public class ReadExcel {
                     Subjects subjects = new Subjects();
                     /*row.getCell(0).setCellType(CellType.STRING);*/
                     //身份证
-                    System.out.println(row.getCell(0).getStringCellValue());
-                    subjects.setIdentity_card(row.getCell(0).getStringCellValue());
+                    if(row.getCell(0)==null) subjects.setIdentity_card("");
+                    else{
+                    	row.getCell(0).setCellType(CellType.STRING);
+                    	subjects.setIdentity_card(row.getCell(0).getStringCellValue());
+                    } 
                     //姓名
-                    subjects.setName(row.getCell(1).getStringCellValue());
-                    row.getCell(2).setCellType(CellType.STRING);
-                    //excel必须为文本格式
-                    row.getCell(3).setCellType(CellType.STRING);
-                    //年龄
-                    subjects.setAge(Integer.valueOf(row.getCell(2).getStringCellValue()));
-                    //日期
-                    subjects.setTestdate(row.getCell(3).getStringCellValue());
+                    if(row.getCell(1)==null) subjects.setName("");
+                    else{
+                    	row.getCell(1).setCellType(CellType.STRING);
+                    	subjects.setName(row.getCell(1).getStringCellValue());
+                    }
+                    if(row.getCell(2)==null) subjects.setAge(null);
+                    else{
+                    	row.getCell(2).setCellType(CellType.STRING);
+                    	//年龄
+                    	subjects.setAge(Integer.valueOf(row.getCell(2).getStringCellValue()));
+                    }
+                    if(row.getCell(3)==null) subjects.setTestdate("");
+                    else{
+                    	//excel必须为文本格式
+                    	row.getCell(3).setCellType(CellType.STRING);
+                    	//日期
+                    	subjects.setTestdate(row.getCell(3).getStringCellValue());
+                    }
                     //体重
-                    subjects.setWeight((float) row.getCell(4).getNumericCellValue());
+                    if(row.getCell(4)==null) return null;
+                    else subjects.setWeight((float) row.getCell(4).getNumericCellValue());
                     //身高
-                    subjects.setHeight((float) row.getCell(5).getNumericCellValue());
+                    if(row.getCell(5)==null) return null;
+                    else subjects.setHeight((float) row.getCell(5).getNumericCellValue());
                     //备注信息
-                    subjects.setRemark(row.getCell(6).getStringCellValue());
+                    if(row.getCell(6)==null) subjects.setRemark("");
+                    else{
+                    	row.getCell(6).setCellType(CellType.STRING);
+                    	subjects.setRemark(row.getCell(6).getStringCellValue());
+                    }
                     subjects.setUser_name(user_name);
                     list.add(subjects);
                 }

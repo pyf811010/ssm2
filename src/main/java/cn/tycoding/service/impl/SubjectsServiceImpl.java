@@ -117,7 +117,7 @@ public class SubjectsServiceImpl implements SubjectsService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"subjects");
                 }
                 break;
             case "del":
@@ -146,7 +146,7 @@ public class SubjectsServiceImpl implements SubjectsService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"subjects");
                 }
         }
         return "success";

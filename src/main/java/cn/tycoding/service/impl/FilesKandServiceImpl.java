@@ -115,7 +115,7 @@ public class FilesKandServiceImpl implements FilesKandService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_kand");
                 }
                 break;
             case "del":
@@ -147,7 +147,7 @@ public class FilesKandServiceImpl implements FilesKandService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_kand");
                 }
         }
         return "success";

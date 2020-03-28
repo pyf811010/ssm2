@@ -109,7 +109,7 @@ public class FilesEleServiceImpl implements FilesEleService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_electromyography");
                 }
                 break;
             case "del":
@@ -141,7 +141,7 @@ public class FilesEleServiceImpl implements FilesEleService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_electromyography");
                 }
         }
         return "success";

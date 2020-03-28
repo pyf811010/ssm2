@@ -120,7 +120,7 @@ public class FilesFootPressureAscServiceImpl implements FilesFootPressureAscServ
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_foot_pressure_asc");
                 }
                 break;
             case "del":
@@ -153,7 +153,7 @@ public class FilesFootPressureAscServiceImpl implements FilesFootPressureAscServ
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_foot_pressure_asc");
                 }
         }
         return "success";

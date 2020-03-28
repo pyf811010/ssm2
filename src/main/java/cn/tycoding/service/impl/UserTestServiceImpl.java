@@ -99,7 +99,7 @@ public class UserTestServiceImpl implements UserTestService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return "fail";
                 }
                 break;
             case "del":
@@ -122,7 +122,7 @@ public class UserTestServiceImpl implements UserTestService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return "fail";
                 }
         }
         return "success";

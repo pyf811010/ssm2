@@ -119,7 +119,7 @@ public class FilesOxygenServiceImpl implements FilesOxygenService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_oxygen");
                 }
                 break;
             case "del":
@@ -153,7 +153,7 @@ public class FilesOxygenServiceImpl implements FilesOxygenService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_oxygen");
                 }
         }
         return "success";

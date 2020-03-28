@@ -121,7 +121,7 @@ public class FilesSlotMachineServiceImpl implements FilesSlotMachineService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_slot_machine");
                 }
                 break;
             case "del":
@@ -153,7 +153,7 @@ public class FilesSlotMachineServiceImpl implements FilesSlotMachineService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_slot_machine");
                 }
         }
         return "success";

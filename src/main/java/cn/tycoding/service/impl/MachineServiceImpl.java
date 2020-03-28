@@ -115,7 +115,7 @@ public class MachineServiceImpl implements MachineService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"machine");
                 }
                 break;
             case "del":
@@ -138,7 +138,7 @@ public class MachineServiceImpl implements MachineService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"machine");
                 }
         }
         return "success";

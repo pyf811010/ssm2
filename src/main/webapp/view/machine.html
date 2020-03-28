@@ -251,6 +251,7 @@
 <script type="text/javascript">
 
     jQuery(function ($) {
+        var upfile = $("#upfile");
         $("#fileCommit").click(function (e) {
             var formData = new FormData();
             var files = $("#upfile")[0].files;
@@ -275,16 +276,20 @@
                         success: function (data) {
                             console.log(data.success);
                             alert(data.info);
+                            //清空选择的文件
+                            upfile.val("");
+                            //上传成功后重新加载表格
+                            $("#grid-table").trigger("reloadGrid");
                         },
                         error: function (err) {
                             hideloading();
                             alert("文件上传遇到错误!" + JSON.stringify(err));
-                            alert("上传失败!");
                         }
                     });
 
                 } else {
                     alert("文件类型错误(提示：xls或xlsx格式)")
+                    upfile.prop("value","");
                 }
             } else {
                 alert("请选择上传的文件");
@@ -292,6 +297,7 @@
         })
     });
 </script>
+
 
 <script>
     $("#header").load("/view/header.html");

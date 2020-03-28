@@ -124,7 +124,7 @@ public class FilesFootPressureFgtServiceImpl implements FilesFootPressureFgtServ
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_foot_pressure_fgt");
                 }
                 break;
             case "del":
@@ -158,7 +158,7 @@ public class FilesFootPressureFgtServiceImpl implements FilesFootPressureFgtServ
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_foot_pressure_fgt");
                 }
         }
         return "success";

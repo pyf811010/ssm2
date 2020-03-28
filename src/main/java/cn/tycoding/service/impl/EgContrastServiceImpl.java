@@ -113,7 +113,7 @@ public class EgContrastServiceImpl implements EgContrastService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"eg_contrast");
                 }
                 break;
             case "del":
@@ -136,7 +136,7 @@ public class EgContrastServiceImpl implements EgContrastService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"eg_contrast");
                 }
         }
         return "success";

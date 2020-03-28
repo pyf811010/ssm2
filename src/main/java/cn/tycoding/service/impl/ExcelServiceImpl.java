@@ -82,6 +82,7 @@ public class ExcelServiceImpl implements ExcelService {
                 try {
                     //如果文件类型正确，对文件进行解析，封装成实体类，并保存在list集合中
                     list = ReadExcel.readExcel(f, new Admin(),user_name);
+                    if(list==null) return new State(0,"上传数据存在为空的字段，此次上传失败！（姓名、密码、用户类型均不能为空）");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -101,6 +102,7 @@ public class ExcelServiceImpl implements ExcelService {
             else if ("machine".equals(fileName)) {
                 try {
                     list = ReadExcel.readExcel(f, new Machine(),user_name);
+                    if(list==null) return new State(0,"设备名称不能为空，此次上传失败");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -117,6 +119,7 @@ public class ExcelServiceImpl implements ExcelService {
             else if ("subjects".equals(fileName)) {
                 try {
                     list = ReadExcel.readExcel(f, new Subjects(),user_name);
+                    if(list==null) return new State(0,"身高、体重列不能为空，此次上传失败");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

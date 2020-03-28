@@ -203,7 +203,7 @@ public class AdminServiceImpl implements AdminService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"admin");
                 }
                 break;
             case "del":
@@ -226,7 +226,7 @@ public class AdminServiceImpl implements AdminService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"admin");
                 }
         }
         return "success";

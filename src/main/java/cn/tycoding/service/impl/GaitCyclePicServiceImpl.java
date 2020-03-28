@@ -118,7 +118,7 @@ public class GaitCyclePicServiceImpl implements GaitCyclePicService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"gait_cycle_pic");
                 }
                 break;
             case "del":
@@ -150,7 +150,7 @@ public class GaitCyclePicServiceImpl implements GaitCyclePicService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"gait_cycle_pic");
                 }
         }
         return "success";

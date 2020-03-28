@@ -134,7 +134,7 @@ public class PreecServiceImpl implements PreecService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"preec");
                 }
                 break;
             case "del":
@@ -254,7 +254,7 @@ public class PreecServiceImpl implements PreecService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"preec");
                 }
         }
         return "success";

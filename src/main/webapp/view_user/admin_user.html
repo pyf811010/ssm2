@@ -277,6 +277,10 @@
                         success: function (data) {
                             console.log(data.success);
                             alert(data.info);
+                            //清空选择的文件
+                            upfile.val("");
+                            //上传成功后重新加载表格
+                            $("#grid-table").trigger("reloadGrid");
                         },
                         error: function (err) {
                             hideloading();
