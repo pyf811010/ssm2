@@ -129,6 +129,7 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
                             stringBuffer.append(fileName + "\n");
                             continue;
                         }
+                        //逐个文件的信息插入数据库
                         insertRemark(fileName, url, map,user_name);
                     }
                 }
@@ -196,7 +197,7 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
     }
 
     /**
-     * 上传文件信息存到数据库
+     * 多个上传文件信息存到数据库
      *
      * @param fileName 文件名
      * @param url      文件在服务器地址（绝对地址）
@@ -209,13 +210,14 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
         String name = fileName.substring(0, fileName.indexOf("."));
         gaitCyclePic.setName(fileName);
         gaitCyclePic.setUrl(url);
+        //如果有备注信息，从map中取出备注信息
         if (!map.isEmpty() && map.keySet().contains(name)) {
             String remark = map.get(name);
             gaitCyclePic.setRemark(remark);
         }
         else {
         	System.out.println("2");
-        	String remark = "未添加任何记录";
+        	String remark = "无";
         	gaitCyclePic.setRemark(remark);
         }
         gaitCyclePic.setUser_name(user_name);
@@ -225,12 +227,29 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
         }
     }
 
+    /**
+     * 单个文件上传存入数据库
+     * @param fileName
+     * @param url
+     * @param user_name
+     */
+    private void insertRemark(String fileName, String url, String user_name){
+        GaitCyclePic gaitCyclePic = new GaitCyclePic();
+        gaitCyclePic.setRemark("无");
+        gaitCyclePic.setName(fileName);
+        gaitCyclePic.setUrl(url);
+        gaitCyclePic.setUser_name(user_name);
+        int add = gaitCyclePicMapper.add(gaitCyclePic);
+        if(add>0){
+            System.out.println("插入成功");
+        }
+    }
+
 	@Override
-	public State readSingleFile(String fi_info,MultipartFile[] files,String user_name) {
+	public State readSingleFile(String fi_info, MultipartFile[] files,String user_name) {
     	if(fi_info.equals("")){
-    		fi_info = "未添加记录";
+    		fi_info = "无";
     	}
-        //file.setFi_is_checked(false);
         State state = new State();
         //由file的属性创建对应文件夹（若无）
         String basePath = FileConstant.PICTURE_FILE_UPLOAD_URL + File.separator;
@@ -276,19 +295,8 @@ public class GaitCyclePicUploadServiceImpl implements GaitCyclePicUploadService 
                     	repeatName = repeatName + "  " + fileName; 
                     	continue;
                     }
-                    GaitCyclePic gaitCyclePic = new GaitCyclePic();
-                    gaitCyclePic.setRemark(fi_info);
-                    gaitCyclePic.setName(fileName);
-                    gaitCyclePic.setUrl(url);
-                    gaitCyclePic.setUser_name(user_name);
-                    int add = gaitCyclePicMapper.add(gaitCyclePic);
-                    if(add>0){
-                    	System.out.println("插入成功");
-                    }
-                    /*file1.createNewFile();
-                    f.transferTo(file1);*/
+                    insertRemark(fileName, url, user_name);
                 }
-                //System.out.println(f.getOriginalFilename());
             } catch (Exception e) {
             	e.printStackTrace();
             	state.setSuccess(2);

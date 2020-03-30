@@ -265,6 +265,8 @@
                 //alert(names[1]); //xlsx
                 //判断文件格式
                 if (names[1] == "xlsx" || names[1] == "xls") {
+                    if (names[0] == "admin"){
+
                     formData.append("file", files[0]);
 
                     $.ajax({
@@ -288,6 +290,9 @@
                             alert("上传失败!");
                         }
                     });
+                    }else {
+                        alert("文件名错误（提示：admin.xls或admin.xlsx）")
+                    }
 
                 } else {
                     alert("文件类型错误(提示：xls或xlsx格式)")
@@ -360,7 +365,7 @@
             //data: grid_data,
             datatype: "json",
             height: 500,
-            colNames: ['操作', '', 'ID','姓名', '密码','用户类型'],
+            colNames: ['操作', '','姓名', '密码','用户类型'],
             colModel: [{
                 name: 'op',
                 index: 'op',
@@ -426,7 +431,7 @@
                     search: false
 
                 },
-                {
+                /*{
                     name: 'a_id',
                     index: 'a_id',
                     width: 50,
@@ -438,7 +443,7 @@
                         cols: "15"
                     }
 
-                },
+                },*/
                 {
                     name: 'a_name',
                     index: 'a_name',

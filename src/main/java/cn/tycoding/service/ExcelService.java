@@ -5,6 +5,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author pyf lsy fdd
  * @date 2020/1/6 20:25:56
@@ -15,10 +17,10 @@ public interface ExcelService {
     /**
      *  上传文件内的数据
      * @param file 需要上传的文件
-     * @param user_name 
+     * @param req 请求头
      * @return 上传结果信息
      */
-    State readExcelFile(MultipartFile file, String user_name);
+    State readExcelFile(MultipartFile file, HttpServletRequest req);
 
     /**
      * 下载模板对象

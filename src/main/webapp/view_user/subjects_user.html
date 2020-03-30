@@ -251,6 +251,7 @@
 <script type="text/javascript">
 
     jQuery(function ($) {
+        var upfile = $("#upfile");
         $("#fileCommit").click(function (e) {
             var formData = new FormData();
             var files = $("#upfile")[0].files;
@@ -293,7 +294,7 @@
                         });
 
                     } else {
-                        alert("文件名错误(提示：subjects)");
+                        alert("文件名错误(提示：subjects.xls或subjects.xlsx)");
                     }
                 } else {
                     alert("文件类型错误(提示：xls或xlsx格式)");

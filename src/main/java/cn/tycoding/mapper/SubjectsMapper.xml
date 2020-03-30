@@ -94,7 +94,7 @@
 			 		testdate = #{testdate} and
 			 		weight = #{weight} and
 			 		height = #{height} and
-			 		remark = #{remark} 
+			 		remark = #{remark}
 			 		limit 1
 			 );
 	</insert>
