@@ -191,6 +191,7 @@
         $(".files_kand").prop("class", "active");
         $("#dataManageSubMenu").prop("style", "display: block;");
         $("#dataManageSubMenuSub2").prop("style", "display: block");
+        $("#kandSub").prop("style", "display: block");
 
     });
 </script>
@@ -244,8 +245,8 @@
 
             //data: grid_data,
             datatype: "json",
-            height: 400,
-            colNames: ['操作', '查看', '下载', '', 'ID', '文件名', '文件地址', '文件修改次数'],
+            height: 500,
+            colNames: ['操作', '查看', '下载', '', 'ID', '文件名', '文件地址', '文件修改次数','操作用户'],
             colModel: [{
                 name: 'op',
                 index: 'op',
@@ -257,17 +258,49 @@
                 search: false,
                 formatter: 'actions',
                 formatoptions: {
+                	onSuccess: function(response) {
+                      	 if (response.responseText == "success") {
+                               $(this).jqGrid('setGridParam', {
+                                   datatype: 'json'
+                               }).trigger('reloadGrid'); //Reloads the grid after edit
+                               alert("修改成功");
+                           	}else if(response.responseText == "fail"){
+                           		$(this).jqGrid('setGridParam', {
+                                      datatype: 'json'
+                                  }).trigger('reloadGrid'); //Reloads the grid after edit
+                                  alert("无修改权限");
+                           	}else{
+                           			$(this).jqGrid('setGridParam', {
+                                   		datatype: 'json'
+                              		 }).trigger('reloadGrid'); //Reloads the grid after edit
+                               		alert(decodeURIComponent(response.responseText));
+                           		 }                    
+                      	 },
                     keys: true,
                     //delbutton: false,//disable delete button
-                    editOptions: {
-                        recreateForm: true,
-                        beforeShowForm: beforeEditCallback
-                    },
                     delOptions: {
                         recreateForm: true,
-                        beforeShowForm: beforeDeleteCallback
+                        beforeShowForm: beforeDeleteCallback,
+                        afterSubmit: function (response, postdata) {
+                            if (response.responseText == "success") {
+                                $(this).jqGrid('setGridParam', {
+                                    datatype: 'json'
+                                }).trigger('reloadGrid'); //Reloads the grid after edit
+                                return [true, "编辑成功!"];
+                            } else {
+                            	if(response.responseText == "fail"){
+                            		$(this).jqGrid('setGridParam', {
+                                        datatype: 'json'
+                                    }).trigger('reloadGrid'); //Reloads the grid after edit
+                                    return [false, "无操作权限"]; //Captures and displays the response text on th Edit window
+                            	}
+                            	$(this).jqGrid('setGridParam', {
+                                    datatype: 'json'
+                                }).trigger('reloadGrid'); //Reloads the grid after edit
+                                return [false, decodeURIComponent(response.responseText)];
+                            }
+                        }
                     },
-
                 }
             },
                 {
@@ -303,7 +336,7 @@
                 {
                     name: 'expid',
                     index: 'expid',
-                    width: 100,
+                    width: 50,
                     key: true,
                     editable: true,
                     edittype: "textarea",
@@ -350,13 +383,25 @@
                         cols: "15"
                     }
                 },
+                {
+                    name: 'user_name',
+                    index: 'user_name',
+                    width: 150,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                },
 
 
             ],
 
             viewrecords: true, //是否显示总数  如View 1 - 10 of 23
-            rowNum: 10, //每页显示10条
-            rowList: [10, 20, 30], //可选的每页显示条数
+            rowNum: 30, //每页显示10条
+            rowList: [30, 50, 100], //可选的每页显示条数
             pager: pager_selector, //指定工具栏
             altRows: true,
             shrinkToFit: false,
@@ -447,18 +492,24 @@
             closeAfterEdit: true,
             //提交后的回调
             afterSubmit: function (response, postdata) {
-                if (response.responseText == "success") {
-                    $(this).jqGrid('setGridParam', {
-                        datatype: 'json'
-                    }).trigger('reloadGrid'); //Reloads the grid after edit
-                    return [true, "编辑成功!"];
-                } else {
-                    $(this).jqGrid('setGridParam', {
-                        datatype: 'json'
-                    }).trigger('reloadGrid'); //Reloads the grid after edit
-                    return [false, decodeURIComponent(response.responseText)]; //Captures and displays the response text on th Edit window
-                }
-            },
+                            if (response.responseText == "success") {
+                                $(this).jqGrid('setGridParam', {
+                                    datatype: 'json'
+                                }).trigger('reloadGrid'); //Reloads the grid after edit
+                                return [true, "编辑成功!"];
+                            } else {
+                            	if(response.responseText == "fail"){
+                            		$(this).jqGrid('setGridParam', {
+                                        datatype: 'json'
+                                    }).trigger('reloadGrid'); //Reloads the grid after edit
+                                    return [false, "无操作权限"]; //Captures and displays the response text on th Edit window
+                            	}
+                            	$(this).jqGrid('setGridParam', {
+                                    datatype: 'json'
+                                }).trigger('reloadGrid'); //Reloads the grid after edit
+                                return [false, decodeURIComponent(response.responseText)];
+                            }
+                        },
 
         }, {
             //新增数据
@@ -498,6 +549,25 @@
                 style_delete_form(form);
 
                 form.data('styled', true);
+            },
+            afterSubmit: function (response, postdata) {
+                if (response.responseText == "success") {
+                    $(this).jqGrid('setGridParam', {
+                        datatype: 'json'
+                    }).trigger('reloadGrid'); //Reloads the grid after edit
+                    return [true, "编辑成功!"];
+                } else {
+                	if(response.responseText == "fail"){
+                		$(this).jqGrid('setGridParam', {
+                            datatype: 'json'
+                        }).trigger('reloadGrid'); //Reloads the grid after edit
+                        return [false, "无操作权限"]; //Captures and displays the response text on th Edit window
+                	}
+                	$(this).jqGrid('setGridParam', {
+                        datatype: 'json'
+                    }).trigger('reloadGrid'); //Reloads the grid after edit
+                    return [false, decodeURIComponent(response.responseText)];
+                }
             },
             onClick: function (e) {
                 //alert(1);
@@ -662,7 +732,6 @@
     });
 
 </script>
-
 </body>
 
 </html>

@@ -1,15 +1,33 @@
 package cn.tycoding.pojo;
 
+import java.io.Serializable;
+
 public class Machine {
     private Integer m_id;
 
     private String name;
 
     private String type;
+    
+    private String company;
+    
+    private String place;
 
     private String remark;
+    
+    private String user_name;
+    
+    
 
-    public Integer getM_id() {
+    public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
+	public Integer getM_id() {
         return m_id;
     }
 
@@ -39,5 +57,34 @@ public class Machine {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+    @Override
+    public String toString() {
+        return "Machine{" +
+                "m_id=" + m_id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", company='" + company + '\'' +
+                ", place='" + place + '\'' +
+                ", remark='" + remark + '\'' +
+                ", user_name='" + user_name + '\'' +
+                '}';
     }
 }

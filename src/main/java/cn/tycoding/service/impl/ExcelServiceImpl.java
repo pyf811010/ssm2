@@ -1,17 +1,14 @@
 package cn.tycoding.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.poi.excel.ExcelReader;
+import cn.hutool.poi.excel.ExcelUtil;
 import cn.tycoding.constant.ExcelConstant;
-import cn.tycoding.constant.FileConstant;
 import cn.tycoding.entity.assist.DBTableComment;
 import cn.tycoding.mapper.*;
 import cn.tycoding.pojo.*;
 import cn.tycoding.service.ExcelService;
-import cn.tycoding.util.ExcelUtil;
-import cn.tycoding.util.ReadExcel;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import cn.tycoding.util.MyExcelUtil;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -21,8 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -33,12 +30,6 @@ import java.util.*;
 
 @Service
 public class ExcelServiceImpl implements ExcelService {
-
-    @Autowired
-    private FilesKandMapper filesKandMapper;
-
-    @Autowired
-    private FilesOxygenMapper filesOxygenMapper;
 
     @Autowired
     private SubjectsMapper subjectsMapper;
@@ -55,8 +46,15 @@ public class ExcelServiceImpl implements ExcelService {
     @Autowired
     private MachineMapper machineMapper;
 
+    /**
+     * 读取excel中的信息
+     *
+     * @param file 需要上传的文件
+     * @param req  请求头
+     * @return 上传结果
+     */
     @Override
-    public synchronized State readExcelFile(MultipartFile file) {
+    public State readExcelFile(MultipartFile file, HttpServletRequest req) {
         //保存上传结果信息
         State state = new State();
         StringBuffer stringBuffer = new StringBuffer();
@@ -65,77 +63,70 @@ public class ExcelServiceImpl implements ExcelService {
         List<Object> list = null;
         if (file instanceof CommonsMultipartFile) {
             CommonsMultipartFile f = (CommonsMultipartFile) file;
-            String originalFilename = f.getOriginalFilename();
-            System.out.println("文件名：" + originalFilename);
-            //文件名
-            String fileName = originalFilename.substring(0, originalFilename.lastIndexOf(".")).trim().toLowerCase();
-            //文件后缀，即文件类型
-            String suffix = (originalFilename.lastIndexOf(".") == -1 ? "" :
-                    originalFilename.substring(originalFilename.lastIndexOf(".") + 1)).trim();
-            System.out.println("文件类型：" + suffix);
-            //判断文件类型是否在正确
-            if (!"xls".equals(suffix) && !"xlsx".equals(suffix)) {
-                return new State(0, "请选择正确的上传文件类型（.xls;.xlsx）");
+            String fileName = MyExcelUtil.getFileName(f);
+            try {
+                list = parseExcel(f, fileName, req);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
             //管理员导入
             if ("admin".equals(fileName)) {
-                try {
-                    //如果文件类型正确，对文件进行解析，封装成实体类，并保存在list集合中
-                    list = ReadExcel.readExcel(f, new Admin());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+
                 //遍历list集合，依次存入数据库
                 // 要判断数据库中是否已经有这条数据：如果已经存在一条相同数据，就提示而不导入数据库。
                 // 可以先从数据库中读出数据封装成对象，然后比较，需要对象重写equals方法
-                for (int i = 0; i < list.size(); i++){
+                for (int i = 0; i < list.size(); i++) {
                     int num = adminMapper.addTemplate((Admin) list.get(i));
-                    if (num != 0){
+                    if (num != 0) {
                         number += num;
-                    }else {
+                    } else {
                         stringBuffer.append("第" + (i + 1) + "行信息重复上传" + "\n");
                     }
                 }
             }
             //实验机器
             else if ("machine".equals(fileName)) {
-                try {
-                    list = ReadExcel.readExcel(f, new Machine());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                for (int i = 0; i < list.size(); i++){
+                for (int i = 0; i < list.size(); i++) {
                     int num = machineMapper.addTemplate((Machine) list.get(i));
-                    if (num != 0){
+                    if (num != 0) {
                         number += num;
-                    }else {
+                    } else {
                         stringBuffer.append("第" + (i + 1) + "行信息重复上传" + "\n");
                     }
                 }
             }
             //实验对象
             else if ("subjects".equals(fileName)) {
-                try {
-                    list = ReadExcel.readExcel(f, new Subjects());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                for (int i = 0; i < list.size(); i++){
-                //for (Object o : list) {
+                for (int i = 0; i < list.size(); i++) {
+                    //for (Object o : list) {
                     int num = subjectsMapper.addTemplate((Subjects) list.get(i));
-                    if (num != 0){
+                    if (num != 0) {
                         number += num;
-                    }else {
+                    } else {
                         stringBuffer.append("第" + (i + 1) + "行信息重复上传" + "\n");
                     }
                 }
-            }
-            else {
-                state.setInfo("上传错误：文件名无法识别！");
+            } else {
+                state.setInfo("上传错误：文件名错误！");
                 state.setSuccess(0);
+                return state;
             }
         }
-        //判断上传状态
+        //返回上传信息
+        return getResult(state, number, stringBuffer, list);
+    }
+
+    /**
+     * 上传结果
+     *
+     * @param state        封装结果信息
+     * @param number       上传成功的信息数量
+     * @param stringBuffer 返回结果
+     * @param list
+     * @return
+     */
+    private State getResult(State state, int number, StringBuffer stringBuffer, List<Object> list) {
         if (number > 0) {
             if (number == list.size()) {
                 state.setSuccess(1);
@@ -146,17 +137,14 @@ public class ExcelServiceImpl implements ExcelService {
             }
         } else {
             state.setSuccess(0);
-            if (stringBuffer.length() == 0){
+            if (stringBuffer.length() == 0) {
                 state.setInfo("上传失败：文件内容可能为空");
-            }else {
-                state.setInfo("上传失败："  + "\n" + stringBuffer.toString());
+            } else {
+                state.setInfo("上传失败：" + "\n" + stringBuffer.toString());
             }
-
         }
-        //返回上传信息
         return state;
     }
-
 
     @Override
     public XSSFWorkbook getTemplate(String name) {
@@ -169,7 +157,7 @@ public class ExcelServiceImpl implements ExcelService {
             XSSFCell cell = row.createCell(i);
             cell.setCellValue(header.get(i));
         }
-        ExcelUtil.setColumnSize(sheet);
+        MyExcelUtil.setColumnSize(sheet);
         return workbook;
     }
 
@@ -179,26 +167,37 @@ public class ExcelServiceImpl implements ExcelService {
      * @param name 模板表格的名字，对应数据库中的相应的表格
      * @return 数据库中相应表格的字段信息。
      */
-    public List<String> getExcelHeader(String name) {
-        int[] index = new int[33];
+    private List<String> getExcelHeader(String name) {
+        int[] index = getIndex(name);
+        List<DBTableComment> list = getDbTableCommentList(name);
+        ArrayList<String> result = new ArrayList<>();
+        for (int i = 0; i < index.length; i++) {
+            result.add(list.get(index[i]).getComment());
+        }
+        return result;
+    }
+
+    /**
+     * 获取表格的字段名和备注
+     *
+     * @param name
+     * @return
+     */
+    private List<DBTableComment> getDbTableCommentList(String name) {
+        System.out.println("获取表头信息开始。。。。。");
         List<DBTableComment> list = new ArrayList<>();
-        List<String> result = new ArrayList<>();
         switch (name) {
             case "egcontrast":
                 list = egContrastMapper.findDbTableComment();
-                index = ExcelConstant.EGCONTRAST_INDEX;
                 break;
             case "machine":
                 list = machineMapper.findDbTableComment();
-                index = ExcelConstant.MACHINE_INDEX;
                 break;
             case "subjects":
                 list = subjectsMapper.findDbTableComment();
-                index = ExcelConstant.SUBJECT_INDEX;
                 break;
             case "admin":
                 list = adminMapper.findDbTableComment();
-                index = ExcelConstant.ADMIN_INDEX;
                 break;
             case "preec":
                 list = preecMapper.findDbTableComment();
@@ -208,12 +207,142 @@ public class ExcelServiceImpl implements ExcelService {
                 list.add(new DBTableComment("age", "受试者年龄"));
                 list.add(new DBTableComment("weight", "受试者体重"));
                 list.add(new DBTableComment("height", "受试者身高"));
-                index = ExcelConstant.PREEC_INDEX;
+                list.add(new DBTableComment("remark", "受试者备注信息"));
+                break;
+            default:
                 break;
         }
-        for (int i = 0; i < index.length; i++) {
-            result.add(list.get(index[i]).getComment());
+        System.out.println("获取表头信息结束。。。。。");
+        System.out.println(list);
+        return list;
+    }
+
+    /**
+     * 获取模板表头的在DBTableCommentlist中的下标
+     *
+     * @param name
+     * @return
+     */
+    private int[] getIndex(String name) {
+        int[] index = new int[33];
+        switch (name) {
+            case "egcontrast":
+                index = ExcelConstant.EGCONTRAST_INDEX;
+                break;
+            case "machine":
+                index = ExcelConstant.MACHINE_INDEX;
+                break;
+            case "subjects":
+                index = ExcelConstant.SUBJECT_INDEX;
+                break;
+            case "admin":
+                index = ExcelConstant.ADMIN_INDEX;
+                break;
+            case "preec":
+                index = ExcelConstant.PREEC_INDEX;
+                break;
+            default:
+                break;
         }
-        return result;
+        return index;
+    }
+
+    public <T> List<T> parseExcel(CommonsMultipartFile file, String name, HttpServletRequest req) throws IOException {
+        Class<T> beanType = getBeanType(name);
+
+        ExcelReader reader = ExcelUtil.getReader(file.getInputStream());
+        // map就是一行。
+        //[{设备名称=测试设备1, 设备型号=12-2349-12313, 所属单位=null, 布置场地=503, 备注=测试用}]
+        List<Map<String, Object>> mapList = reader.read(0, 1, Integer.MAX_VALUE);
+
+        System.out.println("excel中读取数据为："+mapList);
+
+        mapList = changeMap(mapList, name, req);
+        //Bean实例保存在beanList中
+        final List<T> beanList = new ArrayList<>(mapList.size());
+
+        for (Map<String, Object> map : mapList) {
+            beanList.add(BeanUtil.mapToBean(map, beanType, false));
+        }
+        //打印beanlist
+        for (int i = 0; i < beanList.size(); i++) {
+            T t = beanList.get(i);
+            System.out.println(t);
+        }
+        return beanList;
+    }
+
+    /**
+     * 获取文件对应的JavaBean的Class类
+     *
+     * @param name 文件名
+     * @param <T>  类型
+     * @return Class
+     */
+    private <T> Class<T> getBeanType(String name) {
+        Class beanType;
+        switch (name) {
+            case "machine":
+                beanType = Machine.class;
+                break;
+            case "subjects":
+                beanType = Subjects.class;
+                break;
+            case "admin":
+                beanType = Admin.class;
+                break;
+            default:
+                beanType = Object.class;
+                break;
+        }
+        return beanType;
+    }
+
+    /**
+     * 将map中的key换成JavaBean中属性列名，便于封装成Bean对象
+     *
+     * @param list excel文件中的信息
+     * @param name 文件名，可以知道文件对应哪个JavaBean实例
+     * @return list
+     */
+    private List<Map<String, Object>> changeMap(List<Map<String, Object>> list, String name, HttpServletRequest req) {
+
+        List<Map<String, Object>> newList = new ArrayList<>(list.size());
+
+        //获得属性名和备注
+        List<DBTableComment> dbTableCommentList = getDbTableCommentList(name);
+        //将备注换成属性名
+        //逐行遍历替换map
+        for (int i = 0; i < list.size(); i++) {
+            //遍历list取出每个map，对每一个map（行）进行修改key
+            //取出map
+            Map<String, Object> objectMap = list.get(i);
+            //新得map
+            Map<String, Object> map = new HashMap<>(objectMap.size());
+            //遍历原来的map取出key值
+            Set<String> keySet = objectMap.keySet();
+            Iterator<String> iterator = keySet.iterator();
+            //逐个替换key
+            while (iterator.hasNext()) {
+                String key = iterator.next();
+                //找到key对应的列名
+                for (int j = 0; j < dbTableCommentList.size(); j++) {
+                    DBTableComment dbTableComment = dbTableCommentList.get(j);
+
+                    if ((dbTableComment.getComment()).equals(key)) {
+                        String newKey = dbTableComment.getField();
+                        //put到新的map中
+                        map.put(newKey, objectMap.get(key));
+                        //找到就退出循环
+                        break;
+                    }
+                }
+            }
+            map.put("user_name", req.getSession().getAttribute("user_name"));
+
+            //map放到list中
+            newList.add(map);
+        }
+        return newList;
     }
 }

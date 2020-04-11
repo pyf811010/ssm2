@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,12 +59,9 @@ public class FilesVideoController {
     
     @RequestMapping("/handle")
     @ResponseBody
-    public String handle(String oper, FilesVideo filesVideo, String id[])
+    public String handle(String oper, FilesVideo filesVideo, String id[],HttpServletRequest request)
             throws UnsupportedEncodingException {
-    	System.out.println(id);
-        String temp = filesVideoService.handle(oper, filesVideo, id);
-        // 对传回的中文进行编码
-        return URLEncoder.encode(temp, "UTF-8");
+    	return filesVideoService.authorityTemp(oper,filesVideo,id,request);
     }
     
     @RequestMapping("/download/{expid}")

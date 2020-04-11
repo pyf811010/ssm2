@@ -1,6 +1,9 @@
 package cn.tycoding.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import cn.tycoding.pojo.Admin;
 import cn.tycoding.pojo.ObjectQuery;
@@ -19,6 +22,8 @@ public interface PreecService {
 	String handle(String oper, Preec preec, String[] id);
 	
 	List<Preec> findAllById(int id);
+
+	String authorityTemp(String oper, Preec preec, String[] id, HttpServletRequest request) throws UnsupportedEncodingException;
 
 //	List<Preec> findAllByRelateType(int type);
 }

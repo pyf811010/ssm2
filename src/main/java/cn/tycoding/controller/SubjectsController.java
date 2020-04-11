@@ -5,6 +5,8 @@ import cn.tycoding.pojo.ObjectQuery;
 import cn.tycoding.service.AdminService;
 import cn.tycoding.service.SubjectsService;
 import cn.tycoding.service.UserTestService;
+import cn.tycoding.util.FindMachineInfo;
+import cn.tycoding.util.FindSubjectInfo;
 import cn.tycoding.pojo.State;
 import cn.tycoding.pojo.Subjects;
 import cn.tycoding.pojo.UserTest;
@@ -26,6 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -67,15 +70,18 @@ public class SubjectsController {
 
     }
     
+    @RequestMapping("/find1")
+    @ResponseBody
+    public List find1(String text){
+
+        return FindSubjectInfo.findSubject(subjectsService.find(),FindSubjectInfo.splitString(text));
+    }
+    
     @RequestMapping("/handle")
     @ResponseBody
-    public String handle(String oper, Subjects subjects, String id[])
+    public String handle(String oper, Subjects subjects, String id[], HttpServletRequest request)
             throws UnsupportedEncodingException {
-    	
-        String temp = subjectsService.handle(oper, subjects, id);
-        System.out.println(temp);
-        // 对传回的中文进行编码
-        return URLEncoder.encode(temp, "UTF-8");
+        return subjectsService.authorityTemp(oper,subjects,id,request);
     }
     
     /*@RequestMapping("/score")

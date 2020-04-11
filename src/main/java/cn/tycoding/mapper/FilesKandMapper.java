@@ -10,7 +10,6 @@ import cn.tycoding.pojo.FilesKand;
  */
 public interface FilesKandMapper {
 
-
     int deleteByPrimaryKey(Integer expid);
 
     int insert(FilesKand record);
@@ -49,7 +48,6 @@ public interface FilesKandMapper {
 	
 	boolean dataifexist(String url); 
 	
+	String findTypeByUserName(String user_name); 
 	
-	
-
 }

@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -71,12 +72,9 @@ public class EgContrastController {
     
     @RequestMapping("/handle")
     @ResponseBody
-    public String handle(String oper, EgContrast egContrast, String id[])
+    public String handle(String oper, EgContrast egContrast, String id[],HttpServletRequest request )
             throws UnsupportedEncodingException {
-    	System.out.println(id);
-        String temp = egContrastService.handle(oper, egContrast, id);
-        // 对传回的中文进行编码
-        return URLEncoder.encode(temp, "UTF-8");
+    	return egContrastService.authorityTemp(oper,egContrast,id,request);
     }
     
     /*@RequestMapping("/score")

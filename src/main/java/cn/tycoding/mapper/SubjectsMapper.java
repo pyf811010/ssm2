@@ -45,7 +45,7 @@ public interface SubjectsMapper {
 	 */
 	List<DBTableComment> findDbTableComment();
 	
-	Integer selectExistSubject(@Param("identity_card") String identity_card, @Param("name")String name, @Param("age")Integer age,@Param("weight") Float weight,@Param("height") Float height);
+	Integer selectExistSubject(@Param("identity_card") String identity_card, @Param("name")String name, @Param("age")Integer age,@Param("weight") Float weight,@Param("height") Float height, @Param("remark") String subject_remark);
 	
 	Integer insertReturnID(Subjects record);
 

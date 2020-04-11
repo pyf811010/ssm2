@@ -4,6 +4,8 @@ import cn.tycoding.pojo.State;
 import cn.tycoding.service.ExcelService;
 import cn.tycoding.service.UpdateExcelService;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +27,9 @@ public class UpdateExcelController {
 
     @RequestMapping(value = "/upload")
     @ResponseBody
-    public State upload_multi(String fi_info,@RequestParam("files") MultipartFile[] files) {
-    	
-        State state = updateExcelService.readExcelFile(fi_info,files);
+    public State upload_multi(String fi_info,@RequestParam("files") MultipartFile[] files,HttpServletRequest request) {
+    	String user_name = (String) request.getSession().getAttribute("user_name");
+        State state = updateExcelService.readExcelFile(fi_info,files,user_name);
         return state;
     }
 }

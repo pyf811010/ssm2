@@ -7,9 +7,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import cn.tycoding.mapper.AdminMapper;
 import cn.tycoding.mapper.EgContrastMapper;
 import cn.tycoding.mapper.FilesElectromyographyMapper;
 import cn.tycoding.mapper.FilesKandMapper;
@@ -27,6 +30,7 @@ import cn.tycoding.pojo.FilesElectromyography;
 import cn.tycoding.pojo.FilesKand;
 import cn.tycoding.pojo.FilesMontionCapture;
 import cn.tycoding.pojo.FilesOxygen;
+import cn.tycoding.pojo.Machine;
 import cn.tycoding.pojo.ObjectQuery;
 import cn.tycoding.pojo.State;
 import cn.tycoding.service.FilesEleService;
@@ -47,7 +51,12 @@ public class FilesMontionCaptureServiceImpl implements FilesMontionCaptureServic
      */
     @Autowired
     private FilesMontionCaptureMapper filesMontionCaptureMapper;
+    @Autowired
+    private AdminMapper adminMapper;
 
+    private FilesMontionCapture selectByPrimaryKey(Integer m_id) {
+		return filesMontionCaptureMapper.selectByPrimaryKey(m_id);
+	}
 
 	@Override
 	public ObjectQuery findByPage(Boolean _search, String filters, int page, int rows) {
@@ -112,7 +121,7 @@ public class FilesMontionCaptureServiceImpl implements FilesMontionCaptureServic
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_montion_capture");
                 }
                 break;
             case "del":
@@ -122,8 +131,6 @@ public class FilesMontionCaptureServiceImpl implements FilesMontionCaptureServic
                 for (int i = 0; i < id.length; i++) {
                 	int expid = Integer.parseInt(id[i]);
                 	String url = filesMontionCaptureMapper.getPathByExpid(expid);
-                	System.out.println(url);
-//                	url = url.substring(0, url.lastIndexOf("/"));
                 	File file = new File(url);
                 	boolean result = file.delete();
                     int tryCount = 0;
@@ -136,7 +143,7 @@ public class FilesMontionCaptureServiceImpl implements FilesMontionCaptureServic
                 }
                 String str = count + "条成功删除" + (id.length - count) + "条删除失败";
                 System.out.println(str);
-                return str;
+                return "success";
             case "add":
                 // 新增对象
                 System.out.println(filesMontionCapture.toString());
@@ -146,7 +153,7 @@ public class FilesMontionCaptureServiceImpl implements FilesMontionCaptureServic
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return ExceptionUtil.HandleDataException(e,"files_montion_capture");
                 }
         }
         return "success";
@@ -187,6 +194,53 @@ public class FilesMontionCaptureServiceImpl implements FilesMontionCaptureServic
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public String authorityTemp(String oper, FilesMontionCapture filesMontionCapture, String[] id,
+			HttpServletRequest request) throws UnsupportedEncodingException {
+		String user_name = (String) request.getSession().getAttribute("user_name");
+		String type = adminMapper.findTypeByUserName(user_name);
+		if(type.equals("管理员")){
+			System.out.println("用户为管理员");
+			if(oper.equals("add"))filesMontionCapture.setUser_name(user_name);
+			return URLEncoder.encode(handle(oper, filesMontionCapture, id), "UTF-8");
+		}
+        System.out.println("session中的user_name -----> " + user_name);
+        if(id == null){
+        	//点击页面下方编辑按钮会传入后台id，而直接在修改行提交修改则不会直接传入后台id
+        	String machineUser_name2 = filesMontionCapture.getUser_name();
+        	System.out.println(machineUser_name2);
+            if (!user_name.equals(machineUser_name2)) {
+                System.out.println("无权限修改");
+                return URLEncoder.encode("fail", "UTF-8");
+            }
+            String temp = handle(oper, filesMontionCapture, id);
+            System.out.println(temp);
+            // 对传回的中文进行编码
+            return URLEncoder.encode(temp, "UTF-8");
+        }else{
+        	//增加受试者信息的判断(增加受试者信息时，id为_empty，需要数据库自增)
+        	 if(id[0].equals("_empty")){
+        		 filesMontionCapture.setUser_name(user_name);
+                 String temp = handle(oper, filesMontionCapture, id);
+                 System.out.println(temp);
+                 // 对传回的中文进行编码
+                 return URLEncoder.encode(temp, "UTF-8");
+             }
+            for (int i = 0; i < id.length; i++) {
+                String machineUser_name = (selectByPrimaryKey(Integer.valueOf(id[i]))).getUser_name();
+                System.out.println("数据库中的user_name -----> " + machineUser_name);
+                if (!user_name.equals(machineUser_name)) {
+                    System.out.println("无权限修改");
+                    return URLEncoder.encode("fail", "UTF-8");
+                }
+            }
+            String temp = handle(oper, filesMontionCapture, id);
+            System.out.println(temp);
+            // 对传回的中文进行编码
+            return URLEncoder.encode(temp, "UTF-8");
+        }
 	}
 
 	

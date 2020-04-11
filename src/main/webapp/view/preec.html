@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/assets/css/jquery-ui.min.css"/>
     <link rel="stylesheet" href="/assets/css/bootstrap-datepicker3.min.css"/>
     <link rel="stylesheet" href="/assets/css/ui.jqgrid.min.css"/>
+    <link rel="stylesheet" href="/assets/css/icon.css"/>
 
     <!-- text fonts -->
     <link rel="stylesheet" href="/assets/css/fonts.googleapis.com.css"/>
@@ -23,12 +24,20 @@
     <link rel="stylesheet" href="/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
     <link rel="stylesheet" href="/assets/css/ace-skins.min.css"/>
     <link rel="stylesheet" href="/assets/css/ace-rtl.min.css"/>
+    <style>
+    .icon{
+	diaplay:inline-block;
+	background-image:url(images/a.png);
+}
+    </style>
     <script src="/assets/js/ace-extra.min.js"></script>
 </head>
 
 
 <body class="no-skin">
-<div id="header"></div>
+<div id="header" >
+</div>
+
 <!--页面顶部栏  -->
 <div class="main-container ace-save-state" id="main-container">
     <script type="text/javascript">
@@ -60,7 +69,7 @@
                         <a href="/view/index.html">首页</a>
                     </li>
 
-                    <li class="active">前提实验条件管理</li>
+                    <li class="active">前置实验条件管理</li>
                 </ul>
                 <!-- /.breadcrumb -->
 
@@ -298,8 +307,8 @@
 
             //data: grid_data,
             datatype: "json",
-            height: 400,
-            colNames: ['操作', '', 'ID', '实验者信息ID', '实验机器ID', '动补数据信息', '跑台数据信息', '足底压力数据信息', '足底压力合力大小、位置数据信息', '肌电数据信息', '实验条件', '追加实验条件'],
+            height: 500,
+            colNames: ['操作', '', 'ID', '实验条件', '实验者信息ID', '测试设备ID', '动捕数据信息', '跑台数据信息', 'pedar足底压力数据信息', '耗氧量数据信息', '肌电数据信息', '视频数据文件','备注信息'],
             colModel: [{
                 name: 'op',
                 index: 'op',
@@ -337,7 +346,7 @@
                 {
                     name: 'expid',
                     index: 'expid',
-                    width: 100,
+                    width: 50,
                     key: true,
                     editable: true,
                     edittype: "textarea",
@@ -347,11 +356,23 @@
                     }
 
                 },
+                {
+                    name: 'advance',
+                    index: 'advance',
+                    width: 350,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                },
 
                 {
                     name: 'id_subjects',
                     index: 'id_subjects',
-                    width: 150,
+                    width: 93,
                     sortable: false,
                     editable: true,
                     edittype: "textarea",
@@ -364,7 +385,7 @@
                 {
                     name: 'id_machine',
                     index: 'id_machine',
-                    width: 150,
+                    width: 83,
                     sortable: false,
                     editable: true,
                     edittype: "textarea",
@@ -398,8 +419,8 @@
                         cols: "15"
                     }
                 }, {
-                    name: 'asc_info',
-                    index: 'asc_info',
+                    name: 'pedar_info',
+                    index: 'pedar_info',
                     width: 150,
                     sortable: false,
                     editable: true,
@@ -409,8 +430,8 @@
                         cols: "15"
                     }
                 }, {
-                    name: 'fgt_info',
-                    index: 'fgt_info',
+                    name: 'ox_info',
+                    index: 'ox_info',
                     width: 150,
                     sortable: false,
                     editable: true,
@@ -432,8 +453,8 @@
                     }
                 },
                 {
-                    name: 'advance',
-                    index: 'advance',
+                    name: 'video_info',
+                    index: 'video_info',
                     width: 150,
                     sortable: false,
                     editable: true,
@@ -446,7 +467,7 @@
                 {
                     name: 'remark',
                     index: 'remark',
-                    width: 1000,
+                    width: 500,
                     sortable: false,
                     editable: true,
                     edittype: "textarea",
@@ -455,13 +476,14 @@
                         cols: "15"
                     }
                 },
+                
 
 
             ],
 
             viewrecords: true, //是否显示总数  如View 1 - 10 of 23
-            rowNum: 10, //每页显示10条
-            rowList: [10, 20, 30], //可选的每页显示条数
+            rowNum: 30, //每页显示10条
+            rowList: [30, 50, 100], //可选的每页显示条数
             pager: pager_selector, //指定工具栏
             altRows: true,
             shrinkToFit: false,
@@ -480,10 +502,53 @@
                     updatePagerIcons(table);
                     enableTooltips(table);
                 }, 0);
+                $(".jqgrow").each(function () {
+                    var row = $(this.cells[6]);
+                    var formData = new FormData();
+                    var text = row.text();
+                    formData.append("text", text);
+                    $.ajax({
+                        url: "/Machine/find1",
+                        data: formData,
+                        dataType:'json',
+                        type: 'post',
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        success: function (data) {
+                            row.prop("title", data);
+                        },
+                        error: function () {
+                            alert("失败!");
+                        }
+                    });
+                })
+                
+                $(".jqgrow").each(function () {
+                    var row = $(this.cells[5]);
+                    var formData = new FormData();
+                    var text = row.text();
+                    formData.append("text", text);
+                    $.ajax({
+                        url: "/subjects/find1",
+                        data: formData,
+                        dataType:'json',
+                        type: 'post',
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        success: function (data) {
+                            row.prop("title", data);
+                        },
+                        error: function () {
+                            alert("失败!");
+                        }
+                    });
+                })
             },
 
             editurl: "/preec/handle", //nothing is saved
-            caption: "前提实验条件管理" //表名
+            caption: "前置实验条件管理" //表名
 
             //,autowidth: true,
 

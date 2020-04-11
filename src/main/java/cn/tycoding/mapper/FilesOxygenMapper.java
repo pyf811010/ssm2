@@ -40,4 +40,6 @@ public interface FilesOxygenMapper {
 	String getFile_name(int expid);
 	
 	boolean dataifexist(String url); 
+	
+	String findTypeByUserName(String user_name); 
 }

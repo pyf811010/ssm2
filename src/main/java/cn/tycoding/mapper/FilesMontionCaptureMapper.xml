@@ -8,7 +8,7 @@
     <result column="files_name" jdbcType="VARCHAR" property="files_name" />
   </resultMap>
   <sql id="Base_Column_List">
-    expid, url, id_query, files_name
+    expid, url, id_query, files_name,user_name
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -25,9 +25,9 @@
   </delete>
   <insert id="insert" parameterType="cn.tycoding.pojo.FilesMontionCapture">
     insert into files_montion_capture (expid, url, id_query, 
-      files_name)
+      files_name,user_name)
     values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, 
-      #{files_name,jdbcType=VARCHAR})
+      #{files_name,jdbcType=VARCHAR},#{user_name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.tycoding.pojo.FilesMontionCapture">
     insert into files_montion_capture
@@ -107,14 +107,15 @@
 	  update files_montion_capture
       set url = #{url},
       id_query = #{id_query},
-      files_name = #{files_name}
+      files_name = #{files_name},
+      user_name = #{user_name}
       where expid = #{expid}
 	</update>
 
     <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.FilesMontionCapture">
 		insert into files_montion_capture
-		values(#{expid},#{url},#{id_query},#{files_name});
+		values(#{expid},#{url},#{id_query},#{files_name},#{user_name});
 	</insert>
 
     <!-- 按学号删除学生 -->
@@ -122,6 +123,11 @@
 		delete from files_montion_capture
 		where expid=#{expid}
 	</delete>
+	
+	<select id="findByFilters" parameterType="string" resultType="cn.tycoding.pojo.FilesMontionCapture">
+		${_parameter}
+	</select>
+	
 
     <!-- 按照filter的复杂条件查找 -->
     <select id="findByFiltersSum" parameterType="string"

@@ -13,15 +13,15 @@ public class Preec {
     
     private String slot_machine_info=null; //跑台数据信息
     
-    private String asc_info=null; //足底压力数据信息
+    private String pedar_info=null; //pedar足底压力数据信息
     
-    private String fgt_info=null; //足底压力合力大小、位置
+    private String ox_info=null; //耗氧量数据信息
     
     private String elec_info=null; //肌电数据信息
     
-    private String advance;  //实验条件
-
-    private String remark;  //追加实验条件
+    private String video_info=null; //视频数据信息
+    
+    private String user_name=null; //视频数据信息
     
     public Preec() {
     	
@@ -29,8 +29,8 @@ public class Preec {
     
 
 	public Preec(Integer expid, Integer id_query, Integer id_subjects, String id_machine, String motion_capture_info,
-			String slot_machine_info, String asc_info, String fgt_info, String elec_info, String advance,
-			String remark) {
+			String slot_machine_info, String pedar_info, String ox_info, String elec_info, String advance,
+			String remark,String video_info,String user_name) {
 		super();
 		this.expid = expid;
 		this.id_query = id_query;
@@ -38,14 +38,26 @@ public class Preec {
 		this.id_machine = id_machine;
 		this.motion_capture_info = motion_capture_info;
 		this.slot_machine_info = slot_machine_info;
-		this.asc_info = asc_info;
-		this.fgt_info = fgt_info;
+		this.pedar_info = pedar_info;
+		this.ox_info = ox_info;
 		this.elec_info = elec_info;
 		this.advance = advance;
 		this.remark = remark;
+		this.video_info = video_info;
+		this.user_name = user_name;
 	}
 
 
+
+
+	public String getUser_name() {
+		return user_name;
+	}
+
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
 
 
 	public String getId_machine() {
@@ -71,21 +83,6 @@ public class Preec {
 		this.slot_machine_info = slot_machine_info;
 	}
 
-	public String getAsc_info() {
-		return asc_info;
-	}
-
-	public void setAsc_info(String asc_info) {
-		this.asc_info = asc_info;
-	}
-
-	public String getFgt_info() {
-		return fgt_info;
-	}
-
-	public void setFgt_info(String fgt_info) {
-		this.fgt_info = fgt_info;
-	}
 
 	public String getElec_info() {
 		return elec_info;
@@ -135,4 +132,36 @@ public class Preec {
     public void setRemark(String remark) {
         this.remark = remark ;
     }
+
+
+	public String getPedar_info() {
+		return pedar_info;
+	}
+
+
+	public void setPedar_info(String pedar_info) {
+		this.pedar_info = pedar_info;
+	}
+
+
+	public String getOx_info() {
+		return ox_info;
+	}
+
+
+	public void setOx_info(String ox_info) {
+		this.ox_info = ox_info;
+	}
+
+
+	public String getVideo_info() {
+		return video_info;
+	}
+
+
+	public void setVideo_info(String video_info) {
+		this.video_info = video_info;
+	}
+    
+    
 }

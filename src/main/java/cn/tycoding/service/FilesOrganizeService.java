@@ -34,15 +34,15 @@ public interface FilesOrganizeService {
 	
 	public void insertFilesSM(FilesSlotMachine record);
 	
-	public State insertByString(Map<String, List<FilesFolder>> filesfoldersList);
+	public State insertByString(Map<String, List<FilesFolder>> filesfoldersList, String user_name);
 	
-	public void getAnalyzedPreec(String Datetime, String preecUrl) throws Exception;
+	public void getAnalyzedPreec(String Datetime, String preecUrl,String user_name) throws Exception;
 	
-	public void getAnalyzedEgContrast(String Datetime, String egcontrastUrl) throws Exception;
+	public void getAnalyzedEgContrast(String Datetime, String egcontrastUrl,String user_name) throws Exception;
 			
 	public String fileNameTransferm(String fileUrl) throws Exception;
 	
-	public void Rollback (int expid);
+	public void Rollback (List<Integer> failedExpidList, List<FilesFolder> fsList,boolean ifexist) throws Exception;
 	
 	public String sliceUrl(String datetime, String fileType, String originExpid);
 
@@ -54,5 +54,6 @@ public interface FilesOrganizeService {
 	public void insertFilesVideo(FilesVideo record);
 
 	public String fileNameTransform(String fileUrl) throws Exception;
+
 
 }

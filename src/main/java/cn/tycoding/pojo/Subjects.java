@@ -1,6 +1,8 @@
 package cn.tycoding.pojo;
 
-public class Subjects {
+import java.io.Serializable;
+
+public class Subjects  {
     private Integer sub_id;
 
     private String name;
@@ -15,6 +17,10 @@ public class Subjects {
 
     private float height;
     
+    private String remark;
+    
+    private String user_name;
+    
     public Subjects() {
     	
     }
@@ -22,7 +28,7 @@ public class Subjects {
 
 
     public Subjects(String name, String identity_card, String testdate, Integer age, float weight,
-			float height) {
+			float height,String remark,String user_name) {
 		super();
 		this.name = name;
 		this.identity_card = identity_card;
@@ -30,6 +36,33 @@ public class Subjects {
 		this.age = age;
 		this.weight = weight;
 		this.height = height;
+		this.remark = remark;
+		this.user_name = user_name;
+	}
+
+
+
+    
+	public String getUser_name() {
+		return user_name;
+	}
+
+
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
+
+
+	public String getRemark() {
+		return remark;
+	}
+
+
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 
@@ -98,4 +131,18 @@ public class Subjects {
 		this.height = height;
 	}
 
+	@Override
+	public String toString() {
+		return "Subjects{" +
+				"sub_id=" + sub_id +
+				", name='" + name + '\'' +
+				", identity_card='" + identity_card + '\'' +
+				", testdate='" + testdate + '\'' +
+				", age=" + age +
+				", weight=" + weight +
+				", height=" + height +
+				", remark='" + remark + '\'' +
+				", user_name='" + user_name + '\'' +
+				'}';
+	}
 }

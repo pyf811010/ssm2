@@ -41,6 +41,6 @@ public interface EgContrastMapper {
 
 	int getSum();
 
-
+	String findTypeByUserName(String user_name); 
 	List find();
 }

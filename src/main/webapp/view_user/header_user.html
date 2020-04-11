@@ -1,0 +1,67 @@
+<div id="navbar" class="navbar navbar-default          ace-save-state">
+    <div class="navbar-container ace-save-state" id="navbar-container">
+        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+            <span class="sr-only">Toggle sidebar</span>
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+        </button>
+
+        <div class="navbar-header pull-left">
+            <a href="/view_user/index_user.html" class="navbar-brand" >
+                <small>
+               <img src="image/e1.jpg" width=”1” height=”1”/> 
+                    人体运动测试数据分析与管理系统
+                </small>
+            </a>
+        </div>
+
+        <div class="navbar-buttons navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+
+                <li class="light-blue dropdown-modal">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+
+                        <img class="nav-user-photo us_photo" src="/assets/images/avatars/user.jpg" alt="个人头像"
+                             style="background-color:#fff"/>
+
+
+                        <span class="user-info">
+							       <span id="us_name"></span>
+								</span>
+
+                        <i class="ace-icon fa fa-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a id="setting" target="_blank">
+                                <i class="ace-icon fa fa-cog"></i> 设置
+                            </a>
+                        </li>
+
+                        <li>
+                            <a id="profile" target="_blank">
+                                <i class="ace-icon fa fa-user"></i> 个人信息
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+
+                        <li>
+                            <a href="/login.html" onclick="logout()">
+                                <i class="ace-icon fa fa-power-off"></i> 注销
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /.navbar-container -->
+</div>
+<script src="/assets/js/ssm2_user.util.js"></script>
+		

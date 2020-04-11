@@ -68,7 +68,7 @@
         <div class="navbar-header pull-left">
             <a href="/view/index.html" class="navbar-brand">
                 <small>
-                    <i class="fa fa-leaf"></i>
+                <img src="../image/e1.jpg" width=”1” height=”1”/> 
                     人体运动测试数据分析与管理系统
                 </small>
             </a>
@@ -135,11 +135,6 @@
         </script>
         <!-- /.sidebar-shortcuts -->
         <div id="lefter"></div>
-
-        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-            <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
-               data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
-        </div>
     </div>
 
     <div class="main-content">
@@ -217,6 +212,20 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div  style="left: 450px; position: absolute; top: 0px; height:130px">
+                           <!--  <button type="button" class="close" data-dismiss="alert">
+                                <i class="ace-icon fa fa-times"></i>
+                            </button> -->
+
+                            <i class="ace-icon fa fa-check black"></i> <span style="font-size: 15px;">欢迎使用&nbsp;</span>
+                            <strong class="black" style="font-size: 15px;color:#000000;">
+                                <span style="font-size: 15px;">人体运动测试数据分析与管理系统</span>
+                                <small>(v 1.0)</small>
+                                <br>
+                                <span style="font-size: 15px;">文件导入说明：</span>
+                            </strong> <span style="font-size: 15px;">此模块用于上传运动学与动力学数据修改后的文件，并可输入修改信息同步上传，上传文件的文件名需与原文件名保持一致
+                             <br>
+                        </div>
                                 <!-- /.span -->
                             </div>
                             <!-- /.row -->
@@ -240,16 +249,9 @@
     </div>
     <!-- /.main-content -->
 
-    <div class="footer">
-        <div class="footer-inner">
-            <div class="footer-content">
-						<span class="bigger-120">
-							<span class="blue bolder" style="margin-right: 10px;">人体运动测试数据分析与管理系统</span> 中国航天二院 &copy; 
-						</span>
+   <div id="footer"></div>
+    <!--页面底部栏  -->
 
-            </div>
-        </div>
-    </div>
 
     <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
         <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
@@ -302,6 +304,10 @@
 <script src="/assets/js/ace-elements.min.js"></script>
 <script src="/assets/js/ace.min.js"></script>
 
+<script>
+    $("#footer").load("/view/footer.html");
+</script>
+
 
 <!--文件上传-->
 <script type="text/javascript">
@@ -309,6 +315,7 @@
         $("#fileCommit").click(function () {
             var formData = new FormData();
             var files = $("#files")[0].files;
+            if(files.length!=0){
             for (var i = 0; i < files.length; i++) {
                 formData.append("files", files[i]);
             }
@@ -337,6 +344,9 @@
                 }
 
             });
+            }else{
+            	 alert("请选择上传的文件!");
+            }
         })
     });
 </script>

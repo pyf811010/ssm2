@@ -265,6 +265,8 @@
                 //alert(names[1]); //xlsx
                 //判断文件格式
                 if (names[1] == "xlsx" || names[1] == "xls") {
+                    if (names[0] == "admin"){
+
                     formData.append("file", files[0]);
 
                     $.ajax({
@@ -277,6 +279,10 @@
                         success: function (data) {
                             console.log(data.success);
                             alert(data.info);
+                            //清空选择的文件
+                            upfile.val("");
+                            //上传成功后重新加载表格
+                            $("#grid-table").trigger("reloadGrid");
                         },
                         error: function (err) {
                             hideloading();
@@ -284,6 +290,9 @@
                             alert("上传失败!");
                         }
                     });
+                    }else {
+                        alert("文件名错误（提示：admin.xls或admin.xlsx）")
+                    }
 
                 } else {
                     alert("文件类型错误(提示：xls或xlsx格式)")
@@ -355,8 +364,8 @@
 
             //data: grid_data,
             datatype: "json",
-            height: 400,
-            colNames: ['操作', '', 'ID', '姓名', '密码'],
+            height: 500,
+            colNames: ['操作', '','姓名', '密码','用户类型'],
             colModel: [{
                 name: 'op',
                 index: 'op',
@@ -368,17 +377,49 @@
                 search: false,
                 formatter: 'actions',
                 formatoptions: {
+                	onSuccess: function(response) {
+                      	 if (response.responseText == "success") {
+                               $(this).jqGrid('setGridParam', {
+                                   datatype: 'json'
+                               }).trigger('reloadGrid'); //Reloads the grid after edit
+                               alert("修改成功");
+                           	}else if(response.responseText == "fail"){
+                           		$(this).jqGrid('setGridParam', {
+                                      datatype: 'json'
+                                  }).trigger('reloadGrid'); //Reloads the grid after edit
+                                  alert("无修改权限");
+                           	}else{
+                           			$(this).jqGrid('setGridParam', {
+                                   		datatype: 'json'
+                              		 }).trigger('reloadGrid'); //Reloads the grid after edit
+                               		alert(decodeURIComponent(response.responseText));
+                           		 }                    
+                      	 },
                     keys: true,
                     //delbutton: false,//disable delete button
-                    editOptions: {
-                        recreateForm: true,
-                        beforeShowForm: beforeEditCallback
-                    },
                     delOptions: {
                         recreateForm: true,
-                        beforeShowForm: beforeDeleteCallback
+                        beforeShowForm: beforeDeleteCallback,
+                        afterSubmit: function (response, postdata) {
+                            if (response.responseText == "success") {
+                                $(this).jqGrid('setGridParam', {
+                                    datatype: 'json'
+                                }).trigger('reloadGrid'); //Reloads the grid after edit
+                                return [true, "删除成功!"];
+                            } else {
+                            	if(response.responseText == "fail"){
+                            		$(this).jqGrid('setGridParam', {
+                                        datatype: 'json'
+                                    }).trigger('reloadGrid'); //Reloads the grid after edit
+                                    return [false, "无操作权限"]; //Captures and displays the response text on th Edit window
+                            	}
+                            	$(this).jqGrid('setGridParam', {
+                                    datatype: 'json'
+                                }).trigger('reloadGrid'); //Reloads the grid after edit
+                                return [false, decodeURIComponent(response.responseText)];
+                            }
+                        }
                     },
-
                 }
             },
                 {
@@ -390,20 +431,19 @@
                     search: false
 
                 },
-
-                {
+                /*{
                     name: 'a_id',
                     index: 'a_id',
-                    width: 100,
+                    width: 50,
                     key: true,
-                    editable: false,
+                    editable: false,//即不可编辑，新增时此属性也不能添加
                     edittype: "textarea",
                     editoptions: {
                         rows: "2",
                         cols: "15"
                     }
 
-                },
+                },*/
                 {
                     name: 'a_name',
                     index: 'a_name',
@@ -428,12 +468,24 @@
                         cols: "15"
                     }
                 },
+                {
+                    name: 'type',
+                    index: 'type',
+                    width: 150,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                },
 
             ],
 
             viewrecords: true, //是否显示总数  如View 1 - 10 of 23
-            rowNum: 10, //每页显示10条
-            rowList: [10, 20, 30], //可选的每页显示条数
+            rowNum: 30, //每页显示10条
+            rowList: [30, 50, 100], //可选的每页显示条数
             pager: pager_selector, //指定工具栏
             altRows: true,
             shrinkToFit: false,

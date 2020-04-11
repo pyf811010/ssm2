@@ -10,5 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface GaitCyclePicUploadService {
 
-    State readExcelFile(MultipartFile[] files);
+    State readExcelFile(MultipartFile[] files, String user_name);
+
+	State readSingleFile(String fi_info, MultipartFile[] files,String user_name);
 }

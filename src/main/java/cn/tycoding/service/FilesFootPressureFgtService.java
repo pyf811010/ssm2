@@ -1,8 +1,10 @@
 package cn.tycoding.service;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.tycoding.pojo.FilesElectromyography;
@@ -24,6 +26,9 @@ public interface FilesFootPressureFgtService {
 	String handle(String oper, FilesFootPressureFgt FilesFootPressureFgt, String[] id);
 
 	void open(int expid) throws IOException;
+
+	String authorityTemp(String oper, FilesFootPressureFgt filesFootPressureFgt, String[] id,
+			HttpServletRequest request) throws UnsupportedEncodingException;
 
 
 }

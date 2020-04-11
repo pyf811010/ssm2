@@ -102,7 +102,7 @@ public class JsonServiceImpl implements JsonService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return "fail";
                 }
                 break;
             case "del":
@@ -125,7 +125,7 @@ public class JsonServiceImpl implements JsonService {
                         return "success";
                     }
                 } catch (Exception e) {
-                    return ExceptionUtil.HandleDataException(e);
+                    return "fail";
                 }
         }
         return "success";

@@ -84,16 +84,16 @@
                                             <div class="space-4"></div>
 
                                             <div class="clearfix">
-
-                                                <!-- <div class="radio-box">
-                                                    <input type="radio" id="user_type" name="type" value="student"/>
-                                                    <label>普通用户</label>
-                                                </div>
                                                 <div class="radio-box">
-                                                    <input type="radio" id="user_type" name="type" value="teacher"/>
+                                                    <input type="radio" id="user_type" name="type" value="管理员" checked = "checked"/>
                                                     <label>管理员</label>
                                                 </div>
- -->
+
+                                                 <div class="radio-box">
+                                                    <input type="radio" id="user_type" name="type" value="普通用户"/>
+                                                    <label>普通用户</label>
+                                                </div>
+
                                                 <button type="reset" class="width-45 pull-left btn btn-sm">
                                                     <i class="ace-icon fa fa-refresh"></i>
                                                     <span class="bigger-110">重置</span>
@@ -121,7 +121,7 @@
 
                                     <div>
                                         <a href="#" data-target="#signup-box" class="user-signup-link">
-                                            去注册
+                                            注册普通用户
                                             <i class="ace-icon fa fa-arrow-right"></i>
                                         </a>
                                     </div>
@@ -258,7 +258,7 @@
         <div class="footer-inner">
             <div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder" style="margin-right: 10px;">人体运动测试数据分析与管理系统</span> 北京航天二院
+							<span class="blue bolder" style="margin-right: 10px;">人体运动测试数据分析与管理系统</span> 航天科工二院206所
 						</span>
             </div>
         </div>
@@ -298,25 +298,47 @@
 </script>
 
 <script type="text/javascript">
+
+	
     jQuery(function ($) {
         //登录
         $('#login').on('click', function (e) {
-
+        	/* var type = "admin";
+        	var radio = document.getElementsByName("type").innerHTML = check();
+            var formData = new FormData();
+            formData.append("type",type)
+            alert(radio); */
+            /* formData.append("us_id", $("#login_id").val());
+            formData.append("us_password", $("#login_pd").val()); */
             $.ajax({
                 type: "post",
                 url: "/admin/login.do",
                 dataType: "json",
-                data: {
-                    "us_id": $("#login_id").val(),
-                    "us_password": $("#login_pd").val()
+                data:{
+                	"us_id": $("#login_id").val(),
+                	"us_password": $("#login_pd").val(),
+                	"type": $('input[type=radio][name=type]:checked').val()
                 },
                 success: function (data) {
                     if (data.success) {
+                    	var value=data.info.split(":");
+                    	var us_name = value[0];
+                    	var type = value[1];
+                    	if(type == "管理员"){
+                    	//管理员转到index.html页面
                         window.open("/view/index.html", "_self");
                         $.cookie("us_id", $("#login_id").val(), {});
-                        $.cookie("us_name", data.info, {
+                        $.cookie("us_name", us_name, {
                             path: "/"
                         });
+                    	}else{
+                    		//普通用户转到....页面
+                            window.open("/view_user/index_user.html", "_self");
+                            $.cookie("us_id", $("#login_id").val(), {});
+                            $.cookie("us_name", us_name, {
+                                path: "/"
+                            });
+                    	}
 
                     } else {
                         alert(data.info);
@@ -328,6 +350,8 @@
                 }
             });
         });
+        
+        
 
         $('#register').on('click', function (e) {
             //先判断两次输入的密码是否相同

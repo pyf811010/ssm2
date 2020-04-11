@@ -10,5 +10,5 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface UpdateExcelService {
 
-    State readExcelFile(String fi_info, MultipartFile[] files);
+    State readExcelFile(String fi_info, MultipartFile[] files, String user_name);
 }

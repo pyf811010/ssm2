@@ -16,18 +16,12 @@ jQuery(function($) {
 	$("#us_name").html($.cookie("us_name"));
 	//将Cookie中的id设置进个人信息中的id中
 	var type = getUserById($.cookie("us_id")).us_type;
-	if(type == "student") {
+	
 		//个人信息
-		$("#profile").attr("href", "/views/userInformation/studentProfile.html?id=" + $.cookie("us_id"));
+		$("#profile").attr("href", "/views/userInformation/userProfile.html?id=" + $.cookie("us_id"));
 		//个人设置
-		$("#setting").attr("href", "/views/userInformation/studentSetting.html");
-	} else if(type == "teacher") {
-		$("#profile").attr("href", "/views/userInformation/teacherProfile.html?id=" + $.cookie("us_id"));
-		$("#setting").attr("href", "/views/userInformation/teacherSetting.html");
-	} else {
-		$("#profile").attr("href", "#");
-		$("#setting").attr("href", "#");
-	}
+		$("#setting").attr("href", "/views/userInformation/userSetting.html");
+	
 
 });
 

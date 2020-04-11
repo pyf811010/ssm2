@@ -146,7 +146,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 	}
 	
 	@Override
-	public void getAnalyzedPreec(String Datetime, String preecUrl) throws Exception {
+	public void getAnalyzedPreec(String Datetime, String preecUrl, String user_name) throws Exception {
 		
 		System.out.println("日期:"+Datetime+"包含preec:"+preecUrl+",开始解析");
 		this.preecMap.put(Datetime, new HashMap<String, Preec>());
@@ -164,6 +164,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 				String id_SubjectString = columns.get(1).equals("") ? null : columns.get(1).toString();
 				Integer id_Subjects = null;
 				String subject_name = null;
+				String subject_remark = null;
 				Integer subject_age = null;
 				Float subject_weight = null;
 				Float subject_height = null;
@@ -193,10 +194,13 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 						subject_height = Float.parseFloat(subject_height_String);
 					System.out.println("    subject_height:"+subject_height);
 					
-					Integer unknown_Id_subject = subjectMapper.selectExistSubject(identity_card, subject_name, subject_age, subject_weight, subject_height);
+					subject_remark = columns.get(7).equals("") ? null : columns.get(7).toString();
+					System.out.println("    subject_remark:"+subject_remark);
+					
+					Integer unknown_Id_subject = subjectMapper.selectExistSubject(identity_card, subject_name, subject_age, subject_weight, subject_height,subject_remark);
 					
 					if(unknown_Id_subject == null) {
-						Subjects subject = new Subjects(subject_name, identity_card, Datetime,subject_age,subject_weight, subject_height);
+						Subjects subject = new Subjects(subject_name, identity_card, Datetime,subject_age,subject_weight, subject_height,subject_remark,user_name);
 						Integer rownum = subjectMapper.insertReturnID(subject);
 						System.out.println("    didn't find exist subject\n    newly input subjectID:"+subject.getSub_id());
 						id_Subjects = subject.getSub_id();
@@ -207,31 +211,34 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 				}
 				
 				
-				String id_Machine = columns.get(7).equals("") ? null : columns.get(7).toString();	
+				String id_Machine = columns.get(8).equals("") ? null : columns.get(8).toString();	
 				System.out.println("    id_Machine:"+id_Machine);
 				
-				String motion_capture_info = columns.get(8).equals("") ? null : columns.get(8).toString();
+				String motion_capture_info = columns.get(9).equals("") ? null : columns.get(9).toString();
 				System.out.println("    motion_capture_info:"+motion_capture_info);
 				
-				String slot_machine_info = columns.get(9).equals("") ? null : columns.get(9).toString();
+				String slot_machine_info = columns.get(10).equals("") ? null : columns.get(10).toString();
 				System.out.println("    slot_machine_info:"+slot_machine_info);
 				
-				String asc_info = columns.get(10).equals("") ? null : columns.get(10).toString();
-				System.out.println("    asc_info:"+asc_info);
+				String pedar_info = columns.get(11).equals("") ? null : columns.get(11).toString();
+				System.out.println("    pedar_info:"+pedar_info);
 				
-				String fgt_info = columns.get(11).equals("") ? null : columns.get(11).toString();
-				System.out.println("    fgt_info:"+fgt_info);
+				String ox_info = columns.get(12).equals("") ? null : columns.get(12).toString();
+				System.out.println("    ox_info:"+ox_info);
 				
-				String elec_info = columns.get(12).equals("") ? null : columns.get(12).toString();
+				String elec_info = columns.get(13).equals("") ? null : columns.get(13).toString();
 				System.out.println("    elec_info:"+elec_info);
 				
-				String advance = columns.get(13).equals("") ? null : columns.get(13).toString();
+				String video_info = columns.get(14).equals("") ? null : columns.get(14).toString();
+				System.out.println("    video_info:"+video_info);
+				
+				String advance = columns.get(15).equals("") ? null : columns.get(15).toString();
 				System.out.println("    advance:"+advance);
 				
-				String remark = columns.get(14).equals("") ? null : columns.get(14).toString();
+				String remark = columns.get(16).equals("") ? null : columns.get(16).toString();
 				System.out.println("    remark:"+remark);
 				
-				Preec tmpPreec = new Preec(null, null, id_Subjects,id_Machine, motion_capture_info, slot_machine_info, asc_info, fgt_info, elec_info,advance,remark);
+				Preec tmpPreec = new Preec(null, null, id_Subjects,id_Machine, motion_capture_info, slot_machine_info, pedar_info, ox_info, elec_info,advance,remark,video_info,user_name);
 				//Preec(Integer expid, Integer id_query, Integer id_subjects ,String motion_capture_info,String slot_machine_info,String asc_info,String fgt_info,String elec_info)
 				this.preecMap.get(Datetime).put(preexpid, tmpPreec);
 			}
@@ -239,7 +246,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 	}
 	
 	@Override
-	public void getAnalyzedEgContrast(String Datetime, String egcontrastUrl) throws Exception {
+	public void getAnalyzedEgContrast(String Datetime, String egcontrastUrl, String user_name) throws Exception {
 		this.egcontrastMap.put(Datetime, new HashMap<String, EgContrast>());
 	    List<EgContrast> egcontrastList = SmallExcelReaderUtil.readEGcontrasts(egcontrastUrl, 2);
 	    System.out.println("egcontrastList.size"+egcontrastList.size());
@@ -257,9 +264,10 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 	@Override 
 	public String fileNameTransform(String fileUrl) throws Exception {
 		String filename = null;
+		//System.out.println("fileUrl:"+fileUrl);
 		String datetime = fileUrl.split("\\/")[2];
 		String tmpfilename = fileUrl.split("\\/")[4];
-		filename = datetime + "_" + tmpfilename.split("_")[0] + "_" + tmpfilename.split("_")[1] + "." + tmpfilename.split("\\.")[1];
+		filename = datetime + "_" + tmpfilename;
 		return filename;
 	}
 	@Override 
@@ -301,9 +309,8 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 	}
 	
 	@Override
-	public State insertByString(Map<String, List<FilesFolder>> filesfoldersList) {
+	public State insertByString(Map<String, List<FilesFolder>> filesfoldersList,String user_name) {
 		State state = new State();
-
 		this.preecMap = new HashMap<String, Map<String,Preec>>();
 		this.egcontrastMap = new HashMap<String, Map<String,EgContrast>>();
 		for (Map.Entry<String, List<FilesFolder>> folderBydate : filesfoldersList.entrySet()) {
@@ -335,7 +342,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 						if (!this.preecMap.containsKey(datetime)) {
 							System.out.println("开始解析Datetime:" + datetime + "的前置实验表");
 							try {
-								getAnalyzedPreec(datetime, preecUrl);
+								getAnalyzedPreec(datetime, preecUrl,user_name);
 							}catch(Exception e) {
 								System.out.println("解析前置实验条件表出现问题");
 								e.printStackTrace();
@@ -351,7 +358,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 						if (!this.egcontrastMap.containsKey(datetime)) {
 							System.out.println("开始解析Datetime:" + datetime + " Expid:"+originexpid+"的肌肉对照表");
 							try {
-								getAnalyzedEgContrast(datetime, egcontrastUrl);
+								getAnalyzedEgContrast(datetime, egcontrastUrl,user_name);
 								System.out.println("成功解析");
 							}catch(Exception e) {
 								System.out.println("解析肌肉对照表出现问题");
@@ -372,7 +379,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 							System.out.println("********** " + ifexist + " ************ " + filesMCMapper.dataifexist(sliceUrl(datetime, "mc", originexpid)));
 							if (ifexist==false && filesMCMapper.dataifexist(sliceUrl(datetime, "mc", originexpid)) == false) {
 								System.out.println("不存在，可以插入mc表");
-								insertFilesMC(new FilesMontionCapture(expid, fs.getMc(), expid, fileNameTransform(fs.getMc())));
+								insertFilesMC(new FilesMontionCapture(expid, fs.getMc(), expid, fileNameTransform(fs.getMc()),user_name));
 								System.out.println("插入成功");
 							} else {
 								ifexist = true;
@@ -387,7 +394,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 							//realExpidByDate = fs.getSm().split("\\/")[4].split("_")[1];
 							System.out.println("插入Datetime:" + datetime + " expid:"+expid+" originExpid:" + originexpid + "的sm表");
 							if (ifexist==false && filesSMMapper.dataifexist(sliceUrl(datetime, "sm", originexpid)) == false)
-								insertFilesSM(new FilesSlotMachine(expid, fs.getSm(), expid, fileNameTransform(fs.getSm())));
+								insertFilesSM(new FilesSlotMachine(expid, fs.getSm(), expid, fileNameTransform(fs.getSm()),user_name));
 							else {
 								ifexist = true;
 								failed = true;
@@ -402,7 +409,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 							//realExpidByDate = fs.getKand().split("\\/")[4].split("_")[1];
 							System.out.println("插入Datetime:" + datetime + " expid:"+expid+" originExpid:" + originexpid + "的kand表");
 							if (ifexist==false && filesKandMapper.dataifexist(sliceUrl(datetime, "kand", originexpid)) == false)
-								insertFilesKand(new FilesKand(expid, fs.getKand(), expid, fileNameTransform(fs.getKand()),0));
+								insertFilesKand(new FilesKand(expid, fs.getKand(), expid, fileNameTransform(fs.getKand()),0,user_name));
 							else {
 								ifexist = true;
 								failed = true;
@@ -417,7 +424,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 							query.setExpid_ox(expid);
 							System.out.println("插入Datetime:" + datetime + " expid:"+expid+" originExpid:" + originexpid + "的ox表");
 							if (ifexist==false && filesOxygenMapper.dataifexist(sliceUrl(datetime, "ox", originexpid)) == false)
-								insertFilesOxygen(new FilesOxygen(expid, fs.getOx(), expid, fileNameTransform(fs.getOx())));
+								insertFilesOxygen(new FilesOxygen(expid, fs.getOx(), expid, fileNameTransform(fs.getOx()),user_name));
 							else {
 								ifexist = true;
 								failed = true;
@@ -432,7 +439,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 							System.out.println("插入Datetime:" + datetime + " expid:"+expid+" originExpid:" + originexpid + "的Ele表");
 							hasEle = true;
 							if (ifexist == false && filesECMapper.dataifexist(sliceUrl(datetime, "ele", originexpid)) == false) {
-								insertFilesEle(new FilesElectromyography(expid, fs.getEle(), expid, fileNameTransform(fs.getEle())));
+								insertFilesEle(new FilesElectromyography(expid, fs.getEle(), expid, fileNameTransform(fs.getEle()),user_name));
 							} else {
 								ifexist = true;
 								failed =false;
@@ -446,7 +453,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 							//realExpidByDate = fs.getFpa().split("\\/")[4].split("_")[1];
 							System.out.println("插入Datetime:" + datetime + " expid:"+expid+" originExpid:" + originexpid + "的fpa表");
 							if (ifexist == false && filesFPAMapper.dataifexist(sliceUrl(datetime, "fpa", originexpid)) == false) {
-								insertFilesFPA(new FilesFootPressureAsc(expid, fs.getFpa(), expid, fileNameTransform(fs.getFpa())));
+								insertFilesFPA(new FilesFootPressureAsc(expid, fs.getFpa(), expid, fileNameTransform(fs.getFpa()),user_name));
 							} else {
 								ifexist = true;
 								failed = false;
@@ -460,7 +467,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 							//realExpidByDate = fs.getFpf().split("\\/")[4].split("_")[1];
 							System.out.println("插入Datetime:" + datetime + " expid:"+expid+" originExpid:" + originexpid + "的fpf表");
 							if (ifexist == false && filesFPFMapper.dataifexist(sliceUrl(datetime, "fpf", originexpid)) == false) {
-								insertFilesFPF(new FilesFootPressureFgt(expid, fs.getFpf(), expid, fileNameTransform(fs.getFpf())));
+								insertFilesFPF(new FilesFootPressureFgt(expid, fs.getFpf(), expid, fileNameTransform(fs.getFpf()),user_name));
 							} else {
 								ifexist = true;
 								failed = true;
@@ -475,7 +482,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 							//realExpidByDate = fs.getFpf().split("\\/")[4].split("_")[1];
 							System.out.println("插入Datetime:" + datetime + " expid:"+expid+" originExpid:" + originexpid + "的video");
 							if (ifexist == false && filesVideoMapper.dataifexist(sliceUrl(datetime, "video", originexpid)) == false) {
-								insertFilesVideo(new FilesVideo(expid, fs.getVideo(), expid, fileNameTransform(fs.getVideo())));
+								insertFilesVideo(new FilesVideo(expid, fs.getVideo(), expid, fileNameTransform(fs.getVideo()),user_name));
 							} else {
 								ifexist = true;
 								failed = true;
@@ -511,6 +518,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 								tmpEgContrast = this.egcontrastMap.get(datetime).get(originexpid);
 								tmpEgContrast.setExpid(expid);
 								tmpEgContrast.setId_query(expid);
+								tmpEgContrast.setUser_name(user_name);
 								System.out.println("开始插入Datetime:"+datetime+" Expid:"+originexpid+"的Egcontrast表");
 								egContrastMapper.insert(tmpEgContrast);
 								query.setExpid_eg_contrast(expid);
@@ -560,7 +568,10 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 		}//for (Map.Entry<String, List<FilesFolder>> folderBydate : filesfoldersList.entrySet())
 		if (state.getInfo() != null) {
 			state.setSuccess(2);
-		} else state.setSuccess(1);
+		} else {
+			state.setSuccess(1);
+			state.setInfo("全部文件上传成功");
+		}
 		return state;
 	}
 	

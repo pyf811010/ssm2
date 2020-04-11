@@ -4,6 +4,13 @@
 .alert,.well {
 	border-radius:0
 }
+.icon{
+	diaplay:inline-block;
+	width:100px;
+	height:100px;
+	background-image:url(images/pattern.jpg);
+	background-position:center center;
+}
 .nav-list>li .submenu>li>a:hover,.nav-list>li>a,a:active,a:focus {
 	text-decoration:none
 }
@@ -62,7 +69,7 @@ h1,h2,h3,h4,h5,h6 {
 	clear:both
 }
 .sidebar+.main-content {
-	margin-left:190px
+	margin-left:210px
 }
 .page-content {
 	background-color:#FFF;
@@ -1631,7 +1638,7 @@ li.open .user-info {
 	margin-left:7px
 }
 .sidebar {
-	width:190px;
+	width:210px;
 	float:left;
 	position:static;
 	padding-left:0;

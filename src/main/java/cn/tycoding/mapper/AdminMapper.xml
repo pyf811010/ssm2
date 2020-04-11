@@ -20,11 +20,13 @@
         insert into
         admin(
           a_name,
-          a_password
+          a_password,
+          type
         )
         values(
           #{a_name},
-          #{a_password}
+          #{a_password},
+          #{type}
         )
     </insert>
 
@@ -63,7 +65,7 @@
 
     <update id="edit" parameterType="cn.tycoding.pojo.Admin">
 		update admin set
-		a_name=#{a_name},a_password=#{a_password}
+		a_name=#{a_name},a_password=#{a_password},type=#{type}
 		where
 		a_id=#{a_id}
 	</update>
@@ -71,7 +73,7 @@
     <!-- 增加一条管理员数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.Admin">
 		insert into admin
-		values(default,#{a_name},#{a_password});
+		values(default,#{a_name},#{a_password},#{type});
 	</insert>
 
     <!-- 按id删除管理员 -->
@@ -91,6 +93,13 @@
             resultType="int">
 		${_parameter}
 	</select>
+	
+    <!-- 按照用户名查找用户类型 -->
+    <select id="findTypeByUserName" parameterType="string"
+            resultType="string">
+		select type from admin
+		where a_name = #{a_name}
+	</select>
 
     <!-- 查找表中字段的信息，字段名称和字段备注-->
     <select id="findDbTableComment" resultType="cn.tycoding.entity.assist.DBTableComment">
@@ -98,11 +107,12 @@
     </select>
 
     <insert id="addTemplate" parameterType="cn.tycoding.pojo.Admin">
-        insert into admin (a_name,a_password)
-			select #{a_name},#{a_password} from dual where not exists (
+        insert into admin (a_name,a_password,type)
+			select #{a_name},#{a_password},#{type} from dual where not exists (
 			 	select * from admin where
 			 		a_name = #{a_name} and
-			 		a_password = #{a_password}
+			 		a_password = #{a_password} and
+			 		type = #{type} 
 			 		limit 1
 			 );
     </insert>

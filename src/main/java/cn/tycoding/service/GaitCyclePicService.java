@@ -1,8 +1,10 @@
 package cn.tycoding.service;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.tycoding.pojo.FilesElectromyography;
@@ -21,6 +23,8 @@ public interface GaitCyclePicService {
 	void open(int expid) throws IOException;
 
 	void download(int p_id, HttpServletResponse response) throws IOException;
+
+	String authorityTemp(String oper, GaitCyclePic gaitCyclePic, String[] id, HttpServletRequest request) throws UnsupportedEncodingException;
 
 	
 

@@ -8,15 +8,29 @@ public class FilesSlotMachine {
     private Integer id_query;
 
     private String files_name;
+    
+    private String user_name;
+    
     public FilesSlotMachine () {
     }
-    public FilesSlotMachine (Integer expid, String url, Integer id_query, String file_name) {
+    public FilesSlotMachine (Integer expid, String url, Integer id_query, String file_name, String user_name) {
     	this.expid = expid;
     	this.url = url;
     	this.id_query = id_query;
     	this.files_name = file_name;
+    	this.user_name = user_name;
     }
-    public Integer getExpid() {
+    
+    
+    
+    
+    public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+	public Integer getExpid() {
         return expid;
     }
 

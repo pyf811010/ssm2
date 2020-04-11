@@ -19,8 +19,20 @@ public class Admin implements Serializable {
     private String a_telephone;
     // 注册日期
     private String a_date;
+    //类型
+    private String type;
+    
+    
 
-    public int getA_id() {
+    public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public int getA_id() {
         return a_id;
     }
 

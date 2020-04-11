@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -69,11 +70,9 @@ public class PreecController {
     
     @RequestMapping("/handle")
     @ResponseBody
-    public String handle(String oper, Preec preec, String id[])
+    public String handle(String oper, Preec preec, String id[],HttpServletRequest request)
             throws UnsupportedEncodingException {
-        String temp = preecService.handle(oper, preec, id);
-        // 对传回的中文进行编码
-        return URLEncoder.encode(temp, "UTF-8");
+    	return preecService.authorityTemp(oper,preec,id,request);
     }
     
     @RequestMapping("/score")
