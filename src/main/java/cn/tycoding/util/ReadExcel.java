@@ -1,7 +1,9 @@
 package cn.tycoding.util;
 
 import cn.tycoding.pojo.Admin;
+import cn.tycoding.pojo.FilesLiterature;
 import cn.tycoding.pojo.GaitPicRemark;
+import cn.tycoding.pojo.LiteratureRemark;
 import cn.tycoding.pojo.Machine;
 import cn.tycoding.pojo.Subjects;
 import com.sun.org.apache.bcel.internal.generic.FLOAD;
@@ -162,13 +164,59 @@ public class ReadExcel {
                 }
                 if (o instanceof GaitPicRemark){
                     GaitPicRemark gaitPicRemark = new GaitPicRemark();
-                    gaitPicRemark.setFileName(row.getCell(0).getStringCellValue());
+                    Cell cell = row.getCell(0);
+                	cell.setCellType(CellType.STRING);
+                    gaitPicRemark.setFileName(cell.getStringCellValue());
                     if(row.getCell(1)!= null){
-                    	gaitPicRemark.setFileInfo(row.getCell(1).getStringCellValue());
+                    	Cell cell1 = row.getCell(1);
+                     	cell1.setCellType(CellType.STRING);
+                    	gaitPicRemark.setFileInfo(cell1.getStringCellValue());
                     }else{
                     	gaitPicRemark.setFileInfo("未添加任何记录");
                     }
                     list.add(gaitPicRemark);
+                }
+                if (o instanceof LiteratureRemark){
+                	LiteratureRemark literatureRemark = new LiteratureRemark();
+                	Cell cell = row.getCell(0);
+                	cell.setCellType(CellType.STRING);
+                	literatureRemark.setFiles_name(cell.getStringCellValue());
+                	if(row.getCell(1)!= null){
+                		Cell cell1 = row.getCell(1);
+                    	cell1.setCellType(CellType.STRING);
+                		literatureRemark.setTopic(cell1.getStringCellValue());
+                	}else{
+                		literatureRemark.setTopic("无");
+                	}
+                	if(row.getCell(2)!= null){
+                		Cell cell2 = row.getCell(2);
+                    	cell2.setCellType(CellType.STRING);
+                		literatureRemark.setWriter(cell2.getStringCellValue());
+                	}else{
+                		literatureRemark.setWriter("无");
+                	}
+                	if(row.getCell(3)!= null){
+                		Cell cell3 = row.getCell(3);
+                    	cell3.setCellType(CellType.STRING);
+                		literatureRemark.setCompany(cell3.getStringCellValue());
+                	}else{
+                		literatureRemark.setCompany("无");
+                	}
+                	if(row.getCell(4)!= null){
+                		Cell cell4 = row.getCell(4);
+                    	cell4.setCellType(CellType.STRING);
+                		literatureRemark.setTime(cell4.getStringCellValue());
+                	}else{
+                		literatureRemark.setTime("无");
+                	}
+                	if(row.getCell(5)!= null){
+                		Cell cell5 = row.getCell(5);
+                    	cell5.setCellType(CellType.STRING);
+                		literatureRemark.setRemark(cell5.getStringCellValue());
+                	}else{
+                		literatureRemark.setRemark("无");
+                	}
+                	list.add(literatureRemark);
                 }
             }
         }

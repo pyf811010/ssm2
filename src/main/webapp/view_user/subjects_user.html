@@ -78,7 +78,7 @@
                                 <div class="btn-group" style="">
                                     <a href="/excel/downloadTemplate?name=subjects" class="btn btn-success bigger-120"
                                        role="button">
-                                        下载导入摸板
+                                        下载导入模板
                                         <i class="ace-icon fa icon-on-right"></i>
                                     </a>
                                 </div>
@@ -146,12 +146,12 @@
                     <!-- /.col -->
                 </div>
                 <!-- /.row -->
+    <div id="footer"></div>
             </div>
             <!-- /.page-content -->
         </div>
     </div>
     <!-- /.main-content -->
-    <div id="footer"></div>
     <!--页面底部栏  -->
 
     <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
@@ -251,6 +251,7 @@
 <script type="text/javascript">
 
     jQuery(function ($) {
+        var upfile = $("#upfile");
         $("#fileCommit").click(function (e) {
             var formData = new FormData();
             var files = $("#upfile")[0].files;
@@ -293,11 +294,10 @@
                         });
 
                     } else {
-                        alert("文件名错误(提示：subjects)");
+                        alert("文件名错误(提示：subjects.xls或subjects.xlsx)");
                     }
                 } else {
-                    alert("文件类型错误(提示：xls或xlsx格式)");
-                    upfile.prop("value","");
+                    alert("文件类型错误(提示：xls或xlsx格式)")
                 }
             } else {
                 alert("请选择上传的文件");
@@ -367,7 +367,7 @@
 
              //data: grid_data,
              datatype: "json",
-             height: 500,
+             height: 450,
              colNames: ['操作', '', 'ID', '身份证号', '实验者姓名', '年龄', '测试日期', '体重', '身高','备注信息','操作用户'],
              colModel: [{
                  name: 'op',

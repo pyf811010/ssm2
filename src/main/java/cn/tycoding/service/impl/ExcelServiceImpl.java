@@ -54,6 +54,9 @@ public class ExcelServiceImpl implements ExcelService {
 
     @Autowired
     private MachineMapper machineMapper;
+    
+    @Autowired
+    private FilesLiteratureMapper filesLiteratureMapper;
 
     @Override
     public synchronized State readExcelFile(MultipartFile file,String user_name) {
@@ -213,6 +216,10 @@ public class ExcelServiceImpl implements ExcelService {
                 list.add(new DBTableComment("height", "受试者身高"));
                 list.add(new DBTableComment("remark", "受试者备注信息"));
                 index = ExcelConstant.PREEC_INDEX;
+                break;
+            case "literature":
+                list = filesLiteratureMapper.findDbTableComment();
+                index = ExcelConstant.LITERATURE_INDEX;
                 break;
         }
         for (int i = 0; i < index.length; i++) {

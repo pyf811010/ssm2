@@ -1,6 +1,7 @@
 package cn.tycoding.service.impl;
 
 import cn.tycoding.mapper.AdminMapper;
+import cn.tycoding.mapper.EgContrastMapper;
 import cn.tycoding.mapper.FilesElectromyographyMapper;
 import cn.tycoding.mapper.FilesFootPressureAscMapper;
 import cn.tycoding.mapper.FilesFootPressureFgtMapper;
@@ -69,6 +70,8 @@ public class PreecServiceImpl implements PreecService {
     private FilesElectromyographyMapper filesElectromyographyMapper;
     @Autowired
     private AdminMapper adminMapper;
+    @Autowired
+    private EgContrastMapper egContrastMapper;
 
 
 	@Override
@@ -232,6 +235,7 @@ public class PreecServiceImpl implements PreecService {
                     	}
                     	if(result8) System.out.println("成功删除肌电数据");else System.out.println("删除肌电数据失败");
                     }
+                    egContrastMapper.del(id[i]);
                 	filesKandMapper.del(id[i]);
                 	filesMotionCaptureMapper.del(id[i]);
                 	filesFootPressureAscMapper.del(id[i]);

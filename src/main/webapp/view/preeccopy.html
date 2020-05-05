@@ -69,7 +69,7 @@
                         <a href="/view/index.html">首页</a>
                     </li>
 
-                    <li class="active">前置实验条件管理</li>
+                    <li class="active">数据查询管理</li>
                 </ul>
                 <!-- /.breadcrumb -->
 
@@ -86,55 +86,10 @@
                                 <div class="btn-group" style="">
                                     <a href="/excel/downloadTemplate?name=preec" class="btn btn-success bigger-120"
                                        role="button">
-                                        下载导入摸板
+                                        下载导入模板
                                         <i class="ace-icon fa icon-on-right"></i>
                                     </a>
                                 </div>
-                                <!--<div class="btn-group">
-                                    <button data-toggle="dropdown" class="btn btn-success bigger-120 dropdown-toggle">
-                                        导入现有数据
-                                        <i class="ace-icon fa fa-angle-down icon-on-right"></i>
-                                    </button>
-
-                                    <ul class="dropdown-menu dropdown-info dropdown-menu-right">
-
-                                        <li class="divider"></li>
-
-                                        <li>
-
-                                            <form method="POST" enctype="multipart/form-data" id="form1"
-                                                  action="uploadExcel/upload.do">
-
-                                                <div style="margin-left: 10px;">
-                                                    <input id="upfile" type="file" name="upfile">
-                                                </div>
-                                                <div style="margin-top: 15px;margin-left: 10px;">
-                                                    &lt;!&ndash;<a href="#" onclick="importData()">由模版导入数据</a>&ndash;&gt;
-                                                    <span>由模版导入数据</span>
-                                                </div>
-                                            </form>
-
-                                        </li>
-                                    </ul>
-                                </div>-->
-                                <!--<div class="btn-group">
-                                    <button data-toggle="dropdown" class="btn btn-warning bigger-120 dropdown-toggle">
-                                        导出查询数据
-                                        <i class="ace-icon fa fa-angle-down icon-on-right"></i>
-                                    </button>
-
-                                    <ul class="dropdown-menu dropdown-info dropdown-menu-right">
-                                        <li>
-                                            <a href="#" onclick="exportSinglePage()">导出本页数据</a>
-                                        </li>
-
-                                        <li class="divider"></li>
-
-                                        <li>
-                                            <a href="#" onclick="exportAllData()">导出全部数据</a>
-                                        </li>
-                                    </ul>
-                                </div>-->
                             </div>
                         </div>
                         <table id="grid-table"></table>
@@ -306,7 +261,7 @@
 
             //data: grid_data,
             datatype: "json",
-            height: 500,
+            height: 450,
             colNames: ['操作', '', 'ID', '实验条件', '实验者信息ID', '测试设备ID', '动捕数据信息', '跑台数据信息', 'pedar足底压力数据信息', '耗氧量数据信息', '肌电数据信息', '视频数据文件','备注信息','操作用户'],
             colModel: [{
                 name: 'op',
