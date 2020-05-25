@@ -22,6 +22,15 @@ public class FilesKandUpdateinfo {
     
     private String user_name;
     
+    private String flag;
+    
+    public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+    
     
 
     public String getUser_name() {

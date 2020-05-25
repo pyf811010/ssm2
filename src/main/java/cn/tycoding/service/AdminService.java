@@ -1,5 +1,6 @@
 package cn.tycoding.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import cn.tycoding.pojo.Admin;
@@ -26,6 +27,10 @@ public interface AdminService {
 	String handle(String oper, Admin admin, String[] id);
 
 	List<Admin> findAll();
+
+	void sign(int expid) throws IOException;
+
+	void cancelSign(int expid) throws IOException;
 
 
 

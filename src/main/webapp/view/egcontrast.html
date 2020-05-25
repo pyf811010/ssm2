@@ -257,6 +257,53 @@
 </script>
 
 <script type="text/javascript">
+function Sign(expid) {
+    $.ajax({
+        type: "post",
+        url: "/egcontrast/Sign/",
+        dataType: "json",
+        data: {
+            "expid": expid
+        },
+        success: function (data) {
+            if (data.success) {
+            	alert("标记成功");
+                $("#grid-table").trigger("reloadGrid");
+            } else {
+                alert(data.info);
+            }
+
+        },
+        error: function (err) {
+            alert("error:" + err.info);
+        }
+        
+    });
+}
+
+function CancelSign(expid) {
+    $.ajax({
+        type: "post",
+        url: "/egcontrast/CancelSign/",
+        dataType: "json",
+        data: {
+            "expid": expid
+        },
+        success: function (data) {
+            if (data.success) {
+            	alert("标记成功");
+                $("#grid-table").trigger("reloadGrid");
+            } else {
+                alert(data.info);
+            }
+
+        },
+        error: function (err) {
+            alert("error:" + err.info);
+        }
+    });
+}
+
     jQuery(function ($) {
         var grid_selector = "#grid-table";
         var pager_selector = "#grid-pager";
@@ -286,12 +333,12 @@
             //data: grid_data,
             datatype: "json",
             height: 450,
-            colNames: ['操作', '', 'ID', '传感器01', '传感器02', '传感器03', '传感器04', '传感器05', '传感器06', '传感器07', '传感器08', '传感器09', '传感器10', '传感器11', '传感器12', '传感器13', '传感器14', '传感器15', '传感器16', '传感器17', '传感器18', '传感器19', '传感器20', '传感器21', '传感器22', '传感器23', '传感器24', '传感器25', '传感器26', '传感器27', '传感器28', '传感器29', '传感器30', '传感器31', '传感器32','操作用户'],
+            colNames: ['操作','','', 'ID','标记', '传感器01', '传感器02', '传感器03', '传感器04', '传感器05', '传感器06', '传感器07', '传感器08', '传感器09', '传感器10', '传感器11', '传感器12', '传感器13', '传感器14', '传感器15', '传感器16', '传感器17', '传感器18', '传感器19', '传感器20', '传感器21', '传感器22', '传感器23', '传感器24', '传感器25', '传感器26', '传感器27', '传感器28', '传感器29', '传感器30', '传感器31', '传感器32','操作用户'],
             colModel: [{
                 name: 'op',
                 index: 'op',
                 align: 'center',
-                width: 80,
+                width: 40,
                 fixed: true,
                 sortable: false,
                 resize: false,
@@ -317,6 +364,7 @@
                            		 }                    
                       	 },
                     keys: true,
+                    delbutton: false,
                     //delbutton: false,//disable delete button
                     delOptions: {
                         recreateForm: true,
@@ -343,15 +391,24 @@
                     },
                 }
             },
-                {
-                    name: '',
-                    index: '',
-                    width: 0.1,
-                    editable: true,
-                    sortable: false,
-                    search: false
-
-                },
+            {
+                name: 'operate2',
+                index: 'operate2',
+                search: false,
+                width: 40,
+                formatter: function (value, grid, rows, state) {
+                    return "<a href=\"#\" style=\"color:#f60\" onclick=\"Sign(" + rows.expid + ")\">标记</a>"
+                }
+            },
+            {
+                name: 'operate',
+                index: 'operate',
+                search: false,
+                width: 62,
+                formatter: function (value, grid, rows, state) {
+                    return "<a href=\"#\" style=\"color:#f60\" onclick=\"CancelSign(" + rows.expid + ")\">取消标记</a>"
+                }
+            },
 
                 {
                     name: 'expid',
@@ -365,6 +422,18 @@
                         cols: "15"
                     }
 
+                },
+                {
+                    name: 'flag',
+                    index: 'flag',
+                    width: 60,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
                 },
 
                 {

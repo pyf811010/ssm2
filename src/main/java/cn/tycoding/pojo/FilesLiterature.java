@@ -18,6 +18,15 @@ public class FilesLiterature {
     private String remark;
     
     private String user_name;
+    
+    private String flag;
+    
+    public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
 
 	public Integer getExpid() {
 		return expid;

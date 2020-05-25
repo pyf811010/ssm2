@@ -8,7 +8,7 @@
     <result column="file_name" jdbcType="VARCHAR" property="file_name" />
   </resultMap>
   <sql id="Base_Column_List">
-    expid, url, id_query, file_name,user_name
+    expid, url, id_query, file_name,user_name,flag
   </sql>
   
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -26,9 +26,9 @@
   </delete>
   <insert id="insert" parameterType="cn.tycoding.pojo.FilesElectromyography">
     insert into files_electromyography (expid, url, id_query, 
-      file_name,user_name)
+      file_name,user_name,flag)
     values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, 
-      #{file_name,jdbcType=VARCHAR},#{user_name,jdbcType=VARCHAR})
+      #{file_name,jdbcType=VARCHAR},#{user_name,jdbcType=VARCHAR},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler})
   </insert>
   <insert id="insertSelective" parameterType="cn.tycoding.pojo.FilesElectromyography">
     insert into files_electromyography
@@ -109,14 +109,15 @@
       set url = #{url},
       id_query = #{id_query},
       file_name = #{file_name},
-      user_name = #{user_name}
+      user_name = #{user_name},
+      flag = #{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler}
       where expid = #{expid}
 	</update>
 
     <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.FilesElectromyography">
 		insert into files_electromyography
-		values(#{expid},#{url},#{id_query},#{file_name},#{user_name});
+		values(#{expid},#{url},#{id_query},#{file_name},#{user_name},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler});
 	</insert>
 
     <!-- 按学号删除学生 -->
@@ -147,6 +148,21 @@
     SELECT file_name from files_electromyography where expid = #{expid}
   </select>
 
+<!-- 标记信息状态（失效） -->
+    <update id="sign" parameterType="java.lang.Integer">
+		update files_electromyography set
+		flag='已失效'                                                
+		where
+		expid=#{expid}
+	</update>
+	
+    <!-- 标记信息状态（失效） -->
+    <update id="cancelSign" parameterType="java.lang.Integer">
+		update files_electromyography set
+		flag=''                                                
+		where
+		expid=#{expid}
+	</update>
 	
   
 </mapper>

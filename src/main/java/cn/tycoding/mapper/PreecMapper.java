@@ -41,4 +41,10 @@ public interface PreecMapper {
 	 * @return 封装了字段信息的list集合
 	 */
 	List<DBTableComment> findDbTableComment();
+
+	void sign(int expid);
+
+	void cancelSign(int expid);
+
+	List<Integer> getIdByAdvance(String fi_info);
 }

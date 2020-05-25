@@ -325,6 +325,31 @@
 </script>
 
 <script type="text/javascript">
+function Sign(m_id) {
+    $.ajax({
+        type: "post",
+        url: "/Machine/Sign/",
+        dataType: "json",
+        data: {
+            "expid": m_id
+        },
+    });
+    alert("标记成功");
+    $("#grid-table").trigger("reloadGrid");
+}
+
+function CancelSign(m_id) {
+    $.ajax({
+        type: "post",
+        url: "/Machine/CancelSign/",
+        dataType: "json",
+        data: {
+            "expid": m_id
+        },
+    });
+    alert("取消标记成功");
+    $("#grid-table").trigger("reloadGrid");
+}
 
     jQuery(function ($) {
         var grid_selector = "#grid-table";
@@ -355,12 +380,12 @@
             //data: grid_data,
             datatype: "json",
             height: 450,
-            colNames: ['操作', '', 'ID', '设备名称', '设备型号', '所属单位','布置场地','备注','操作用户'],
+            colNames: ['操作','','', 'ID','标记', '设备名称', '设备型号', '所属单位','布置场地','备注','操作用户'],
             colModel: [{
                 name: 'op',
                 index: 'op',
                 align: 'center',
-                width: 70,
+                width: 40,
                 fixed: true,
                 sortable: false,
                 resize: false,
@@ -386,6 +411,7 @@
                            		 }                    
                       	 },
                     keys: true,
+                    delbutton: false,
                     //delbutton: false,//disable delete button
                     delOptions: {
                         recreateForm: true,
@@ -412,17 +438,24 @@
                     },
                 }
             },
-
-                {
-                    name: '',
-                    index: '',
-                    width: 0.1,
-                    editable: true,
-                    sortable: false,
-                    search: false
-
-                },
-
+            {
+                name: 'operate2',
+                index: 'operate2',
+                search: false,
+                width: 40,
+                formatter: function (value, grid, rows, state) {
+                    return "<a href=\"#\" style=\"color:#f60\" onclick=\"Sign(" + rows.m_id + ")\">标记</a>"
+                }
+            },
+            {
+                name: 'operate',
+                index: 'operate',
+                search: false,
+                width: 62,
+                formatter: function (value, grid, rows, state) {
+                    return "<a href=\"#\" style=\"color:#f60\" onclick=\"CancelSign(" + rows.m_id + ")\">取消标记</a>"
+                }
+            },
                 {
                     name: 'm_id',
                     index: 'm_id',
@@ -435,6 +468,18 @@
                         cols: "15"
                     }
 
+                },
+                {
+                    name: 'flag',
+                    index: 'flag',
+                    width: 60,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
                 },
                 {
                     name: 'name',

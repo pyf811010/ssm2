@@ -11,6 +11,8 @@ public class FilesElectromyography {
     
     private String user_name;
     
+    private String flag;
+    
     public FilesElectromyography() {
     }
     public FilesElectromyography(Integer expid, String url, Integer id_query, String file_name, String user_name) {
@@ -22,7 +24,12 @@ public class FilesElectromyography {
     }
 
     
-    
+    public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
     
     public String getUser_name() {
 		return user_name;

@@ -8,7 +8,7 @@
     <result column="files_name" jdbcType="VARCHAR" property="files_name" />
   </resultMap>
   <sql id="Base_Column_List">
-    expid, url, id_query, files_name,user_name
+    expid, url, id_query, files_name,user_name,flag
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -25,9 +25,9 @@
   </delete>
   <insert id="insert" parameterType="cn.tycoding.pojo.FilesMontionCapture">
     insert into files_montion_capture (expid, url, id_query, 
-      files_name,user_name)
+      files_name,user_name,flag)
     values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, 
-      #{files_name,jdbcType=VARCHAR},#{user_name,jdbcType=VARCHAR})
+      #{files_name,jdbcType=VARCHAR},#{user_name,jdbcType=VARCHAR},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler})
   </insert>
   <insert id="insertSelective" parameterType="cn.tycoding.pojo.FilesMontionCapture">
     insert into files_montion_capture
@@ -108,14 +108,15 @@
       set url = #{url},
       id_query = #{id_query},
       files_name = #{files_name},
-      user_name = #{user_name}
+      user_name = #{user_name},
+      flag = #{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler}
       where expid = #{expid}
 	</update>
 
     <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.FilesMontionCapture">
 		insert into files_montion_capture
-		values(#{expid},#{url},#{id_query},#{files_name},#{user_name});
+		values(#{expid},#{url},#{id_query},#{files_name},#{user_name},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler});
 	</insert>
 
     <!-- 按学号删除学生 -->
@@ -144,5 +145,21 @@
 	<select id="getFile_name"  resultType="String">
     SELECT files_name from files_montion_capture where expid = #{expid}
   </select>
+  
+  <!-- 标记信息状态（失效） -->
+    <update id="sign" parameterType="java.lang.Integer">
+		update files_montion_capture set
+		flag='已失效'                                                
+		where
+		expid=#{expid}
+	</update>
+	
+    <!-- 标记信息状态（失效） -->
+    <update id="cancelSign" parameterType="java.lang.Integer">
+		update files_montion_capture set
+		flag=''                                                
+		where
+		expid=#{expid}
+	</update>
   
 </mapper>

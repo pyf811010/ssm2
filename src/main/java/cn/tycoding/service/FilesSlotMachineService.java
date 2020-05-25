@@ -12,6 +12,7 @@ import cn.tycoding.pojo.FilesKand;
 import cn.tycoding.pojo.FilesOxygen;
 import cn.tycoding.pojo.FilesSlotMachine;
 import cn.tycoding.pojo.ObjectQuery;
+import cn.tycoding.pojo.State;
 
 public interface FilesSlotMachineService {
 
@@ -28,5 +29,7 @@ public interface FilesSlotMachineService {
 
 	String authorityTemp(String oper, FilesSlotMachine filesSlotMachine, String[] id, HttpServletRequest request) throws UnsupportedEncodingException;
 
-
+	State sign(int expid, HttpServletRequest request) throws IOException;
+	
+	State cancelSign(int expid, HttpServletRequest request) throws IOException;
 }

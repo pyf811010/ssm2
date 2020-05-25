@@ -324,6 +324,31 @@
 </script>
 
 <script type="text/javascript">
+function Sign(sub_id) {
+    $.ajax({
+        type: "post",
+        url: "/subjects/Sign/",
+        dataType: "json",
+        data: {
+            "expid": sub_id
+        },
+    });
+    alert("标记成功");
+    $("#grid-table").trigger("reloadGrid");
+}
+
+function CancelSign(sub_id) {
+    $.ajax({
+        type: "post",
+        url: "/subjects/CancelSign/",
+        dataType: "json",
+        data: {
+            "expid": sub_id
+        },
+    });
+    alert("取消标记成功");
+    $("#grid-table").trigger("reloadGrid");
+}
 
     jQuery(function($) {
         var grid_selector = "#grid-table";
@@ -368,12 +393,12 @@
              //data: grid_data,
              datatype: "json",
              height: 450,
-             colNames: ['操作', '', 'ID', '身份证号', '实验者姓名', '年龄', '测试日期', '体重', '身高','备注信息','操作用户'],
+             colNames: ['操作','','', 'ID','标记', '身份证号', '实验者姓名', '年龄', '测试日期', '体重', '身高','备注信息','操作用户'],
              colModel: [{
                  name: 'op',
                  index: 'op',
                  align: 'center',
-                 width: 80,
+                 width: 40,
                  fixed: true,
                  sortable: false,
                  resize: false,
@@ -399,6 +424,7 @@
                          		 }                    
                     	 },
                      keys: true,
+                     delbutton: false,
                      //delbutton: false,//disable delete button
                      delOptions: {
                          recreateForm: true,
@@ -432,15 +458,24 @@
 
                  }
              },
-                 {
-                     name: '',
-                     index: '',
-                     width: 0.1,
-                     editable: true,
-                     sortable: false,
-                     search: false
-
-                 },
+             {
+                 name: 'operate2',
+                 index: 'operate2',
+                 search: false,
+                 width: 40,
+                 formatter: function (value, grid, rows, state) {
+                     return "<a href=\"#\" style=\"color:#f60\" onclick=\"Sign(" + rows.sub_id + ")\">标记</a>"
+                 }
+             },
+             {
+                 name: 'operate',
+                 index: 'operate',
+                 search: false,
+                 width: 62,
+                 formatter: function (value, grid, rows, state) {
+                     return "<a href=\"#\" style=\"color:#f60\" onclick=\"CancelSign(" + rows.sub_id + ")\">取消标记</a>"
+                 }
+             },
 
                  {
                      name: 'sub_id',
@@ -454,6 +489,18 @@
                          cols: "15"
                      }
 
+                 },
+                 {
+                     name: 'flag',
+                     index: 'flag',
+                     width: 60,
+                     sortable: false,
+                     editable: true,
+                     edittype: "textarea",
+                     editoptions: {
+                         rows: "2",
+                         cols: "15"
+                     }
                  },
                  {
                      name: 'identity_card',

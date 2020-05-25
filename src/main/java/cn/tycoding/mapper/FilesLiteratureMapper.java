@@ -33,4 +33,7 @@ public interface FilesLiteratureMapper {
 	
 	List<DBTableComment> findDbTableComment();
 	
+	void sign(int expid);
+
+	void cancelSign(int expid);
 }

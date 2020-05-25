@@ -39,6 +39,10 @@ public interface GaitCyclePicMapper {
 
 	Integer getPidByFileName(String name);
 	
-	String findTypeByUserName(String user_name); 
+	String findTypeByUserName(String user_name);
+
+	void sign(int expid);
+
+	void cancelSign(int expid); 
 
 }

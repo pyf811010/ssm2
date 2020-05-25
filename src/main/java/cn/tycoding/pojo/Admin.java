@@ -21,10 +21,20 @@ public class Admin implements Serializable {
     private String a_date;
     //类型
     private String type;
+    //标记
+    private String flag;
     
     
 
-    public String getType() {
+    public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
+	public String getType() {
 		return type;
 	}
 

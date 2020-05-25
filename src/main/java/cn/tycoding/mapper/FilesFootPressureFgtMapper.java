@@ -40,4 +40,8 @@ public interface FilesFootPressureFgtMapper {
 	boolean dataifexist(String url); 
 	
 	String findTypeByUserName(String user_name); 
+	
+	void sign(int expid);
+
+	void cancelSign(int expid);
 }

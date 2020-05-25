@@ -18,6 +18,7 @@ import cn.tycoding.pojo.FilesElectromyography;
 import cn.tycoding.pojo.FilesKand;
 import cn.tycoding.pojo.FilesOxygen;
 import cn.tycoding.pojo.ObjectQuery;
+import cn.tycoding.pojo.State;
 import cn.tycoding.service.FilesEleService;
 import cn.tycoding.service.FilesKandService;
 import cn.tycoding.service.FilesOxygenService;
@@ -83,5 +84,32 @@ public class FilesOxygenController {
             e.printStackTrace();
         }
     }
+    
+    @RequestMapping("/Sign")
+    @ResponseBody
+    public State Sign(int expid,HttpServletRequest request) {
+    	try {
+    		State state = filesOxygenService.sign(expid,request);
+    		return state;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    	
+    }
+    
+    
+    @RequestMapping("/CancelSign")
+    @ResponseBody
+    public State CancelSign(int expid,HttpServletRequest request) {
+    	try {
+    		State state =filesOxygenService.cancelSign(expid,request);
+    		return state;
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    		return null;
+    	}
+    }
+
 
 }

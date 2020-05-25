@@ -12,6 +12,7 @@ import cn.tycoding.pojo.FilesKand;
 import cn.tycoding.pojo.FilesVideo;
 import cn.tycoding.pojo.GaitCyclePic;
 import cn.tycoding.pojo.ObjectQuery;
+import cn.tycoding.pojo.State;
 
 public interface FilesVideoService {
 
@@ -28,5 +29,7 @@ public interface FilesVideoService {
 
 	String authorityTemp(String oper, FilesVideo filesVideo, String[] id, HttpServletRequest request) throws UnsupportedEncodingException;
 
-
+	State sign(int expid, HttpServletRequest request) throws IOException;
+	
+	State cancelSign(int expid, HttpServletRequest request) throws IOException;
 }

@@ -11,9 +11,19 @@ public class GaitCyclePic {
     
     private String user_name;
     
+    private String flag;
+    
     
 
-    public String getUser_name() {
+    public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
+	public String getUser_name() {
 		return user_name;
 	}
 

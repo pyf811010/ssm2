@@ -2,6 +2,8 @@ package cn.tycoding.pojo;
 
 public class EgContrast {
     private Integer expid;
+    
+    private String flag;
 
     private String sensor01;
 
@@ -72,6 +74,14 @@ public class EgContrast {
     private String user_name;
     
     
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
 
 	public String getUser_name() {
 		return user_name;

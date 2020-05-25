@@ -14,7 +14,7 @@
 
 
   <sql id="Base_Column_List">
-    expid,topic,writer,company,time,remark, url, files_name,user_name
+    expid,topic,writer,company,time,remark, url, files_name,user_name,flag
   </sql>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -53,14 +53,15 @@
       company = #{company},
       time = #{time},
       remark = #{remark},
-      user_name = #{user_name}
+      user_name = #{user_name},
+      flag = #{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler}
       where expid = #{expid}
 	</update>
 
     <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.FilesLiterature">
 		insert into files_literature
-		values(#{expid},#{topic},#{files_name},#{writer},#{company},#{time},#{remark},#{url},#{user_name});
+		values(#{expid},#{topic},#{files_name},#{writer},#{company},#{time},#{remark},#{url},#{user_name},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler});
 	</insert>
 
     <!-- 按学号删除学生 -->
@@ -95,5 +96,21 @@
     <select id="findDbTableComment" resultType="cn.tycoding.entity.assist.DBTableComment">
         show full fields from files_literature
     </select>
+    
+    <!-- 标记信息状态（失效） -->
+    <update id="sign" parameterType="java.lang.Integer">
+		update files_literature set
+		flag='已失效'                                                
+		where
+		expid=#{expid}
+	</update>
+	
+    <!-- 标记信息状态（失效） -->
+    <update id="cancelSign" parameterType="java.lang.Integer">
+		update files_literature set
+		flag=''                                                
+		where
+		expid=#{expid}
+	</update>
 
 </mapper>

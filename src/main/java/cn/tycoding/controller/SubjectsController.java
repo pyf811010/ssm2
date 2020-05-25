@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -84,11 +85,32 @@ public class SubjectsController {
         return subjectsService.authorityTemp(oper,subjects,id,request);
     }
     
-    /*@RequestMapping("/score")
+    @RequestMapping("/Sign")
     @ResponseBody
-    public List<Subjects> usertestInfo(int id) {
-        return subjectsService.findAllById(id);
-    }*/
+    public State Sign(int expid,HttpServletRequest request) {
+    	try {
+    		State state = subjectsService.sign(expid,request);
+    		return state;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    	
+    }
+    
+    
+    @RequestMapping("/CancelSign")
+    @ResponseBody
+    public State CancelSign(int expid,HttpServletRequest request) {
+    	try {
+    		State state =subjectsService.cancelSign(expid,request);
+    		return state;
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    		return null;
+    	}
+    }
+
     
     
 }

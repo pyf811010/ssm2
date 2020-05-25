@@ -11,6 +11,7 @@ import cn.tycoding.pojo.FilesElectromyography;
 import cn.tycoding.pojo.FilesKand;
 import cn.tycoding.pojo.FilesOxygen;
 import cn.tycoding.pojo.ObjectQuery;
+import cn.tycoding.pojo.State;
 
 public interface FilesOxygenService {
 
@@ -25,5 +26,9 @@ public interface FilesOxygenService {
 	void open(int expid) throws IOException;
 
 	String authorityTemp(String oper, FilesOxygen filesOxygen, String[] id, HttpServletRequest request) throws UnsupportedEncodingException;
+	
+	State sign(int expid, HttpServletRequest request) throws IOException;
+	
+	State cancelSign(int expid, HttpServletRequest request) throws IOException;
 
 }

@@ -40,6 +40,8 @@
         <property name="typeAliasesPackage" value="cn.tycoding.pojo"/>
         <!-- 扫描Mapper层的配置文件 -->
         <property name="mapperLocations" value="classpath:cn/tycoding/mapper/*.xml"/>
+        <!-- 将导入文件中为null的字段设置为空字符串的配置文件 -->
+        <property name="typeHandlersPackage" value="cn.tycoding.util.NullValueHandle"/> 
     </bean>
     
     <!-- 配置一个可以批量执行的sqlSession -->

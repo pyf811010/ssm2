@@ -56,5 +56,9 @@ public interface MachineMapper {
 	 */
 	int addTemplate(Machine machine);
 	
-	String findTypeByUserName(String user_name); 
+	String findTypeByUserName(String user_name);
+
+	void sign(int expid);
+
+	void cancelSign(int expid); 
 }

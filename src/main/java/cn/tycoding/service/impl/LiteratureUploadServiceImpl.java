@@ -69,7 +69,7 @@ public class LiteratureUploadServiceImpl implements LiteratureUploadService {
         }*/
         State state = new State();
         //由file的属性创建对应文件夹（若无）
-        String basePath = FileConstant.PICTURE_FILE_UPLOAD_URL;
+        String basePath = FileConstant.LITERATURE_FILE_UPLOAD_URL;
         // basePath为：D:/PictureData
         System.out.println("导入文件个数为：" + files.length);
         int count = 0;

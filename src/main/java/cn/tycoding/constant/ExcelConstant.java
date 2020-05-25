@@ -44,6 +44,6 @@ public class ExcelConstant {
     /**
      * 前提实验条件 preec
      */
-    public static final int[] PREEC_INDEX = {0,12,13,14,15,16,17,18,2,6,7,8,9,10,11,4,5};
+    public static final int[] PREEC_INDEX = {0,13,14,15,16,17,18,19,2,6,7,8,9,10,11,4,5};
 
 }

@@ -19,6 +19,7 @@ import cn.tycoding.pojo.FilesFootPressureFgt;
 import cn.tycoding.pojo.FilesKand;
 import cn.tycoding.pojo.FilesOxygen;
 import cn.tycoding.pojo.ObjectQuery;
+import cn.tycoding.pojo.State;
 import cn.tycoding.service.FilesEleService;
 import cn.tycoding.service.FilesFootPressureFgtService;
 import cn.tycoding.service.FilesKandService;
@@ -85,5 +86,32 @@ public class FilesFootPressureFgtController {
             e.printStackTrace();
         }
     }
+    
+    @RequestMapping("/Sign")
+    @ResponseBody
+    public State Sign(int expid,HttpServletRequest request) {
+    	try {
+    		State state = filesFootPressureFgtService.sign(expid,request);
+    		return state;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    	
+    }
+    
+    
+    @RequestMapping("/CancelSign")
+    @ResponseBody
+    public State CancelSign(int expid,HttpServletRequest request) {
+    	try {
+    		State state =filesFootPressureFgtService.cancelSign(expid,request);
+    		return state;
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    		return null;
+    	}
+    }
+
 
 }

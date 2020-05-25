@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.tycoding.pojo.FilesElectromyography;
 import cn.tycoding.pojo.FilesKand;
 import cn.tycoding.pojo.ObjectQuery;
+import cn.tycoding.pojo.State;
 import cn.tycoding.service.FilesEleService;
 import cn.tycoding.service.FilesKandService;
 
@@ -81,5 +82,44 @@ public class FilesKandController {
             e.printStackTrace();
         }
     }
+    
+    @RequestMapping("/Sign")
+    @ResponseBody
+    public State Sign(int expid,HttpServletRequest request) {
+    	try {
+    		State state = filesKandService.sign(expid,request);
+    		return state;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    	
+    }
+    
+    
+    @RequestMapping("/CancelSign")
+    @ResponseBody
+    public State CancelSign(int expid,HttpServletRequest request) {
+    	try {
+    		State state =filesKandService.cancelSign(expid,request);
+    		return state;
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    		return null;
+    	}
+    }
+    
+    @RequestMapping("/batchDownload")
+    @ResponseBody
+    public State batchDownload(String fi_info) {
+    	State state = new State();
+    	try {
+    		 state = filesKandService.batchDownload(fi_info);
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+		return state;
+    }
+
 
 }

@@ -51,4 +51,8 @@ public interface AdminMapper {
 	int addTemplate(Admin admin);
 
 	String findTypeByUserName(String user_name);
+
+	void sign(int expid);
+
+	void cancelSign(int expid);
 }

@@ -133,6 +133,7 @@ public class AdminController {
     		e.printStackTrace();
     	}  
     }
+    
     /**
      * 打开matlab可执行文件
      */
@@ -151,6 +152,19 @@ public class AdminController {
      */
     @RequestMapping(value = "/open3")
     public void open3() {
+    	Runtime runtime = Runtime.getRuntime();  
+    	try {
+    		Process exec = runtime.exec("D:\\index\\interface_draft4_eval\\for_testing\\interface_draft4_eval.exe");
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}  
+    }
+    /**
+     * 打开matlab可执行文件
+     */
+    @RequestMapping(value = "/open4")
+    public void open4() {
     	Runtime runtime = Runtime.getRuntime();  
     	try {
     		Process exec = runtime.exec("D:\\index\\interface_draft4_eval\\for_testing\\interface_draft4_eval.exe");
@@ -285,6 +299,27 @@ public class AdminController {
 		}
 		return message;
 	}
+    
+    @RequestMapping("/Sign")
+    @ResponseBody
+    public void Sign(int expid) {
+    	try {
+    		adminService.sign(expid);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    @RequestMapping("/CancelSign")
+    @ResponseBody
+    public void CancelSign(int expid) {
+    	try {
+    		adminService.cancelSign(expid);
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+    }
     
     
     

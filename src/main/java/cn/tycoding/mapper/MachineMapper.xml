@@ -9,7 +9,7 @@
   </resultMap>
   
   <sql id="Base_Column_List">
-    m_id, name, type,company,place, remark,user_name
+    m_id, name, type,company,place, remark,user_name,flag
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -127,14 +127,15 @@
       company = #{company},
       place = #{place},
       remark = #{remark},
-      user_name = #{user_name}
+      user_name = #{user_name},
+      flag = #{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler}
       where m_id = #{m_id}
 	</update>
 
     <!-- 增加一条实验机器数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.Machine">
 		insert into machine
-		values(default ,#{name},#{type},#{company},#{place},#{remark},#{user_name});
+		values(default ,#{name},#{type},#{company},#{place},#{remark},#{user_name},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler});
 	</insert>
 
     <!-- 按学号删除实验机器信息 -->
@@ -160,8 +161,8 @@
     </select>
 
     <insert id="addTemplate" parameterType="cn.tycoding.pojo.Machine">
-        insert into machine (name,type,company,place,remark,user_name)
-			select #{name},#{type},#{company},#{place},#{remark},#{user_name} from dual where not exists (
+        insert into machine (name,type,company,place,remark,user_name,flag)
+			select #{name},#{type},#{company},#{place},#{remark},#{user_name},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler} from dual where not exists (
 			 	select * from machine where
 			 		name = #{name} and
 			 		type = #{type} and
@@ -171,5 +172,21 @@
 			 		limit 1
 			 );
     </insert>
+    
+       <!-- 标记信息状态（失效） -->
+    <update id="sign" parameterType="java.lang.Integer">
+		update machine set
+		flag='已失效'                                                
+		where
+		m_id=#{m_id}
+	</update>
+	
+    <!-- 标记信息状态（失效） -->
+    <update id="cancelSign" parameterType="java.lang.Integer">
+		update machine set
+		flag=''                                                
+		where
+		m_id=#{m_id}
+	</update>
 
 </mapper>

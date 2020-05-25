@@ -200,6 +200,33 @@
 </script>
 
 <script type="text/javascript">
+function Sign(expid) {
+    $.ajax({
+        type: "post",
+        url: "/FilesOxygen/Sign/",
+        dataType: "json",
+        data: {
+            "expid": expid
+        },
+    });
+    alert("标记成功");
+    $("#grid-table").trigger("reloadGrid");
+}
+
+function CancelSign(expid) {
+    $.ajax({
+        type: "post",
+        url: "/FilesOxygen/CancelSign/",
+        dataType: "json",
+        data: {
+            "expid": expid
+        },
+    });
+    alert("取消标记成功");
+    $("#grid-table").trigger("reloadGrid");
+}
+
+
     function Open(expid) {
         $.ajax({
             type: "post",
@@ -245,12 +272,12 @@
             //data: grid_data,
             datatype: "json",
             height: 500,
-            colNames: ['操作', '查看', '下载', '', 'ID', '文件名', '文件地址','操作用户'],
+            colNames: ['操作','','', '查看', '下载', 'ID','标记', '文件名', '文件地址','操作用户'],
             colModel: [{
                 name: 'op',
                 index: 'op',
                 align: 'center',
-                width: 70,
+                width: 40,
                 fixed: true,
                 sortable: false,
                 resize: false,
@@ -276,6 +303,7 @@
                            		 }                    
                       	 },
                     keys: true,
+                    delbutton: false,
                     //delbutton: false,//disable delete button
                     delOptions: {
                         recreateForm: true,
@@ -302,6 +330,25 @@
                     },
                 }
             },
+            
+            {
+                name: 'operate3',
+                index: 'operate2',
+                search: false,
+                width: 40,
+                formatter: function (value, grid, rows, state) {
+                    return "<a href=\"#\" style=\"color:#f60\" onclick=\"Sign(" + rows.expid + ")\">标记</a>"
+                }
+            },
+            {
+                name: 'operate4',
+                index: 'operate',
+                search: false,
+                width: 62,
+                formatter: function (value, grid, rows, state) {
+                    return "<a href=\"#\" style=\"color:#f60\" onclick=\"CancelSign(" + rows.expid + ")\">取消标记</a>"
+                }
+            },
                 {
                     name: 'operate2',
                     index: 'operate2',
@@ -323,16 +370,6 @@
                 },
 
                 {
-                    name: '',
-                    index: '',
-                    width: 0.1,
-                    editable: true,
-                    sortable: false,
-                    search: false
-
-                },
-
-                {
                     name: 'expid',
                     index: 'expid',
                     width: 50,
@@ -344,6 +381,19 @@
                         cols: "15"
                     }
 
+                },
+                
+                {
+                    name: 'flag',
+                    index: 'flag',
+                    width: 60,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
                 },
 
                 {
