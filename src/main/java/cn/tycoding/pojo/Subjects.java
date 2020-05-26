@@ -145,18 +145,4 @@ public class Subjects  {
 		this.height = height;
 	}
 
-	@Override
-	public String toString() {
-		return "Subjects{" +
-				"sub_id=" + sub_id +
-				", name='" + name + '\'' +
-				", identity_card='" + identity_card + '\'' +
-				", testdate='" + testdate + '\'' +
-				", age=" + age +
-				", weight=" + weight +
-				", height=" + height +
-				", remark='" + remark + '\'' +
-				", user_name='" + user_name + '\'' +
-				'}';
-	}
 }

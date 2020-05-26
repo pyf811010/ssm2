@@ -40,7 +40,7 @@
 		order by expid desc
 		
 	</select>
-	
+
     <update id="edit" parameterType="cn.tycoding.pojo.Preec">
 		update preec set
 		id_subjects=#{id_subjects},advance=#{advance},remark=#{remark},motion_capture_info=#{motion_capture_info},slot_machine_info=#{slot_machine_info},pedar_info=#{pedar_info},ox_info=#{ox_info},elec_info=#{elec_info},id_machine=#{id_machine},video_info=#{video_info},flag=#{flag}                                                

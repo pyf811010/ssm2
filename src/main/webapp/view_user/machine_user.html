@@ -99,14 +99,12 @@
                                                   action="uploadExcel/upload.do">
 
                                                 <div style="margin-left: 10px;margin-top: 15px;">
-                                                    <input id="upfile" type="file" name="uploadAdmin"
-                                                           style="padding-bottom: 2px;">
+                                                    <input id="upfile" type="file" name="uploadAdmin" style="padding-bottom: 2px;">
                                                 </div>
 
                                                 <div style="margin-top: 15px;margin-left: 10px;">
                                                     <!--<a href="#" onclick="importData()">由模版导入数据</a>-->
-                                                    <button class="btn btn-info2" type="button" id="fileCommit"
-                                                            style="height: 40px;">
+                                                    <button class="btn btn-info2" type="button" id="fileCommit" style="height: 40px;">
                                                         <i class="ace-icon fa fa-check bigger-110"></i>
                                                         确定上传
                                                     </button>
@@ -316,7 +314,7 @@
         $("#main").prop("class", "");
         $(".machine").prop("class", "active");
         $("#dataManageSubMenu").prop("style", "display: block;");
-        $("#dataManageSubMenuSub").prop("style", "display: block;");
+		$("#dataManageSubMenuSub").prop("style", "display: block;");
     });
 </script>
 
@@ -444,13 +442,13 @@ function CancelSign(m_id) {
                                 }).trigger('reloadGrid'); //Reloads the grid after edit
                                 return [true, "编辑成功!"];
                             } else {
-                                if (response.responseText == "fail") {
-                                    $(this).jqGrid('setGridParam', {
+                            	if(response.responseText == "fail"){
+                            		$(this).jqGrid('setGridParam', {
                                         datatype: 'json'
                                     }).trigger('reloadGrid'); //Reloads the grid after edit
                                     return [false, "无操作权限"]; //Captures and displays the response text on th Edit window
-                                }
-                                $(this).jqGrid('setGridParam', {
+                            	}
+                            	$(this).jqGrid('setGridParam', {
                                     datatype: 'json'
                                 }).trigger('reloadGrid'); //Reloads the grid after edit
                                 return [false, decodeURIComponent(response.responseText)];
@@ -505,7 +503,7 @@ function CancelSign(m_id) {
                 {
                     name: 'name',
                     index: 'name',
-                    width: 200,
+                    width: 300,
                     sortable: false,
                     editable: true,
                     edittype: "textarea",
@@ -518,7 +516,7 @@ function CancelSign(m_id) {
                 {
                     name: 'type',
                     index: 'type',
-                    width: 200,
+                    width: 350,
                     sortable: false,
                     /* editrules: { required: true, number: true, custom: true, custom_func: ValidateTvalue }, */
                     editable: true,
@@ -531,7 +529,7 @@ function CancelSign(m_id) {
                 {
                     name: 'company',
                     index: 'company',
-                    width: 200,
+                    width: 350,
                     sortable: false,
                     editable: true,
                     edittype: "textarea",
@@ -543,7 +541,7 @@ function CancelSign(m_id) {
                 {
                     name: 'place',
                     index: 'place',
-                    width: 200,
+                    width: 350,
                     sortable: false,
                     editable: true,
                     edittype: "textarea",
@@ -555,7 +553,7 @@ function CancelSign(m_id) {
                 {
                     name: 'remark',
                     index: 'remark',
-                    width: 300,
+                    width: 500,
                     sortable: false,
                     editable: true,
                     edittype: "textarea",
@@ -567,7 +565,7 @@ function CancelSign(m_id) {
                 {
                     name: 'user_name',
                     index: 'user_name',
-                    width: 100,
+                    width: 500,
                     sortable: false,
                     editable: true,
                     edittype: "textarea",
@@ -619,10 +617,10 @@ function CancelSign(m_id) {
                     .after('<span class="lbl"></span>');
             }, 0);
         }
-
-        function ValidateTvalue(value, name) {
-            return [false, "分数错误，请输入数值型.如：12或12.23"];
-        }
+        
+        function ValidateTvalue(value,name) {
+                return [false, "分数错误，请输入数值型.如：12或12.23"];
+    }
 
         //enable datepicker
         //编辑表格时,选择日期
@@ -676,25 +674,25 @@ function CancelSign(m_id) {
             closeOnEscape: true,
             closeAfterEdit: true,
             //提交后的回调
-            afterSubmit: function (response, postdata) {
-                if (response.responseText == "success") {
-                    $(this).jqGrid('setGridParam', {
-                        datatype: 'json'
-                    }).trigger('reloadGrid'); //Reloads the grid after edit
-                    return [true, "编辑成功!"];
-                } else {
-                    if (response.responseText == "fail") {
-                        $(this).jqGrid('setGridParam', {
-                            datatype: 'json'
-                        }).trigger('reloadGrid'); //Reloads the grid after edit
-                        return [false, "无操作权限"]; //Captures and displays the response text on th Edit window
-                    }
-                    $(this).jqGrid('setGridParam', {
-                        datatype: 'json'
-                    }).trigger('reloadGrid'); //Reloads the grid after edit
-                    return [false, decodeURIComponent(response.responseText)];
-                }
-            }
+             afterSubmit: function (response, postdata) {
+                            if (response.responseText == "success") {
+                                $(this).jqGrid('setGridParam', {
+                                    datatype: 'json'
+                                }).trigger('reloadGrid'); //Reloads the grid after edit
+                                return [true, "编辑成功!"];
+                            } else {
+                            	if(response.responseText == "fail"){
+                            		$(this).jqGrid('setGridParam', {
+                                        datatype: 'json'
+                                    }).trigger('reloadGrid'); //Reloads the grid after edit
+                                    return [false, "无操作权限"]; //Captures and displays the response text on th Edit window
+                            	}
+                            	$(this).jqGrid('setGridParam', {
+                                    datatype: 'json'
+                                }).trigger('reloadGrid'); //Reloads the grid after edit
+                                return [false, decodeURIComponent(response.responseText)];
+                            }
+                        }
         }, {
             //新增数据
 
@@ -741,13 +739,13 @@ function CancelSign(m_id) {
                     }).trigger('reloadGrid'); //Reloads the grid after edit
                     return [true, "编辑成功!"];
                 } else {
-                    if (response.responseText == "fail") {
-                        $(this).jqGrid('setGridParam', {
+                	if(response.responseText == "fail"){
+                		$(this).jqGrid('setGridParam', {
                             datatype: 'json'
                         }).trigger('reloadGrid'); //Reloads the grid after edit
                         return [false, "无操作权限"]; //Captures and displays the response text on th Edit window
-                    }
-                    $(this).jqGrid('setGridParam', {
+                	}
+                	$(this).jqGrid('setGridParam', {
                         datatype: 'json'
                     }).trigger('reloadGrid'); //Reloads the grid after edit
                     return [false, decodeURIComponent(response.responseText)];
@@ -770,7 +768,7 @@ function CancelSign(m_id) {
                 style_search_filters($(this));
             },
             multipleSearch: true,
-            sopt: ['cn', 'eq'],
+            sopt : ['cn','eq'], 
             /**
              multipleGroup:true,
              showQuery: true

@@ -84,17 +84,6 @@ public class Machine {
 	public void setPlace(String place) {
 		this.place = place;
 	}
-
-    @Override
-    public String toString() {
-        return "Machine{" +
-                "m_id=" + m_id +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", company='" + company + '\'' +
-                ", place='" + place + '\'' +
-                ", remark='" + remark + '\'' +
-                ", user_name='" + user_name + '\'' +
-                '}';
-    }
+    
+    
 }

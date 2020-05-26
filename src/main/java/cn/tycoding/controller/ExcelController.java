@@ -1,14 +1,20 @@
 package cn.tycoding.controller;
 
-import cn.tycoding.pojo.FilesFolder;
 import cn.tycoding.pojo.State;
+import cn.tycoding.pojo.FilesFolder;
 import cn.tycoding.service.ExcelService;
 import cn.tycoding.service.FilesOrganizeService;
+import cn.tycoding.util.ExcelUtil;
 import cn.tycoding.util.FolderPathUtil;
-import cn.tycoding.util.MyExcelUtil;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,8 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -64,12 +68,17 @@ public class ExcelController {
     public void  downloadTemplate(HttpServletResponse response, @RequestParam(value = "name") String name){
         XSSFWorkbook workbook = excelService.getTemplate(name);
         String fileName = name + ".xlsx";
-        MyExcelUtil.downloadExcel(response, workbook, fileName);
+        ExcelUtil.downloadExcel(response, workbook, fileName);
     }
 
     @ResponseBody
     @RequestMapping("/uploadFile")
     public State uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request){
-        return excelService.readExcelFile(file, request);
+    	String user_name = (String) request.getSession().getAttribute("user_name");
+        if (!file.isEmpty()){
+            return excelService.readExcelFile(file,user_name);
+        }else {
+            return new State(0, "请选择上传文件");
+        }
     }
 }

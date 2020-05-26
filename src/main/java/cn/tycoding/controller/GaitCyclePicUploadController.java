@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * @author：pyf
+ * @author：pyf 
  * @date
  * @description：上传步态周期图像文件
  */
@@ -25,7 +25,7 @@ public class GaitCyclePicUploadController {
 
     @Autowired
     private GaitCyclePicUploadService gaitCyclePicUploadService;
-
+    
     @RequestMapping(value = "/upload")
     @ResponseBody
     public State upload_multi(@RequestParam("files") MultipartFile[] files,HttpServletRequest request) {
@@ -37,7 +37,7 @@ public class GaitCyclePicUploadController {
             return new State(0, "请选择上传文件");
         }
     }
-
+    
     @RequestMapping(value = "/singlePicUpload")
     @ResponseBody
     public State upload_single(@RequestParam("files") MultipartFile[] files,String fi_info,HttpServletRequest request) {
