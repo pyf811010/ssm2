@@ -368,10 +368,13 @@ public class FilesKandServiceImpl implements FilesKandService {
 		}else{
 			//需要压缩的文件--包括文件地址和文件名
 			ArrayList<String> path = new ArrayList<String>();
+			ArrayList<String> file_names = new ArrayList<String>();
 		    for (int i = 0; i < ids.size(); i++) {
 			 String url = filesKandMapper.getPathByExpid(ids.get(i));
+			 String file_name = filesKandMapper.getFile_name(ids.get(i));
 //			 String filename = filesKandMapper.getFile_name(i);
 			 path.add(i, url);
+			 file_names.add(i, file_name);
 		 }
 	        // 要生成的压缩文件地址和文件名称
 		    String basePath = "D:\\MLR_Data";
@@ -392,7 +395,7 @@ public class FilesKandServiceImpl implements FilesKandService {
 	                //将需要压缩的文件格式化为输入流
 	                zipSource = new FileInputStream(file);
 	                //压缩条目不是具体独立的文件，而是压缩包文件列表中的列表项，称为条目，就像索引一样
-	                ZipEntry zipEntry = new ZipEntry(file.getName());
+	                ZipEntry zipEntry = new ZipEntry(file_names.get(i));
 	                //定位该压缩条目位置，开始写入文件到压缩包中
 
 	                zipStream.putNextEntry(zipEntry);
