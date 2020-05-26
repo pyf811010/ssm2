@@ -11,6 +11,8 @@ public class FilesVideo {
     
     private String user_name;
     
+    private String flag;
+    
     public FilesVideo () {
     }
     public FilesVideo (Integer expid, String url, Integer id_query, String file_name, String user_name) {
@@ -23,7 +25,13 @@ public class FilesVideo {
     
     
     
-    public String getUser_name() {
+    public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+	public String getUser_name() {
 		return user_name;
 	}
 	public void setUser_name(String user_name) {

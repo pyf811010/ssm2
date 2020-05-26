@@ -43,4 +43,8 @@ public interface EgContrastMapper {
 
 	String findTypeByUserName(String user_name); 
 	List find();
+
+	void sign(int expid);
+
+	void cancelSign(int expid);
 }

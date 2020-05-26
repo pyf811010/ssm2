@@ -42,7 +42,7 @@
     expid, sensor01, sensor02, sensor03, sensor04, sensor05, sensor06, sensor07, sensor08,
     sensor09, sensor10, sensor11, sensor12, sensor13, sensor14, sensor15, sensor16, sensor17,
     sensor18, sensor19, sensor20, sensor21, sensor22, sensor23, sensor24, sensor25, sensor26,
-    sensor27, sensor28, sensor29, sensor30, sensor31, sensor32, id_query,user_name
+    sensor27, sensor28, sensor29, sensor30, sensor31, sensor32, id_query,user_name,flag
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -66,7 +66,7 @@
       sensor21, sensor22, sensor23,
       sensor24, sensor25, sensor26,
       sensor27, sensor28, sensor29,
-      sensor30, sensor31, sensor32, id_query,user_name)
+      sensor30, sensor31, sensor32, id_query,user_name,flag)
     values ( #{expid,jdbcType=INTEGER},#{sensor01,jdbcType=DOUBLE}, #{sensor02,jdbcType=DOUBLE},
       #{sensor03,jdbcType=DOUBLE}, #{sensor04,jdbcType=DOUBLE}, #{sensor05,jdbcType=DOUBLE},
       #{sensor06,jdbcType=DOUBLE}, #{sensor07,jdbcType=DOUBLE}, #{sensor08,jdbcType=DOUBLE},
@@ -77,7 +77,7 @@
       #{sensor21,jdbcType=DOUBLE}, #{sensor22,jdbcType=DOUBLE}, #{sensor23,jdbcType=DOUBLE},
       #{sensor24,jdbcType=DOUBLE}, #{sensor25,jdbcType=DOUBLE}, #{sensor26,jdbcType=DOUBLE},
       #{sensor27,jdbcType=DOUBLE}, #{sensor28,jdbcType=DOUBLE}, #{sensor29,jdbcType=DOUBLE},
-      #{sensor30,jdbcType=DOUBLE}, #{sensor31,jdbcType=DOUBLE}, #{sensor32,jdbcType=DOUBLE},#{id_query,jdbcType=INTEGER},#{user_name,jdbcType=VARCHAR})
+      #{sensor30,jdbcType=DOUBLE}, #{sensor31,jdbcType=DOUBLE}, #{sensor32,jdbcType=DOUBLE},#{id_query,jdbcType=INTEGER},#{user_name,jdbcType=VARCHAR},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler})
   </insert>
     <insert id="insertSelective" parameterType="cn.tycoding.pojo.EgContrast">
         insert into eg_contrast
@@ -484,14 +484,15 @@
       sensor31 = #{sensor31},
       sensor32 = #{sensor32},
       id_query = #{id_query},
-      user_name = #{user_name}
+      user_name = #{user_name},
+      flag = #{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler}
     where expid = #{expid}
 	</update>
 
     <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.EgContrast">
 		insert into eg_contrast
-		values(#{expid},#{sensor01},#{sensor02},#{sensor03},#{sensor04},#{sensor05},#{sensor06},#{sensor07},#{sensor08},#{sensor09},#{sensor10},#{sensor11},#{sensor12},#{sensor13},#{sensor14},#{sensor15},#{sensor16},#{sensor17},#{sensor18},#{sensor19},#{sensor20},#{sensor21},#{sensor22},#{sensor23},#{sensor24},#{sensor25},#{sensor26},#{sensor27},#{sensor28},#{sensor29},#{sensor30},#{sensor31},#{sensor32},#{id_query},#{user_name});
+		values(#{expid},#{sensor01},#{sensor02},#{sensor03},#{sensor04},#{sensor05},#{sensor06},#{sensor07},#{sensor08},#{sensor09},#{sensor10},#{sensor11},#{sensor12},#{sensor13},#{sensor14},#{sensor15},#{sensor16},#{sensor17},#{sensor18},#{sensor19},#{sensor20},#{sensor21},#{sensor22},#{sensor23},#{sensor24},#{sensor25},#{sensor26},#{sensor27},#{sensor28},#{sensor29},#{sensor30},#{sensor31},#{sensor32},#{id_query},#{user_name},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler});
 	</insert>
 
     <!-- 按学号删除学生 -->
@@ -516,5 +517,21 @@
     <select id="findDbTableComment" resultType="cn.tycoding.entity.assist.DBTableComment">
         show full fields from eg_contrast
     </select>
+    
+    <!-- 标记信息状态（失效） -->
+    <update id="sign" parameterType="java.lang.Integer">
+		update eg_contrast set
+		flag='已失效'                                                
+		where
+		expid=#{expid}
+	</update>
+	
+    <!-- 标记信息状态（失效） -->
+    <update id="cancelSign" parameterType="java.lang.Integer">
+		update eg_contrast set
+		flag=''                                                
+		where
+		expid=#{expid}
+	</update>
 
 </mapper>

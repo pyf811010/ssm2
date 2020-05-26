@@ -69,7 +69,7 @@
                         <a href="/view/index.html">首页</a>
                     </li>
 
-                    <li class="active">前置实验条件管理</li>
+                    <li class="active">数据查询管理</li>
                 </ul>
                 <!-- /.breadcrumb -->
 
@@ -86,55 +86,10 @@
                                 <div class="btn-group" style="">
                                     <a href="/excel/downloadTemplate?name=preec" class="btn btn-success bigger-120"
                                        role="button">
-                                        下载导入摸板
+                                        下载导入模板
                                         <i class="ace-icon fa icon-on-right"></i>
                                     </a>
                                 </div>
-                                <!--<div class="btn-group">
-                                    <button data-toggle="dropdown" class="btn btn-success bigger-120 dropdown-toggle">
-                                        导入现有数据
-                                        <i class="ace-icon fa fa-angle-down icon-on-right"></i>
-                                    </button>
-
-                                    <ul class="dropdown-menu dropdown-info dropdown-menu-right">
-
-                                        <li class="divider"></li>
-
-                                        <li>
-
-                                            <form method="POST" enctype="multipart/form-data" id="form1"
-                                                  action="uploadExcel/upload.do">
-
-                                                <div style="margin-left: 10px;">
-                                                    <input id="upfile" type="file" name="upfile">
-                                                </div>
-                                                <div style="margin-top: 15px;margin-left: 10px;">
-                                                    &lt;!&ndash;<a href="#" onclick="importData()">由模版导入数据</a>&ndash;&gt;
-                                                    <span>由模版导入数据</span>
-                                                </div>
-                                            </form>
-
-                                        </li>
-                                    </ul>
-                                </div>-->
-                                <!--<div class="btn-group">
-                                    <button data-toggle="dropdown" class="btn btn-warning bigger-120 dropdown-toggle">
-                                        导出查询数据
-                                        <i class="ace-icon fa fa-angle-down icon-on-right"></i>
-                                    </button>
-
-                                    <ul class="dropdown-menu dropdown-info dropdown-menu-right">
-                                        <li>
-                                            <a href="#" onclick="exportSinglePage()">导出本页数据</a>
-                                        </li>
-
-                                        <li class="divider"></li>
-
-                                        <li>
-                                            <a href="#" onclick="exportAllData()">导出全部数据</a>
-                                        </li>
-                                    </ul>
-                                </div>-->
                             </div>
                         </div>
                         <table id="grid-table"></table>
@@ -264,6 +219,33 @@
 </script>
 
 <script type="text/javascript">
+
+function Sign(expid) {
+    $.ajax({
+        type: "post",
+        url: "/preec/Sign/",
+        dataType: "json",
+        data: {
+            "expid": expid
+        },
+    });
+    alert("标记成功");
+    $("#grid-table").trigger("reloadGrid");
+}
+
+function CancelSign(expid) {
+    $.ajax({
+        type: "post",
+        url: "/preec/CancelSign/",
+        dataType: "json",
+        data: {
+            "expid": expid
+        },
+    });
+    alert("取消标记成功");
+    $("#grid-table").trigger("reloadGrid");
+}
+
     jQuery(function ($) {
         var grid_selector = "#grid-table";
         var pager_selector = "#grid-pager";
@@ -306,13 +288,13 @@
 
             //data: grid_data,
             datatype: "json",
-            height: 500,
-            colNames: ['操作', '', 'ID', '实验条件', '实验者信息ID', '测试设备ID', '动捕数据信息', '跑台数据信息', 'pedar足底压力数据信息', '耗氧量数据信息', '肌电数据信息', '视频数据文件','备注信息','操作用户'],
+            height: 450,
+            colNames: ['操作','','', 'ID','标记', '实验条件', '实验者信息ID', '测试设备ID', '动捕数据信息', '跑台数据信息', 'pedar足底压力数据信息', '耗氧量数据信息', '肌电数据信息', '视频数据文件','备注信息','操作用户'],
             colModel: [{
                 name: 'op',
                 index: 'op',
                 align: 'center',
-                width: 80,
+                width: 40,
                 fixed: true,
                 sortable: false,
                 resize: false,
@@ -338,6 +320,7 @@
                         		 }                    
                    	 },
                     keys: true,
+                    delbutton: false,
                     //delbutton: false,//disable delete button
                     delOptions: {
                         recreateForm: true,
@@ -365,16 +348,24 @@
 
                 }
             },
-                {
-                    name: '',
-                    index: '',
-                    width: 0.1,
-                    editable: true,
-                    sortable: false,
-                    search: false
-
-                },
-
+            {
+                name: 'operate2',
+                index: 'operate2',
+                search: false,
+                width: 40,
+                formatter: function (value, grid, rows, state) {
+                    return "<a href=\"#\" style=\"color:#f60\" onclick=\"Sign(" + rows.expid + ")\">标记</a>"
+                }
+            },
+            {
+                name: 'operate',
+                index: 'operate',
+                search: false,
+                width: 62,
+                formatter: function (value, grid, rows, state) {
+                    return "<a href=\"#\" style=\"color:#f60\" onclick=\"CancelSign(" + rows.expid + ")\">取消标记</a>"
+                }
+            },
                 {
                     name: 'expid',
                     index: 'expid',
@@ -387,6 +378,18 @@
                         cols: "15"
                     }
 
+                },
+                {
+                    name: 'flag',
+                    index: 'flag',
+                    width: 60,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
                 },
                 {
                     name: 'advance',
@@ -547,7 +550,7 @@
                     enableTooltips(table);
                 }, 0);
                 $(".jqgrow").each(function () {
-                    var row = $(this.cells[6]);
+                    var row = $(this.cells[8]);
                     var formData = new FormData();
                     var text = row.text();
                     formData.append("text", text);
@@ -569,7 +572,7 @@
                 })
                 
                 $(".jqgrow").each(function () {
-                    var row = $(this.cells[5]);
+                    var row = $(this.cells[7]);
                     var formData = new FormData();
                     var text = row.text();
                     formData.append("text", text);

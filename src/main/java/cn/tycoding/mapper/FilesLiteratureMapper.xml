@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tycoding.mapper.FilesLiteratureMapper">
+  <resultMap id="BaseResultMap" type="cn.tycoding.pojo.FilesLiterature">
+    <id column="expid" jdbcType="INTEGER" property="expid" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="topic" jdbcType="VARCHAR" property="topic" />
+    <result column="writer" jdbcType="VARCHAR" property="writer" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="files_name" jdbcType="VARCHAR" property="files_name" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    expid,topic,writer,company,time,remark, url, files_name,user_name,flag
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from files_literature
+    where expid = #{expid,jdbcType=INTEGER}
+  </select>
+  
+    <!-- 第一个参数为页数，第二个参数为每页多少行 -->
+    <select id="findByPage" resultType="cn.tycoding.pojo.FilesLiterature">
+		select * from
+		files_literature
+		order by expid desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		files_literature
+	</select>
+
+    <select id="find" resultType="cn.tycoding.pojo.FilesLiterature">
+		select * from
+		files_literature
+		order by expid desc
+		
+	</select>
+
+    <update id="edit" parameterType="cn.tycoding.pojo.FilesLiterature">
+	  update files_literature
+      set url = #{url},
+      topic = #{topic},
+      files_name = #{files_name},
+      writer = #{writer},
+      company = #{company},
+      time = #{time},
+      remark = #{remark},
+      user_name = #{user_name},
+      flag = #{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler}
+      where expid = #{expid}
+	</update>
+
+    <!-- 增加一条学生数据 -->
+    <insert id="add" parameterType="cn.tycoding.pojo.FilesLiterature">
+		insert into files_literature
+		values(#{expid},#{topic},#{files_name},#{writer},#{company},#{time},#{remark},#{url},#{user_name},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler});
+	</insert>
+
+    <!-- 按学号删除学生 -->
+    <delete id="del" parameterType="string">
+		delete from files_literature
+		where expid=#{expid}
+	</delete>
+	
+	    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFilters" parameterType="string"
+            resultType="cn.tycoding.pojo.FilesLiterature">
+		${_parameter}
+	</select>
+
+    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFiltersSum" parameterType="string"
+            resultType="int">
+		${_parameter}
+	</select>
+	
+	<!--根据expid返回url  -->
+	<select id="getPathByExpid"  resultType="String">
+    SELECT url from files_literature where expid = #{expid}
+  </select>
+  
+	<!--根据expid返回url  -->
+	<select id="getFile_name"  resultType="String">
+    SELECT files_name from files_literature where expid = #{expid}
+  </select>
+  
+      <!-- 查找表中字段的信息，字段名称和字段备注-->
+    <select id="findDbTableComment" resultType="cn.tycoding.entity.assist.DBTableComment">
+        show full fields from files_literature
+    </select>
+    
+    <!-- 标记信息状态（失效） -->
+    <update id="sign" parameterType="java.lang.Integer">
+		update files_literature set
+		flag='已失效'                                                
+		where
+		expid=#{expid}
+	</update>
+	
+    <!-- 标记信息状态（失效） -->
+    <update id="cancelSign" parameterType="java.lang.Integer">
+		update files_literature set
+		flag=''                                                
+		where
+		expid=#{expid}
+	</update>
+
+</mapper>

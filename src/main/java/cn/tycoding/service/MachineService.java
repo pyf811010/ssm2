@@ -11,6 +11,7 @@ import cn.tycoding.pojo.FilesElectromyography;
 import cn.tycoding.pojo.FilesKand;
 import cn.tycoding.pojo.Machine;
 import cn.tycoding.pojo.ObjectQuery;
+import cn.tycoding.pojo.State;
 
 public interface MachineService {
 
@@ -22,6 +23,10 @@ public interface MachineService {
 	String handle(String oper, Machine machine, String[] id);
 
 	String authorityTemp(String oper, Machine machine, String[] id, HttpServletRequest request) throws UnsupportedEncodingException;
+
+	State sign(int expid, HttpServletRequest request) throws IOException;
+	
+	State cancelSign(int expid, HttpServletRequest request) throws IOException;
 
 	
 

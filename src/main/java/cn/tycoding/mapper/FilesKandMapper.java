@@ -50,4 +50,11 @@ public interface FilesKandMapper {
 	
 	String findTypeByUserName(String user_name); 
 	
+	void sign(int expid);
+
+	void cancelSign(int expid);
+
+
+	List<Integer> getIdByAdvance(String fi_info);
+	
 }

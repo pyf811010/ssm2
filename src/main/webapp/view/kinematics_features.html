@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <title>人体运动测试数据管理</title>
+    <meta name="description" content="Dynamic tables and grids using jqGrid plugin"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/assets/font-awesome/4.5.0/css/font-awesome.min.css"/>
+
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="/assets/css/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="/assets/css/bootstrap-datepicker3.min.css"/>
+    <link rel="stylesheet" href="/assets/css/ui.jqgrid.min.css"/>
+
+    <!-- text fonts -->
+    <link rel="stylesheet" href="/assets/css/fonts.googleapis.com.css"/>
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
+    <link rel="stylesheet" href="/assets/css/ace-skins.min.css"/>
+    <link rel="stylesheet" href="/assets/css/ace-rtl.min.css"/>
+    <script src="/assets/js/ace-extra.min.js"></script>
+</head>
+
+
+<body class="no-skin">
+<div id="header"></div>
+<!--页面顶部栏  -->
+<div class="main-container ace-save-state" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.loadState('main-container')
+        } catch (e) {
+        }
+    </script>
+
+    <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
+        <script type="text/javascript">
+            try {
+                ace.settings.loadState('sidebar')
+            } catch (e) {
+            }
+        </script>
+
+        <div id="lefter"></div>
+        <!--页面左部导航栏  -->
+
+    </div>
+
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="/view/index.html">首页</a>
+                    </li>
+
+                    <li class="active">运动学特性分析</li>
+                </ul>
+                <!-- /.breadcrumb -->
+
+            </div>
+            <div class="page-content">
+
+                <div class="row">
+                    <div class="col-xs-12">
+                    <div class="">
+                         <!--    <button type="button" class="close" data-dismiss="alert">
+                                <i class="ace-icon fa fa-times"></i>
+                            </button> -->
+							<i class="ace-icon fa fa-check black"></i>
+                            <span style="font-size: 15px;">欢迎使用&nbsp;</span>
+                            <strong class="black" style="font-size: 15px;color:#000000;">
+                                <span style="font-size: 15px;">人体运动测试数据分析与管理系统</span> 
+                                <small>(v 1.0)</small>
+                            </strong>
+                                <br>
+                                <strong class="black" style="font-size: 15px;color:#000000;">
+                                <span style="font-size: 15px;">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;函数功能简介：
+                                </span>
+                                </strong>
+                                <span style="font-size: 15px;">
+                                    	XXXXXXXXXX<br>
+                                </span>
+                                <br>
+                                <strong class="black" style="font-size: 15px;color:#000000;">
+                                <span style="font-size: 15px;">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;函数输入：
+                                </span>
+                                </strong>
+                                <span style="font-size: 15px;">
+                                    	XXXXXXXX<br>
+                                </span>
+                                <br>
+                                <strong class="black" style="font-size: 15px;color:#000000;">
+                                <span style="font-size: 15px;">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;函数输出：
+
+                                </span>
+                                </strong>
+                                <span style="font-size: 15px;">
+                                    	XXXXXXXXXX
+                                </span>
+                                <br>
+                                <br>
+                                <strong class="black" style="font-size: 15px;color:#000000;">
+                                <span style="font-size: 15px;">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;函数使用说明：
+                                </span>
+                                </strong>
+                                <span style="font-size: 15px;">
+                                    	XXXXXX<br>
+                                </span>
+                                <br>
+                                <br>
+                                <!-- <strong class="black" style="font-size: 15px;color:#000000;">
+                                <span style="font-size: 15px;">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;matlab数据处理：
+                                </span>
+                                </strong>
+                                <span style="font-size: 15px;">
+                                    	使用matlab程序对指定数据进行处理。
+                                </span>
+                                <br>
+                                <strong class="black" style="font-size: 15px;color:#000000;">
+                                <span style="font-size: 15px;">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;文件操作：
+                                </span>
+                                </strong>
+                                <span style="font-size: 15px;">
+                                    	对测试数据的数据库录入功能。<br>
+                                </span>
+                                <strong class="black" style="font-size: 15px;color:#000000;">
+                                <span style="font-size: 15px;">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;原始测试数据文件上传：
+                                </span>
+                                </strong>
+                                <span style="font-size: 15px;">
+                                    	上传测试得到的原始数据。<br>
+                                </span>
+                                <strong class="black" style="font-size: 15px;color:#000000;">
+                                <span style="font-size: 15px;">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;修改数据文件上传：
+                                </span>
+                                </strong>
+                                <span style="font-size: 15px;">
+                                    	对原始“运动学与动力学数据”修改后单独上传。<br>
+                                </span>
+                                <strong class="black" style="font-size: 15px;color:#000000;">
+                                <span style="font-size: 15px;">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;步态周期图像文件上传：
+                                </span>
+                                </strong>
+                                <span style="font-size: 15px;">
+                                    	上传实验过程中的图像和视频上传，可以批量上传和单个上传。
+                                </span>
+                                <br>
+                                <br>
+                                <span style="font-size: 15px;">
+                                系统管理员电话：xxx-xxxxxxxx
+                                </span>
+                                <br>
+                            </strong> --><!-- <span style="font-size: 15px;">它基于已有的高校学生在校期间各方面的信息，联合教务办、学工办、就业办及研究生处等多部门， 实现对学生在校期间学习、发展情况的智能化统计、分析，挖掘其内在的数据关系，为教师和辅导员提供更具针对性的教学对策， 营造良好的学习氛围，促进师生交流，提高管理效率。
+									<br>了解更多:</span>
+									<a href="http://www.usts.edu.cn/" target="_blank" style="font-size: 15px;">苏州科技大学官网</a> -->
+                        </div>
+                    
+                        <!-- PAGE CONTENT BEGINS -->
+                        <!-- 下载模板 -->
+                        <div class="row" style="margin-bottom: 50px;">
+                            <div class="row" style="float:left;margin-left: 20px;">
+                                <div class="btn-group" style="">
+                                    <a id="open" class="btn btn-success bigger-120"
+                                       role="button">
+                                        进入分析程序
+                                        <i class="ace-icon fa icon-on-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- PAGE CONTENT ENDS -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.page-content -->
+        </div>
+    </div>
+    <!-- /.main-content -->
+    <div id="footer"></div>
+    <!--页面底部栏  -->
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
+</div>
+<!-- /.main-container -->
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+<script src="/assets/js/jquery-2.1.4.min.js"></script>
+<script src="/assets/js/jquery.form.js"></script>
+<script src="/assets/js/jquery.cookie.js"></script>
+<script src="/assets/js/ssm2.util.js"></script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script src="/assets/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+    if ('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+</script>
+<script src="/assets/js/bootstrap.min.js"></script>
+
+<!-- page specific plugin scripts -->
+<script src="/assets/js/bootstrap-datepicker.min.js"></script>
+<script src="/assets/js/jquery.jqGrid.min.js"></script>
+<script src="/assets/js/grid.locale-cn.js"></script>
+
+<!-- ace scripts -->
+<script src="/assets/js/ace-elements.min.js"></script>
+<script src="/assets/js/ace.min.js"></script>
+
+<!-- inline scripts related to this page -->
+
+
+
+
+<!--上面代码用来设置水平滚动条  -->
+<!--文件上传-->
+<script type="text/javascript">
+    //ajax请求数据
+    $(function () {
+        $("#open").click(function () {
+            //清空之前的行
+            $.ajax({
+                type: "post",
+                url: "/admin/open1",
+            });
+        });
+    });
+</script>
+
+<script>
+    $("#header").load("/view/header.html");
+</script>
+
+<script>
+    $("#lefter").load("/view/lefter.html", function () {
+        $("#main").prop("class", "");
+        $(".kinematics_features").prop("class", "active");
+        $("#indexAnalyse").prop("style", "display: block;");
+    });
+</script>
+
+<script>
+    $("#footer").load("/view/footer.html");
+</script>
+
+
+</body>
+
+</html>

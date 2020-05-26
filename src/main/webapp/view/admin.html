@@ -78,7 +78,7 @@
                                 <div class="btn-group" style="">
                                     <a href="/excel/downloadTemplate?name=admin" class="btn btn-success bigger-120"
                                        role="button">
-                                        下载导入摸板
+                                        下载导入模板
                                         <i class="ace-icon fa icon-on-right"></i>
                                     </a>
                                 </div>
@@ -250,50 +250,55 @@
 </style>
 <!--上面代码用来设置水平滚动条  -->
 <!--文件上传-->
+<!--文件上传-->
 <script type="text/javascript">
 
     jQuery(function ($) {
+        var upfile = $("#upfile");
         $("#fileCommit").click(function (e) {
             var formData = new FormData();
             var files = $("#upfile")[0].files;
+            // e.preventDefault();
             //判断是否选择了上传文件
             if (files.length != 0) {
+                //可以获得文件名字包括后缀 subjects.xlsx
                 var name = files[0].name;
+                //alert(name);
                 //分割文件名与后缀（文件类型） {"subjects", "xlsx"}
                 var names = name.split(".");
                 //alert(names[0]); //subjects
                 //alert(names[1]); //xlsx
                 //判断文件格式
                 if (names[1] == "xlsx" || names[1] == "xls") {
-                    if (names[0] == "admin"){
+                    //判断文件名字
+                    if (names[0] == "admin") {
+                        formData.append("file", files[0]);
 
-                    formData.append("file", files[0]);
+                        $.ajax({
+                            type: "post",
+                            url: "/excel/uploadFile",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
 
-                    $.ajax({
-                        type: "post",
-                        url: "/excel/uploadFile",
-                        data: formData,
-                        processData: false,
-                        contentType: false,
+                            success: function (data) {
+                                console.log(data.success);
+                                alert(data.info);
+                                //清空选择的文件
+                                upfile.val("");
+                                //上传成功后重新加载表格
+                                $("#grid-table").trigger("reloadGrid");
+                            },
+                            error: function (err) {
+                                hideloading();
+                                alert("文件上传遇到错误!" + JSON.stringify(err));
+                                alert("上传失败!");
+                            }
+                        });
 
-                        success: function (data) {
-                            console.log(data.success);
-                            alert(data.info);
-                            //清空选择的文件
-                            upfile.val("");
-                            //上传成功后重新加载表格
-                            $("#grid-table").trigger("reloadGrid");
-                        },
-                        error: function (err) {
-                            hideloading();
-                            alert("文件上传遇到错误!" + JSON.stringify(err));
-                            alert("上传失败!");
-                        }
-                    });
-                    }else {
-                        alert("文件名错误（提示：admin.xls或admin.xlsx）")
+                    } else {
+                        alert("文件名错误(提示：admin.xls或admin.xlsx)");
                     }
-
                 } else {
                     alert("文件类型错误(提示：xls或xlsx格式)")
                 }
@@ -303,7 +308,6 @@
         })
     });
 </script>
-
 <script>
     $("#header").load("/view/header.html");
 </script>
@@ -322,6 +326,32 @@
 </script>
 
 <script type="text/javascript">
+function Sign(a_id) {
+    $.ajax({
+        type: "post",
+        url: "/admin/Sign/",
+        dataType: "json",
+        data: {
+            "expid": a_id
+        },
+    });
+    alert("标记成功");
+    $("#grid-table").trigger("reloadGrid");
+}
+
+function CancelSign(a_id) {
+    $.ajax({
+        type: "post",
+        url: "/admin/CancelSign/",
+        dataType: "json",
+        data: {
+            "expid": a_id
+        },
+    });
+    alert("取消标记成功");
+    $("#grid-table").trigger("reloadGrid");
+}
+
     jQuery(function ($) {
         var grid_selector = "#grid-table";
         var pager_selector = "#grid-pager";
@@ -364,13 +394,13 @@
 
             //data: grid_data,
             datatype: "json",
-            height: 500,
-            colNames: ['操作', '','姓名', '密码','用户类型'],
+            height: 450,
+            colNames: ['操作','','', 'ID','标记','姓名', '密码','用户类型'],
             colModel: [{
                 name: 'op',
                 index: 'op',
                 align: 'center',
-                width: 80,
+                width: 40,
                 fixed: true,
                 sortable: false,
                 resize: false,
@@ -396,6 +426,7 @@
                            		 }                    
                       	 },
                     keys: true,
+                    delbutton: false,
                     //delbutton: false,//disable delete button
                     delOptions: {
                         recreateForm: true,
@@ -422,16 +453,25 @@
                     },
                 }
             },
+            {
+                name: 'operate2',
+                index: 'operate2',
+                search: false,
+                width: 40,
+                formatter: function (value, grid, rows, state) {
+                    return "<a href=\"#\" style=\"color:#f60\" onclick=\"Sign(" + rows.a_id + ")\">标记</a>"
+                }
+            },
+            {
+                name: 'operate',
+                index: 'operate',
+                search: false,
+                width: 62,
+                formatter: function (value, grid, rows, state) {
+                    return "<a href=\"#\" style=\"color:#f60\" onclick=\"CancelSign(" + rows.a_id + ")\">取消标记</a>"
+                }
+            },
                 {
-                    name: '',
-                    index: '',
-                    width: 0.1,
-                    editable: true,
-                    sortable: false,
-                    search: false
-
-                },
-                /*{
                     name: 'a_id',
                     index: 'a_id',
                     width: 50,
@@ -444,6 +484,18 @@
                     }
 
                 },*/
+                {
+                    name: 'flag',
+                    index: 'flag',
+                    width: 60,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                },
                 {
                     name: 'a_name',
                     index: 'a_name',

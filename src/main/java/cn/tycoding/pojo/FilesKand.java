@@ -13,6 +13,9 @@ public class FilesKand {
     
     private Integer update_times;
     
+    private String flag;
+    
+    
     public FilesKand () {
     }
     public FilesKand (Integer expid, String url, Integer id_query, String file_name, Integer update_times, String user_name) {
@@ -24,7 +27,12 @@ public class FilesKand {
     	this.user_name = user_name;
     }
     
-    
+    public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
     
 	public String getUser_name() {
 		return user_name;

@@ -12,7 +12,7 @@
 
   <!-- 数据库中得字段 -->
   <sql id="Base_Column_List">
-    expid, url, id_query,files_name,user_name
+    expid, url, id_query,files_name,user_name,flag
   </sql>
 
   <!-- 按照主键查询 -->
@@ -34,9 +34,9 @@
 
   <!-- 插入信息 -->
   <insert id="insert" parameterType="cn.tycoding.pojo.FilesKand">
-    insert into files_kand (expid, url, id_query ,files_name,update_times,user_name
+    insert into files_kand (expid, url, id_query ,files_name,update_times,user_name,flag
       )
-    values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, #{files_name,jdbcType=VARCHAR},#{update_times,jdbcType=INTEGER},#{user_name,jdbcType=VARCHAR}
+    values (#{expid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{id_query,jdbcType=INTEGER}, #{files_name,jdbcType=VARCHAR},#{update_times,jdbcType=INTEGER},#{user_name,jdbcType=VARCHAR},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler}
       )
   </insert>
 
@@ -108,14 +108,15 @@
       id_query = #{id_query},
       files_name = #{files_name},
       update_times = #{update_times},
-      user_name = #{user_name}
+      user_name = #{user_name},
+      flag = #{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler}
       where expid = #{expid}
 	</update>
 
     <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.FilesKand">
 		insert into files_kand
-		values(#{expid},#{url},#{id_query},#{files_name},#{update_times},#{user_name});
+		values(#{expid},#{url},#{id_query},#{files_name},#{update_times},#{user_name},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler});
 	</insert>
 
     <!-- 按学号删除学生 -->
@@ -141,6 +142,8 @@
     SELECT url from files_kand where expid = #{expid}
   </select>
   
+
+  
 	<!--根据expid返回url  -->
 	<select id="getFile_name"  resultType="String">
     SELECT files_name from files_kand where expid = #{expid}
@@ -151,6 +154,22 @@
     SELECT expid from files_kand where files_name = #{files_name}
   </select>
   
+  
+  <!-- 标记信息状态（失效） -->
+    <update id="sign" parameterType="java.lang.Integer">
+		update files_kand set
+		flag='已失效'                                                
+		where
+		expid=#{expid}
+	</update>
+	
+    <!-- 标记信息状态（失效） -->
+    <update id="cancelSign" parameterType="java.lang.Integer">
+		update files_kand set
+		flag=''                                                
+		where
+		expid=#{expid}
+	</update>
   
   
 </mapper>

@@ -45,6 +45,9 @@ public class ExcelServiceImpl implements ExcelService {
 
     @Autowired
     private MachineMapper machineMapper;
+    
+    @Autowired
+    private FilesLiteratureMapper filesLiteratureMapper;
 
     /**
      * 读取excel中的信息
@@ -241,7 +244,9 @@ public class ExcelServiceImpl implements ExcelService {
             case "preec":
                 index = ExcelConstant.PREEC_INDEX;
                 break;
-            default:
+            case "literature":
+                list = filesLiteratureMapper.findDbTableComment();
+                index = ExcelConstant.LITERATURE_INDEX;
                 break;
         }
         return index;

@@ -19,7 +19,7 @@
 	</select>
   
   <sql id="Base_Column_List">
-    expid,id_query,id_subjects,motion_capture_info,slot_machine_info,pedar_info,ox_info,elec_info,video_info,user_name
+    expid,id_query,id_subjects,motion_capture_info,slot_machine_info,pedar_info,ox_info,elec_info,video_info,flag,user_name
   </sql>
     <!-- 第一个参数为页数，第二个参数为每页多少行 -->
     <select id="findByPage" resultType="cn.tycoding.pojo.Preec">
@@ -43,7 +43,7 @@
 	
     <update id="edit" parameterType="cn.tycoding.pojo.Preec">
 		update preec set
-		id_subjects=#{id_subjects},advance=#{advance},remark=#{remark},motion_capture_info=#{motion_capture_info},slot_machine_info=#{slot_machine_info},pedar_info=#{pedar_info},ox_info=#{ox_info},elec_info=#{elec_info},id_machine=#{id_machine},video_info=#{video_info}                                                
+		id_subjects=#{id_subjects},advance=#{advance},remark=#{remark},motion_capture_info=#{motion_capture_info},slot_machine_info=#{slot_machine_info},pedar_info=#{pedar_info},ox_info=#{ox_info},elec_info=#{elec_info},id_machine=#{id_machine},video_info=#{video_info},flag=#{flag}                                                
 		where
 		expid=#{expid}
 	</update>
@@ -51,12 +51,12 @@
     <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.Preec">
 		insert into preec
-		values(#{expid},#{id_query},#{id_machine},#{id_subjects},#{advance},#{remark},#{motion_capture_info},#{slot_machine_info},#{pedar_info},#{ox_info},#{elec_info},#{video_info},#{user_name});
+		values(#{expid},#{id_query},#{id_machine},#{id_subjects},#{advance},#{remark},#{motion_capture_info},#{slot_machine_info},#{pedar_info},#{ox_info},#{elec_info},#{video_info},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler},#{user_name});
 	</insert>
 	
 	<insert id="insert" parameterType="cn.tycoding.pojo.Preec">
 		insert into preec
-		values(#{expid},#{id_query},#{id_machine},#{id_subjects},#{advance},#{remark},#{motion_capture_info},#{slot_machine_info},#{pedar_info},#{ox_info},#{elec_info},#{video_info},#{user_name});
+		values(#{expid},#{id_query},#{id_machine},#{id_subjects},#{advance},#{remark},#{motion_capture_info},#{slot_machine_info},#{pedar_info},#{ox_info},#{elec_info},#{video_info},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler},#{user_name});
 	</insert>
     <!-- 按学号删除学生 -->
     <delete id="del" parameterType="string">
@@ -88,5 +88,26 @@
 	<select id="findDbTableComment" resultType="cn.tycoding.entity.assist.DBTableComment">
         show full fields from preec
     </select>
+    
+    <!-- 标记信息状态（失效） -->
+    <update id="sign" parameterType="java.lang.Integer">
+		update preec set
+		flag='已失效'                                                
+		where
+		expid=#{expid}
+	</update>
+	
+    <!-- 标记信息状态（失效） -->
+    <update id="cancelSign" parameterType="java.lang.Integer">
+		update preec set
+		flag=''                                                
+		where
+		expid=#{expid}
+	</update>
+	
+		<!--根据实验方式返回expid  -->
+	<select id="getIdByAdvance"  resultType="Integer">
+    SELECT expid from preec where advance = #{advance}
+  </select>
 
 </mapper>

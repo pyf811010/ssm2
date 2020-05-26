@@ -9,6 +9,9 @@ public class FileConstant {
     
     //图像上传基地址
     public static final String PICTURE_FILE_UPLOAD_URL = "D:/PictureData";
+    
+    //文献上传基地址
+    public static final String LITERATURE_FILE_UPLOAD_URL = "D:/LiteratureData";
 
     //头像的保存地址
     public static final String PHOTO_UPLOAD_URL = FILE_UPLOAD_URL + "/photo";

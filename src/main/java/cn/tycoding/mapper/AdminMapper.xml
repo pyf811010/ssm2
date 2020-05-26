@@ -65,7 +65,7 @@
 
     <update id="edit" parameterType="cn.tycoding.pojo.Admin">
 		update admin set
-		a_name=#{a_name},a_password=#{a_password},type=#{type}
+		a_name=#{a_name},a_password=#{a_password},type=#{type},flag=#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler}
 		where
 		a_id=#{a_id}
 	</update>
@@ -73,7 +73,7 @@
     <!-- 增加一条管理员数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.Admin">
 		insert into admin
-		values(default,#{a_name},#{a_password},#{type});
+		values(default,#{a_name},#{a_password},#{type},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler});
 	</insert>
 
     <!-- 按id删除管理员 -->
@@ -107,8 +107,8 @@
     </select>
 
     <insert id="addTemplate" parameterType="cn.tycoding.pojo.Admin">
-        insert into admin (a_name,a_password,type)
-			select #{a_name},#{a_password},#{type} from dual where not exists (
+        insert into admin (a_name,a_password,type,flag)
+			select #{a_name},#{a_password},#{type},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler} from dual where not exists (
 			 	select * from admin where
 			 		a_name = #{a_name} and
 			 		a_password = #{a_password} and
@@ -116,5 +116,21 @@
 			 		limit 1
 			 );
     </insert>
+    
+    <!-- 标记信息状态（失效） -->
+    <update id="sign" parameterType="java.lang.Integer">
+		update admin set
+		flag='已失效'                                                
+		where
+		a_id=#{a_id}
+	</update>
+	
+    <!-- 标记信息状态（失效） -->
+    <update id="cancelSign" parameterType="java.lang.Integer">
+		update admin set
+		flag=''                                                
+		where
+		a_id=#{a_id}
+	</update>
     
 </mapper>

@@ -1,5 +1,6 @@
 package cn.tycoding.service;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -27,6 +28,10 @@ public interface SubjectsService {
 	Subjects selectByPrimaryKey(Integer valueOf);
 
 	String authorityTemp(String oper, Subjects subjects, String[] id, HttpServletRequest request) throws UnsupportedEncodingException;
+
+	State sign(int expid, HttpServletRequest request) throws IOException;
+	
+	State cancelSign(int expid, HttpServletRequest request) throws IOException;
 
 //	List<UserTest> findAllByRelateType(int type);
 }

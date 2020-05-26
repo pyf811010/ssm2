@@ -12,6 +12,7 @@ import cn.tycoding.util.QueryCondition;
 import cn.tycoding.util.QueryUtil;
 import cn.tycoding.util.SqlJointUtil;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -239,4 +240,15 @@ public class AdminServiceImpl implements AdminService {
 		return admin;
 	}
 
+	@Override
+	public void sign(int expid) throws IOException {
+		adminMapper.sign(expid);
+		
+	}
+
+	@Override
+	public void cancelSign(int expid) throws IOException {
+		adminMapper.cancelSign(expid);
+		
+	}
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.tycoding.pojo.FilesElectromyography;
 import cn.tycoding.pojo.ObjectQuery;
+import cn.tycoding.pojo.State;
 
 public interface FilesEleService {
 
@@ -25,5 +26,9 @@ public interface FilesEleService {
 	String authorityTemp(String oper, FilesElectromyography filesElectromyography, String[] id,
 			HttpServletRequest request) throws UnsupportedEncodingException;
 
+	State sign(int expid, HttpServletRequest request) throws IOException;
+	
+	State cancelSign(int expid, HttpServletRequest request) throws IOException;
+	
 
 }

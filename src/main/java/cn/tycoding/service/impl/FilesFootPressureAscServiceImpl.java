@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ import cn.tycoding.mapper.FilesElectromyographyMapper;
 import cn.tycoding.mapper.FilesFootPressureAscMapper;
 import cn.tycoding.mapper.FilesKandMapper;
 import cn.tycoding.mapper.FilesOxygenMapper;
+import cn.tycoding.pojo.Admin;
 import cn.tycoding.pojo.EgContrast;
 import cn.tycoding.pojo.FilesElectromyography;
 import cn.tycoding.pojo.FilesFootPressureAsc;
@@ -241,6 +243,64 @@ public class FilesFootPressureAscServiceImpl implements FilesFootPressureAscServ
             // 对传回的中文进行编码
             return URLEncoder.encode(temp, "UTF-8");
         }
+	}
+	
+
+	@Override
+	public State sign(int expid,HttpServletRequest request) throws IOException {
+		State state = new State();
+		String user_name = (String) request.getSession().getAttribute("user_name");
+		String type = adminMapper.findTypeByUserName(user_name);
+		if(type.equals("管理员")){
+			System.out.println("用户为管理员");
+			filesFootPressureAscMapper.sign(expid);
+			state.setInfo("标记成功");
+			state.setSuccess(1);
+			return state;
+		}else{
+			String FilesUser_name = (selectByPrimaryKey(expid)).getUser_name();
+            System.out.println("数据库中的user_name -----> " + FilesUser_name);
+            if (!user_name.equals(FilesUser_name)) {
+                System.out.println("无权限修改");
+    			state.setInfo("无标记权限");
+    			state.setSuccess(0);//0代表失败
+    			return state;
+            }else{
+            	filesFootPressureAscMapper.sign(expid);
+            	state.setInfo("标记成功");
+    			state.setSuccess(1);
+    			return state;
+            }
+		}
+		
+	}
+
+	@Override
+	public State cancelSign(int expid,HttpServletRequest request) throws IOException {
+		State state = new State();
+		String user_name = (String) request.getSession().getAttribute("user_name");
+		String type = adminMapper.findTypeByUserName(user_name);
+		if(type.equals("管理员")){
+			System.out.println("用户为管理员");
+			filesFootPressureAscMapper.cancelSign(expid);
+			state.setInfo("标记成功");
+			state.setSuccess(1);
+			return state;
+		}else{
+			String FilesUser_name = (selectByPrimaryKey(expid)).getUser_name();
+            System.out.println("数据库中的user_name -----> " + FilesUser_name);
+            if (!user_name.equals(FilesUser_name)) {
+                System.out.println("无权限修改");
+    			state.setInfo("无标记权限");
+    			state.setSuccess(0);//0代表失败
+    			return state;
+            }else{
+            	filesFootPressureAscMapper.cancelSign(expid);
+            	state.setInfo("标记成功");
+    			state.setSuccess(1);
+    			return state;
+            }
+		}
 	}
 
 	

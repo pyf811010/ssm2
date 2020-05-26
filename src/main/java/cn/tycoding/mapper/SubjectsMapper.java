@@ -50,4 +50,8 @@ public interface SubjectsMapper {
 	Integer insertReturnID(Subjects record);
 
 	int addTemplate(Subjects subjects);
+
+	void sign(int expid);
+
+	void cancelSign(int expid);
 }

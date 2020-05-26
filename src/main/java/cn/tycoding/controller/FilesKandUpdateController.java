@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.tycoding.pojo.FilesElectromyography;
 import cn.tycoding.pojo.FilesKandUpdateinfo;
 import cn.tycoding.pojo.ObjectQuery;
+import cn.tycoding.pojo.State;
 import cn.tycoding.service.FilesEleService;
 import cn.tycoding.service.FilesKandUpdateService;
 
@@ -80,6 +81,32 @@ public class FilesKandUpdateController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    @RequestMapping("/Sign")
+    @ResponseBody
+    public State Sign(int expid,HttpServletRequest request) {
+    	try {
+    		State state = filesKandUpdateService.sign(expid,request);
+    		return state;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    	
+    }
+    
+    
+    @RequestMapping("/CancelSign")
+    @ResponseBody
+    public State CancelSign(int expid,HttpServletRequest request) {
+    	try {
+    		State state =filesKandUpdateService.cancelSign(expid,request);
+    		return state;
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    		return null;
+    	}
     }
 
 }

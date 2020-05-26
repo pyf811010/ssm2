@@ -13,6 +13,7 @@ import cn.tycoding.pojo.FilesFootPressureFgt;
 import cn.tycoding.pojo.FilesKand;
 import cn.tycoding.pojo.FilesOxygen;
 import cn.tycoding.pojo.ObjectQuery;
+import cn.tycoding.pojo.State;
 
 public interface FilesFootPressureFgtService {
 
@@ -30,5 +31,7 @@ public interface FilesFootPressureFgtService {
 	String authorityTemp(String oper, FilesFootPressureFgt filesFootPressureFgt, String[] id,
 			HttpServletRequest request) throws UnsupportedEncodingException;
 
-
+	State sign(int expid, HttpServletRequest request) throws IOException;
+	
+	State cancelSign(int expid, HttpServletRequest request) throws IOException;
 }

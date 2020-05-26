@@ -1,6 +1,7 @@
 package cn.tycoding.service.impl;
 
 import cn.tycoding.mapper.AdminMapper;
+import cn.tycoding.mapper.EgContrastMapper;
 import cn.tycoding.mapper.FilesElectromyographyMapper;
 import cn.tycoding.mapper.FilesFootPressureAscMapper;
 import cn.tycoding.mapper.FilesFootPressureFgtMapper;
@@ -26,6 +27,7 @@ import cn.tycoding.util.QueryUtil;
 import cn.tycoding.util.SqlJointUtil;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -69,6 +71,8 @@ public class PreecServiceImpl implements PreecService {
     private FilesElectromyographyMapper filesElectromyographyMapper;
     @Autowired
     private AdminMapper adminMapper;
+    @Autowired
+    private EgContrastMapper egContrastMapper;
 
 
 	@Override
@@ -232,6 +236,7 @@ public class PreecServiceImpl implements PreecService {
                     	}
                     	if(result8) System.out.println("成功删除肌电数据");else System.out.println("删除肌电数据失败");
                     }
+                    egContrastMapper.del(id[i]);
                 	filesKandMapper.del(id[i]);
                 	filesMotionCaptureMapper.del(id[i]);
                 	filesFootPressureAscMapper.del(id[i]);
@@ -312,8 +317,101 @@ public class PreecServiceImpl implements PreecService {
         }
 	}
 
-	private Object selectByPrimaryKey(Integer expid) {
+	private Preec selectByPrimaryKey(Integer expid) {
 		return preecMapper.selectByPrimaryKey(expid);
+	}
+
+	@Override
+	public State sign(int expid,HttpServletRequest request) throws IOException {
+		State state = new State();
+		String user_name = (String) request.getSession().getAttribute("user_name");
+		String type = adminMapper.findTypeByUserName(user_name);
+		if(type.equals("管理员")){
+			System.out.println("用户为管理员");
+			preecMapper.sign(expid);
+			filesKandMapper.sign(expid);
+			filesMotionCaptureMapper.sign(expid);
+			filesFootPressureAscMapper.sign(expid);
+			filesFootPressureFgtMapper.sign(expid);
+			filesOxygenMapper.sign(expid);
+			filesSlotMachineMapper.sign(expid);
+			filesVideoMapper.sign(expid);
+			filesElectromyographyMapper.sign(expid);
+			filesElectromyographyMapper.sign(expid);
+			state.setInfo("标记成功");
+			state.setSuccess(1);
+			return state;
+		}else{
+			String FilesUser_name = (selectByPrimaryKey(expid)).getUser_name();
+            System.out.println("数据库中的user_name -----> " + FilesUser_name);
+            if (!user_name.equals(FilesUser_name)) {
+                System.out.println("无权限修改");
+    			state.setInfo("无标记权限");
+    			state.setSuccess(0);//0代表失败
+    			return state;
+            }else{
+            	preecMapper.sign(expid);
+    			filesKandMapper.sign(expid);
+    			filesMotionCaptureMapper.sign(expid);
+    			filesFootPressureAscMapper.sign(expid);
+    			filesFootPressureFgtMapper.sign(expid);
+    			filesOxygenMapper.sign(expid);
+    			filesSlotMachineMapper.sign(expid);
+    			filesVideoMapper.sign(expid);
+    			filesElectromyographyMapper.sign(expid);
+    			filesElectromyographyMapper.sign(expid);
+            	state.setInfo("标记成功");
+    			state.setSuccess(1);
+    			return state;
+            }
+		}
+		
+	}
+
+	@Override
+	public State cancelSign(int expid,HttpServletRequest request) throws IOException {
+		State state = new State();
+		String user_name = (String) request.getSession().getAttribute("user_name");
+		String type = adminMapper.findTypeByUserName(user_name);
+		if(type.equals("管理员")){
+			System.out.println("用户为管理员");
+			preecMapper.cancelSign(expid);
+			filesKandMapper.cancelSign(expid);
+			filesMotionCaptureMapper.cancelSign(expid);
+			filesFootPressureAscMapper.cancelSign(expid);
+			filesFootPressureFgtMapper.cancelSign(expid);
+			filesOxygenMapper.cancelSign(expid);
+			filesSlotMachineMapper.cancelSign(expid);
+			filesVideoMapper.cancelSign(expid);
+			filesElectromyographyMapper.cancelSign(expid);
+			filesElectromyographyMapper.cancelSign(expid);
+			state.setInfo("标记成功");
+			state.setSuccess(1);
+			return state;
+		}else{
+			String FilesUser_name = (selectByPrimaryKey(expid)).getUser_name();
+            System.out.println("数据库中的user_name -----> " + FilesUser_name);
+            if (!user_name.equals(FilesUser_name)) {
+                System.out.println("无权限修改");
+    			state.setInfo("无标记权限");
+    			state.setSuccess(0);//0代表失败
+    			return state;
+            }else{
+            	preecMapper.cancelSign(expid);
+    			filesKandMapper.cancelSign(expid);
+    			filesMotionCaptureMapper.cancelSign(expid);
+    			filesFootPressureAscMapper.cancelSign(expid);
+    			filesFootPressureFgtMapper.cancelSign(expid);
+    			filesOxygenMapper.cancelSign(expid);
+    			filesSlotMachineMapper.cancelSign(expid);
+    			filesVideoMapper.cancelSign(expid);
+    			filesElectromyographyMapper.cancelSign(expid);
+    			filesElectromyographyMapper.cancelSign(expid);
+            	state.setInfo("标记成功");
+    			state.setSuccess(1);
+    			return state;
+            }
+		}
 	}
 
 	

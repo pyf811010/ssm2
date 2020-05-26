@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import cn.tycoding.pojo.FilesElectromyography;
 import cn.tycoding.pojo.FilesKandUpdateinfo;
 import cn.tycoding.pojo.ObjectQuery;
+import cn.tycoding.pojo.State;
 
 public interface FilesKandUpdateService {
 
@@ -26,5 +27,7 @@ public interface FilesKandUpdateService {
 
 	String authorityTemp(String oper, FilesKandUpdateinfo filesKandUpdateinfo, String[] id, HttpServletRequest request) throws UnsupportedEncodingException;
 
-
+	State sign(int expid, HttpServletRequest request) throws IOException;
+	
+	State cancelSign(int expid, HttpServletRequest request) throws IOException;
 }

@@ -25,9 +25,9 @@
   </delete>
   <insert id="insert" parameterType="cn.tycoding.pojo.FilesKandUpdateinfo">
     insert into files_kand_updateinfo (expid,file_name, comment, 
-      updatetime, url,user_name)
+      updatetime, url,user_name,flag)
     values (#{expid,jdbcType=INTEGER},#{file_name,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, 
-      #{updatetime,jdbcType=TIMESTAMP}, #{url,jdbcType=VARCHAR}, #{user_name,jdbcType=VARCHAR})
+      #{updatetime,jdbcType=TIMESTAMP}, #{url,jdbcType=VARCHAR}, #{user_name,jdbcType=VARCHAR},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler})
   </insert>
   <insert id="insertSelective" parameterType="cn.tycoding.pojo.FilesKandUpdateinfo">
     insert into files_kand_updateinfo
@@ -123,14 +123,15 @@
        comment = #{comment},
       updatetime = #{updatetime},
        url = #{url},
-       user_name = #{user_name}
+       user_name = #{user_name},
+       flag = #{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler}
       where u_id = #{u_id}
 	</update>
 
     <!-- 增加一条学生数据 -->
     <insert id="add" parameterType="cn.tycoding.pojo.FilesKandUpdateinfo">
 		insert into files_kand_updateinfo
-		values(#{u_id},#{expid},#{file_name},#{comment},#{updatetime},#{url},#{user_name});
+		values(#{u_id},#{expid},#{file_name},#{comment},#{updatetime},#{url},#{user_name},#{flag,jdbcType=VARCHAR,typeHandler=cn.tycoding.util.NullValueHandler});
 	</insert>
 
     <!-- 按学号删除学生 -->
@@ -165,7 +166,21 @@
     SELECT count(*) from files_kand_updateinfo where file_name like #{file_name}"%"
   </select>
   
-  
+  <!-- 标记信息状态（失效） -->
+    <update id="sign" parameterType="java.lang.Integer">
+		update files_kand_updateinfo set
+		flag='已失效'                                                
+		where
+		u_id=#{u_id}
+	</update>
+	
+    <!-- 标记信息状态（失效） -->
+    <update id="cancelSign" parameterType="java.lang.Integer">
+		update files_kand_updateinfo set
+		flag=''                                                
+		where
+		u_id=#{u_id}
+	</update>
   
   
 </mapper>

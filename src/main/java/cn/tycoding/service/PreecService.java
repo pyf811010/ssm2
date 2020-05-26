@@ -1,5 +1,6 @@
 package cn.tycoding.service;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -24,6 +25,10 @@ public interface PreecService {
 	List<Preec> findAllById(int id);
 
 	String authorityTemp(String oper, Preec preec, String[] id, HttpServletRequest request) throws UnsupportedEncodingException;
+
+	State sign(int expid, HttpServletRequest request) throws IOException;
+	
+	State cancelSign(int expid, HttpServletRequest request) throws IOException;
 
 //	List<Preec> findAllByRelateType(int type);
 }

@@ -238,7 +238,7 @@ public class FilesOrganizeServiceImpl implements FilesOrganizeService {
 				String remark = columns.get(16).equals("") ? null : columns.get(16).toString();
 				System.out.println("    remark:"+remark);
 				
-				Preec tmpPreec = new Preec(null, null, id_Subjects,id_Machine, motion_capture_info, slot_machine_info, pedar_info, ox_info, elec_info,advance,remark,video_info,user_name);
+				Preec tmpPreec = new Preec(null, null, id_Subjects,id_Machine, motion_capture_info, slot_machine_info, pedar_info, ox_info, elec_info,advance,remark,video_info,null,user_name);
 				//Preec(Integer expid, Integer id_query, Integer id_subjects ,String motion_capture_info,String slot_machine_info,String asc_info,String fgt_info,String elec_info)
 				this.preecMap.get(Datetime).put(preexpid, tmpPreec);
 			}
