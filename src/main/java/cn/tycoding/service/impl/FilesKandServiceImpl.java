@@ -370,11 +370,14 @@ public class FilesKandServiceImpl implements FilesKandService {
 			return state;
 		}else{
 			//需要压缩的文件--包括文件地址和文件名
+
 			List<Pair> path = new ArrayList<Pair>();
+
 		    for (int i = 0; i < ids.size(); i++) {
 			 String url = filesKandMapper.getPathByExpid(ids.get(i));
 			 String file_name = filesKandMapper.getFile_name(ids.get(i));
 //			 String filename = filesKandMapper.getFile_name(i);
+
 			 File temp = new File(url);
 			 if (!temp.exists()) continue;
 			 System.out.println(i+ " " + url+" "+ file_name);
@@ -387,6 +390,7 @@ public class FilesKandServiceImpl implements FilesKandService {
 		    	state.setInfo("所有相关文件已失效，请检查！");
 		    	return state;
 		    }
+
 	        // 要生成的压缩文件地址和文件名称
 		    String basePath = "D:\\MLR_Data";
 		    String desPath = "D:\\MLR_Data\\"+fi_info+".zip";
@@ -408,7 +412,9 @@ public class FilesKandServiceImpl implements FilesKandService {
 	                //将需要压缩的文件格式化为输入流
 	                zipSource = new FileInputStream(file);
 	                //压缩条目不是具体独立的文件，而是压缩包文件列表中的列表项，称为条目，就像索引一样
+
 	                ZipEntry zipEntry = new ZipEntry((String)path.get(i).getValue());
+
 	                //定位该压缩条目位置，开始写入文件到压缩包中
 
 	                zipStream.putNextEntry(zipEntry);
