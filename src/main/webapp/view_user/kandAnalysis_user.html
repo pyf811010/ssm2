@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/assets/css/jquery-ui.min.css"/>
     <link rel="stylesheet" href="/assets/css/bootstrap-datepicker3.min.css"/>
     <link rel="stylesheet" href="/assets/css/ui.jqgrid.min.css"/>
+    <link rel="stylesheet" href="/assets/css/loading.css" />
 
     <!-- text fonts -->
     <link rel="stylesheet" href="/assets/css/fonts.googleapis.com.css"/>
@@ -28,6 +29,9 @@
 
 
 <body class="no-skin">
+<div id="loading">
+		<img src="/assets/css/images/loading.gif">
+	</div>
 <div id="header"></div>
 <!--页面顶部栏  -->
 <div class="main-container ace-save-state" id="main-container">
@@ -67,130 +71,102 @@
             </div>
             <div class="page-content">
 
-                <div class="row">
-                    <div class="col-xs-12">
-                    <div class="">
-                         <!--    <button type="button" class="close" data-dismiss="alert">
+					<div class="row">
+
+						<div class="col-xs-12">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<form class="form-horizontal" role="form">
+
+									<div class="row">
+
+										<!-- /.span -->
+
+										<div class="col-xs-12 col-sm-4">
+											<div class="widget-box">
+												<div class="widget-header">
+													<h4 class="widget-title">选择需要分析的动作</h4>
+													<span class="widget-toolbar"></span>
+												</div>
+
+												<div class="widget-body">
+													<div class="widget-main">
+
+
+														<!--  <div class="form-group" style="margin-top: 20px;">
+                                                    <div class="col-xs-12">
+                                                        <input  type="file" id="files" />
+                                                    </div>
+                                                </div>
+ -->
+														<div style="margin-bottom: 12px;">
+															<label for="fi_info" style="margin-bottom: 8px;">实验方式：</label>
+															<select id="selectid"
+																style="width: 188px; margin-left: 10px">
+																<option value="">请选择</option>
+															</select>
+														</div>
+														<div class="clearfix form-actions">
+															<p>
+
+																<button class="btn btn-yellow" type="button"
+																	onclick="openApp()" id="openApplication">打开分析程序</button>
+																<button class="btn btn-purple" type="button"
+																	onclick="getValue()" id="fileCommit">拷贝到本地</button>
+
+																<button class="btn" type="reset">
+																	<i class="ace-icon fa fa-undo bigger-110"></i> 重置
+																</button>
+
+															</p>
+														</div>
+
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<!-- <button type="button" class="close" data-dismiss="alert">
                                 <i class="ace-icon fa fa-times"></i>
                             </button> -->
-							<i class="ace-icon fa fa-check black"></i>
-                            <span style="font-size: 15px;">欢迎使用&nbsp;</span>
-                            <strong class="black" style="font-size: 15px;color:#000000;">
-                                <span style="font-size: 15px;">人体运动测试数据分析与管理系统</span> 
-                                <small>(v 1.0)</small>
-                            </strong>
-                                <br>
-                                <strong class="black" style="font-size: 15px;color:#000000;">
-                                <span style="font-size: 15px;">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;函数功能简介：
-                                </span>
-                                </strong>
-                                <span style="font-size: 15px;">
-                                    	XXXXXXXXXX<br>
-                                </span>
-                                <br>
-                                <strong class="black" style="font-size: 15px;color:#000000;">
-                                <span style="font-size: 15px;">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;函数输入：
-                                </span>
-                                </strong>
-                                <span style="font-size: 15px;">
-                                    	XXXXXXXX<br>
-                                </span>
-                                <br>
-                                <strong class="black" style="font-size: 15px;color:#000000;">
-                                <span style="font-size: 15px;">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;函数输出：
 
-                                </span>
-                                </strong>
-                                <span style="font-size: 15px;">
-                                    	XXXXXXXXXX
-                                </span>
-                                <br>
-                                <br>
-                                <strong class="black" style="font-size: 15px;color:#000000;">
-                                <span style="font-size: 15px;">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;函数使用说明：
-                                </span>
-                                </strong>
-                                <span style="font-size: 15px;">
-                                    	XXXXXX<br>
-                                </span>
-                                <br>
-                                <br>
-                                <!-- <strong class="black" style="font-size: 15px;color:#000000;">
-                                <span style="font-size: 15px;">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;matlab数据处理：
-                                </span>
-                                </strong>
-                                <span style="font-size: 15px;">
-                                    	使用matlab程序对指定数据进行处理。
-                                </span>
-                                <br>
-                                <strong class="black" style="font-size: 15px;color:#000000;">
-                                <span style="font-size: 15px;">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;文件操作：
-                                </span>
-                                </strong>
-                                <span style="font-size: 15px;">
-                                    	对测试数据的数据库录入功能。<br>
-                                </span>
-                                <strong class="black" style="font-size: 15px;color:#000000;">
-                                <span style="font-size: 15px;">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;原始测试数据文件上传：
-                                </span>
-                                </strong>
-                                <span style="font-size: 15px;">
-                                    	上传测试得到的原始数据。<br>
-                                </span>
-                                <strong class="black" style="font-size: 15px;color:#000000;">
-                                <span style="font-size: 15px;">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;修改数据文件上传：
-                                </span>
-                                </strong>
-                                <span style="font-size: 15px;">
-                                    	对原始“运动学与动力学数据”修改后单独上传。<br>
-                                </span>
-                                <strong class="black" style="font-size: 15px;color:#000000;">
-                                <span style="font-size: 15px;">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;步态周期图像文件上传：
-                                </span>
-                                </strong>
-                                <span style="font-size: 15px;">
-                                    	上传实验过程中的图像和视频上传，可以批量上传和单个上传。
-                                </span>
-                                <br>
-                                <br>
-                                <span style="font-size: 15px;">
-                                系统管理员电话：xxx-xxxxxxxx
-                                </span>
-                                <br>
-                            </strong> --><!-- <span style="font-size: 15px;">它基于已有的高校学生在校期间各方面的信息，联合教务办、学工办、就业办及研究生处等多部门， 实现对学生在校期间学习、发展情况的智能化统计、分析，挖掘其内在的数据关系，为教师和辅导员提供更具针对性的教学对策， 营造良好的学习氛围，促进师生交流，提高管理效率。
-									<br>了解更多:</span>
-									<a href="http://www.usts.edu.cn/" target="_blank" style="font-size: 15px;">苏州科技大学官网</a> -->
-                        </div>
-                    
-                        <!-- PAGE CONTENT BEGINS -->
-                        <!-- 下载模板 -->
-                        <div class="row" style="margin-bottom: 50px;">
-                            <div class="row" style="float:left;margin-left: 20px;">
-                                <div class="btn-group" style="">
-                                    <a id="open" class="btn btn-success bigger-120"
-                                       role="button">
-                                        进入分析程序
-                                        <i class="ace-icon fa icon-on-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- PAGE CONTENT ENDS -->
-                    </div>
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
-            </div>
+											<i class="ace-icon fa fa-check black"></i> <span
+												style="font-size: 15px; color: #000000;">欢迎使用&nbsp;</span> <strong
+												class="black" style="font-size: 15px; color: #000000;">
+												<span style="font-size: 15px;">人体运动测试数据分析与管理系统</span> <small>(v
+													1.0)</small> <br> <span style="font-size: 15px;">运动学与动力学特征分析：</span><br>
+											</strong> 
+											<span style="font-size: 15px;">
+											此模块用于运动学与动力学特征分析，请确保分析程序已安装在D:\Program\MLR_Program\目录下。
+											<br>
+											选择动作后，单击拷贝到本地，文件默认拷贝到D:\MLR_Data\目录下。
+											</span>	
+										</div>
+										<!-- /.span -->
+									</div>
+									<!-- /.row -->
+
+									<div class="space-24"></div>
+
+									<div class="hr hr-24"></div>
+
+								</form>
+
+								<div class="hr hr-18 dotted hr-double"></div>
+								<div class="row"></div>
+								<!-- PAGE CONTENT ENDS -->
+							</div>
+
+							<!-- PAGE CONTENT BEGINS -->
+							<!-- 下载模板 -->
+
+
+							<!-- PAGE CONTENT ENDS -->
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
+				</div>
             <!-- /.page-content -->
         </div>
     </div>
@@ -240,31 +216,69 @@
 <!--文件上传-->
 <script type="text/javascript">
     //ajax请求数据
-    $(function () {
-        $("#open").click(function () {
-            //清空之前的行
-            $.ajax({
-                type: "post",
-                url: "/admin/open4",
-            });
+    function hideloading() {
+	    $("#loading").attr("style", "display:none;");
+	    console.log("hide");
+	}
+	
+	function showloading() {
+	    $("#loading").attr("style", "display:block;");
+	    console.log("show");
+	}
+   function openApp(){
+		$.ajax({
+			type: "post",
+			url: "/AnalyzeProgram/MLR_DataAnalysis"
+		});
+	}
+
+    function getValue(){
+        var str = $("#selectid option:selected").val();   //获得选中的值
+        showloading();
+        $.ajax({
+            type:"post",
+            dataType:"json",
+            url:"/FilesKand/batchDownload/",
+            data:{'fi_info':str},
+            success: function (data) {
+            	hideloading();
+                if (data.success == 1) {
+                    alert("下载成功!");
+                }else if(data.success == 0){
+                	alert(data.info);
+                }else{
+                	alert("下载失败");
+                }
+            },
+            error: function (err) {
+            	hideloading();
+                alert("文件下载遇到错误!" + JSON.stringify(err));
+            }
+        });
+    }
+    jQuery(function ($) {
+    	$.ajax({
+    		url: "/preec/findDistinctActions",
+    		type: "get",
+    		dataType:"json",
+    		success:function(data){
+    			for (var i=0; i<data.length;i++) {
+    				var value=data[i];
+    				$('#selectid').append("<option>"+value+"</option>");
+    			}
+    		},
+    		error:function(data){
+    			alert("查询动作过程中出错，请检查数据库");
+    		}
+    	});
+    	$("#header").load("/view_user/header_user.html");
+    	$("#lefter").load("/view_user/lefter_user.html", function () {
+            $("#main").prop("class", "");
+            $(".kandAnalysis").prop("class", "active");
+            $("#dataAnalyze").prop("style", "display: block;");
+            $("#footer").load("/view_user/footer_user.html");
         });
     });
-</script>
-
-<script>
-    $("#header").load("/view_user/header_user.html");
-</script>
-
-<script>
-    $("#lefter").load("/view_user/lefter_user.html", function () {
-        $("#main").prop("class", "");
-        $(".kandAnalysis").prop("class", "active");
-        $("#dataAnalyze").prop("style", "display: block;");
-    });
-</script>
-
-<script>
-    $("#footer").load("/view_user/footer_user.html");
 </script>
 
 

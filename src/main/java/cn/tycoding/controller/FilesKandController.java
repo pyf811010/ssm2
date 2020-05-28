@@ -1,3 +1,4 @@
+
 package cn.tycoding.controller;
 
 import java.io.IOException;
@@ -14,12 +15,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.tycoding.mapper.PreecMapper;
 import cn.tycoding.pojo.FilesElectromyography;
 import cn.tycoding.pojo.FilesKand;
 import cn.tycoding.pojo.ObjectQuery;
 import cn.tycoding.pojo.State;
 import cn.tycoding.service.FilesEleService;
 import cn.tycoding.service.FilesKandService;
+import cn.tycoding.service.PreecService;
 
 /**
  * 运动学和动力学数据
@@ -120,6 +123,5 @@ public class FilesKandController {
     	}
 		return state;
     }
-
 
 }

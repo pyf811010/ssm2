@@ -1,6 +1,7 @@
 package cn.tycoding.service.impl;
 
 import java.awt.Desktop;
+import javafx.util.Pair;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -45,6 +46,7 @@ import cn.tycoding.util.ExceptionUtil;
 import cn.tycoding.util.QueryCondition;
 import cn.tycoding.util.QueryUtil;
 import cn.tycoding.util.SqlJointUtil;
+import cn.tycoding.util.DirectoryUtil;
 
 
 @Service
@@ -364,25 +366,36 @@ public class FilesKandServiceImpl implements FilesKandService {
 		if(ids.isEmpty()){
 			//集合为空，说明没有对应的文件
 			state.setSuccess(0);
+			state.setInfo("没有对应文件！");
 			return state;
 		}else{
 			//需要压缩的文件--包括文件地址和文件名
-			ArrayList<String> path = new ArrayList<String>();
-			ArrayList<String> file_names = new ArrayList<String>();
+			List<Pair> path = new ArrayList<Pair>();
 		    for (int i = 0; i < ids.size(); i++) {
 			 String url = filesKandMapper.getPathByExpid(ids.get(i));
 			 String file_name = filesKandMapper.getFile_name(ids.get(i));
 //			 String filename = filesKandMapper.getFile_name(i);
-			 path.add(i, url);
-			 file_names.add(i, file_name);
-		 }
+			 File temp = new File(url);
+			 if (!temp.exists()) continue;
+			 System.out.println(i+ " " + url+" "+ file_name);
+			 //path.add(i, url);
+			 //file_names.add(i, file_name);
+			 path.add(new Pair<>(url,file_name));
+		    }
+		    if (path.isEmpty()) {
+		    	state.setSuccess(0);
+		    	state.setInfo("所有相关文件已失效，请检查！");
+		    	return state;
+		    }
 	        // 要生成的压缩文件地址和文件名称
 		    String basePath = "D:\\MLR_Data";
 		    String desPath = "D:\\MLR_Data\\"+fi_info+".zip";
 		    File baseFile = new File(basePath);
-		    if (!baseFile.exists()) {
-		    	baseFile.mkdirs();
+		    if (baseFile.exists()) {
+		    	DirectoryUtil.remove(baseFile);
 		    }
+		    baseFile.mkdirs();
+		    
 	        File zipFile = new File(desPath);
 	        ZipOutputStream zipStream = null;
 	        FileInputStream zipSource = null;
@@ -391,11 +404,11 @@ public class FilesKandServiceImpl implements FilesKandService {
 	            //构造最终压缩包的输出流
 	            zipStream = new ZipOutputStream(new FileOutputStream(zipFile));
 	            for(int i =0;i<path.size();i++){
-	                File file = new File(path.get(i));
+	                File file = new File((String) path.get(i).getKey());
 	                //将需要压缩的文件格式化为输入流
 	                zipSource = new FileInputStream(file);
 	                //压缩条目不是具体独立的文件，而是压缩包文件列表中的列表项，称为条目，就像索引一样
-	                ZipEntry zipEntry = new ZipEntry(file_names.get(i));
+	                ZipEntry zipEntry = new ZipEntry((String)path.get(i).getValue());
 	                //定位该压缩条目位置，开始写入文件到压缩包中
 
 	                zipStream.putNextEntry(zipEntry);

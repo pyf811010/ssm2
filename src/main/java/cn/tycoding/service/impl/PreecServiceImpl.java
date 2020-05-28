@@ -367,6 +367,11 @@ public class PreecServiceImpl implements PreecService {
 		}
 		
 	}
+	
+	@Override
+	public List<String> findDistinctActions(){
+		return preecMapper.findDistinctAction();
+	}
 
 	@Override
 	public State cancelSign(int expid,HttpServletRequest request) throws IOException {

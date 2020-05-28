@@ -46,8 +46,6 @@ public class PreecController {
     @Autowired
     private PreecService preecService;
 
-
-
     @RequestMapping("/findsome")
     @ResponseBody
     public ObjectQuery findByPage(Boolean _search, String filters, int page, int rows)
@@ -106,6 +104,15 @@ public class PreecController {
     		e.printStackTrace();
     		return null;
     	}
+    }
+    
+    @RequestMapping("/findDistinctActions")
+    @ResponseBody
+    public List<String> findDistinctActions() {
+    	List<String> actions = preecService.findDistinctActions();
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("actions", actions);
+    	return actions;
     }
 
     

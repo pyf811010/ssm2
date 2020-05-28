@@ -47,4 +47,6 @@ public interface PreecMapper {
 	void cancelSign(int expid);
 
 	List<Integer> getIdByAdvance(String fi_info);
+	
+	List<String> findDistinctAction();
 }
