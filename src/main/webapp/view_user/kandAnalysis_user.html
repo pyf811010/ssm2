@@ -216,6 +216,15 @@
 <!--文件上传-->
 <script type="text/javascript">
     //ajax请求数据
+    function hideloading() {
+	    $("#loading").attr("style", "display:none;");
+	    console.log("hide");
+	}
+	
+	function showloading() {
+	    $("#loading").attr("style", "display:block;");
+	    console.log("show");
+	}
    function openApp(){
 		$.ajax({
 			type: "post",
@@ -247,22 +256,29 @@
             }
         });
     }
-</script>
-
-<script>
-    $("#header").load("/view_user/header_user.html");
-</script>
-
-<script>
-    $("#lefter").load("/view_user/lefter_user.html", function () {
-        $("#main").prop("class", "");
-        $(".kandAnalysis").prop("class", "active");
-        $("#dataAnalyze").prop("style", "display: block;");
+    jQuery(function ($) {
+    	$.ajax({
+    		url: "/preec/findDistinctActions",
+    		type: "get",
+    		dataType:"json",
+    		success:function(data){
+    			for (var i=0; i<data.length;i++) {
+    				var value=data[i];
+    				$('#selectid').append("<option>"+value+"</option>");
+    			}
+    		},
+    		error:function(data){
+    			alert("查询动作过程中出错，请检查数据库");
+    		}
+    	});
+    	$("#header").load("/view_user/header_user.html");
+    	$("#lefter").load("/view_user/lefter_user.html", function () {
+            $("#main").prop("class", "");
+            $(".kandAnalysis").prop("class", "active");
+            $("#dataAnalyze").prop("style", "display: block;");
+            $("#footer").load("/view_user/footer_user.html");
+        });
     });
-</script>
-
-<script>
-    $("#footer").load("/view_user/footer_user.html");
 </script>
 
 
