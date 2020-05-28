@@ -29,6 +29,7 @@ public interface PreecService {
 	State sign(int expid, HttpServletRequest request) throws IOException;
 	
 	State cancelSign(int expid, HttpServletRequest request) throws IOException;
-
+	
+	List<String> findDistinctActions();
 //	List<Preec> findAllByRelateType(int type);
 }

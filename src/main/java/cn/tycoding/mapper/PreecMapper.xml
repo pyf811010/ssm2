@@ -89,6 +89,9 @@
         show full fields from preec
     </select>
     
+    <select id="findDistinctAction" resultType="java.lang.String">
+    	select distinct advance from preec
+    </select>
     <!-- 标记信息状态（失效） -->
     <update id="sign" parameterType="java.lang.Integer">
 		update preec set
