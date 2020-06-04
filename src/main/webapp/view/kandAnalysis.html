@@ -272,9 +272,7 @@
 $("#lefter").load("/view/lefter.html",function () {
     $("#main").prop("class", "");
     $(".files_kand_download").prop("class", "active");
-    $("#dataManageSubMenu").prop("style", "display: block;");
-    $("#dataManageSubMenuSub2").prop("style", "display: block");
-    $("#kandSub").prop("style", "display: block");
+    $("#dataAnalyze").prop("style", "display: block;");
     });
 </script>
 
@@ -342,7 +340,7 @@ $("#lefter").load("/view/lefter.html",function () {
     			alert("查询动作过程中出错，请检查数据库");
     		}
     	});
-    	$("#header").load("/view/header.html");
+    	$("#header").load("/view_user/header_user.html");
         $('#id-disable-check').on('click', function () {
             var inp = $('#form-input-readonly').get(0);
             if (inp.hasAttribute('disabled')) {
