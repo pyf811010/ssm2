@@ -12,7 +12,7 @@ public class AnalyzeProgramController {
 	public void open1() {
     	Runtime runtime = Runtime.getRuntime();  
     	try {
-    		Process exec = runtime.exec("cmd /c D:\\Softwares\\【电脑】黑科下载器-3.5\\HeikeTest.exe");
+    		Process exec = runtime.exec("cmd /k start D:\\Program\\MLR_Program\\main.exe");
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
