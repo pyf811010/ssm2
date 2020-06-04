@@ -12,7 +12,8 @@ public class AnalyzeProgramController {
 	public void open1() {
     	Runtime runtime = Runtime.getRuntime();  
     	try {
-    		Process exec = runtime.exec("cmd /c D:\\Program\\MLR_Program\\main.exe");
+    		
+    		Process exec = runtime.exec("cmd /k start D:\\Program\\MLR_Program\\main.exe");
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
