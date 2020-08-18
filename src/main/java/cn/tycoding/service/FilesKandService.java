@@ -33,5 +33,11 @@ public interface FilesKandService {
 	State cancelSign(int expid, HttpServletRequest request) throws IOException;
 
 	State batchDownload(String fi_info) throws IOException;
+	
+	String[] getFileInfo(int expid);
+
+	String getUrl(int expid);
+
+	void getResultOfTrain();
 
 }
