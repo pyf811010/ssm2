@@ -114,7 +114,7 @@ public class AdminController {
     public void open() {
     	Runtime runtime = Runtime.getRuntime();  
     	try {
-			Process exec = runtime.exec("D:\\index\\lab_mo_cap\\for_testing\\lab_mo_cap.exe");
+			Process exec = runtime.exec("D:\\Program\\lab_mo_cap.exe");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -127,7 +127,7 @@ public class AdminController {
     public void open1() {
     	Runtime runtime = Runtime.getRuntime();  
     	try {
-    		Process exec = runtime.exec("D:\\index\\interface_draft4_kin\\for_testing\\interface_draft4_kin.exe");
+    		Process exec = runtime.exec("D:\\Program\\interface_draft4_kin.exe");
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
@@ -141,7 +141,7 @@ public class AdminController {
     public void open2() {
     	Runtime runtime = Runtime.getRuntime();  
     	try {
-    		Process exec = runtime.exec("D:\\index\\interface_draft4_mot\\for_testing\\interface_draft4_mot.exe");
+    		Process exec = runtime.exec("D:\\Program\\interface_draft4_mot.exe");
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
@@ -154,7 +154,7 @@ public class AdminController {
     public void open3() {
     	Runtime runtime = Runtime.getRuntime();  
     	try {
-    		Process exec = runtime.exec("D:\\index\\interface_draft4_eval\\for_testing\\interface_draft4_eval.exe");
+    		Process exec = runtime.exec("D:\\Program\\interface_draft4_eval.exe");
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
@@ -167,7 +167,7 @@ public class AdminController {
     public void open4() {
     	Runtime runtime = Runtime.getRuntime();  
     	try {
-    		Process exec = runtime.exec("D:\\index\\interface_draft4_eval\\for_testing\\interface_draft4_eval.exe");
+    		Process exec = runtime.exec("D:\\Program\\interface_draft4_eval.exe");
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();

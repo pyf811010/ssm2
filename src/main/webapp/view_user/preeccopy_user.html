@@ -615,7 +615,7 @@ function CancelSign(expid) {
                     enableTooltips(table);
                 }, 0);
                 $(".jqgrow").each(function () {
-                    var row = $(this.cells[6]);
+                    var row = $(this.cells[8]);
                     var formData = new FormData();
                     var text = row.text();
                     formData.append("text", text);
@@ -637,7 +637,7 @@ function CancelSign(expid) {
                 })
                 
                 $(".jqgrow").each(function () {
-                    var row = $(this.cells[5]);
+                    var row = $(this.cells[7]);
                     var formData = new FormData();
                     var text = row.text();
                     formData.append("text", text);
