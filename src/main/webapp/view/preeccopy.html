@@ -289,7 +289,7 @@ function CancelSign(expid) {
             //data: grid_data,
             datatype: "json",
             height: 450,
-            colNames: ['操作','','', 'ID','标记', '运动方式', '实验者信息ID', '测试设备ID', '动捕数据信息', '跑台数据信息', 'pedar足底压力数据信息', '耗氧量数据信息', '肌电数据信息', '视频数据文件','备注信息','操作用户'],
+            colNames: ['操作','','', 'ID','标记', '运动方式','备注信息', '实验者信息ID', '测试设备ID', '动捕数据信息', '跑台数据信息', 'pedar足底压力数据信息', '耗氧量数据信息', '肌电数据信息', '视频数据文件','操作用户'],
             colModel: [{
                 name: 'op',
                 index: 'op',
@@ -394,6 +394,18 @@ function CancelSign(expid) {
                 {
                     name: 'advance',
                     index: 'advance',
+                    width: 70,
+                    sortable: false,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {
+                        rows: "2",
+                        cols: "15"
+                    }
+                },
+                {
+                    name: 'remark',
+                    index: 'remark',
                     width: 350,
                     sortable: false,
                     editable: true,
@@ -403,7 +415,6 @@ function CancelSign(expid) {
                         cols: "15"
                     }
                 },
-
                 {
                     name: 'id_subjects',
                     index: 'id_subjects',
@@ -500,18 +511,6 @@ function CancelSign(expid) {
                     }
                 },
                 {
-                    name: 'remark',
-                    index: 'remark',
-                    width: 500,
-                    sortable: false,
-                    editable: true,
-                    edittype: "textarea",
-                    editoptions: {
-                        rows: "2",
-                        cols: "15"
-                    }
-                },
-                {
                     name: 'user_name',
                     index: 'user_name',
                     width: 150,
@@ -550,7 +549,7 @@ function CancelSign(expid) {
                     enableTooltips(table);
                 }, 0);
                 $(".jqgrow").each(function () {
-                    var row = $(this.cells[8]);
+                    var row = $(this.cells[9]);
                     var formData = new FormData();
                     var text = row.text();
                     formData.append("text", text);
@@ -572,7 +571,7 @@ function CancelSign(expid) {
                 })
                 
                 $(".jqgrow").each(function () {
-                    var row = $(this.cells[7]);
+                    var row = $(this.cells[8]);
                     var formData = new FormData();
                     var text = row.text();
                     formData.append("text", text);

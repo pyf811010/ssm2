@@ -127,7 +127,7 @@ public class AdminController {
     public void open1() {
     	Runtime runtime = Runtime.getRuntime();  
     	try {
-    		Process exec = runtime.exec("D:\\Program\\interface_draft4_kin.exe");
+    		Process exec = runtime.exec("D:\\Program\\interface_draft5_kin.exe");
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
@@ -141,7 +141,7 @@ public class AdminController {
     public void open2() {
     	Runtime runtime = Runtime.getRuntime();  
     	try {
-    		Process exec = runtime.exec("D:\\Program\\interface_draft4_mot.exe");
+    		Process exec = runtime.exec("D:\\Program\\interface_draft5_mot.exe");
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
@@ -154,7 +154,7 @@ public class AdminController {
     public void open3() {
     	Runtime runtime = Runtime.getRuntime();  
     	try {
-    		Process exec = runtime.exec("D:\\Program\\interface_draft4_eval.exe");
+    		Process exec = runtime.exec("D:\\Program\\interface_draft5_eval.exe");
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
@@ -167,7 +167,7 @@ public class AdminController {
     public void open4() {
     	Runtime runtime = Runtime.getRuntime();  
     	try {
-    		Process exec = runtime.exec("D:\\Program\\interface_draft4_eval.exe");
+    		Process exec = runtime.exec("D:\\Program\\interface_draft5_eval.exe");
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();

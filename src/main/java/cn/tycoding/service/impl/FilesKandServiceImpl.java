@@ -194,7 +194,9 @@ public class FilesKandServiceImpl implements FilesKandService {
         String filename = filesKandMapper.getFile_name(expid);
         File file = new File(path);
         try {
+        	System.out.println("开始");
             Desktop.getDesktop().open(file);
+            System.out.println("结束");
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

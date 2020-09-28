@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -18,7 +20,7 @@ public class AnalyzeProgramController {
     public void open1() {
         Runtime runtime = Runtime.getRuntime();
         try {
-            Process exec = runtime.exec("cmd /k start D:\\Program\\MLR_Program\\main.exe");
+            Process exec = runtime.exec("D:\\Program\\MLR_Program\\main.exe");
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -89,8 +91,9 @@ public class AnalyzeProgramController {
     @RequestMapping("/openExcel")
     public void openExcel() {
         String url = "D:\\ProgrammData\\kend_train_result.xlsx";
+        File file = new File(url);
         try {
-            Runtime.getRuntime().exec("cmd /c start " + url);
+        	Desktop.getDesktop().open(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
